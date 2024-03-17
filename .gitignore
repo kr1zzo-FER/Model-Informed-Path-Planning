@@ -1,4 +1,6 @@
 build
+install
+log
 bin
 lib
 msg_gen
