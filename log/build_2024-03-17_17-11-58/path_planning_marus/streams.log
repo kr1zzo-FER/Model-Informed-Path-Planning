@@ -1,0 +1,36 @@
+[2.051s] Invoking command in '/home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/src/path_planning_marus': PYTHONPATH=/home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/build/path_planning_marus/prefix_override:/home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/install/path_planning_marus/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/path_planning_marus build --build-base /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/build/path_planning_marus/build install --record /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/build/path_planning_marus/install.log --single-version-externally-managed
+[2.627s] running egg_info
+[2.628s] creating ../../build/path_planning_marus/path_planning_marus.egg-info
+[2.629s] writing ../../build/path_planning_marus/path_planning_marus.egg-info/PKG-INFO
+[2.629s] writing dependency_links to ../../build/path_planning_marus/path_planning_marus.egg-info/dependency_links.txt
+[2.629s] writing entry points to ../../build/path_planning_marus/path_planning_marus.egg-info/entry_points.txt
+[2.630s] writing requirements to ../../build/path_planning_marus/path_planning_marus.egg-info/requires.txt
+[2.630s] writing top-level names to ../../build/path_planning_marus/path_planning_marus.egg-info/top_level.txt
+[2.630s] writing manifest file '../../build/path_planning_marus/path_planning_marus.egg-info/SOURCES.txt'
+[2.633s] reading manifest file '../../build/path_planning_marus/path_planning_marus.egg-info/SOURCES.txt'
+[2.633s] adding license file 'LICENSE'
+[2.635s] writing manifest file '../../build/path_planning_marus/path_planning_marus.egg-info/SOURCES.txt'
+[2.635s] running build
+[2.635s] running build_py
+[2.636s] creating /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/build/path_planning_marus/build
+[2.636s] creating /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/build/path_planning_marus/build/lib
+[2.636s] creating /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/build/path_planning_marus/build/lib/path_planning_marus
+[2.636s] copying path_planning_marus/__init__.py -> /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/build/path_planning_marus/build/lib/path_planning_marus
+[2.636s] running install
+[2.644s] /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[2.644s]   warnings.warn(
+[2.646s] running install_lib
+[2.648s] creating /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/install/path_planning_marus/lib/python3.10/site-packages/path_planning_marus
+[2.649s] copying /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/build/path_planning_marus/build/lib/path_planning_marus/__init__.py -> /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/install/path_planning_marus/lib/python3.10/site-packages/path_planning_marus
+[2.651s] byte-compiling /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/install/path_planning_marus/lib/python3.10/site-packages/path_planning_marus/__init__.py to __init__.cpython-310.pyc
+[2.651s] running install_data
+[2.653s] creating /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/install/path_planning_marus/share/ament_index
+[2.653s] creating /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/install/path_planning_marus/share/ament_index/resource_index
+[2.654s] creating /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/install/path_planning_marus/share/ament_index/resource_index/packages
+[2.654s] copying resource/path_planning_marus -> /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/install/path_planning_marus/share/ament_index/resource_index/packages
+[2.654s] copying package.xml -> /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/install/path_planning_marus/share/path_planning_marus
+[2.654s] running install_egg_info
+[2.658s] Copying ../../build/path_planning_marus/path_planning_marus.egg-info to /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/install/path_planning_marus/lib/python3.10/site-packages/path_planning_marus-0.0.0-py3.10.egg-info
+[2.659s] running install_scripts
+[2.701s] writing list of installed files to '/home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/build/path_planning_marus/install.log'
+[2.737s] Invoked command in '/home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/src/path_planning_marus' returned '0': PYTHONPATH=/home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/build/path_planning_marus/prefix_override:/home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/install/path_planning_marus/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/path_planning_marus build --build-base /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/build/path_planning_marus/build install --record /home/enio/develop_fer/path_planning/Model-informed-path-planning-and-control-for-autonomous-vessels/build/path_planning_marus/install.log --single-version-externally-managed
