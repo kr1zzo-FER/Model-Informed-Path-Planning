@@ -1,0 +1,28 @@
+
+#test algorithM
+# 1. a_star
+# 2. bidirectional_a_star
+# 3. dijkstra
+# 4. d_star
+# 5. d_star_lite
+# 6. breadth_first_search
+# 7. bidirectional_breadth_first_search
+# 8. depth_first_search
+# 9. greedy_best_first_search
+
+test_algorithm : 
+- "a_star"
+- "d_star"
+
+plot_algorithms:
+- "a_star"
+- "bidirectional_a_star"
+- "dijkstra"
+
+grid_size : 1.0  # [m]
+robot_radius : 1.0  # [m]
+
+start_image_name : "jadranovo.png"
+start_image_name_bw :  "jadranovo_bw.png"
+image_name : "jadranovo_resized.png"
+image_name_bw : "jadranovo_bw_resized.png"

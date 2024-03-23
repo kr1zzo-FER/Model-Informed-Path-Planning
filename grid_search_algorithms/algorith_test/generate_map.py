@@ -3,13 +3,24 @@
 from skimage import io, measure
 from PIL import Image
 import pickle
-
-
+from pathlib import Path
+from pathlib import Path
+import yaml
 def main():
     
     # set obstacle positions
-    image_pixel = Image.open('jadranovo_bw.png')
-    image_pixel_rgb = Image.open('jadranovo.png')
+    root = Path(".")
+
+    binary_path = root / "binary_dump"
+    images = root / "images"
+
+    with open("config.yaml", "r") as f:
+        config = yaml.safe_load(f)
+        image_pixel = config["start_image_name_bw"]
+        image_pixel_rgb = config["start_image_name"]
+
+    image_pixel = Image.open(images/'jadranovo_bw.png')
+    image_pixel_rgb = Image.open(images/'jadranovo.png')
 
     resize_factor = 8
 
@@ -43,19 +54,25 @@ def main():
                 ox.append(i)
                 oy.append(image_pixel.size[1]-j)
     
-    with open("ox", "wb") as f:
+    root = Path(".")
+
+    my_path = root / "binary_dump"
+    images = root / "images"
+
+
+    with open(my_path/"ox", "wb") as f:
         pickle.dump(ox, f)
-    with open("oy", "wb") as f:
+    with open(my_path/"oy", "wb") as f:
         pickle.dump(oy, f)
-    with open("dim_x", "wb") as f:
+    with open(my_path/"dim_x", "wb") as f:
         pickle.dump(image_pixel.size[0], f)
-    with open("dim_y", "wb") as f:
+    with open(my_path/"dim_y", "wb") as f:
         pickle.dump(image_pixel.size[1], f)
     
-    image_pixel.show()
+    #image_pixel.show()
 
-    image_pixel.save("jadranovo_bw_resized.png")
-    image_pixel_rgb.save("jadranovo_resized.png")
+    image_pixel.save(images/"jadranovo_bw_resized.png")
+    image_pixel_rgb.save(images/"jadranovo_resized.png")
     
     
 
