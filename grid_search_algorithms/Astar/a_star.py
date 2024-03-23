@@ -1,4 +1,5 @@
 import math
+import init_pygame
 
 class Node:
     def __init__(self, grid, x, y):
@@ -108,7 +109,7 @@ def a_star(grid, start, end):
         for neighbor in current.get_neighbors():
 
             obstacle_factor = 1
-
+            #print(neighbor.type)
             
             if neighbor in closed_set or neighbor.type == 'wall_area_2' or neighbor.type == 'wall_area_3' or neighbor.type == 'wall_area_1':
                 if neighbor.type == 'wall_area_2':
@@ -137,6 +138,7 @@ def a_star(grid, start, end):
 
             elif tentative_g_score > neighbor.g_score:
                 # Not a better path
+                neighbor.type = "searched"
                 continue
 
             # Found a better path

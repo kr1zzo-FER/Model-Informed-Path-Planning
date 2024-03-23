@@ -18,7 +18,7 @@ def get_edges(image):
 
 if __name__ == '__main__':
 
-    image_1 = io.imread('kvarner.png')
+    image_1 = io.imread('jadranovo.png')
     #plt.imshow(image)
     #plt.show()
     
@@ -38,8 +38,8 @@ if __name__ == '__main__':
     #plt.show()
 
     label_image = measure.label(closed)
-    plt.imshow(label_image)
-    plt.show()
+    #plt.imshow(label_image)
+    #plt.show()
     #print(label_image)
 
     picture_values = []
@@ -51,7 +51,7 @@ if __name__ == '__main__':
             if k not in picture_values:
                 picture_values.append(k)
             #print(k)
-            if k == 28:
+            if k == 2:
                 label_image[i][j] = 255
             else:
                 label_image[i][j] = 0
@@ -65,7 +65,7 @@ if __name__ == '__main__':
     #for element in picture_values:
     #    print(element)
 
-    plt.imsave('kvarner_bw.png', label_image,cmap='gray')
+    plt.imsave('jadranovo_bw.png', label_image,cmap='gray')
 
     image_uint8 = image_1.astype(np.uint8)
     img_blur = cv2.GaussianBlur(image_uint8,(5,5),0)
