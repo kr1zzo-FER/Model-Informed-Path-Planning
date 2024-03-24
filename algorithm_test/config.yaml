@@ -12,7 +12,16 @@
 
 test_algorithm : 
 - "a_star"
-- "d_star"
+- "bidirectional_a_star"
+
+#- "dijkstra"
+#- "d_star"
+#- "d_star_lite"
+#- "breadth_first_search"
+#- "bidirectional_breadth_first_search"
+#- "depth_first_search"
+#- "greedy_best_first_search"
+
 
 plot_algorithms:
 - "a_star"
@@ -21,6 +30,10 @@ plot_algorithms:
 
 grid_size : 1.0  # [m]
 robot_radius : 1.0  # [m]
+
+show_table : True
+table_name : "test.png"
+result_image_name : "result_image.png"
 
 start_image_name : "jadranovo.png"
 start_image_name_bw :  "jadranovo_bw.png"

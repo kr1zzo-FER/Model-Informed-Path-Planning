@@ -22,11 +22,13 @@ def main():
 
     binary_path = root / "binary_dump"
     images = root / "images"
+    results = root / "results"
 
     with open("config.yaml", "r") as f:
         config = yaml.safe_load(f)
         plot_algorithm = config["plot_algorithms"]
         image_name = config["image_name"]
+        result_image_name = config["result_image_name"]
     
 
     with open(binary_path/"ox", "rb") as f:
@@ -149,6 +151,7 @@ def main():
 
     
     ax.legend(handles=legend_elements, loc='upper right')
+    plt.savefig(results/result_image_name)
     plt.show()
 
 if __name__ == '__main__':

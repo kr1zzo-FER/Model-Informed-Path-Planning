@@ -9,6 +9,8 @@ from PIL import Image
 import pickle
 import os 
 from pathlib import Path
+import time
+import threading
 
 from algorithms.a_star import AStarPlanner
 from algorithms.dstar import Map, State
@@ -93,6 +95,48 @@ class Map:
 
             self.map[x][y].set_state("#")
 
+class Algorithms:
+    def __init__(self, ox, oy):
+        self.ox = ox
+        self.oy = oy
+        self.rows = []
+        self.columns = ['Time', 'Distance']
+        self.values = []
+
+    def get_path(self):
+        return self.rx, self.ry
+
+    def planning(self, sx, sy, gx, gy):
+        pass
+
+    def a_star(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
+        print("\nA* calculation started..")
+        self.rows.append("A*")
+        start_time = time.time()
+        a_star = AStarPlanner(self.ox, self.oy, grid_size, robot_radius)
+        rx, ry = a_star.planning(sx, sy, gx, gy)
+        end_time = time.time()
+        function_time = round(end_time - start_time, 5)
+        self.values.append([function_time, 0])
+        with open(binary_path/"a_star_path_x", "wb") as f:
+            pickle.dump(rx, f)
+        with open(binary_path/"a_star_path_y", "wb") as f:
+            pickle.dump(ry, f)
+        pass
+
+    def bidirectional_a_star(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
+        print("\nBidirectional A* calculation started..")
+        self.rows.append("Bidirectional A*")
+        start_time = time.time()
+        bidir_a_star = BidirectionalAStarPlanner(self.ox, self.oy, grid_size, robot_radius)
+        rx, ry = bidir_a_star.planning(sx, sy, gx, gy)
+        end_time = time.time()
+        function_time = round(end_time - start_time, 5)
+        self.values.append([function_time, 0])
+        with open(binary_path/"bid_a_star_path_x", "wb") as f:
+            pickle.dump(rx, f)
+        with open(binary_path/"bid_a_star_path_y", "wb") as f:
+            pickle.dump(ry, f)
     
 
 def main():
@@ -108,6 +152,7 @@ def main():
 
     binary_path = root / "binary_dump"
     images = root / "images"
+    results = root / "results"
 
     with open(binary_path/"ox", "rb") as f:
         ox = pickle.load(f)
@@ -129,58 +174,73 @@ def main():
         test_algorithm = config["test_algorithm"]
         grid_size = config["grid_size"]
         robot_radius = config["robot_radius"]
+        show_table = config["show_table"]
+        table_name = config["table_name"]
 
+    rows = []
+    columns = ['Time', 'Distance']
+    values = []
+    
+    algorithm = Algorithms(ox, oy)
+
+    threads = []    
 
     for test_algorithm in test_algorithm:
         if test_algorithm == "a_star":
-            print("\nA* calculation started..")
-            a_star = AStarPlanner(ox, oy, grid_size, robot_radius)
-            rx, ry = a_star.planning(sx, sy, gx, gy)
-            with open(binary_path/"a_star_path_x", "wb") as f:
-                pickle.dump(rx, f)
-            with open(binary_path/"a_star_path_y", "wb") as f:
-                pickle.dump(ry, f)
-        
-        if test_algorithm == "bidirectional_a_star":
-            print("\nBidirectional A* calculation started..")
-            bidir_a_star = BidirectionalAStarPlanner(ox, oy, grid_size, robot_radius)
-            rx, ry = bidir_a_star.planning(sx, sy, gx, gy)
-            with open(binary_path/"bid_a_star_path_x", "wb") as f:
-                pickle.dump(rx, f)
-            with open(binary_path/"bid_a_star_path_y", "wb") as f:
-                pickle.dump(ry, f)
+            thread1 = threading.Thread(target = algorithm.a_star, args=(sx, sy, gx, gy, grid_size, robot_radius, binary_path))
+            threads.append(thread1)
 
-        elif test_algorithm == "dijkstra":
+        if test_algorithm == "bidirectional_a_star":
+            thread2 = threading.Thread(target = algorithm.bidirectional_a_star, args=(sx, sy, gx, gy, grid_size, robot_radius, binary_path))
+            threads.append(thread2)
+            
+
+        if test_algorithm == "dijkstra":
             print("\nDijkstra calculation started")
+            rows.append("Dijkstra")
+            start_time = time.time()
             dijkstra = Dijkstra(ox, oy, grid_size, robot_radius)
             rx, ry = dijkstra.planning(sx, sy, gx, gy)
+            end_time = time.time()
+            function_time = round(end_time - start_time, 5)
             with open(binary_path/"dijkstra_path_x", "wb") as f:
                 pickle.dump(rx, f)
             with open(binary_path/"dijkstra_path_y", "wb") as f:
                 pickle.dump(ry, f)
         
-        elif test_algorithm == "d_star":
+        if test_algorithm == "d_star":
             print("\nD* calculation started")
+            rows.append("D*")
             m = Map(size_x, size_y)
             m.set_obstacle([(i, j) for i, j in zip(ox, oy)])
             start = [int(sx), int(sy)]
             goal = [int(gx), int(gy)]
             start = m.map[start[0]][start[1]]
             end = m.map[goal[0]][goal[1]]
+            start_time = time.time()
             dstar = Dstar(m)
             rx, ry = dstar.run(start, end)
+            end_time = time.time()
+            function_time = round(end_time - start_time, 5)
+            values.append([function_time, 0])
 
             with open(binary_path/"d_star_path_x", "wb") as f:
                 pickle.dump(rx, f)
             with open(binary_path/"d_star_path_y", "wb") as f:
                 pickle.dump(ry, f)
 
-        elif test_algorithm == "d_star_lite":
+        if test_algorithm == "d_star_lite":
             print("\nD* lite calculation started")
+            rows.append("D* Lite")
             spoofed_ox = [[], [], [], []]
             spoofed_oy = [[], [], [], []]
+            start_time = time.time()
             dstarlite = DStarLite(ox, oy)
             rx, ry = dstarlite.get_path()
+            end_time = time.time()
+            function_time = round(end_time - start_time, 5)
+            values.append([function_time, 0])
+
             dstarlite.main(Node(x=int(sx), y=int(sy)), Node(x=int(gx), y=int(gy)),
                     spoofed_ox=spoofed_ox, spoofed_oy=spoofed_oy)
             
@@ -192,43 +252,84 @@ def main():
             with open(binary_path/"d_star_lite_path_y", "wb") as f:
                 pickle.dump(ry, f)
         
-        elif test_algorithm == "breadth_first_search":
+        if test_algorithm == "breadth_first_search":
             print("\nBFS calculation started")
+            rows.append("BFS")
+            start_time = time.time()
             bfs = BreadthFirstSearchPlanner(ox, oy, grid_size, robot_radius)
             rx, ry = bfs.planning(sx, sy, gx, gy)
+            end_time = time.time()
+            function_time = round(end_time - start_time, 5)
+            values.append([function_time, 0])
             with open(binary_path/"bfs_path_x", "wb") as f:
                 pickle.dump(rx, f)
             with open(binary_path/"bfs_path_y", "wb") as f:
                 pickle.dump(ry, f)
         
-        elif test_algorithm == "bidirectional_breadth_first_search":
+        if test_algorithm == "bidirectional_breadth_first_search":
             print("\nbidirectional BFS calculation started")
+            rows.append("Bidirectional BFS")
+            start_time = time.time()
             bi_bfs = BidirectionalBreadthFirstSearchPlanner(
             ox, oy, grid_size, robot_radius)
             rx, ry = bi_bfs.planning(sx, sy, gx, gy)
+            end_time = time.time()
+            function_time = round(end_time - start_time, 5)
+            values.append([function_time, 0])
             with open(binary_path/"bid_bfs_path_x", "wb") as f:
                 pickle.dump(rx, f)
             with open(binary_path/"bid_bfs_path_y", "wb") as f:
                 pickle.dump(ry, f)
 
-        elif test_algorithm == "depth_first_search":
+        if test_algorithm == "depth_first_search":
+            print("\nDFS calculation started")
+            rows.append("DFS")
+            start_time = time.time()
             dfs = DepthFirstSearchPlanner(ox, oy, grid_size, robot_radius)
             rx, ry = dfs.planning(sx, sy, gx, gy)
+            end_time = time.time()
+            function_time = round(end_time - start_time, 5)
+            values.append([function_time, 0])
             with open(binary_path/"dfs_path_x", "wb") as f:
                 pickle.dump(rx, f)
             with open(binary_path/"dfs_path_y", "wb") as f:
                 pickle.dump(ry, f)
         
-        elif test_algorithm == "greedy_best_first_search":
+        if test_algorithm == "greedy_best_first_search":
+            print("\nGreedy Best First Search calculation started")
+            rows.append("Greedy Best First Search")
+            start_time = time.time()
             greedy_best_first_search = BestFirstSearchPlanner(ox, oy, grid_size, robot_radius)
             rx, ry = greedy_best_first_search.planning(sx, sy, gx, gy)
+            end_time = time.time()
+            function_time = round(end_time - start_time, 5)
+            values.append([function_time, 0])
             with open(binary_path/"greedy_best_first_search_path_x", "wb") as f:
                 pickle.dump(rx, f)
             with open(binary_path/"greedy_best_first_search_path_y", "wb") as f:
                 pickle.dump(ry, f)
     
+    for thread in threads:
+        thread.start()
+    
+    for thread in threads:
+        thread.join()
+
     print("Path generated")
 
+    if show_table:
+        fig, ax = plt.subplots()
+
+        # hide axes
+        fig.patch.set_visible(False)
+        ax.axis('off')
+        ax.axis('tight')
+        ax.table(cellText=algorithm.values, colLabels=algorithm.columns, rowLabels=algorithm.rows, loc='center', cellLoc='center', colLoc='center')
+        fig.tight_layout()
+        plt.savefig(results/table_name)
+        plt.show()
+    
+    
 
 if __name__ == '__main__':
     main()
