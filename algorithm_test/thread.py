@@ -1,3 +1,11 @@
+"""
+
+Thread module for running the main functions of the project in parallel.
+
+author: Enio Krizman (@kr1zzo)
+
+"""
+
 import threading
 
 from generate_map import main as map_main

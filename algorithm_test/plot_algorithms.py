@@ -1,4 +1,11 @@
 
+"""
+
+Path planning algorithms plotter
+
+author: Enio Krizman (@kr1zzo)
+
+"""
 import math
 import pickle
 import matplotlib.pyplot as plt
@@ -29,6 +36,7 @@ def main():
         plot_algorithm = config["plot_algorithms"]
         image_name = config["image_name"]
         result_image_name = config["result_image_name"]
+        costume_start_goal = config["costume_start_goal"]
     
 
     with open(binary_path/"ox", "rb") as f:
@@ -41,15 +49,26 @@ def main():
     with open(binary_path/"dim_y", "rb") as f:
         size_y = pickle.load(f)
     
-    sx = size_x * 0.2  # [m]
-    sy = size_y * 0.8 # [m]
-    gx = size_x * 0.45   # [m]
-    gy = size_y * 0.3  # [m]
+    if costume_start_goal:
+        with open(binary_path/"sx", "rb") as f:
+            sx = pickle.load(f)
+        with open(binary_path/"sy", "rb") as f:
+            sy = pickle.load(f)
+        with open(binary_path/"gx", "rb") as f:
+            gx = pickle.load(f)
+        with open(binary_path/"gy", "rb") as f:
+            gy = pickle.load(f)
+    
+    else:
+        sx = size_x * 0.2  # [m]
+        sy = size_y * 0.8 # [m]
+        gx = size_x * 0.45   # [m]
+        gy = size_y * 0.3  # [m]
 
     im = plt.imread(images/image_name)
     fig, ax = plt.subplots()
     im = ax.imshow(im, extent=[0, size_x, 0, size_y])
-    plt.plot(ox, oy, ".k")
+    #plt.plot(ox, oy, ".k")
     plt.plot(sx, sy, "og")
     plt.plot(gx, gy, "xb")
     plt.grid(True)

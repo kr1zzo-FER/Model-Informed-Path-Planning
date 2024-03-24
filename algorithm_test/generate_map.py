@@ -1,4 +1,12 @@
 
+"""
+
+Map generation script
+
+author: Enio Krizman (@kr1zzo)
+
+"""
+
 
 from skimage import io, measure
 from PIL import Image
@@ -6,6 +14,33 @@ import pickle
 from pathlib import Path
 from pathlib import Path
 import yaml
+import matplotlib.pyplot as plt
+from matplotlib.backend_bases import MouseButton
+counter = 0
+
+def onclick(event):
+    root = Path(".")
+
+    my_path = root / "binary_dump"
+    images = root / "images"
+    global counter
+    if event.button == MouseButton.LEFT:
+        if counter == 0:
+            print("Start position set")
+            with open(my_path/"sx", "wb") as f:
+                pickle.dump(event.xdata, f)
+            with open(my_path/"sy", "wb") as f:
+                pickle.dump(event.ydata, f)
+            counter += 1
+        elif counter == 1:
+            print("Goal position set")
+            with open(my_path/"gx", "wb") as f:
+                pickle.dump(event.xdata, f)
+            with open(my_path/"gy", "wb") as f:
+                pickle.dump(event.ydata, f)
+            exit(0)
+
+
 def main():
     
     # set obstacle positions
@@ -73,7 +108,15 @@ def main():
 
     image_pixel.save(images/"jadranovo_bw_resized.png")
     image_pixel_rgb.save(images/"jadranovo_resized.png")
+
+    fig, ax = plt.subplots()
+    im = ax.imshow(image_pixel_rgb, extent=[0, image_pixel.size[0], 0, image_pixel.size[1]])
     
+    ax.set_title("Left mouse click - set start and goal positions")
+
+    fig.canvas.mpl_connect('button_press_event', onclick)
+
+    plt.show()
     
 
     

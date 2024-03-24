@@ -1,5 +1,15 @@
+start_image_name : "jadranovo.png"
+start_image_name_bw :  "jadranovo_bw.png"
+image_name : "jadranovo_resized.png"
+image_name_bw : "jadranovo_bw_resized.png"
+# Results
+table_name : "test.png"
+result_image_name : "result_image.png"
 
-#test algorithM
+grid_size : 1.0  # [m]
+robot_radius : 1.0  # [m]
+
+#test and plot options
 # 1. a_star
 # 2. bidirectional_a_star
 # 3. dijkstra
@@ -13,12 +23,11 @@
 test_algorithm : 
 - "a_star"
 - "bidirectional_a_star"
-
-#- "dijkstra"
-#- "d_star"
-#- "d_star_lite"
-#- "breadth_first_search"
-#- "bidirectional_breadth_first_search"
+- "dijkstra"
+- "d_star"
+- "d_star_lite"
+- "breadth_first_search"
+- "bidirectional_breadth_first_search"
 #- "depth_first_search"
 #- "greedy_best_first_search"
 
@@ -27,15 +36,19 @@ plot_algorithms:
 - "a_star"
 - "bidirectional_a_star"
 - "dijkstra"
+- "d_star"
+- "d_star_lite"
+- "breadth_first_search"
+- "bidirectional_breadth_first_search"
+#- "depth_first_search"
+#- "greedy_best_first_search"
 
-grid_size : 1.0  # [m]
-robot_radius : 1.0  # [m]
 
-show_table : True
-table_name : "test.png"
-result_image_name : "result_image.png"
+# thread_enable : True - thread for plotting map
+# thread_enable map : False - for algorithm runtime calculation
+thread_enable : False
 
-start_image_name : "jadranovo.png"
-start_image_name_bw :  "jadranovo_bw.png"
-image_name : "jadranovo_resized.png"
-image_name_bw : "jadranovo_bw_resized.png"
+costume_start_goal : True
+
+
+
