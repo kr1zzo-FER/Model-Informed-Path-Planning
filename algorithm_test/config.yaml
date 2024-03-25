@@ -1,12 +1,12 @@
-start_image_name : "jadranovo.png"
-start_image_name_bw :  "jadranovo_bw.png"
-image_name : "jadranovo_resized.png"
-image_name_bw : "jadranovo_bw_resized.png"
+start_image_name : "voz.png"
+start_image_name_bw :  "voz_bw.png"
+image_save : "voz_resized.png"
+image_save_bw : "voz_bw_resized.png"
 # Results
 table_name : "test.png"
 result_image_name : "result_image.png"
 
-grid_size : 1.0  # [m]
+grid_size : 10.0  # [m]
 robot_radius : 1.0  # [m]
 
 #test and plot options
@@ -28,18 +28,18 @@ test_algorithm :
 - "d_star_lite"
 - "breadth_first_search"
 - "bidirectional_breadth_first_search"
-#- "depth_first_search"
-#- "greedy_best_first_search"
+- "depth_first_search"
+- "greedy_best_first_search"
 
 
 plot_algorithms:
 - "a_star"
-- "bidirectional_a_star"
-- "dijkstra"
+#- "bidirectional_a_star"
+#- "dijkstra"
 - "d_star"
-- "d_star_lite"
-- "breadth_first_search"
-- "bidirectional_breadth_first_search"
+#- "d_star_lite"
+#- "breadth_first_search"
+#- "bidirectional_breadth_first_search"
 #- "depth_first_search"
 #- "greedy_best_first_search"
 

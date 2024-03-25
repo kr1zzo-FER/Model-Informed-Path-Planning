@@ -22,7 +22,7 @@ import threading
 
 from algorithms.a_star import AStarPlanner
 from algorithms.dstar import Map, State
-from algorithms.dstar import Dstar
+from algorithms.dstar import Dstar, Map, State
 from algorithms.d_star_lite import DStarLite
 from algorithms.d_star_lite import Node
 from algorithms.dijkstra import Dijkstra
@@ -35,74 +35,7 @@ from algorithms.greedy_best_first_search import BestFirstSearchPlanner
 
 show_animation = False
 
-
-
-class State:
-
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        self.parent = None
-        self.state = "."
-        self.t = "new"  # tag for state
-        self.h = 0
-        self.k = 0
-
-    def cost(self, state):
-        if self.state == "#" or state.state == "#":
-            return maxsize
-
-        return math.sqrt(math.pow((self.x - state.x), 2) +
-                         math.pow((self.y - state.y), 2))
-
-    def set_state(self, state):
-        """
-        .: new
-        #: obstacle
-        e: oparent of current state
-        *: closed state
-        s: current state
-        """
-        if state not in ["s", ".", "#", "e", "*"]:
-            return
-        self.state = state
-
-class Map:
-
-    def __init__(self, row, col):
-        self.row = row
-        self.col = col
-        self.map = self.init_map()
-
-    def init_map(self):
-        map_list = []
-        for i in range(self.row):
-            tmp = []
-            for j in range(self.col):
-                tmp.append(State(i, j))
-            map_list.append(tmp)
-        return map_list
-
-    def get_neighbors(self, state):
-        state_list = []
-        for i in [-1, 0, 1]:
-            for j in [-1, 0, 1]:
-                if i == 0 and j == 0:
-                    continue
-                if state.x + i < 0 or state.x + i >= self.row:
-                    continue
-                if state.y + j < 0 or state.y + j >= self.col:
-                    continue
-                state_list.append(self.map[state.x + i][state.y + j])
-        return state_list
-
-    def set_obstacle(self, point_list):
-        for x, y in point_list:
-            if x < 0 or x >= self.row or y < 0 or y >= self.col:
-                continue
-
-            self.map[x][y].set_state("#")
-
+    
 class Algorithms:
     def __init__(self, ox, oy):
         self.ox = ox
@@ -167,10 +100,17 @@ class Algorithms:
             pickle.dump(ry, f)
         
     def d_star(self, sx, sy, gx, gy, grid_size, size_x, size_y, robot_radius, binary_path):
+        print(size_x, size_y)
         print("\nD* calculation started")
         self.rows.append("D*")
-        m = Map(size_x, size_y)
-        m.set_obstacle([(i, j) for i, j in zip(self.ox, self.oy)])
+        m = Map(round(size_x/grid_size), round(size_y/grid_size))
+        ox_ = [round(ox/grid_size) for ox in self.ox]
+        oy_ = [round(oy/grid_size) for oy in self.oy]
+        sx = round(sx/grid_size)
+        sy = round(sy/grid_size)
+        gx = round(gx/grid_size)
+        gy = round(gy/grid_size)
+        m.set_obstacle([(i, j) for i, j in zip(ox_, oy_)])
         start = [int(sx), int(sy)]
         goal = [int(gx), int(gy)]
         start = m.map[start[0]][start[1]]
@@ -178,6 +118,7 @@ class Algorithms:
         start_time = time.time()
         dstar = Dstar(m)
         rx, ry = dstar.run(start, end)
+        rx, ry = [rx[i]*grid_size for i in range(len(rx))], [ry[i]*grid_size for i in range(len(ry))]
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
         distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
@@ -297,7 +238,8 @@ def main():
         size_x = pickle.load(f)
     with open(binary_path/"dim_y", "rb") as f:
         size_y = pickle.load(f)
-   
+    
+    
     
     with open("config.yaml", "r") as f:
         config = yaml.safe_load(f)
@@ -319,10 +261,11 @@ def main():
             gy = pickle.load(f)
     
     else:
-        sx = size_x * 0.2  # [m]
-        sy = size_y * 0.8 # [m]
-        gx = size_x * 0.45   # [m]
-        gy = size_y * 0.3  # [m]
+        sx =  1500 # [m]
+        sy = 2000 # [m]
+        gx = 3000   # [m]
+        gy = 1000  # [m]
+    
 
     rows = []
     columns = ['Time [s]', 'Distance [m]']
@@ -357,6 +300,7 @@ def main():
         
         if test_algorithm == "d_star":
             if thread_enable:
+                print
                 thread4 = threading.Thread(target = algorithm.d_star, args=(sx, sy, gx, gy, grid_size, size_x, size_y, robot_radius, binary_path))
                 threads.append(thread4)
             else:
@@ -419,8 +363,6 @@ def main():
         fig.tight_layout()
         plt.savefig(results/table_name)
         plt.show()
-    
-    exit(0)
     
     
 

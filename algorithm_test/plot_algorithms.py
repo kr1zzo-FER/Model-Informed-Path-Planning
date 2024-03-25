@@ -12,16 +12,28 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
+import matplotlib.ticker as mticker
 
 import matplotlib.colors as mcolors
 from pathlib import Path
 import yaml
+import numpy as np
 
 show_animation = True
 legend_elements = []
 ox, oy = [], []
 size_x = 0
 size_y = 0
+
+def deg_to_dms(deg):
+    #print(deg)
+    d = int(deg)
+    md = abs(deg - d) * 60
+    m = int(md)
+    sd = round((md - m) * 60)
+    format_string = f"{d}°{m}'{sd}\""
+    #print(format_string)
+    return format_string
 
 def main():
 
@@ -34,7 +46,7 @@ def main():
     with open("config.yaml", "r") as f:
         config = yaml.safe_load(f)
         plot_algorithm = config["plot_algorithms"]
-        image_name = config["image_name"]
+        image_name = config["image_save"]
         result_image_name = config["result_image_name"]
         costume_start_goal = config["costume_start_goal"]
     
@@ -43,11 +55,14 @@ def main():
         ox = pickle.load(f)
     with open(binary_path/"oy", "rb") as f:
         oy = pickle.load(f)
-    
+    with open(binary_path/"coordinates", "rb") as f:
+        coordinates = pickle.load(f)
     with open(binary_path/"dim_x", "rb") as f:
         size_x = pickle.load(f)
     with open(binary_path/"dim_y", "rb") as f:
         size_y = pickle.load(f)
+    
+
     
     if costume_start_goal:
         with open(binary_path/"sx", "rb") as f:
@@ -67,11 +82,48 @@ def main():
 
     im = plt.imread(images/image_name)
     fig, ax = plt.subplots()
+    # new axis with the same size as the image
     im = ax.imshow(im, extent=[0, size_x, 0, size_y])
+
+    coordinates = [round(float(coordinates[0]),6), round(float(coordinates[1]),6), round(float(coordinates[2]),6), round(float(coordinates[3]),6)]
+    #print(coordinates[0])
+    coordinates_plot_x = np.arange(coordinates[0], coordinates[2],0.005)
+    coordinates_plot_x = np.append(coordinates_plot_x, coordinates[2])
+    coordinates_plot_x = [deg_to_dms(i) for i in coordinates_plot_x]
+    coordinates_plot_y = np.arange(coordinates[1], coordinates[3],0.005)
+    coordinates_plot_y = np.append(coordinates_plot_y, coordinates[3])
+    coordinates_plot_y = [deg_to_dms(i) for i in coordinates_plot_y]
+    
+
+    image_cordinates_x = np.arange(0, round(size_x), round(size_x/(len(coordinates_plot_x)-1)))
+    image_cordinates_x = np.append(image_cordinates_x, size_x)
+    image_cordinates_y = np.arange(0, round(size_y), round(size_y/(len(coordinates_plot_y)-1)))
+    image_cordinates_y = np.append(image_cordinates_y, size_y)
+
+    plt.xticks(image_cordinates_x, coordinates_plot_x, rotation=90)
+    plt.yticks(image_cordinates_y, coordinates_plot_y)
+
+    sx_longitude = round(sx * (coordinates[2] - coordinates[0]) / size_x + coordinates[0], 6)
+    sx_longitude = deg_to_dms(sx_longitude)
+    sy_latitude = round(sy * (coordinates[3] - coordinates[1]) / size_y + coordinates[1], 6)
+    sy_latitude = deg_to_dms(sy_latitude)
+    print(sy_latitude)
+
+    gx_longitude = round(gx * (coordinates[2] - coordinates[0]) / size_x + coordinates[0], 6)
+    gx_longitude = deg_to_dms(gx_longitude)
+    gy_latitude = round(gy * (coordinates[3] - coordinates[1]) / size_y + coordinates[1], 6)
+    gy_latitude = deg_to_dms(gy_latitude)
+    
     #plt.plot(ox, oy, ".k")
+    plt.xlabel("Longitude")
+    plt.ylabel("Latitude")
     plt.plot(sx, sy, "og")
     plt.plot(gx, gy, "xb")
+
+    legend_elements.append(Line2D([0], [0], marker='o', color='g', label=f'Start : ({sx_longitude}, {sy_latitude})'))
+    legend_elements.append(Line2D([0], [0], marker='x', color='b', label=f'Goal : ({gx_longitude}, {gy_latitude})'))
     plt.grid(True)
+
 
     
     for algorithm in plot_algorithm:
