@@ -1,34 +1,49 @@
-# Model-informed Path Planning and control for autonomous vessels
+# Algorithm test
 
-This repository implements some path planning algorithms used in maritime robotics, including ...
+This directory is used for testing path planning algorithms 
 
-# Directory Structure
+## Directory Structure
     .
-    └── assets
-    └── image_processing
-    └── map_generator
+    └── algorithms
         ├── A*
         ├── Bidirectional A*
-        ├── Anytime Repairing A*
-        ├── Learning Real-time A* (LRTA*)
-        ├── Real-time Adaptive A* (RTAA*)
-        ├── Lifelong Planning A* (LPA*)
-        ├── Dynamic A* (D*)
-        ├── D* Lite
-        └── Anytime D*
-    └── grid_search_algorithms
-    └── Papers
+        ├── Dijkstra
+        ├── D*
+        ├── D* lite
+        ├── Breadth first search
+        ├── Bidirectional Breadth first search
+        ├── Depth first search
+        └── Greedy best first search
+    └── binary_dump
+    └── config.yaml
+    └── images
+    └── generate_map.py
+    └── test_algorithms.py
+    └── plot_algorithms.py
 
-# Requirements
+## Run code
+Testing an plotting configuration:
+```sh
+config.yaml
+```
 
-For running each sample code:
+Generating map from image:
+```
+python3 generate_map.py
+```
 
-- [Python 3.12.x](https://www.python.org/)
- 
-- [NumPy](https://numpy.org/)
- 
-- [SciPy](https://scipy.org/)
- 
-- [Matplotlib](https://matplotlib.org/)
- 
-- [cvxpy](https://www.cvxpy.org/) 
+Test algorithms
+```
+python3 test_algorithms.py
+```
+
+Plot algorithms
+```
+python3 test_algorithms.py
+```
+
+Thread run
+```
+python3 plot_algorithms.py
+```
+

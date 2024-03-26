@@ -107,7 +107,6 @@ def main():
     sx_longitude = deg_to_dms(sx_longitude)
     sy_latitude = round(sy * (coordinates[3] - coordinates[1]) / size_y + coordinates[1], 6)
     sy_latitude = deg_to_dms(sy_latitude)
-    print(sy_latitude)
 
     gx_longitude = round(gx * (coordinates[2] - coordinates[0]) / size_x + coordinates[0], 6)
     gx_longitude = deg_to_dms(gx_longitude)
@@ -224,6 +223,6 @@ def main():
     ax.legend(handles=legend_elements, loc='upper right')
     plt.savefig(results/result_image_name)
     plt.show()
-
+    
 if __name__ == '__main__':
     main()

@@ -69,6 +69,9 @@ class Algorithms:
             pickle.dump(ry, f)
         pass
 
+        with open(binary_path/"time_distance_astar", "wb") as f:
+            pickle.dump([function_time, distance], f)
+
     def bidirectional_a_star(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
         print("\nBidirectional A* calculation started..")
         self.rows.append("Bidirectional A*")
@@ -83,6 +86,9 @@ class Algorithms:
             pickle.dump(rx, f)
         with open(binary_path/"bid_a_star_path_y", "wb") as f:
             pickle.dump(ry, f)
+        
+        with open(binary_path/"time_distance_bidir_astar", "wb") as f:
+            pickle.dump([function_time, distance], f)
     
     def dijkstra(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
         print("\nDijkstra calculation started")
@@ -98,6 +104,10 @@ class Algorithms:
             pickle.dump(rx, f)
         with open(binary_path/"dijkstra_path_y", "wb") as f:
             pickle.dump(ry, f)
+        
+        with open(binary_path/"time_distance_dijkstra", "wb") as f:
+            pickle.dump([function_time, distance], f)
+        
         
     def d_star(self, sx, sy, gx, gy, grid_size, size_x, size_y, robot_radius, binary_path):
         print(size_x, size_y)
@@ -128,26 +138,40 @@ class Algorithms:
             pickle.dump(rx, f)
         with open(binary_path/"d_star_path_y", "wb") as f:
             pickle.dump(ry, f)
+        
+        with open(binary_path/"time_distance_dstar", "wb") as f:
+            pickle.dump([function_time, distance], f)
 
     def d_star_lite(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
         print("\nD* lite calculation started")
         self.rows.append("D* Lite")
         spoofed_ox = [[], [], [], []]
         spoofed_oy = [[], [], [], []]
+        ox_ = [round(ox/grid_size) for ox in self.ox]
+        oy_ = [round(oy/grid_size) for oy in self.oy]
         start_time = time.time()
-        dstarlite = DStarLite(self.ox, self.oy)
+        dstarlite = DStarLite(ox_, oy_)
+        sx = round(sx/grid_size)
+        sy = round(sy/grid_size)
+        gx = round(gx/grid_size)
+        gy = round(gy/grid_size)
         dstarlite.main(Node(x=int(sx), y=int(sy)), Node(x=int(gx), y=int(gy)),
                 spoofed_ox=spoofed_ox, spoofed_oy=spoofed_oy)
         rx, ry = dstarlite.get_path()
+        rx, ry = [rx[i]*grid_size for i in range(len(rx))], [ry[i]*grid_size for i in range(len(ry))]
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
         distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        self.values.append([function_time, distance])
+        #self.values.append([function_time, distance])
 
         with open(binary_path/"d_star_lite_path_x", "wb") as f:
             pickle.dump(rx, f)
         with open(binary_path/"d_star_lite_path_y", "wb") as f:
                 pickle.dump(ry, f)
+        
+        with open(binary_path/"time_distance_dstar_lite", "wb") as f:
+            pickle.dump([function_time, distance], f)
+        
         
     def breadth_first_search(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
         print("\nBFS calculation started")
@@ -163,6 +187,9 @@ class Algorithms:
             pickle.dump(rx, f)
         with open(binary_path/"bfs_path_y", "wb") as f:
             pickle.dump(ry, f)
+
+        with open(binary_path/"time_distance_bfs", "wb") as f:
+            pickle.dump([function_time, distance], f)
     
     def bidirectional_breadth_first_search(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
         print("\nbidirectional BFS calculation started")
@@ -179,6 +206,9 @@ class Algorithms:
             pickle.dump(rx, f)
         with open(binary_path/"bid_bfs_path_y", "wb") as f:
             pickle.dump(ry, f)
+        
+        with open(binary_path/"time_distance_bidir_bfs", "wb") as f:
+            pickle.dump([function_time, distance], f)
 
     def depth_first_search(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
         print("\nDFS calculation started")
@@ -194,6 +224,9 @@ class Algorithms:
             pickle.dump(rx, f)
         with open(binary_path/"dfs_path_y", "wb") as f:
             pickle.dump(ry, f)
+        
+        with open(binary_path/"time_distance_dfs", "wb") as f:
+            pickle.dump([function_time, distance], f)
     
     def greedy_best_first_search(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
         print("\nGreedy Best First Search calculation started")
@@ -209,6 +242,8 @@ class Algorithms:
             pickle.dump(rx, f)
         with open(binary_path/"gbfs_path_y", "wb") as f:
             pickle.dump(ry, f)
+        with open(binary_path/"time_distance_gbfs", "wb") as f:
+            pickle.dump([function_time, distance], f)
     
     
     

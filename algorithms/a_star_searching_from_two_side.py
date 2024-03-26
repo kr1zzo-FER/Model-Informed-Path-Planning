@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-show_animation = False
+show_animation = True
 
 
 class Node:
