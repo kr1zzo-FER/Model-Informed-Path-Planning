@@ -28,7 +28,7 @@ def process_osm_data(binary_path, input_data) -> None:
 
     print("\nProcessing OSM data...\n")
 
-    with open('osm_info.txt', 'r') as file:
+    with open(input_data/'osm_info.txt', 'r') as file:
         data = file.read()
 
     # initializing substrings

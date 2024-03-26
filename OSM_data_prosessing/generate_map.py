@@ -110,10 +110,7 @@ def main():
     # paths to files
     binary_path = root / "binary_dump"
     results = root / "results"
-
-    input_data = Path(".")
-
-    print(input_data)
+    input_data = root / "input_data" / folder_name
 
     # process OSM data - latitutde and longitude to meters
     process_osm_data(binary_path, input_data)
