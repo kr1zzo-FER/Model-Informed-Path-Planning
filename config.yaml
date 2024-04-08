@@ -1,12 +1,28 @@
-folder_name : "Voz"
-start_image_name : "voz.png"
-image_save : "voz_resized.png"
+
+# Process OSM data
+location_folder : "voz"
+location_image: "voz.png"
+resized_location_image : "voz_resized.png"
+# Canny edge detection (True) or pixel HSV edge detection (False) for coastline detection
+
+
 # Results
+costume_start_goal : False
+
+# This is hardcoded start and goal position and applied only if costume_start_goal is False
+start_longitude: 14.613089
+start_latitude : 45.225997
+
+goal_longitude: 14.577252
+goal_latitude : 45.235119
+
+
+
 table_name : "runtime_results.png"
 result_image_name : "result_image.png"
 
 grid_size : 10.0  # [m]
-robot_radius : 1.0  # [m]
+robot_radius : 10.0  # [m]
 
 #test and plot options
 # 1. a_star
@@ -20,7 +36,7 @@ robot_radius : 1.0  # [m]
 # 9. greedy_best_first_search
 
 test_algorithm : 
-- "a_star"
+#- "a_star"
 #- "bidirectional_a_star"
 #- "dijkstra"
 - "d_star"
@@ -35,7 +51,7 @@ plot_algorithms:
 - "a_star"
 #- "bidirectional_a_star"
 #- "dijkstra"
-- "d_star"
+#- "d_star"
 #- "d_star_lite"
 #- "breadth_first_search"
 #- "bidirectional_breadth_first_search"
@@ -47,9 +63,6 @@ plot_algorithms:
 # thread_enable map : False - for algorithm runtime calculation
 thread_enable : False
 
-costume_start_goal : True
-
-canny_detection : True
 
 
 

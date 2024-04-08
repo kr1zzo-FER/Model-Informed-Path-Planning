@@ -47,11 +47,11 @@ In the folder `input_data` are proveided default data for the following location
 
 Feel free to download your own data from OpenStreetMap and follow the instructions below.
 
-1.1. Go to [OpenStreetMap](https://www.openstreetmap.org/#map=15/45.2359/14.5844) and select the area you want to download.
+### 1.1. Go to [OpenStreetMap](https://www.openstreetmap.org/#map=15/45.2359/14.5844) and select the area you want to download.
 
-1.2. Make new folder `geolocation_name` (for example `Rijeka`) in the `input_data` folder and put `osm_data.txt` file inside
+### 1.2. Make new folder `geolocation_name` (for example `Rijeka`) in the `input_data` folder and put `osm_data.txt` file inside
 
-1.3. Click on the Download button and download the data in .png format
+### 1.3. Click on the Download button and download the data in .png format
 
 <img src="assets/osm_download.png" alt="drawing" width="200"/>
 
@@ -63,10 +63,37 @@ Feel free to download your own data from OpenStreetMap and follow the instructio
 
 <img src="assets/osm_geolocation.png" alt="drawing" width="200"/>
 
-1.4. Update config.yaml file
+### 1.4. Update config.yaml file
 
+Example of the config.yaml file for the location `voz`:
 
+- location folder from the `input_data` folder step 1.2 and location_image is the name of the .png file from the step 1.3
 
+- canny_detection : True for Canny edge detection or False for pixel HSV edge detection for coastline detection
+
+ ```yaml
+# Process OSM data
+location_folder : "voz"
+location_image: "voz.png"
+resized_location_image : "voz_resized.png"
+# Canny edge detection (True) or pixel HSV edge detection (False) for coastline detection
+canny_detection : True
+```
+
+### 1.5. Run the following command to generate map and detect coastline
+
+ ```terminal
+  python3 generate_map.py
+  ```
+
+  - `detect_coastline.py` - process the image and detect the coastline
+  - `process_osm_data.py` - extract the coordinates from the OpenStreetMap data and meters per pixel
+
+### If everything is done correctly, the map would be resized to 1 $pixel$ per 1 $meter^2$ and costline should be marked with blue colour!
+
+1.6. Select start and goal points on the map and run the path planning algorithms
+
+## Step 2 : Path planning algorithms
 
 ## Credits
 

@@ -19,6 +19,7 @@ from pathlib import Path
 import yaml
 import numpy as np
 
+root = Path(__file__).resolve().parents[1]
 show_animation = True
 legend_elements = []
 ox, oy = [], []
@@ -37,16 +38,16 @@ def deg_to_dms(deg):
 
 def main():
 
-    root = Path(".")
+    global root
 
     binary_path = root / "binary_dump"
-    images = root / "images"
+    images = root / "results"
     results = root / "results"
 
-    with open("config.yaml", "r") as f:
+    with open(root/"config.yaml", "r") as f:
         config = yaml.safe_load(f)
         plot_algorithm = config["plot_algorithms"]
-        image_name = config["image_save"]
+        image_name = config["resized_location_image"]
         result_image_name = config["result_image_name"]
         costume_start_goal = config["costume_start_goal"]
     

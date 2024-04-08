@@ -24,6 +24,16 @@ def gps_to_meters(lat1, lon1, lat2, lon2):
     d = R * c
     return d * 1000 # meters
 
+def deg_to_dms(deg):
+    #print(deg)
+    d = int(deg)
+    md = abs(deg - d) * 60
+    m = int(md)
+    sd = round((md - m) * 60)
+    format_string = f"{d}°{m}'{sd}\""
+    #print(format_string)
+    return format_string
+
 def process_osm_data(binary_path, input_data) -> None:
 
     print("\nProcessing OSM data...\n")
@@ -55,3 +65,5 @@ def process_osm_data(binary_path, input_data) -> None:
 
     with open(binary_path/"image_width_height_m", "wb") as f:
         pickle.dump([image_width, image_height], f)
+    
+    return latlong
