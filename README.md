@@ -267,7 +267,7 @@ Run for plotting the results:
 ```
 
 
-### 3.3. Check the results
+### 3.2.3. Check the results
 
 * Results are saved in the `results` folder with the name `result_image` and `table_name`
 
@@ -315,6 +315,9 @@ Example of the prototype cost map:
 
 ## Step 5 : Path interpolation and optimization
 
+* From the results of the path planning algorithms, the path interpolation and optimization are needed for the path planning algorithms to be used in the real environment
+* From the step 3, the path planning algorithm with the best results is chosen for the path interpolation and optimization (D*),and code is modified to fit the cost map generated in the previous step
+
 //TODO
 
 ## Step 6 : Testing of the path planning algorithms on the generated cost map
@@ -350,4 +353,5 @@ Dr. Sc. Nadir Kapetanović  | nadir.kapetanovi@fer.hr
 ## Acknowledgments
 
 This repository is built using the following resources and it is used only for educational purposes:
-* [PythonRobotics](https://github.com/AtsushiSakai/PythonRobotics)
+* [PythonRobotics repository](https://github.com/AtsushiSakai/PythonRobotics)
+* [PythonRobotics documentation](https://arxiv.org/abs/1808.10703)
