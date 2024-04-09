@@ -289,6 +289,7 @@ Run for plotting the results:
 * the current cost map is based on the distance from the coast
 * TODO: Implement costmap based on the depth, obstacles, etc.
 * TODO: develop the solution for the bridge detections and elimination from the provided data
+* TODO : add more directions and fix empty spaces, connect meters with geolocations
 
 ### 4.1. Update config.yaml file
 
@@ -315,7 +316,7 @@ Example of the prototype cost map:
 * Zones are marked with different colors based on the distance from the coast
 and determined according to the prescribed [safety regulations in Croatia](https://www.angelina.hr/en/blog/minimum-distance-between-yachts-and-the-coast-in-croatia)
 
-//TODO : add more directions and fix empty spaces, connect meters with geolocations
+
 
 
 ## Step 5 : Testing of the path planning algorithms on the generated cost map
