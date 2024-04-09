@@ -3,7 +3,7 @@
 ![GitHub_Action_Linux_CI](https://github.com/AtsushiSakai/PythonRobotics/workflows/Linux_CI/badge.svg)
 
 ## Project description
-This repository is a part of the diploma thesis at the Faculty of Electrical Engineering and Computing, University of Zagreb. The main goal of the thesis is to develop a model-informed path planning and control for autonomous vessels.  The project is based on the PythonRobotics repository and it is used for educational purposes only.
+This repository is a part of the diploma thesis at the Faculty of [Electrical Engineering and Computing, University of Zagreb](https://www.fer.unizg.hr/), [Laboratory for Underwater Systems and Technologies](https://labust.fer.hr/). The main goal of the thesis is to develop a _model-informed path planning and control for autonomous vessels (Croatian: Modelski informirano globalno planiranje putanje i upravljanje autonomnoga plovila)_.  The project is based on the PythonRobotics repository and it is used for educational purposes only.
  Model-informed path planning consists of the following steps:
 1. Data extraction and processing from OpenStreetMap
 3. Testing of the path planning algorithms from the PythonRobotics repository on the extracted OpenStreetMap data 
@@ -83,8 +83,8 @@ Folder `input_data` should have the following structure:
     │   ├── osm_input.txt       # HTML string from the OpenStreetMa
     │   └── voz.png             # .png file from the OpenStreetMap
     ├── jadranovo
-    │   ├── osm_input.txt       # HTML string from the OpenStreetMa
-     jadranovo.png       # .png file from the OpenStreetMap
+    │   ├── osm_input.txt       # HTML string from the OpenStreetMap
+    │   └── jadranovo.png       # .png file from the OpenStreetMap
     ├── location_1
     │   ├── osm_input.txt       # HTML string from the OpenStreetMa
     │   └── location_1.png      # .png file from the OpenStreetMap
@@ -301,9 +301,9 @@ Example of the prototype cost map:
 
 ## Credits
 
-#### &copy; Faculty of Electrical Engineering and Computing, University of Zagreb, 2024
+#### [&copy; Faculty of Electrical Engineering and Computing, University of Zagreb, 2024](https://www.fer.unizg.hr/)
 
-#### &copy; Laboratory for Underwater Systems and Technologies (LABUST)
+#### [&copy; Laboratory for Underwater Systems and Technologies (LABUST)](https://labust.fer.hr/)
 
 <img src="assets/labust_logo.png" alt="drawing" width="50"/>
 <img src="assets/FER_logo_3.png" alt="drawing" width="200"/>
