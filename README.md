@@ -30,6 +30,28 @@ This repository is a part of the diploma thesis at the Faculty of [Electrical En
   * [Credits](#credits)
   * [Acknowledgments](#acknowledgments)
 
+### Folder structure
+
+```terminal
+Model-informed-path-planning
+    ├── assets
+    │   └── ...
+    ├── input_data            # Step 1
+    │   └── ...
+    ├── osm_data_processing   # Step 2 and Step 4
+    │   └── ...
+    ├── test_algorithm        # Step 3
+    │   └── ...
+    ├── results
+    │   └── ...
+    ├── requirements
+    │   └── requirements.txt
+    ├── config.yaml
+    ├── README.md
+    ├── .gitignore
+    └── ...
+    
+
 ## Installing
 ```terminal
 git clone https://github.com/kr1zzo/Model-informed-path-planning.git
@@ -43,7 +65,9 @@ pip install -r requirements/requirements.txt
 
 ## Executing program
 
-Steps are marked in `config.yaml` file with `## Step n : ...` and can be changed according to the user's needs.
+* Steps are marked in `config.yaml` file with `## Step n : ...` and can be changed according to the user's needs.
+
+* After first run, the `results` and `binary_dumps` folders are created
 
 
 ## Step 1 : Download data from OpenStreetMap 
