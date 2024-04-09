@@ -1,28 +1,37 @@
 
+## Step 1: Download data from OpenStreetMap (optional)
+
 # Process OSM data
 location_folder : "voz"
 location_image: "voz.png"
+
+
+## Step 2 : Data extraction and processing from OpenStreetMap
+
 resized_location_image : "voz_resized.png"
-# Canny edge detection (True) or pixel HSV edge detection (False) for coastline detection
 
-
-# Results
-costume_start_goal : False
+costume_start_goal : True
 
 # This is hardcoded start and goal position and applied only if costume_start_goal is False
-start_longitude: 14.613089
-start_latitude : 45.225997
+start_longitude: 14.576700
+start_latitude : 45.235964
 
-goal_longitude: 14.577252
-goal_latitude : 45.235119
+goal_longitude: 14.584563
+goal_latitude : 45.229204
 
+## Step 3: Path planning algorithms testing
 
-
+result_image : "voz_result.png"
 table_name : "runtime_results.png"
 result_image_name : "result_image.png"
 
 grid_size : 10.0  # [m]
 robot_radius : 10.0  # [m]
+
+
+# thread_enable : True - thread for plotting map
+# thread_enable map : False - for algorithm runtime calculation
+thread_enable : True
 
 #test and plot options
 # 1. a_star
@@ -36,20 +45,8 @@ robot_radius : 10.0  # [m]
 # 9. greedy_best_first_search
 
 test_algorithm : 
-#- "a_star"
-#- "bidirectional_a_star"
-#- "dijkstra"
-- "d_star"
-#- "d_star_lite"
-#- "breadth_first_search"
-#- "bidirectional_breadth_first_search"
-#- "depth_first_search"
-#- "greedy_best_first_search"
-
-
-plot_algorithms:
 - "a_star"
-#- "bidirectional_a_star"
+- "bidirectional_a_star"
 #- "dijkstra"
 #- "d_star"
 #- "d_star_lite"
@@ -59,9 +56,18 @@ plot_algorithms:
 #- "greedy_best_first_search"
 
 
-# thread_enable : True - thread for plotting map
-# thread_enable map : False - for algorithm runtime calculation
-thread_enable : False
+plot_algorithms:
+- "a_star"
+- "bidirectional_a_star"
+- "dijkstra"
+#- "d_star"
+#- "d_star_lite"
+#- "breadth_first_search"
+#- "bidirectional_breadth_first_search"
+#- "depth_first_search"
+#- "greedy_best_first_search"
+
+
 
 
 

@@ -1,7 +1,2 @@
-build/
-install/
-log/
-bin
-lib
-msg_gen
-srv_gen
+results/
+binary_dump/
