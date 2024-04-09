@@ -17,10 +17,12 @@ This respository is a part of diploma thesis at the Faculty of Electrical Engine
 
 ## Table of Contents
 
-   * [Installing](##Installing)
-   * [Requirements](##Requirements)
-   * [Executing program](##Executing-program)
-        * [Step 1 : Download data from OpenStreetMap (optional)](##executing-program)
+   * [Installing](#installing)
+   * [Requirements](#requirements)
+   * [Executing program](#executing-program)
+        * [Step 1 : Download data from OpenStreetMap (optional)] (#step-1:-download-data-from-openstreetmap-optional)
+        * [Step 2 : Data extraction and processing from OpenStreetMap]
+        * [Step 3 : Path planning algorithms testing]
 
 
 ## Installing
@@ -30,9 +32,9 @@ git clone https://github.com/kr1zzo/Model-informed-path-planning.git
 
 ## Requirements
 
- ```terminal
-  pip install -r requirements/requirements.txt
-  ```
+```terminal
+pip install -r requirements/requirements.txt
+```
 
 ## Executing program
 
