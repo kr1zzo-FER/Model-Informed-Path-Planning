@@ -50,13 +50,12 @@ Steps are marked in `config.yaml` file with `## Step n : ...` and can be changed
 
 ### Folder name : `input_data`
 
-`Steps 1.1. - 1.5. are optional and can be skipped if the default data is used`
+`Steps 1.1. - 1.5. are optional and can be skipped if the default data is used. Feel free to download your data from OpenStreetMap and follow the instructions below!`
 
 In the folder `input_data` are provided default data for the following locations:
 - Voz, island of Krk, Croatia
 - Jadranovo, Croatia
 
-Feel free to download your own data from OpenStreetMap and follow the instructions below.
 
 ### 1.1. Go to [OpenStreetMap](https://www.openstreetmap.org/#map=15/45.2359/14.5844) and select the area you want to download
 
