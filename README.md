@@ -288,6 +288,7 @@ Run for plotting the results:
 * cost map generation is needed for the path interpolation and optimization in Step 5
 * the current cost map is based on the distance from the coast
 * TODO: Implement costmap based on the depth, obstacles, etc.
+* TODO: develop the solution for the bridge detections and elimination from the provided data
 
 ### 4.1. Update config.yaml file
 
