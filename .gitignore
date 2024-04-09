@@ -1,2 +1,5 @@
 results/
 binary_dump/
+__pycache__/
+osm_data_processing/__pycache__/
+test_algorithm/__pycache__/
