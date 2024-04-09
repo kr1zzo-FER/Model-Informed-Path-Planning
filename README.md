@@ -19,6 +19,7 @@ This repository is a part of the diploma thesis at the Faculty of [Electrical En
    * [Installing](#installing)
    * [Requirements](#requirements)
    * [Executing program](#executing-program)
+        * [Folder structure](#folder-structure)
         * [Step 1 : Download data from OpenStreetMap](#step-1--download-data-from-openstreetmap)
         * [Step 2 : Data extraction and processing from OpenStreetMap](#step-2--data-extraction-and-processing-from-openstreetmap)
         * [Step 3 : Path planning algorithms testing](#step-3--path-planning-algorithms-testing)
@@ -29,6 +30,21 @@ This repository is a part of the diploma thesis at the Faculty of [Electrical En
 
   * [Credits](#credits)
   * [Acknowledgments](#acknowledgments)
+
+
+## Installing
+```terminal
+git clone https://github.com/kr1zzo/Model-informed-path-planning.git
+```
+
+## Requirements
+
+```terminal
+pip install -r requirements/requirements.txt
+```
+
+## Executing program
+
 
 ### Folder structure
 
@@ -50,25 +66,11 @@ Model-informed-path-planning
     ├── README.md
     ├── .gitignore
     └── ...
-    
-
-## Installing
-```terminal
-git clone https://github.com/kr1zzo/Model-informed-path-planning.git
 ```
-
-## Requirements
-
-```terminal
-pip install -r requirements/requirements.txt
-```
-
-## Executing program
 
 * Steps are marked in `config.yaml` file with `## Step n : ...` and can be changed according to the user's needs.
 
-* After first run, the `results` and `binary_dumps` folders are created
-
+* After [first run](#2.2.-Run-the-following-command-to-generate-map-and-detect-the-coastline), the `results` and `binary_dump` folders are created for saving the results and binary files for the path planning algorithms
 
 ## Step 1 : Download data from OpenStreetMap 
 
