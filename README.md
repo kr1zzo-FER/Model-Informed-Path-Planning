@@ -3,8 +3,7 @@
 ![GitHub_Action_Linux_CI](https://github.com/AtsushiSakai/PythonRobotics/workflows/Linux_CI/badge.svg)
 
 ## Project description
-
-This respository is a part of diploma thesis at the Faculty of Electrical Engineering and Computing, University of Zagreb. The main goal of the thesis is to develop a model-informed path planning and control for autonomous vessels.  The project is based on the PythonRobotics repository and it is used for educational purposes only.
+This repository is a part of the diploma thesis at the Faculty of Electrical Engineering and Computing, University of Zagreb. The main goal of the thesis is to develop a model-informed path planning and control for autonomous vessels.  The project is based on the PythonRobotics repository and it is used for educational purposes only.
  Model-informed path planning consists of the following steps:
 1. Data extraction and processing from OpenStreetMap
 3. Testing of the path planning algorithms from the PythonRobotics repository on the extracted OpenStreetMap data 
@@ -20,10 +19,16 @@ This respository is a part of diploma thesis at the Faculty of Electrical Engine
    * [Installing](#installing)
    * [Requirements](#requirements)
    * [Executing program](#executing-program)
-        * [Step 1 : Download data from OpenStreetMap (optional)] (#step-1:-download-data-from-openstreetmap-optional)
-        * [Step 2 : Data extraction and processing from OpenStreetMap]
-        * [Step 3 : Path planning algorithms testing]
+        * [Step 1 : Download data from OpenStreetMap](#step-1--download-data-from-openstreetmap)
+        * [Step 2 : Data extraction and processing from OpenStreetMap](#step-2--data-extraction-and-processing-from-openstreetmap)
+        * [Step 3 : Path planning algorithms testing](#step-3--path-planning-algorithms-testing)
+        * [Step 4 : Cost map generation](#step-4--cost-map-generation)
+        * [Step 5 : Path interpolation and optimization](#step-5--path-interpolation-and-optimization)
+        * [Step 6 : Testing of the path planning algorithms on the generated cost map](#step-6--testing-of-the-path-planning-algorithms-on-the-generated-cost-map)
+        * [Step 7 : Publishing data to the ROS2 environment and testing the path planning algorithms on the real vessel or in the simulation environment](#step-7--publishing-data-to-the-ros2-environment-and-testing-the-path-planning-algorithms-on-the-real-vessel-or-in-the-simulation-environment)
 
+  * [Credits](#credits)
+  * [Acknowledgments](#acknowledgments)
 
 ## Installing
 ```terminal
@@ -38,14 +43,16 @@ pip install -r requirements/requirements.txt
 
 ## Executing program
 
-Steps are marked in `config.yaml` file with `## Step n : ...` and can be changed according to the user needs.
+Steps are marked in `config.yaml` file with `## Step n : ...` and can be changed according to the user's needs.
 
 
-## Step 1 : Download data from OpenStreetMap (optional)
+## Step 1 : Download data from OpenStreetMap 
 
 ### Folder name : `input_data`
 
-In the folder `input_data` are proveided default data for the following locations:
+`Steps 1.1. - 1.5. are optional and can be skipped if the default data is used`
+
+In the folder `input_data` are provided default data for the following locations:
 - Voz, island of Krk, Croatia
 - Jadranovo, Croatia
 
@@ -63,7 +70,7 @@ Feel free to download your own data from OpenStreetMap and follow the instructio
 
 ### 1.4. Copy the downloaded .png file to the `input_data/geolocation_name` folder as `geolocation_name.png`
 
-### 1.5. Copy  HTML string from the OpenStreetMap website and paste it into the `input_data/geolocation_name` folder in the `osm_data.txt` file for extrcation of the coordinates
+### 1.5. Copy  HTML string from the OpenStreetMap website and paste it into the `input_data/geolocation_name` folder in the `osm_data.txt` file for extraction of the coordinates
 
 <img src="assets/osm_geolocation.png" alt="drawing" width="200"/>
 
@@ -93,7 +100,7 @@ Folder `input_data` should have the following structure:
 
 Example of the config.yaml file for the location `voz`:
 
-- location folder from the `input_data` folder step 1.2 and location_image is the name of the .png file from the step 1.3
+- location folder from the `input_data` folder in step 1.2 and location_image is the name of the .png file from step 1.3
 
 
  ```yaml
@@ -116,32 +123,18 @@ location_image: "voz.png"
 
 ```
 
-* `main.py` - main file for data extraction and processing and runs following files:
+* `main.py` - main file for data extraction and processing and runs the following files:
     * `process_osm_data.py` - file for data extraction and processing from Step 1
     * `detect_coastline.py` - file for detecting coastline and coast points and marking them on the map
     * `set_start_goal.py` - file for setting start and goal points on the map and plotting them on the map
-    * `generate_costmap.py` - file for generating costmap from the map and coastline data - needed for later steps
+    * `generate_costmap.py` - file for generating cost map from the map and coastline data - needed for later steps
 
 
 ### 2.1. Choose start and goal points on the map
 
-- Set `resized_location_image` name for the resized map from the previous step. It is saved in the `results` folder for the further steps
-- Set `costume_start_goal` to `True` if you want to choose start and goal points with mouse click on the map or `False` if you want to add start and goal points manually in the config.yaml file
-
-```yaml
-resized_location_image : "voz_resized.png"
-
-costume_start_goal : True
-
-# This is hardcoded start and goal position and applied only if costume_start_goal is False
-start_longitude: 14.613089
-start_latitude : 45.225997
-
-goal_longitude: 14.577252
-goal_latitude : 45.235119
-```
-
-Disable costmap generation in the `config.yaml` file or start and goal points will be disabled on the map generation
+- Set `resized_location_image` name for the resized map from the previous step. It is saved in the `results` folder for further steps
+- Set `costume_start_goal` to `True` if you want to choose start and goal points with a mouse click on the map or `False` if you want to add start and goal points manually in the config.yaml file
+Disable cost map generation in the `config.yaml` file or start and goal points will be disabled on the map generation
 
 ```yaml
 ...
@@ -149,7 +142,7 @@ Disable costmap generation in the `config.yaml` file or start and goal points wi
 generate_costmap : False
 ```
 
-### 2.2. Run the following command to generate map and detect coastline
+### 2.2. Run the following command to generate map and detect the coastline
 
  ```terminal
   python3 main.py
@@ -157,12 +150,12 @@ generate_costmap : False
 
 ### 2.2.3. Check the results
 
-* the map is resized to 1 $pixel$ per 1 $meter^2$ 
-* costline is marked with light blue colour
-* start is marked with green circle and goal with blue X
+* the map is resized to 1 $pixel$ per 1 $meter^2$
+* coastline is marked with a light blue color
+* the start is marked with a green circle and the goal with a blue X
 * axis are displayed in geographical coordinates
-* longitude and latitude of grid the start and goal points are displayed in legend
-* geolcation data marked in the map should be the same as geolocation data in the OpenStreetMap, Google Maps, etc.
+* longitude and latitude of the grid the start and goal points are displayed in legend
+* geolocation data marked in the map should be the same as geolocation data in the OpenStreetMap, Google Maps, etc.
 
 **Example of the map with start and goal points hardcoded in the config.yaml file:**
 
@@ -233,7 +226,7 @@ test_algorithm :  #plot_algorithm
 - "greedy_best_first_search"
 ```
 
-### 3.2. Run the following command to test path planning algorithms
+### 3.2. Run the following command to test path-planning algorithms
 
 Run for testing and plotting algorithms:
  ```terminal
@@ -267,8 +260,8 @@ Run for plotting the results:
 
 ### Folder name: `osm_data_processing`
 
-* Cost map generation is needed for the path interpolation and optimization in the Step 5 
-* Current costmap is based on the distance from the coast
+* cost map generation is needed for the path interpolation and optimization in Step 5
+* the current cost map is based on the distance from the coast
 * TODO: Implement costmap based on the depth, obstacles, etc.
 
 ### 4.1. Update config.yaml file
@@ -283,7 +276,7 @@ cost_map : True
 
 ### 4.2. Run the following command to generate cost map
 
-* Same as in the Step 2.2. Run the following command in the folder `osm_data_processing` to generate cost map, but set `generate_costmap` to `True` in the `config.yaml` file
+* Same as in the Step 2.2. Run the following command in the folder `osm_data_processing` to generate a cost map, but set `generate_costmap` to `True` in the `config.yaml` file
 disables the start and goal points on the map generation
  ```terminal
   python3 main.py
@@ -331,5 +324,5 @@ Dr. Sc. Nadir Kapetanović  | nadir.kapetanovi@fer.hr
 
 ## Acknowledgments
 
-This repository is build using the following resources and it is used only for educational purposes:
+This repository is built using the following resources and it is used only for educational purposes:
 * [PythonRobotics](https://github.com/AtsushiSakai/PythonRobotics)
