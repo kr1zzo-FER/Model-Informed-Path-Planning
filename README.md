@@ -283,7 +283,7 @@ cost_map : True
 
 ### 4.2. Run the following command to generate cost map
 
-* Same as in the Step 2.2. Run the following command to generate cost map, but set `generate_costmap` to `True` in the `config.yaml` file
+* Same as in the Step 2.2. Run the following command in the folder `osm_data_processing` to generate cost map, but set `generate_costmap` to `True` in the `config.yaml` file
 disables the start and goal points on the map generation
  ```terminal
   python3 main.py
