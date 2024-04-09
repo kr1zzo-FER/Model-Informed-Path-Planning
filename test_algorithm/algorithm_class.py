@@ -1,4 +1,14 @@
 
+"""
+
+Algorithm class for path planning algorithms
+
+author: Enio Krizman (GitHub: @kr1zzo)
+
+Copyright: © Faculty of Electrical Engineering and Computing, University of Zagreb
+
+"""
+
 import math
 
 import matplotlib.pyplot as plt
