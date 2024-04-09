@@ -8,8 +8,8 @@ This repository is a part of the diploma thesis at the Faculty of [Electrical En
 1. Data extraction and processing from OpenStreetMap
 3. Testing of the path planning algorithms from the PythonRobotics repository on the extracted OpenStreetMap data 
 4. Cost map generation
-5. Path interpolation and optimization
-6. Testing of the path planning algorithms on the generated cost map
+5. Testing of the path planning algorithms on the generated cost map
+6. Path interpolation and optimization
 7. Publishing data to the ROS2 environment and testing the path planning algorithms on the real vessel or in the simulation environment
 
 
@@ -24,8 +24,8 @@ This repository is a part of the diploma thesis at the Faculty of [Electrical En
         * [Step 2 : Data extraction and processing from OpenStreetMap](#step-2--data-extraction-and-processing-from-openstreetmap)
         * [Step 3 : Path planning algorithms testing](#step-3--path-planning-algorithms-testing)
         * [Step 4 : Cost map generation](#step-4--cost-map-generation)
-        * [Step 5 : Path interpolation and optimization](#step-5--path-interpolation-and-optimization)
-        * [Step 6 : Testing of the path planning algorithms on the generated cost map](#step-6--testing-of-the-path-planning-algorithms-on-the-generated-cost-map)
+        * [Step 5 : Testing of the path planning algorithms on the generated cost map](#step-5--testing-of-the-path-planning-algorithms-on-the-generated-cost-map)
+        * [Step 6 : Path interpolation and optimization](#step-6--path-interpolation-and-optimization)
         * [Step 7 : Publishing data to the ROS2 environment and testing the path planning algorithms on the real vessel or in the simulation environment](#step-7--publishing-data-to-the-ros2-environment-and-testing-the-path-planning-algorithms-on-the-real-vessel-or-in-the-simulation-environment)
 
   * [Credits](#credits)
@@ -311,16 +311,21 @@ Example of the prototype cost map:
 
 <img src="assets/example_costmap.png" alt="drawing" width="500"/>
 
+* Zones are marked with different colors based on the distance from the coast
+and determined according to the prescribed [safety regulations in Croatia](https://www.angelina.hr/en/blog/minimum-distance-between-yachts-and-the-coast-in-croatia)
+
 //TODO : add more directions and fix empty spaces, connect meters with geolocations
 
-## Step 5 : Path interpolation and optimization
 
-* From the results of the path planning algorithms, the path interpolation and optimization are needed for the path planning algorithms to be used in the real environment
+## Step 5 : Testing of the path planning algorithms on the generated cost map
+
 * From the step 3, the path planning algorithm with the best results is chosen for the path interpolation and optimization (D*),and code is modified to fit the cost map generated in the previous step
 
 //TODO
 
-## Step 6 : Testing of the path planning algorithms on the generated cost map
+## Step 6 : Path interpolation and optimization
+
+* From the results of the path planning algorithms, the path interpolation and optimization are needed for the path planning algorithms to be used in the real environment
 
 //TODO
 
