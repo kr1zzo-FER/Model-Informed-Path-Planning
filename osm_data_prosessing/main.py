@@ -14,7 +14,7 @@ from pathlib import Path
 import yaml
 from matplotlib.backend_bases import MouseButton
 import sys
-from detect_coastline import detect_coastline
+from detect_coastline import detect_coastline, zones_from_coast
 from process_osm_data import process_osm_data, pixel_to_meters
 from set_start_goal import set_start_goal
 import time
@@ -40,6 +40,8 @@ def main():
         image_save = config["resized_location_image"]
         grid_size = int(config["grid_size"])
         folder_name = config["location_folder"]
+        cost_map = config["cost_map"]
+        result_costmap_name = config["result_costmap_name"]
     
     # paths to files
     binary_path = root / "binary_dump"
@@ -79,9 +81,12 @@ def main():
     toc = time.time()
     print(f"Runtime {round(toc-tic,4)} seconds : {len(coast_points)} coast points\nMin x: {min(coast_points, key=lambda x: x[0])[0]}, Max x: {max(coast_points, key=lambda x: x[0])[0]}\nMin y: {min(coast_points, key=lambda x: x[1])[1]}, Max y: {max(coast_points, key=lambda x: x[1])[1]}")
 
-
-    # set start and goal positions
-    set_start_goal(coast_points, latlong)
+    if cost_map:
+        zones_from_coast(coast_points, results/result_costmap_name, results/image_save,binary_path,grid_size) 
+        sys.exit(0)
+    else:  
+        # set start and goal positions
+        set_start_goal(coast_points, latlong)
     
 if __name__ == '__main__':
     try:

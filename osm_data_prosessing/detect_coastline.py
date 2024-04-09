@@ -44,7 +44,7 @@ def detect_coast(image_path,x,y):
     except:
         return False
 
-def detect_coastline(image_path, binary_path, grid_size, make_costmap=False):
+def detect_coastline(image_path, binary_path, grid_size):
 
     global image
     global x,y
@@ -92,17 +92,14 @@ def detect_coastline(image_path, binary_path, grid_size, make_costmap=False):
                             coast_points.append([pixel_i, h-pixel_j])
 
             except:
-                pass
-    
-    
-    if make_costmap:
-        zones_from_coast(coast_points, image_path, mask, grid_size)      
+                pass     
             
     # save obstacles to binary files
     with open(binary_path/"coast_points", "wb") as f:
         pickle.dump(coast_points, f)
     with open(binary_path/"dimensions", "wb") as f:
-        pickle.dump((x_width*grid_size, y_width*grid_size), f)
+        #print(image1.size[0], image1.size[1])
+        pickle.dump((image1.size[0], image1.size[1]), f)
 
     return coast_points
 

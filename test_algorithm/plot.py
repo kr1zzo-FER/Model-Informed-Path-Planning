@@ -215,19 +215,6 @@ def plot():
                 ry_bidir_bfs = pickle.load(f)
             plt.plot(rx_bidir_bfs, ry_bidir_bfs, "yellow")
             legend_elements.append(Line2D([0], [0], color='yellow', lw=4, label='Bidirectional BFS'))
-        
-        
-        
-        if algorithm == "depth_first_search":
-            rows.append("DFS")
-            rx_dfs = []
-            ry_dfs = []
-            with open(binary_path/"dfs_path_x", "rb") as f:
-                rx_dfs = pickle.load(f)
-            with open(binary_path/"dfs_path_y", "rb") as f:
-                ry_dfs = pickle.load(f)
-            plt.plot(rx_dfs, ry_dfs, "purple")
-            legend_elements.append(Line2D([0], [0], color='purple', lw=4, label='DFS'))
 
         if algorithm == "greedy_best_first_search":
             rows.append("Greedy Best First Search")

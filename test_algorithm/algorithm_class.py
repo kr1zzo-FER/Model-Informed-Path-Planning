@@ -126,8 +126,10 @@ class Algorithms:
         spoofed_oy = [[], [], [], []]
         start_time = time.time()
         dstarlite = DStarLite(self.ox, self.oy)
-        dstarlite.main(Node(x=int(sx), y=int(sy)), Node(x=int(gx), y=int(gy)),
+        print(f"Start: {sx, sy} Goal: {gx, gy}")
+        dstarlite.main(Node(x=sx, y=sy), Node(x=gx, y=gy),
                 spoofed_ox=spoofed_ox, spoofed_oy=spoofed_oy)
+        print("D* Lite calculation finished")
         rx, ry = dstarlite.get_path()
         end_time = time.time()
         function_time = round(end_time - start_time, 5)

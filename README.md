@@ -141,6 +141,14 @@ goal_longitude: 14.577252
 goal_latitude : 45.235119
 ```
 
+Disable costmap generation in the `config.yaml` file or start and goal points will be disabled on the map generation
+
+```yaml
+...
+## Step 4: Cost map generation
+generate_costmap : False
+```
+
 ### 2.2. Run the following command to generate map and detect coastline
 
  ```terminal
@@ -156,7 +164,7 @@ goal_latitude : 45.235119
 * longitude and latitude of grid the start and goal points are displayed in legend
 * geolcation data marked in the map should be the same as geolocation data in the OpenStreetMap, Google Maps, etc.
 
-Example of the map with start and goal points hardcoded in the config.yaml file:
+**Example of the map with start and goal points hardcoded in the config.yaml file:**
 
 <img src="assets/start_goal_map_example.png" alt="drawing" width="500"/>
 
@@ -177,6 +185,7 @@ Folder name: `test_algorithm`
     │   ├── bidirectional_breadth_first_search.py
     │   ├── depth_first_search.py
     │   └── greedy_best_first_search.py
+    ├── algorithms_class.py
     ├── plot.py
     ├── test.py
     └── main.py
@@ -185,6 +194,7 @@ Folder name: `test_algorithm`
 
 * `main.py` - main file for testing path planning algorithms and runs following files:
     * `test.py` - file for testing path planning algorithms and runs the algorithms from the `algorithms` folder
+    * `algorithms_class.py` - class for path planning algorithms
     * `plot.py` - file for plotting the results of the path planning algorithms on the map and table with the result runtime and path length in meters
 
 ### 3.1. Update config.yaml file
@@ -208,7 +218,6 @@ result_image_name : "result_image.png"
 grid_size : 10.0  # [m]
 robot_radius : 5.0  # [m]
 
-
 # thread_enable : True - thread for plotting map
 # thread_enable map : False - for algorithm runtime calculation
 thread_enable : False
@@ -221,19 +230,82 @@ test_algorithm :  #plot_algorithm
 - "d_star_lite"
 - "breadth_first_search"
 - "bidirectional_breadth_first_search"
-- "depth_first_search"
 - "greedy_best_first_search"
 ```
 
 ### 3.2. Run the following command to test path planning algorithms
 
+Run for testing and plotting algorithms:
  ```terminal
   python3 main.py
-  ```
+```
+Run for testing algorithms runtime:
+ ```terminal
+  python3 test.py
+```
+Run for plotting the results:
+ ```terminal
+  python3 plot.py
+```
+
 
 ### 3.3. Check the results
 
 * Results are saved in the `results` folder with the name `result_image` and `table_name`
+
+**Example of the map with the path planning algorithm results:**
+
+<img src="assets/example_paths.png" alt="drawing" width="500"/>
+
+**Example of the table with the runtime results and path length:**
+
+<img src="assets/example_table.png" alt="drawing" width="500"/>
+
+//TODO : fix D* Lite algorithm
+
+## Step 4 : Cost map generation
+
+### Folder name: `osm_data_processing`
+
+* Cost map generation is needed for the path interpolation and optimization in the Step 5 
+* Current costmap is based on the distance from the coast
+* TODO: Implement costmap based on the depth, obstacles, etc.
+
+### 4.1. Update config.yaml file
+
+- Set `cost_map` to `True` in the `config.yaml` file and set the `result_costmap_name` for the cost map figure name
+
+```yaml
+## Step 4: Cost map generation
+result_costmap_name : "voz_costmap.png"
+cost_map : True
+```
+
+### 4.2. Run the following command to generate cost map
+
+* Same as in the Step 2.2. Run the following command to generate cost map, but set `generate_costmap` to `True` in the `config.yaml` file
+disables the start and goal points on the map generation
+ ```terminal
+  python3 main.py
+```
+
+Example of the prototype cost map:
+
+<img src="assets/example_costmap.png" alt="drawing" width="500"/>
+
+//TODO : add more directions and fix empty spaces, connect meters with geolocations
+
+## Step 5 : Path interpolation and optimization
+
+//TODO
+
+## Step 6 : Testing of the path planning algorithms on the generated cost map
+
+//TODO
+
+## Step 7 : Publishing data to the ROS2 environment and testing the path planning algorithms on the real vessel or in the simulation environment
+
+//TODO
 
 ## Credits
 

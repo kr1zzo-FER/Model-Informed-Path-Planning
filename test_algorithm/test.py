@@ -149,13 +149,6 @@ def test():
                 threads.append(thread7)
             else:
                 algorithm.bidirectional_breadth_first_search(sx, sy, gx, gy, grid_size, robot_radius, binary_path)
-
-        if test_algorithm == "depth_first_search":
-            if thread_enable:
-                thread8 = threading.Thread(target = algorithm.depth_first_search, args=(sx, sy, gx, gy, grid_size, robot_radius, binary_path))
-                threads.append(thread8)
-            else:
-                algorithm.depth_first_search(sx, sy, gx, gy, grid_size, robot_radius, binary_path)
         
         if test_algorithm == "greedy_best_first_search":
             if thread_enable:
