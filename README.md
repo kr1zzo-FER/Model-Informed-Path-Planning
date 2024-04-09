@@ -165,7 +165,75 @@ Example of the map with start and goal points hardcoded in the config.yaml file:
 
 Folder name: `test_algorithm`
 
+```terminal
+  test_algorithm
+    ├── algorithms
+    │   ├── a_star.py
+    │   ├── bidirectional_a_star.py
+    │   ├── dijkstra.py
+    │   ├── dstar.py
+    │   ├── d_star_lite.py
+    │   ├── breadth_first_search.py
+    │   ├── bidirectional_breadth_first_search.py
+    │   ├── depth_first_search.py
+    │   └── greedy_best_first_search.py
+    ├── plot.py
+    ├── test.py
+    └── main.py
 
+```
+
+* `main.py` - main file for testing path planning algorithms and runs following files:
+    * `test.py` - file for testing path planning algorithms and runs the algorithms from the `algorithms` folder
+    * `plot.py` - file for plotting the results of the path planning algorithms on the map and table with the result runtime and path length in meters
+
+### 3.1. Update config.yaml file
+
+- Set `result_image` name for the map with the path planning algorithm results and table_name for the table with the runtime results and path length
+- Set `grid_size` and `robot_radius` for the path planning algorithms, recommended values are boat length and width as grid size and robot radius as 1/2 of the boat length
+- Set `thread_enable` if runtime results are not needed and thread_enable map if runtime results are needed for algorithm runtime comparison
+  - `thread_enable : True` - overall runtime is lower, but runtime of each algorithm is higher
+- Set the path planning algorithm you want to test in the `test_algorithm` variable
+- Set the path planning algorithm you want to plot in the `plot_algorithm` variable
+
+
+
+```yaml
+## Step 3: Path planning algorithms testing
+
+result_image : "voz_result.png"
+table_name : "runtime_results.png"
+result_image_name : "result_image.png"
+
+grid_size : 10.0  # [m]
+robot_radius : 5.0  # [m]
+
+
+# thread_enable : True - thread for plotting map
+# thread_enable map : False - for algorithm runtime calculation
+thread_enable : False
+
+test_algorithm :  #plot_algorithm
+- "a_star"
+- "bidirectional_a_star"
+- "dijkstra"
+- "d_star"
+- "d_star_lite"
+- "breadth_first_search"
+- "bidirectional_breadth_first_search"
+- "depth_first_search"
+- "greedy_best_first_search"
+```
+
+### 3.2. Run the following command to test path planning algorithms
+
+ ```terminal
+  python3 main.py
+  ```
+
+### 3.3. Check the results
+
+* Results are saved in the `results` folder with the name `result_image` and `table_name`
 
 ## Credits
 

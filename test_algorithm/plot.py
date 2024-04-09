@@ -1,9 +1,11 @@
 
 """
 
-Path planning algorithms plotter
+Program for path planning algorithms plotting
 
-author: Enio Krizman (@kr1zzo)
+author: Enio Krizman (GitHub: @kr1zzo)
+
+Copyright: © Faculty of Electrical Engineering and Computing, University of Zagreb
 
 """
 import math
@@ -18,6 +20,7 @@ import matplotlib.colors as mcolors
 from pathlib import Path
 import yaml
 import numpy as np
+import sys
 
 root = Path(__file__).resolve().parents[1]
 show_animation = True
@@ -36,7 +39,7 @@ def deg_to_dms(deg):
     #print(format_string)
     return format_string
 
-def main():
+def plot():
 
     ox, oy = [], []
     size_x = 0
@@ -244,7 +247,12 @@ def main():
 
     try:
         fig, ax = plt.subplots()
-
+        for row in rows:
+            with open(binary_path/f"{row}_results", "rb") as f:
+                values = pickle.load(f)
+        print(values)
+        print(columns)
+        print(rows)
         # hide axes
         fig.patch.set_visible(False)
         ax.axis('off')
@@ -259,4 +267,7 @@ def main():
     
     
 if __name__ == '__main__':
-    main()
+    try:
+        plot()
+    except KeyboardInterrupt:
+        sys.exit(0)

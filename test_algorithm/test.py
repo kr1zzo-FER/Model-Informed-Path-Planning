@@ -1,8 +1,10 @@
 """
 
-Path planning algorithms test
+Program for path planning algorithms testing
 
-author: Enio Krizman (@kr1zzo)
+author: Enio Krizman (GitHub: @kr1zzo)
+
+Copyright: © Faculty of Electrical Engineering and Computing, University of Zagreb
 
 """
 
@@ -32,190 +34,15 @@ from algorithms.breadth_first_search import BreadthFirstSearchPlanner
 from algorithms.bidirectional_breadth_first_search import BidirectionalBreadthFirstSearchPlanner
 from algorithms.depth_first_search import DepthFirstSearchPlanner
 from algorithms.greedy_best_first_search import BestFirstSearchPlanner
+import sys
+from algorithm_class import Algorithms 
+
 root = Path(__file__).resolve().parents[1]
 
 show_animation = False
-
-    
-class Algorithms:
-    def __init__(self, ox, oy):
-        self.ox = ox
-        self.oy = oy
-        self.rows = []
-        self.columns = ['Time [s]', 'Distance [m]']
-        self.values = []
-
-    def get_path(self):
-        return self.rx, self.ry
-
-    def planning(self, sx, sy, gx, gy):
-        pass
-
-    def euclidean_distance(self,x1,y1,x2,y2):
-        return math.sqrt((x1-x2)**2 + (y1-y2)**2)
-
-    def a_star(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
-        print("\nA* calculation started..")
-        self.rows.append("A*")
-        start_time = time.time()
-        a_star = AStarPlanner(self.ox, self.oy, grid_size, robot_radius)
-        rx, ry = a_star.planning(sx, sy, gx, gy)
-        end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        self.values.append([function_time, distance])
-        with open(binary_path/"a_star_path_x", "wb") as f:
-            pickle.dump(rx, f)
-        with open(binary_path/"a_star_path_y", "wb") as f:
-            pickle.dump(ry, f)
-        pass
-
-    def bidirectional_a_star(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
-        print("\nBidirectional A* calculation started..")
-        self.rows.append("Bidirectional A*")
-        start_time = time.time()
-        bidir_a_star = BidirectionalAStarPlanner(self.ox, self.oy, grid_size, robot_radius)
-        rx, ry = bidir_a_star.planning(sx, sy, gx, gy)
-        end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        self.values.append([function_time, distance])
-        with open(binary_path/"bid_a_star_path_x", "wb") as f:
-            pickle.dump(rx, f)
-        with open(binary_path/"bid_a_star_path_y", "wb") as f:
-            pickle.dump(ry, f)
-    
-    def dijkstra(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
-        print("\nDijkstra calculation started")
-        self.rows.append("Dijkstra")
-        start_time = time.time()
-        dijkstra = Dijkstra(self.ox, self.oy, grid_size, robot_radius)
-        rx, ry = dijkstra.planning(sx, sy, gx, gy)
-        end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        self.values.append([function_time, distance])
-        with open(binary_path/"dijkstra_path_x", "wb") as f:
-            pickle.dump(rx, f)
-        with open(binary_path/"dijkstra_path_y", "wb") as f:
-            pickle.dump(ry, f)
-        
-    def d_star(self, sx, sy, gx, gy, grid_size, size_x, size_y, robot_radius, binary_path):
-        print(size_x, size_y)
-        print("\nD* calculation started")
-        self.rows.append("D*")
-        m = Map(round(size_x/grid_size), round(size_y/grid_size))
-        ox_ = [round(ox/grid_size) for ox in self.ox]
-        oy_ = [round(oy/grid_size) for oy in self.oy]
-        sx = round(sx/grid_size)
-        sy = round(sy/grid_size)
-        gx = round(gx/grid_size)
-        gy = round(gy/grid_size)
-        m.set_obstacle([(i, j) for i, j in zip(ox_, oy_)])
-        start = [int(sx), int(sy)]
-        goal = [int(gx), int(gy)]
-        start = m.map[start[0]][start[1]]
-        end = m.map[goal[0]][goal[1]]
-        start_time = time.time()
-        dstar = Dstar(m)
-        rx, ry = dstar.run(start, end)
-        rx, ry = [rx[i]*grid_size for i in range(len(rx))], [ry[i]*grid_size for i in range(len(ry))]
-        end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        self.values.append([function_time, distance])
-
-        with open(binary_path/"d_star_path_x", "wb") as f:
-            pickle.dump(rx, f)
-        with open(binary_path/"d_star_path_y", "wb") as f:
-            pickle.dump(ry, f)
-
-    def d_star_lite(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
-        print("\nD* lite calculation started")
-        self.rows.append("D* Lite")
-        spoofed_ox = [[], [], [], []]
-        spoofed_oy = [[], [], [], []]
-        start_time = time.time()
-        dstarlite = DStarLite(self.ox, self.oy)
-        dstarlite.main(Node(x=int(sx), y=int(sy)), Node(x=int(gx), y=int(gy)),
-                spoofed_ox=spoofed_ox, spoofed_oy=spoofed_oy)
-        rx, ry = dstarlite.get_path()
-        end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        self.values.append([function_time, distance])
-
-        with open(binary_path/"d_star_lite_path_x", "wb") as f:
-            pickle.dump(rx, f)
-        with open(binary_path/"d_star_lite_path_y", "wb") as f:
-                pickle.dump(ry, f)
-        
-    def breadth_first_search(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
-        print("\nBFS calculation started")
-        self.rows.append("BFS")
-        start_time = time.time()
-        bfs = BreadthFirstSearchPlanner(self.ox, self.oy, grid_size, robot_radius)
-        rx, ry = bfs.planning(sx, sy, gx, gy)
-        end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        self.values.append([function_time, distance])
-        with open(binary_path/"bfs_path_x", "wb") as f:
-            pickle.dump(rx, f)
-        with open(binary_path/"bfs_path_y", "wb") as f:
-            pickle.dump(ry, f)
-    
-    def bidirectional_breadth_first_search(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
-        print("\nbidirectional BFS calculation started")
-        self.rows.append("Bidirectional BFS")
-        start_time = time.time()
-        bi_bfs = BidirectionalBreadthFirstSearchPlanner(
-        self.ox, self.oy, grid_size, robot_radius)
-        rx, ry = bi_bfs.planning(sx, sy, gx, gy)
-        end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        self.values.append([function_time, distance])
-        with open(binary_path/"bid_bfs_path_x", "wb") as f:
-            pickle.dump(rx, f)
-        with open(binary_path/"bid_bfs_path_y", "wb") as f:
-            pickle.dump(ry, f)
-
-    def depth_first_search(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
-        print("\nDFS calculation started")
-        self.rows.append("DFS")
-        start_time = time.time()
-        dfs = DepthFirstSearchPlanner(self.ox, self.oy, grid_size, robot_radius)
-        rx, ry = dfs.planning(sx, sy, gx, gy)
-        end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        self.values.append([function_time, distance])
-        with open(binary_path/"dfs_path_x", "wb") as f:
-            pickle.dump(rx, f)
-        with open(binary_path/"dfs_path_y", "wb") as f:
-            pickle.dump(ry, f)
-    
-    def greedy_best_first_search(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
-        print("\nGreedy Best First Search calculation started")
-        self.rows.append("Greedy Best First Search")
-        start_time = time.time()
-        greedy_best_first_search = BestFirstSearchPlanner(self.ox, self.oy, grid_size, robot_radius)
-        rx, ry = greedy_best_first_search.planning(sx, sy, gx, gy)
-        end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        self.values.append([function_time, distance])
-        with open(binary_path/"gbfs_path_x", "wb") as f:
-            pickle.dump(rx, f)
-        with open(binary_path/"gbfs_path_y", "wb") as f:
-            pickle.dump(ry, f)
-    
-    
-    
     
 
-def main():
+def test():
     print(__file__ + " start!!")
 
     # start and goal position
@@ -238,7 +65,6 @@ def main():
         dimensions = pickle.load(f)
         size_x = dimensions[0]
         size_y = dimensions[1]
-        print(size_x, size_y)
     
     
     with open(root/"config.yaml", "r") as f:
@@ -298,7 +124,6 @@ def main():
         
         if test_algorithm == "d_star":
             if thread_enable:
-                print
                 thread4 = threading.Thread(target = algorithm.d_star, args=(sx, sy, gx, gy, grid_size, size_x, size_y, robot_radius, binary_path))
                 threads.append(thread4)
             else:
@@ -354,26 +179,14 @@ def main():
         for thread in threads:
             thread.join()
         
-
-    fig, ax = plt.subplots()
-
     for row, value in zip(algorithm.rows, values):
         with open(binary_path/f"{row}_results", "wb") as f:
             pickle.dump(values, f)
     
-    print(columns)
-    print(rows)
-    print(values)
-    # hide axes
-    fig.patch.set_visible(False)
-    ax.axis('off')
-    ax.axis('tight')
-    ax.table(cellText=values, colLabels=columns, rowLabels=rows, loc='center', cellLoc='center', colLoc='center')
-    fig.tight_layout()
-    plt.savefig(results/table_name)
-    plt.show()
-
         
 
 if __name__ == '__main__':
-    main()
+    try:
+        test()
+    except KeyboardInterrupt:
+        sys.exit(0)

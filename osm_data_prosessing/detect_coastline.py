@@ -102,7 +102,7 @@ def detect_coastline(image_path, binary_path, grid_size, make_costmap=False):
     with open(binary_path/"coast_points", "wb") as f:
         pickle.dump(coast_points, f)
     with open(binary_path/"dimensions", "wb") as f:
-        pickle.dump((x_width, y_width), f)
+        pickle.dump((x_width*grid_size, y_width*grid_size), f)
 
     return coast_points
 
