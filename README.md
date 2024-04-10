@@ -158,13 +158,14 @@ location_image: "voz.png"
 ### 2.1. Choose start and goal points on the map
 
 - Set `resized_location_image` name for the resized map from the previous step. It is saved in the `results` folder for further steps
-- Set `costume_start_goal` to `True` if you want to choose start and goal points with a mouse click on the map or `False` if you want to add start and goal points manually in the config.yaml file
-Disable cost map generation in the `config.yaml` file or start and goal points will be disabled on the map generation
+- Set `custom_start_goal` to `True` if you want to choose start and goal points with a mouse click on the map or `False` if you want to add start and goal points manually in the config.yaml file
+
+Disable cost map generation in the `config.yaml` file or start and goal points will be disabled on the map generation:
 
 ```yaml
 ...
 ## Step 4: Cost map generation
-generate_costmap : False
+cost_map : False
 ```
 
 ### 2.2. Run the following command to generate map and detect the coastline
@@ -173,7 +174,7 @@ generate_costmap : False
   python3 main.py
   ```
 
-### 2.2.3. Check the results
+### 2.2.1. Check the results
 
 * the map is resized to 1 $pixel$ per 1 $meter^2$
 * coastline is marked with a light blue color

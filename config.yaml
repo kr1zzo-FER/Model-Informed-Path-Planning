@@ -10,9 +10,9 @@ location_image: "voz.png"
 
 resized_location_image : "voz_resized.png"
 
-costume_start_goal : False
+custom_start_goal : True
 
-# This is hardcoded start and goal position and applied only if costume_start_goal is False
+# This is hardcoded start and goal position and applied only if custom_start_goal is False
 start_longitude: 14.576700
 start_latitude : 45.235964
 
@@ -66,7 +66,7 @@ plot_algorithms:
 
 ## Step 4: Cost map generation
 result_costmap_name : "voz_costmap.png"
-cost_map : True
+cost_map : False
 
 
 

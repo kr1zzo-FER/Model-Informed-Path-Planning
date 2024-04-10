@@ -10,6 +10,7 @@ Copyright: © Faculty of Electrical Engineering and Computing, University of Zag
 """
 import math
 import pickle
+import matplotlib
 import matplotlib.pyplot as plt
 from PIL import Image
 from matplotlib.lines import Line2D
@@ -21,6 +22,8 @@ from pathlib import Path
 import yaml
 import numpy as np
 import sys
+
+matplotlib.use('agg')
 
 root = Path(__file__).resolve().parents[1]
 show_animation = True
@@ -237,9 +240,6 @@ def plot():
         for row in rows:
             with open(binary_path/f"{row}_results", "rb") as f:
                 values = pickle.load(f)
-        print(values)
-        print(columns)
-        print(rows)
         # hide axes
         fig.patch.set_visible(False)
         ax.axis('off')

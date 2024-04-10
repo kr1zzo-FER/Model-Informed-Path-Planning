@@ -55,12 +55,12 @@ def onclick(event):
 
     if event.button == MouseButton.LEFT:
         if counter % 2 != 0:
-            counter += 1
             x_data = int(round(event.xdata/grid_size)*grid_size)
             y_data = int(round(event.ydata/grid_size)*grid_size)
             if detect_coast(image_path,x_data, y_data):
                 print("Start position is not set in the sea! Choose another position")
                 return
+            counter += 1
             with open(binary_path/"sx", "wb") as f:
                 pickle.dump(x_data, f)
             with open(binary_path/"sy", "wb") as f:
@@ -74,18 +74,19 @@ def onclick(event):
             start
             print(f"Start position for calculation: \nx_longitude : {x_data} [{sx_longitude}]\ny_latitude : {y_data} [{sy_latitude}]\n")
             ax.plot(x_data,y_data, 'go', markersize=5)
-            legend_elements.append(Line2D([0], [0], marker='o', color='g', label=f'\nStart and goal positions part {counter/2}:\nStart : ({sx_longitude}, {sy_latitude}))'))
+            legend_elements.append(Line2D([0], [0], marker='o', color='g', label=f'\nStart and goal positions part {counter/2}:\nStart : ({sx_longitude}, {sy_latitude})'))
             ax.legend(handles=legend_elements, loc='upper right')
             plt.draw()
             set_start = True
             
         else:
-            counter += 1
+
             x_data = int(round(event.xdata/grid_size)*grid_size)
             y_data = int(round(event.ydata/grid_size)*grid_size)
             if detect_coast(image_path,x_data, y_data):
                 print("Goal position is not set in the sea! Choose another position")
                 return
+            counter += 1
             with open(binary_path/"gx", "wb") as f:
                 pickle.dump(x_data, f)
             with open(binary_path/"gy", "wb") as f:
@@ -98,7 +99,7 @@ def onclick(event):
             gy_latitude = deg_to_dms(gy_latitude)
             print(f"Goal position for calculation: \nx_longitude : {x_data} [{gx_longitude}]\ny_latitude : {y_data} [{gy_latitude}]\n")
             ax.plot(x_data,y_data, 'bx', markersize=5)
-            legend_elements.append(Line2D([0], [0], marker='x', color='b', label=f'Goal : ({gx_longitude}, {gy_latitude}))'))
+            legend_elements.append(Line2D([0], [0], marker='x', color='b', label=f'Goal : ({gx_longitude}, {gy_latitude})'))
             ax.legend(handles=legend_elements, loc='upper right')
             plt.draw()
             set_goal = True
@@ -142,7 +143,7 @@ def set_start_goal(coast_points, latlong):
         config = yaml.safe_load(f)
         image_save = config["resized_location_image"]
         grid_size = int(config["grid_size"])
-        costume_start_goal = config["costume_start_goal"]
+        custom_start_goal = config["custom_start_goal"]
         slatitude = config["start_latitude"]
         slongitude = config["start_longitude"]
         glatitude = config["goal_latitude"]
@@ -197,11 +198,11 @@ def set_start_goal(coast_points, latlong):
     for point in coast_points:
         ax.plot(point[0],point[1], 'bo', markersize=0.1)
     
-    print(f"\nCostume start and goal positions: {costume_start_goal}\n")
+    print(f"\ncustom start and goal positions: {custom_start_goal}\n")
     
     legend_elements = []
 
-    if costume_start_goal:
+    if custom_start_goal:
         ax.set_title("(<-) Left mouse click - set start and goal positions (->) Right mouse click - end program")
         print("\n(<-) Left mouse click - set start and goal positions (->) Right mouse click - end program\n")
         fig.canvas.mpl_connect('button_press_event', onclick)
