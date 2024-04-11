@@ -89,17 +89,30 @@ In the folder `input_data` are provided default data for the following locations
 
 ### 1.3. Click on the Download button and download the data in .png format
 
+<p align="center">
 <img src="assets/osm_download.png" alt="drawing" width="200"/>
-
+</p>
+<p align="center">
+<em>
+Figure 1: Download data from OpenStreetMap
+</em>
+</p>
 
 
 ### 1.4. Copy the downloaded .png file to the `input_data/geolocation_name` folder as `geolocation_name.png`
 
 ### 1.5. Copy  HTML string from the OpenStreetMap website and paste it into the `input_data/geolocation_name` folder in the `osm_data.txt` file for extraction of the coordinates
 
+<p align="center">
 <img src="assets/osm_geolocation.png" alt="drawing" width="200"/>
+</p>
+<p align="center">
+<em>
+Figure 2: Copy HTML string from OpenStreetMap
+</em>
+</p>
 
-<br />
+<br/>
 
 Folder `input_data` should have the following structure:
 
@@ -185,8 +198,14 @@ cost_map : False
 
 **Example of the map with start and goal points hardcoded in the config.yaml file:**
 
+<p align="center">
 <img src="assets/start_goal_map_example.png" alt="drawing" width="500"/>
-
+</p>
+<p align="center">
+<em>
+Figure 3: Example of the map with start and goal points
+</em>
+</p>
 
 ## Step 3 : Path planning algorithms testing
 
@@ -320,9 +339,14 @@ disables the start and goal points on the map generation
   python3 main.py
 ```
 
-Example of the prototype cost map:
-
+<p align="center">
 <img src="assets/example_costmap.png" alt="drawing" width="500"/>
+</p>
+
+<p align="center">
+<em>
+Figure 6: Example of the cost map
+</em>
 
 * Zones are marked with different colors based on the distance from the coast
 and determined according to the prescribed [safety regulations in Croatia](https://www.angelina.hr/en/blog/minimum-distance-between-yachts-and-the-coast-in-croatia)
