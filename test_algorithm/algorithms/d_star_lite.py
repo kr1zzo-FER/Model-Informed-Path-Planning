@@ -20,6 +20,7 @@ p_create_random_obstacle = 0
 path_cordinates_x = []
 path_cordinates_y = []
 
+
 class Node:
     def __init__(self, x: int = 0, y: int = 0, cost: float = 0.0):
         self.x = x
@@ -227,9 +228,9 @@ class DStarLite:
                         spoofed_obstacle.x + self.x_min_world)
                     self.detected_obstacles_for_plotting_y.append(
                         spoofed_obstacle.y + self.y_min_world)
-                    #plt.plot(self.detected_obstacles_for_plotting_x,
-                    #         self.detected_obstacles_for_plotting_y, ".k")
-                    #plt.pause(pause_time)
+                    plt.plot(self.detected_obstacles_for_plotting_x,
+                             self.detected_obstacles_for_plotting_y, ".k")
+                    plt.pause(pause_time)
             self.spoofed_obstacles.pop(0)
 
         # Allows random generation of obstacles
@@ -281,15 +282,12 @@ class DStarLite:
     def display_path(self, path: list, colour: str, alpha: float = 1.0):
         px = [(node.x + self.x_min_world) for node in path]
         py = [(node.y + self.y_min_world) for node in path]
-        #for px, py in zip(px, py):
-        #    print(f"({px}, {py})")
         drawing = plt.plot(px, py, colour, alpha=alpha)
         plt.pause(pause_time)
         return drawing
     
     def get_path(self):
         return path_cordinates_x, path_cordinates_y
-
 
     def main(self, start: Node, goal: Node,
              spoofed_ox: list, spoofed_oy: list):
@@ -353,14 +351,13 @@ class DStarLite:
                         current_path_image = self.display_path(current_path,
                                                                ".c")
                         plt.pause(pause_time)
-        
+
         for px in pathx:
             path_cordinates_x.append(px)
         for py in pathy:
             path_cordinates_y.append(py)
         print("Path found")
         return True, pathx, pathy
-
 
 def main():
 

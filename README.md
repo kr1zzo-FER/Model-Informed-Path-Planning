@@ -272,15 +272,25 @@ Run for plotting the results:
 
 * Results are saved in the `results` folder with the name `result_image` and `table_name`
 
-**Example of the map with the path planning algorithm results:**
 
-<img src="assets/example_paths.png" alt="drawing" width="500"/>
+<p align="center">
 
-**Example of the table with the runtime results and path length:**
+<img src="assets/example_paths.png" alt="drawing" width="600"/>
 
-<img src="assets/example_table.png" alt="drawing" width="500"/>
+<p align="center">
+<em>
+Figure 4: Example of the map with the path planning algorithm results
+</em>
+</p>
 
-//TODO : fix D* Lite algorithm
+<p align="center">
+
+<img src="assets/example_table_1.png" alt="drawing" width="500"/>
+<p align="center">
+<em>
+Figure 5: Example of the table with the runtime results and path length
+<em>
+</p>
 
 ## Step 4 : Cost map generation
 

@@ -10,7 +10,7 @@ location_image: "voz.png"
 
 resized_location_image : "voz_resized.png"
 
-custom_start_goal : True
+custom_start_goal : False
 
 # This is hardcoded start and goal position and applied only if custom_start_goal is False
 start_longitude: 14.576700
@@ -48,7 +48,7 @@ test_algorithm :
 - "bidirectional_a_star"
 - "dijkstra"
 - "d_star"
-#- "d_star_lite"
+- "d_star_lite"
 - "breadth_first_search"
 - "bidirectional_breadth_first_search"
 - "greedy_best_first_search"
@@ -59,7 +59,7 @@ plot_algorithms:
 - "bidirectional_a_star"
 - "dijkstra"
 - "d_star"
-#- "d_star_lite"
+- "d_star_lite"
 - "breadth_first_search"
 - "bidirectional_breadth_first_search"
 - "greedy_best_first_search"

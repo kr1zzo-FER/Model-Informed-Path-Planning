@@ -134,13 +134,20 @@ class Algorithms:
         self.rows.append("D* Lite")
         spoofed_ox = [[], [], [], []]
         spoofed_oy = [[], [], [], []]
+        ox_ = [round(ox/grid_size) for ox in self.ox]
+        oy_ = [round(oy/grid_size) for oy in self.oy]
+        sx = round(sx/grid_size)
+        sy = round(sy/grid_size)
+        gx = round(gx/grid_size)
+        gy = round(gy/grid_size)
         start_time = time.time()
-        dstarlite = DStarLite(self.ox, self.oy)
+        dstarlite = DStarLite(ox_,oy_)
         print(f"Start: {sx, sy} Goal: {gx, gy}")
         dstarlite.main(Node(x=sx, y=sy), Node(x=gx, y=gy),
                 spoofed_ox=spoofed_ox, spoofed_oy=spoofed_oy)
         print("D* Lite calculation finished")
         rx, ry = dstarlite.get_path()
+        rx, ry = [rx[i]*grid_size for i in range(len(rx))], [ry[i]*grid_size for i in range(len(ry))]
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
         distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)

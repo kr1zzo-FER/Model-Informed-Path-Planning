@@ -23,8 +23,6 @@ import yaml
 import numpy as np
 import sys
 
-matplotlib.use('agg')
-
 root = Path(__file__).resolve().parents[1]
 show_animation = True
 legend_elements = []
