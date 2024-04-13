@@ -12,7 +12,12 @@ import math
 import pickle
 import matplotlib
 import matplotlib.pyplot as plt
+from matplotlib import colors
+from matplotlib.colors import LinearSegmentedColormap
+from matplotlib import cm
+from matplotlib import animation
 from PIL import Image
+from typing import Tuple
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 import matplotlib.ticker as mticker
