@@ -227,11 +227,14 @@ def plot():
                 ry_gbfs = pickle.load(f)
             plt.plot(rx_gbfs, ry_gbfs, "orange")
             legend_elements.append(Line2D([0], [0], color='orange', lw=4, label='GBFS'))
-        
-    plt.legend(handles=legend_elements, loc='upper right')
-    plt.draw()
-    plt.savefig(results/result_image)
-    plt.show(block = False)
+
+    try: 
+        plt.legend(handles=legend_elements, loc='upper right')
+        plt.draw()
+        plt.savefig(results/result_image)
+        plt.show(block = False)
+    except:
+        pass
 
     try:
         fig, ax = plt.subplots()

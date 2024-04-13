@@ -44,14 +44,14 @@ thread_enable : False
 # 9. greedy_best_first_search
 
 test_algorithm : 
-- "a_star"
-- "bidirectional_a_star"
-- "dijkstra"
-- "d_star"
+#- "a_star"
+#- "bidirectional_a_star"
+#- "dijkstra"
+#- "d_star"
 - "d_star_lite"
-- "breadth_first_search"
-- "bidirectional_breadth_first_search"
-- "greedy_best_first_search"
+#- "breadth_first_search"
+#- "bidirectional_breadth_first_search"
+#- "greedy_best_first_search"
 
 
 plot_algorithms:

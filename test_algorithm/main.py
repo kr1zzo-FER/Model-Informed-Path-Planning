@@ -12,13 +12,13 @@ from test import test
 from plot import plot
 
 def main():
-    thread2 = threading.Thread(target=test)
-    thread2.start()
-    thread2.join()
-    thread3 = threading.Thread(target=plot)
-    thread3.start()
-    thread3.join()
-
+    test_thread = threading.Thread(target=test)
+    test_thread.start()
+    test_thread.join()
+    plot_thread = threading.Thread(target=plot)
+    plot_thread.start()
+    plot_thread.join()
+    
 if __name__ == '__main__':
     try:
         main()

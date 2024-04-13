@@ -29,6 +29,7 @@ from algorithms.dstar import Map, State
 from algorithms.dstar import Dstar, Map, State
 from algorithms.d_star_lite import DStarLite
 from algorithms.d_star_lite import Node
+from algorithms.d_star_lite_advanced import DStarLiteAdvanced
 from algorithms.dijkstra import Dijkstra
 from algorithms.bidirectional_a_star import BidirectionalAStarPlanner
 from algorithms.breadth_first_search import BreadthFirstSearchPlanner
@@ -38,12 +39,18 @@ from algorithms.greedy_best_first_search import BestFirstSearchPlanner
 root = Path(__file__).resolve().parents[1]
 
 class Algorithms:
-    def __init__(self, ox, oy):
+    def __init__(self, ox, oy, redx=[], redy=[], yellowx=[], yellowy=[],greenx=[], greeny=[]):
         self.ox = ox
         self.oy = oy
         self.rows = []
         self.columns = ['Time [s]', 'Distance [m]']
         self.values = []
+        self.redx = redx
+        self.redy = redy
+        self.yellowx = yellowx
+        self.yellowy = yellowy
+        self.greenx = greenx
+        self.greeny = greeny
 
     def get_path(self):
         return self.rx, self.ry
@@ -156,6 +163,44 @@ class Algorithms:
         with open(binary_path/"d_star_lite_path_x", "wb") as f:
             pickle.dump(rx, f)
         with open(binary_path/"d_star_lite_path_y", "wb") as f:
+                pickle.dump(ry, f)
+    
+    def d_star_lite_advanced(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
+        print("\nD* lite calculation started")
+        self.rows.append("D* Lite advanced")
+        spoofed_ox = [[], [], [], []]
+        spoofed_oy = [[], [], [], []]
+        ox_ = [round(ox/grid_size) for ox in self.ox]
+        oy_ = [round(oy/grid_size) for oy in self.oy]
+        redx = [round(red/grid_size) for red in self.redx]
+        redy = [round(red/grid_size) for red in self.redy]
+        yellowx = [round(yellow/grid_size) for yellow in self.yellowx]
+        yellowy = [round(yellow/grid_size) for yellow in self.yellowy]
+        greenx = [round(green/grid_size) for green in self.greenx]
+        greeny = [round(green/grid_size) for green in self.greeny]
+        sx = round(sx/grid_size)
+        sy = round(sy/grid_size)
+        gx = round(gx/grid_size)
+        gy = round(gy/grid_size)
+        print(f"len redx: {len(redx)}")
+        print(f"len redy: {len(redy)}")
+        
+        start_time = time.time()
+        dstarlite = DStarLiteAdvanced(ox_,oy_, redx, redy, yellowx, yellowy, greenx, greeny)
+        print(f"Start: {sx, sy} Goal: {gx, gy}")
+        dstarlite.main(Node(x=sx, y=sy), Node(x=gx, y=gy),
+                spoofed_ox=spoofed_ox, spoofed_oy=spoofed_oy)
+        print("D* Lite calculation finished")
+        rx, ry = dstarlite.get_path()
+        rx, ry = [rx[i]*grid_size for i in range(len(rx))], [ry[i]*grid_size for i in range(len(ry))]
+        end_time = time.time()
+        function_time = round(end_time - start_time, 5)
+        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
+        self.values.append([function_time, distance])
+
+        with open(binary_path/"d_star_lite_avdanced_path_x", "wb") as f:
+            pickle.dump(rx, f)
+        with open(binary_path/"d_star_lite_advanced_path_y", "wb") as f:
                 pickle.dump(ry, f)
         
     def breadth_first_search(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
