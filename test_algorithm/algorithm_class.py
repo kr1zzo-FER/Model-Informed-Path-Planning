@@ -165,8 +165,8 @@ class Algorithms:
         with open(binary_path/"d_star_lite_path_y", "wb") as f:
                 pickle.dump(ry, f)
     
-    def d_star_lite_advanced(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
-        print("\nD* lite calculation started")
+    def d_star_lite_advanced(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path, red_cost, yellow_cost, green_cost):
+        print("\nD* lite advanced calculation started")
         self.rows.append("D* Lite advanced")
         spoofed_ox = [[], [], [], []]
         spoofed_oy = [[], [], [], []]
@@ -182,11 +182,9 @@ class Algorithms:
         sy = round(sy/grid_size)
         gx = round(gx/grid_size)
         gy = round(gy/grid_size)
-        print(f"len redx: {len(redx)}")
-        print(f"len redy: {len(redy)}")
         
         start_time = time.time()
-        dstarlite = DStarLiteAdvanced(ox_,oy_, redx, redy, yellowx, yellowy, greenx, greeny)
+        dstarlite = DStarLiteAdvanced(ox_,oy_, redx, redy, yellowx, yellowy, greenx, greeny, red_cost, yellow_cost, green_cost)
         print(f"Start: {sx, sy} Goal: {gx, gy}")
         dstarlite.main(Node(x=sx, y=sy), Node(x=gx, y=gy),
                 spoofed_ox=spoofed_ox, spoofed_oy=spoofed_oy)
@@ -198,7 +196,7 @@ class Algorithms:
         distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
         self.values.append([function_time, distance])
 
-        with open(binary_path/"d_star_lite_avdanced_path_x", "wb") as f:
+        with open(binary_path/"d_star_lite_advanced_path_x", "wb") as f:
             pickle.dump(rx, f)
         with open(binary_path/"d_star_lite_advanced_path_y", "wb") as f:
                 pickle.dump(ry, f)

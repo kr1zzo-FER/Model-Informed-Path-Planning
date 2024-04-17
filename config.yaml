@@ -2,13 +2,13 @@
 ## Step 1: Download data from OpenStreetMap (optional)
 
 # Process OSM data
-location_folder : "voz"
-location_image: "voz.png"
+location_folder : "voz2"
+location_image: "voz2.png"
 
 
 ## Step 2 : Data extraction and processing from OpenStreetMap
 
-resized_location_image : "voz_resized.png"
+resized_location_image : "voz_resized2.png"
 
 custom_start_goal : False
 
@@ -21,8 +21,8 @@ goal_latitude : 45.229204
 
 ## Step 3: Path planning algorithms testing
 
-result_image : "voz_result.png"
-table_name : "runtime_results.png"
+result_image : "voz2_result.png"
+table_name : "runtime_results2.png"
 
 grid_size : 10.0  # [m]
 robot_radius : 5.0  # [m]
@@ -66,9 +66,13 @@ plot_algorithms:
 
 ## Step 4: Cost map generation
 result_costmap_name : "voz_costmap.png"
-cost_map : False
+cost_map : True
+cost_map_show : True
 
-
+## Step 5: Path planning algorithms testing with cost map
+red_cost : 10
+yellow_cost : 5
+green_cost : 2
 
 
 

@@ -41,6 +41,7 @@ def main():
         grid_size = int(config["grid_size"])
         folder_name = config["location_folder"]
         cost_map = config["cost_map"]
+        cost_map_show = config["cost_map_show"]
         result_costmap_name = config["result_costmap_name"]
     
     # paths to files
@@ -81,12 +82,12 @@ def main():
     toc = time.time()
     print(f"Runtime {round(toc-tic,4)} seconds : {len(coast_points)} coast points\nMin x: {min(coast_points, key=lambda x: x[0])[0]}, Max x: {max(coast_points, key=lambda x: x[0])[0]}\nMin y: {min(coast_points, key=lambda x: x[1])[1]}, Max y: {max(coast_points, key=lambda x: x[1])[1]}")
 
+    red_zone, yellow_zone, green_zone = [], [], []
     if cost_map:
-        zones_from_coast(coast_points, results/result_costmap_name, results/image_save,binary_path,grid_size) 
-        sys.exit(0)
-    else:  
-        # set start and goal positions
-        set_start_goal(coast_points, latlong)
+        red_zone, yellow_zone,green_zone = zones_from_coast(coast_points, results/result_costmap_name, results/image_save,binary_path,grid_size) 
+        
+    # set start and goal positions
+    set_start_goal(coast_points, latlong, cost_map_show,red_zone, yellow_zone, green_zone)
     
 if __name__ == '__main__':
     try:

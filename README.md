@@ -173,15 +173,18 @@ location_image: "voz.png"
 - Set `resized_location_image` name for the resized map from the previous step. It is saved in the `results` folder for further steps
 - Set `custom_start_goal` to `True` if you want to choose start and goal points with a mouse click on the map or `False` if you want to add start and goal points manually in the config.yaml file
 
-Disable cost map generation in the `config.yaml` file or start and goal points will be disabled on the map generation:
+### 2.2. Run the following command to generate a map and detect the coastline
+
+Disable cost map generation in the `config.yaml` file if you want to skip cost map generation in this step :
 
 ```yaml
 ...
 ## Step 4: Cost map generation
 cost_map : False
+cost_map_show : False
 ```
 
-### 2.2. Run the following command to generate map and detect the coastline
+Run the following command in the folder `osm_data_processing` to generate a map and detect the coastline:
 
  ```terminal
   python3 main.py
@@ -334,10 +337,16 @@ cost_map : True
 ### 4.2. Run the following command to generate cost map
 
 * Same as in the Step 2.2. Run the following command in the folder `osm_data_processing` to generate a cost map, but set `generate_costmap` to `True` in the `config.yaml` file
-disables the start and goal points on the map generation
+* 
  ```terminal
   python3 main.py
 ```
+
+### 4.3. Select start and goal points on the cost map
+
+* [Step 2.1. Choose start and goal points on the map](#2.1.-Choose-start-and-goal-points-on-the-map)
+
+### 4.4. Check the results
 
 <p align="center">
 <img src="assets/example_costmap.png" alt="drawing" width="500"/>
@@ -351,14 +360,11 @@ Figure 6: Example of the cost map
 * Zones are marked with different colors based on the distance from the coast
 and determined according to the prescribed [safety regulations in Croatia](https://www.angelina.hr/en/blog/minimum-distance-between-yachts-and-the-coast-in-croatia)
 
-
-
-
 ## Step 5 : Testing of the path planning algorithms on the generated cost map
 
 * From the step 3, the path planning algorithm with the best results is chosen for the path interpolation and optimization (D*),and code is modified to fit the cost map generated in the previous step
 
-//TODO
+
 
 ## Step 6 : Path interpolation and optimization
 

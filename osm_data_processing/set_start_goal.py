@@ -21,6 +21,7 @@ import numpy as np
 from matplotlib.lines import Line2D
 from process_osm_data import deg_to_dms
 import os
+import math
 
 root = Path(__file__).resolve().parents[1]
 binary_path = root / "binary_dump"
@@ -73,8 +74,8 @@ def onclick(event):
             sy_latitude = deg_to_dms(sy_latitude)
             start
             print(f"Start position for calculation: \nx_longitude : {x_data} [{sx_longitude}]\ny_latitude : {y_data} [{sy_latitude}]\n")
-            ax.plot(x_data,y_data, 'go', markersize=5)
-            legend_elements.append(Line2D([0], [0], marker='o', color='g', label=f'\nStart and goal positions part {counter/2}:\nStart : ({sx_longitude}, {sy_latitude})'))
+            ax.plot(x_data,y_data, 'bo', markersize=8)
+            legend_elements.append(Line2D([0], [0], marker='o', color='b', label=f'\nStart and goal positions part {counter/2}:\nStart : ({sx_longitude}, {sy_latitude})'))
             ax.legend(handles=legend_elements, loc='upper right')
             plt.draw()
             set_start = True
@@ -98,7 +99,7 @@ def onclick(event):
             gy_latitude = round(gy * (coordinates[3] - coordinates[1]) / size_y + coordinates[1], 6)
             gy_latitude = deg_to_dms(gy_latitude)
             print(f"Goal position for calculation: \nx_longitude : {x_data} [{gx_longitude}]\ny_latitude : {y_data} [{gy_latitude}]\n")
-            ax.plot(x_data,y_data, 'bx', markersize=5)
+            ax.plot(x_data,y_data, 'bx', markersize=8)
             legend_elements.append(Line2D([0], [0], marker='x', color='b', label=f'Goal : ({gx_longitude}, {gy_latitude})'))
             ax.legend(handles=legend_elements, loc='upper right')
             plt.draw()
@@ -119,7 +120,7 @@ def onclick(event):
         elif not set_goal:
             print("\nSet goal position first!\n")
 
-def set_start_goal(coast_points, latlong):
+def set_start_goal(coast_points, latlong, cost_map_show ,red_zone=[], yellow_zone=[], green_zone=[]):
 
     global binary_path
     global root
@@ -148,6 +149,7 @@ def set_start_goal(coast_points, latlong):
         slongitude = config["start_longitude"]
         glatitude = config["goal_latitude"]
         glongitude = config["goal_longitude"]
+        cost_map_show = config["cost_map_show"]
 
     try:
         image_path = root/"results"/image_save
@@ -174,14 +176,21 @@ def set_start_goal(coast_points, latlong):
     coordinates_plot_x = np.arange(coordinates[0], coordinates[2],0.005)
     coordinates_plot_x = np.append(coordinates_plot_x, coordinates[2])
     coordinates_plot_x = [deg_to_dms(i) for i in coordinates_plot_x]
+
     coordinates_plot_y = np.arange(coordinates[1], coordinates[3],0.005)
     coordinates_plot_y = np.append(coordinates_plot_y, coordinates[3])
     coordinates_plot_y = [deg_to_dms(i) for i in coordinates_plot_y]
     
 
-    image_cordinates_x = np.arange(0, round(size_x), round(size_x/(len(coordinates_plot_x)-1)))
+    image_cordinates_x = np.arange(0, round(size_x), math.ceil(size_x/(len(coordinates_plot_x)-1)))
     image_cordinates_x = np.append(image_cordinates_x, size_x)
-    image_cordinates_y = np.arange(0, round(size_y), round(size_y/(len(coordinates_plot_y)-1)))
+
+    factor_y = size_y/len(coordinates_plot_y)
+    print(f"factor_y: {factor_y}")
+    print(f"round {factor_y}: {round(factor_y)}")
+
+
+    image_cordinates_y = np.arange(0, round(size_y), math.ceil(size_y/(len(coordinates_plot_y)-1)))
     image_cordinates_y = np.append(image_cordinates_y, size_y)
 
     plt.xticks(image_cordinates_x, coordinates_plot_x, rotation=90)
@@ -219,8 +228,8 @@ def set_start_goal(coast_points, latlong):
         sy__pixel = round(sy__pixel/grid_size)*grid_size
         gx__pixel = round(gx__pixel/grid_size)*grid_size
         gy__pixel = round(gy__pixel/grid_size)*grid_size
-        ax.plot(sx__pixel, sy__pixel, 'go', markersize=5)
-        ax.plot(gx__pixel, gy__pixel, 'bx', markersize=5)  
+        ax.plot(sx__pixel, sy__pixel, 'bo', markersize=8)
+        ax.plot(gx__pixel, gy__pixel, 'bx', markersize=8)  
 
         print(f"Start position for calculation: \nx_longitude : {sx__pixel} [{deg_to_dms(slongitude)}]\ny_latitude : {sy__pixel} [{deg_to_dms(slatitude)}]\n")
         print(f"Goal position for calculation: \nx_longitude : {gx__pixel} [{deg_to_dms(glongitude)}]\ny_latitude : {gy__pixel} [{deg_to_dms(glatitude)}]\n")
@@ -235,10 +244,18 @@ def set_start_goal(coast_points, latlong):
         with open(binary_path/"gy", "wb") as f:
             pickle.dump(gy__pixel, f)
             
-        legend_elements.append(Line2D([0], [0], marker='o', color='g', label=f'Start : ({deg_to_dms(slongitude)}, {deg_to_dms(slatitude)})'))
+        legend_elements.append(Line2D([0], [0], marker='o', color='b', label=f'Start : ({deg_to_dms(slongitude)}, {deg_to_dms(slatitude)})'))
         legend_elements.append(Line2D([0], [0], marker='x', color='b', label=f'Goal : ({deg_to_dms(glongitude)}, {deg_to_dms(glatitude)})'))
     
         ax.legend(handles=legend_elements, loc='upper right')
+
+    if cost_map_show:
+        for point in red_zone:
+            ax.plot(point[0],point[1],".r", markersize=1)
+        for point in yellow_zone:
+            ax.plot(point[0],point[1],".y", markersize=1)
+        for point in green_zone:
+            ax.plot(point[0],point[1],".g", markersize=1)
 
     plt.show()
 

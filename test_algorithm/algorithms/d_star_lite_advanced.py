@@ -55,7 +55,7 @@ class DStarLiteAdvanced:
         Node(-1, -1, math.sqrt(2))
     ]
 
-    def __init__(self, ox: list, oy: list, redx : list, redy: list, yellowx: list, yellowy: list, greenx: list, greeny: list):
+    def __init__(self, ox: list, oy: list, rx : list, ry:list, yx: list, yy: list, gx: list, gy: list, red_cost: float = 1.0, yellow_cost: float = 1.0, green_cost: float = 1.0):
         # Ensure that within the algorithm implementation all node coordinates
         # are indices in the grid and extend
         # from 0 to abs(<axis>_max - <axis>_min)
@@ -63,23 +63,27 @@ class DStarLiteAdvanced:
         self.y_min_world = int(min(oy))
         self.x_max = int(abs(max(ox) - self.x_min_world))
         self.y_max = int(abs(max(oy) - self.y_min_world))
+
         self.obstacles = [Node(x - self.x_min_world, y - self.y_min_world)
                           for x, y in zip(ox, oy)]
         self.obstacles_xy = np.array(
             [[obstacle.x, obstacle.y] for obstacle in self.obstacles]
         )
-        self.x_min_red = int(min(redx))
-        self.y_min_red = int(min(redy))
-        self.red_obstacles = [Node(x - self.x_min_red, y - self.y_min_red)
-                          for x, y in zip(redx, redy)]
-        self.x_min_yellow = int(min(yellowx))
-        self.y_min_yellow = int(min(yellowy))
-        self.yellow_obstacles = [Node(x - self.x_min_yellow, y - self.y_min_yellow)
-                          for x, y in zip(yellowx, yellowy)]
-        self.x_min_green = int(min(greenx))
-        self.y_min_green = int(min(greeny))
-        self.green_obstacles = [Node(x - self.x_min_green, y - self.y_min_green)
-                          for x, y in zip(greenx, greeny)]
+        self.red_zone = [Node(x - self.x_min_world, y - self.y_min_world)
+                          for x, y in zip(rx, ry)]
+        self.red_zone_xy = np.array(
+            [[red_zone.x, red_zone.y] for red_zone in self.red_zone]
+        )
+        self.yellow_zone = [Node(x - self.x_min_world, y - self.y_min_world)
+                            for x, y in zip(yx, yy)]
+        self.yellow_zone_xy = np.array(
+            [[yellow_zone.x, yellow_zone.y] for yellow_zone in self.yellow_zone]
+        )
+        self.green_zone = [Node(x - self.x_min_world, y - self.y_min_world)
+                            for x, y in zip(gx, gy)]
+        self.green_zone_xy = np.array(
+            [[green_zone.x, green_zone.y] for green_zone in self.green_zone]
+        )
 
         self.start = Node(0, 0)
         self.goal = Node(0, 0)
@@ -94,6 +98,10 @@ class DStarLiteAdvanced:
             self.detected_obstacles_for_plotting_x = list()  # type: ignore
             self.detected_obstacles_for_plotting_y = list()  # type: ignore
         self.initialized = False
+        self.red_cost = red_cost
+        self.yellow_cost = yellow_cost
+        self.green_cost = green_cost
+
 
     def create_grid(self, val: float):
         return np.full((self.x_max, self.y_max), val)
@@ -113,48 +121,44 @@ class DStarLiteAdvanced:
 
         return is_in_obstacles or is_in_detected_obstacles
     
-    def is_red_obstacle(self, node: Node):
+    def is_red_zone(self, node: Node):
         x = np.array([node.x])
         y = np.array([node.y])
-        obstacle_x_equal = self.red_obstacles[:, 0] == x
-        obstacle_y_equal = self.red_obstacles[:, 1] == y
-        is_in_obstacles = (obstacle_x_equal & obstacle_y_equal).any()
-
-        return is_in_obstacles
-
-    def is_yellow_obstacle(self, node: Node):
+        red_zone_x_equal = self.red_zone_xy[:, 0] == x
+        red_zone_y_equal = self.red_zone_xy[:, 1] == y
+        return (red_zone_x_equal & red_zone_y_equal).any()
+    
+    def is_yellow_zone(self, node: Node):
         x = np.array([node.x])
         y = np.array([node.y])
-        obstacle_x_equal = self.yellow_obstacles[:, 0] == x
-        obstacle_y_equal = self.yellow_obstacles[:, 1] == y
-        is_in_obstacles = (obstacle_x_equal & obstacle_y_equal).any()
-
-        return is_in_obstacles
-
-    def is_green_obstacle(self, node: Node):
+        yellow_zone_x_equal = self.yellow_zone_xy[:, 0] == x
+        yellow_zone_y_equal = self.yellow_zone_xy[:, 1] == y
+        return (yellow_zone_x_equal & yellow_zone_y_equal).any()
+    
+    def is_green_zone(self, node: Node):
         x = np.array([node.x])
         y = np.array([node.y])
-        obstacle_x_equal = self.green_obstacles[:, 0] == x
-        obstacle_y_equal = self.green_obstacles[:, 1] == y
-        is_in_obstacles = (obstacle_x_equal & obstacle_y_equal).any()
-
-        return is_in_obstacles
+        green_zone_x_equal = self.green_zone_xy[:, 0] == x
+        green_zone_y_equal = self.green_zone_xy[:, 1] == y
+        return (green_zone_x_equal & green_zone_y_equal).any()
 
     def c(self, node1: Node, node2: Node):
+        #print(f"red cost: {self.red_cost}, yellow cost: {self.yellow_cost}, green cost: {self.green_cost}")
         if self.is_obstacle(node2):
             # Attempting to move from or to an obstacle
             return math.inf
-        if self.is_red_obstacle(node2):
-            return 2
-        if self.is_yellow_obstacle(node2):
-            return 1
-        if self.is_green_obstacle(node2):
-            return 0.5
+        factor = 1
+        if self.is_red_zone(node2):
+            factor = self.red_cost
+        if self.is_yellow_zone(node2):
+            factor = self.yellow_cost
+        if self.is_green_zone(node2):
+            factor = self.green_cost
         new_node = Node(node1.x-node2.x, node1.y-node2.y)
         detected_motion = list(filter(lambda motion:
                                       compare_coordinates(motion, new_node),
                                       self.motions))
-        return detected_motion[0].cost
+        return detected_motion[0].cost * factor
 
     def h(self, s: Node):
         # Cannot use the 2nd euclidean norm as this might sometimes generate
@@ -222,8 +226,11 @@ class DStarLiteAdvanced:
 
     def compare_keys(self, key_pair1: tuple[float, float],
                      key_pair2: tuple[float, float]):
-        return key_pair1[0] < key_pair2[0] or \
-               (key_pair1[0] == key_pair2[0] and key_pair1[1] < key_pair2[1])
+        if key_pair1[0] < key_pair2[0]:
+            return True
+        elif key_pair1[0] == key_pair2[0] and key_pair1[1] < key_pair2[1]:
+            return True
+        return False
 
     def compute_shortest_path(self):
         self.U.sort(key=lambda x: x[1])
@@ -269,6 +276,14 @@ class DStarLiteAdvanced:
                         [[spoofed_obstacle.x, spoofed_obstacle.y]]
                     )
                 )
+                if show_animation:
+                    self.detected_obstacles_for_plotting_x.append(
+                        spoofed_obstacle.x + self.x_min_world)
+                    self.detected_obstacles_for_plotting_y.append(
+                        spoofed_obstacle.y + self.y_min_world)
+                    plt.plot(self.detected_obstacles_for_plotting_x,
+                             self.detected_obstacles_for_plotting_y, ".k")
+                    plt.pause(pause_time)
             self.spoofed_obstacles.pop(0)
 
         # Allows random generation of obstacles
@@ -342,6 +357,12 @@ class DStarLiteAdvanced:
         pathx.append(self.start.x + self.x_min_world)
         pathy.append(self.start.y + self.y_min_world)
 
+        if show_animation:
+            current_path = self.compute_current_path()
+            previous_path = current_path.copy()
+            previous_path_image = self.display_path(previous_path, ".c",
+                                                    alpha=0.3)
+            current_path_image = self.display_path(current_path, ".c")
 
         while not compare_coordinates(self.goal, self.start):
             if self.g[self.start.x][self.start.y] == math.inf:
@@ -353,7 +374,10 @@ class DStarLiteAdvanced:
                              self.g[sprime.x][sprime.y])
             pathx.append(self.start.x + self.x_min_world)
             pathy.append(self.start.y + self.y_min_world)
-
+            if show_animation:
+                current_path.pop(0)
+                plt.plot(pathx, pathy, "-r")
+                plt.pause(pause_time)
             changed_vertices = self.detect_changes()
             if len(changed_vertices) != 0:
                 print("New obstacle detected")
@@ -366,6 +390,20 @@ class DStarLiteAdvanced:
                     self.g[u.x][u.y] = math.inf
                     self.update_vertex(u)
                 self.compute_shortest_path()
+
+                if show_animation:
+                    new_path = self.compute_current_path()
+                    if not self.compare_paths(current_path, new_path):
+                        current_path_image[0].remove()
+                        previous_path_image[0].remove()
+                        previous_path = current_path.copy()
+                        current_path = new_path.copy()
+                        previous_path_image = self.display_path(previous_path,
+                                                                ".c",
+                                                                alpha=0.3)
+                        current_path_image = self.display_path(current_path,
+                                                               ".c")
+                        plt.pause(pause_time)
 
         for px in pathx:
             path_cordinates_x.append(px)

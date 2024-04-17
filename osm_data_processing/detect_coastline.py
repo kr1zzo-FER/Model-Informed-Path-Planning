@@ -19,6 +19,8 @@ import pickle
 from math import sqrt
 from generate_coastmap import zones_from_coast
 
+show_mask = False
+
 def detect_coast(image_path,x,y):
     try:
         image = io.imread(image_path)
@@ -65,8 +67,12 @@ def detect_coastline(image_path, binary_path, grid_size):
     global mask
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
-    mask = nd.binary_closing(mask, structure=np.ones((7,7)))
+    mask = nd.binary_closing(mask, structure=np.ones((10,10)))
     h,w = mask.shape
+
+    if show_mask:
+        plt.imshow(mask)
+        plt.show()
     
     px = mask
 
