@@ -9,50 +9,35 @@ Copyright: © Faculty of Electrical Engineering and Computing, University of Zag
 
 """
 
-import yaml
 import matplotlib.pyplot as plt
 from matplotlib.backend_bases import MouseButton
 import sys
-from detect_coastline import detect_coast
-import pickle
 from pathlib import Path
-from PIL import Image
-import numpy as np
 from matplotlib.lines import Line2D
-from process_osm_data import deg_to_dms
-import os
-import math
+from detect_coast import detect_coast
+from process_osm_data import deg_to_dms, gps_to_pixel, prepare_image_to_plot
 
 root = Path(__file__).resolve().parents[1]
+
 binary_path = root / "binary_dump"
 counter = 1
 ax, fig = 0,0
-grid_size = 0
 start = []
 goal = []
 set_start = False
 set_goal = False
-image_path = ""
-coordinates = []
-size_x = 0  
-size_y = 0
 legend_elements = []
-start = []
+sx, sy, gx, gy = 0,0,0,0
 
-def onclick(event):
+def onclick(event, image_path, grid_size, coordinates, size_x, size_y, binary_path):
     
     global counter
     global ax, fig
-    global image_path
-    global coordinates
-    global size_x
-    global size_y
     global legend_elements
-    global grid_size
-    global binary_path
     global set_start
     global set_goal
     global start
+    global sx, sy, gx, gy
 
     if event.button == MouseButton.LEFT:
         if counter % 2 != 0:
@@ -62,17 +47,13 @@ def onclick(event):
                 print("Start position is not set in the sea! Choose another position")
                 return
             counter += 1
-            with open(binary_path/"sx", "wb") as f:
-                pickle.dump(x_data, f)
-            with open(binary_path/"sy", "wb") as f:
-                pickle.dump(y_data, f)
             sx = x_data
             sy = y_data
             sx_longitude = round(sx * (coordinates[2] - coordinates[0]) / size_x + coordinates[0], 6)
             sx_longitude = deg_to_dms(sx_longitude)
             sy_latitude = round(sy * (coordinates[3] - coordinates[1]) / size_y + coordinates[1], 6)
             sy_latitude = deg_to_dms(sy_latitude)
-            start
+            start.clear()
             print(f"Start position for calculation: \nx_longitude : {x_data} [{sx_longitude}]\ny_latitude : {y_data} [{sy_latitude}]\n")
             ax.plot(x_data,y_data, 'bo', markersize=8)
             legend_elements.append(Line2D([0], [0], marker='o', color='b', label=f'\nStart and goal positions part {counter/2}:\nStart : ({sx_longitude}, {sy_latitude})'))
@@ -88,10 +69,6 @@ def onclick(event):
                 print("Goal position is not set in the sea! Choose another position")
                 return
             counter += 1
-            with open(binary_path/"gx", "wb") as f:
-                pickle.dump(x_data, f)
-            with open(binary_path/"gy", "wb") as f:
-                pickle.dump(y_data, f)
             gx = x_data
             gy = y_data
             gx_longitude = round(gx * (coordinates[2] - coordinates[0]) / size_x + coordinates[0], 6)
@@ -106,148 +83,34 @@ def onclick(event):
             set_goal = True
             goal.clear()
             
-    
-
-    
-
     elif event.button == MouseButton.RIGHT:
         if set_start and set_goal:
             print("\nStart and goal positions set!\n")
             plt.close()
-            sys.exit(0)
+            return
         elif not set_start:
             print("\nSet start position first!\n")
         elif not set_goal:
             print("\nSet goal position first!\n")
+    return
 
-def set_start_goal(coast_points, latlong, cost_map_show ,red_zone=[], yellow_zone=[], green_zone=[]):
-
-    global binary_path
-    global root
-    global grid_size
+def set_start_goal(image_path, binary_path,grid_size,image_wh_meters, latlong, custom_start_goal, start_goal, cost_map_show, coast_points=[], red_zone=[], yellow_zone=[], green_zone=[]):
+    """
+    Set start and goal positions for the path planning algorithm
+    Option 1 : Set start and goal positions by clicking on the image (costum_start_goal = True)
+    Option 2 : Set start and goal positions in the config file (costum_start_goal = False)
+    """
+    
     global ax, fig
-    global counter
-    global fig, ax
-    global image_path
-    global coordinates
-    global size_x
-    global size_y
-    global legend_elements
-
-    binary_path = root / "binary_dump"
-    isExist = os.path.exists(binary_path)
-    if not isExist:
-        os.makedirs(binary_path)
-
-
-    with open(root/"config.yaml", "r") as f:
-        config = yaml.safe_load(f)
-        image_save = config["resized_location_image"]
-        grid_size = int(config["grid_size"])
-        custom_start_goal = config["custom_start_goal"]
-        slatitude = config["start_latitude"]
-        slongitude = config["start_longitude"]
-        glatitude = config["goal_latitude"]
-        glongitude = config["goal_longitude"]
-        cost_map_show = config["cost_map_show"]
-
-    try:
-        image_path = root/"results"/image_save
-    except FileNotFoundError:
-        print(f"Image {image_save} not found in the results folder!")
-        sys.exit(0)
-
-    image = Image.open(root/"results"/image_save)
     
-
-    # plot image and detect start and goal positions
-    
-    
-    fig, ax = plt.subplots()
-
-    im = ax.imshow(image, extent=[0, image.size[0], 0, image.size[1]])
-
-    coordinates = latlong
-    size_x = image.size[0]
-    size_y = image.size[1]
-
-    coordinates = [round(float(coordinates[0]),6), round(float(coordinates[1]),6), round(float(coordinates[2]),6), round(float(coordinates[3]),6)]
-    #print(coordinates[0])
-    coordinates_plot_x = np.arange(coordinates[0], coordinates[2],0.005)
-    coordinates_plot_x = np.append(coordinates_plot_x, coordinates[2])
-    coordinates_plot_x = [deg_to_dms(i) for i in coordinates_plot_x]
-
-    coordinates_plot_y = np.arange(coordinates[1], coordinates[3],0.005)
-    coordinates_plot_y = np.append(coordinates_plot_y, coordinates[3])
-    coordinates_plot_y = [deg_to_dms(i) for i in coordinates_plot_y]
-    
-
-    image_cordinates_x = np.arange(0, round(size_x), math.ceil(size_x/(len(coordinates_plot_x)-1)))
-    image_cordinates_x = np.append(image_cordinates_x, size_x)
-
-    factor_y = size_y/len(coordinates_plot_y)
-    print(f"factor_y: {factor_y}")
-    print(f"round {factor_y}: {round(factor_y)}")
-
-
-    image_cordinates_y = np.arange(0, round(size_y), math.ceil(size_y/(len(coordinates_plot_y)-1)))
-    image_cordinates_y = np.append(image_cordinates_y, size_y)
-
-    plt.xticks(image_cordinates_x, coordinates_plot_x, rotation=90)
-    plt.yticks(image_cordinates_y, coordinates_plot_y)
-
-    
-    #plt.plot(ox, oy, ".k")
-    plt.xlabel("Longitude")
-    plt.ylabel("Latitude")
-    plt.grid(True)
-    
-    
-    
-    for point in coast_points:
-        ax.plot(point[0],point[1], 'bo', markersize=0.1)
-    
-    print(f"\ncustom start and goal positions: {custom_start_goal}\n")
+    size_x = image_wh_meters[0]
+    size_y = image_wh_meters[1]
+  
+    fig,ax = prepare_image_to_plot(image_path, latlong, coast_points)  
     
     legend_elements = []
 
-    if custom_start_goal:
-        ax.set_title("(<-) Left mouse click - set start and goal positions (->) Right mouse click - end program")
-        print("\n(<-) Left mouse click - set start and goal positions (->) Right mouse click - end program\n")
-        fig.canvas.mpl_connect('button_press_event', onclick)
-   
-    else:
-
-        ax.set_title("Start and goal positions are set in the config file (Ctrl+C to exit)")
-        print("Start and goal positions are set in the config file (Ctrl+C to exit)\n")
-        sx__pixel = int(round((slongitude - coordinates[0]) * size_x / (coordinates[2] - coordinates[0])))
-        sy__pixel = int(round((slatitude - coordinates[1]) * size_y / (coordinates[3] - coordinates[1])))
-        gx__pixel = int(round((glongitude - coordinates[0]) * size_x / (coordinates[2] - coordinates[0])))
-        gy__pixel = int(round((glatitude - coordinates[1]) * size_y / (coordinates[3] - coordinates[1])))
-        sx__pixel = round(sx__pixel/grid_size)*grid_size
-        sy__pixel = round(sy__pixel/grid_size)*grid_size
-        gx__pixel = round(gx__pixel/grid_size)*grid_size
-        gy__pixel = round(gy__pixel/grid_size)*grid_size
-        ax.plot(sx__pixel, sy__pixel, 'bo', markersize=8)
-        ax.plot(gx__pixel, gy__pixel, 'bx', markersize=8)  
-
-        print(f"Start position for calculation: \nx_longitude : {sx__pixel} [{deg_to_dms(slongitude)}]\ny_latitude : {sy__pixel} [{deg_to_dms(slatitude)}]\n")
-        print(f"Goal position for calculation: \nx_longitude : {gx__pixel} [{deg_to_dms(glongitude)}]\ny_latitude : {gy__pixel} [{deg_to_dms(glatitude)}]\n")
-
-        with open(binary_path/"sx", "wb") as f:
-                pickle.dump(sx__pixel, f)
-        with open(binary_path/"sy", "wb") as f:
-            pickle.dump(sy__pixel, f)
-
-        with open(binary_path/"gx", "wb") as f:
-            pickle.dump(gx__pixel, f)
-        with open(binary_path/"gy", "wb") as f:
-            pickle.dump(gy__pixel, f)
-            
-        legend_elements.append(Line2D([0], [0], marker='o', color='b', label=f'Start : ({deg_to_dms(slongitude)}, {deg_to_dms(slatitude)})'))
-        legend_elements.append(Line2D([0], [0], marker='x', color='b', label=f'Goal : ({deg_to_dms(glongitude)}, {deg_to_dms(glatitude)})'))
-    
-        ax.legend(handles=legend_elements, loc='upper right')
+    print(f"\ncustom start and goal positions: {custom_start_goal}\n")
 
     if cost_map_show:
         for point in red_zone:
@@ -257,11 +120,44 @@ def set_start_goal(coast_points, latlong, cost_map_show ,red_zone=[], yellow_zon
         for point in green_zone:
             ax.plot(point[0],point[1],".g", markersize=1)
 
-    plt.show()
+    if custom_start_goal:
+        global sx, sy, gx, gy
+        ax.set_title("(<-) Left mouse click - set start and goal positions (->) Right mouse click - end program and save start and goal positions")
+        print("\n(<-) Left mouse click - set start and goal positions (->) Right mouse click - end program\n")
+        fig.canvas.mpl_connect('button_press_event', lambda event: onclick(event, image_path, grid_size, latlong, ax.get_xlim()[1], ax.get_ylim()[1], binary_path))
+        plt.show()
+        sx__pixel = sx
+        sy__pixel = sy
+        gx__pixel = gx
+        gy__pixel = gy
+    else:
+        # load start and goal positions
+        slatitude = start_goal[0]
+        slongitude = start_goal[1]
+        glatitude = start_goal[2]
+        glongitude = start_goal[3]
 
+        print(start_goal)
 
-if __name__ == '__main__':
-    try:
-        set_start_goal()
-    except KeyboardInterrupt:
-        sys.exit(0)
+        # Convert start and goal positions to pixels and plot them
+        sx__pixel, sy__pixel = gps_to_pixel(slatitude, slongitude, latlong, size_x, size_y, grid_size)
+        gx__pixel, gy__pixel = gps_to_pixel(glatitude, glongitude, latlong, size_x, size_y, grid_size)
+
+        print(f"Start position for calculation: \nx_longitude : {sx__pixel} [{deg_to_dms(slongitude)}]\ny_latitude : {sy__pixel} [{deg_to_dms(slatitude)}]\n")
+
+        ax.plot(sx__pixel, sy__pixel, 'bo', markersize=8)
+        ax.plot(gx__pixel, gy__pixel, 'bx', markersize=8)  
+
+        # print start and goal positions
+        ax.set_title("Start and goal positions are set in the config file. Close the window to exit and save start and goal positions!")
+        print("Start and goal positions are set in the config file (Ctrl+C to exit)\n")
+        print(f"Start position for calculation: \nx_longitude : {sx__pixel} [{deg_to_dms(slongitude)}]\ny_latitude : {sy__pixel} [{deg_to_dms(slatitude)}]\n")
+        print(f"Goal position for calculation: \nx_longitude : {gx__pixel} [{deg_to_dms(glongitude)}]\ny_latitude : {gy__pixel} [{deg_to_dms(glatitude)}]\n")
+            
+        legend_elements.append(Line2D([0], [0], marker='o', color='b', label=f'Start : ({deg_to_dms(slongitude)}, {deg_to_dms(slatitude)})'))
+        legend_elements.append(Line2D([0], [0], marker='x', color='b', label=f'Goal : ({deg_to_dms(glongitude)}, {deg_to_dms(glatitude)})'))
+    
+        ax.legend(handles=legend_elements, loc='upper right')
+        plt.show()
+
+    return sx__pixel, sy__pixel, gx__pixel, gy__pixel

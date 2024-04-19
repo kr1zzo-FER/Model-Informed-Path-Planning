@@ -77,7 +77,6 @@ def plot():
         result_image = config["result_image"]
         plot_algorithms = config["plot_algorithms"]
         cost_map = config["cost_map"]
-        cost_map_show = config["cost_map_show"]
         red_cost = config["red_cost"]
         yellow_cost = config["yellow_cost"]
         green_cost = config["green_cost"]
@@ -187,6 +186,17 @@ def plot():
                 plt.plot(rx_bidir_astar, ry_bidir_astar, "crimson")
                 legend_elements.append(Line2D([0], [0], color='crimson', lw=4, label='Bidirectional A*'))
 
+            if algorithm == "hybrid_a_star":
+                rows.append("Hybrid A*")
+                rx_bidir_astar = []
+                ry_bidir_astar = []
+                with open(binary_path/"hybrid_a_star_path_x", "rb") as f:
+                    rx_bidir_astar = pickle.load(f)
+                with open(binary_path/"hybrid_a_star_path_y", "rb") as f:
+                    ry_bidir_astar = pickle.load(f)
+                plt.plot(rx_bidir_astar, ry_bidir_astar, "crimson")
+                legend_elements.append(Line2D([0], [0], color='crimson', lw=4, label='Hybrid A*'))
+
             if algorithm == "dijkstra":
                 try:
                     
@@ -269,7 +279,7 @@ def plot():
         plt.plot(rx_dstar_lite, ry_dstar_lite, "blue")
         legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f'D* Lite advanced\n(Red cost: {red_cost}\n Yellow cost: {yellow_cost}\nGreen cost: {green_cost})'))
     
-    if cost_map_show:
+    if cost_map:
         for point in red_zone:
             ax.plot(point[0],point[1],".r", markersize=1)
         for point in yellow_zone:

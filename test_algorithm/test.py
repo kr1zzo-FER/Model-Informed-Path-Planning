@@ -138,7 +138,13 @@ def test():
                 else:
                     algorithm.bidirectional_a_star(sx, sy, gx, gy, grid_size, robot_radius, binary_path)
                 
-
+            if test_algorithm == "hybrid_a_star":
+                if thread_enable:
+                    thread2 = threading.Thread(target = algorithm.hybrid_a_star, args=(sx, sy, gx, gy, grid_size, robot_radius, binary_path))
+                    threads.append(thread2)
+                else:
+                    algorithm.hybrid_a_star(sx, sy, gx, gy, grid_size, robot_radius, binary_path)
+                
             if test_algorithm == "dijkstra":
                 if thread_enable:
                     thread3 = threading.Thread(target = algorithm.dijkstra, args=(sx, sy, gx, gy, grid_size, robot_radius, binary_path))

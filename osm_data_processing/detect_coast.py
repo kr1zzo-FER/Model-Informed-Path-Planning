@@ -1,6 +1,7 @@
+
 """
 
-Program for generating costmap
+Functions for detecting coast and coastline
 
 author: Enio Krizman (GitHub: @kr1zzo)
 
@@ -9,18 +10,100 @@ Copyright: © Faculty of Electrical Engineering and Computing, University of Zag
 """
 
 import matplotlib.pyplot as plt
-from PIL import Image
-import pickle
-from math import sqrt
-from skimage import io
 import numpy as np
 import cv2
+from PIL import Image
+from skimage import io
 from scipy import ndimage as nd
-from math import cos, sin, pi
+from math import sqrt, cos, sin, pi
 import time
 
-def zones_from_coast(coast_points,results_name, image_path, binary_path,grid_size):
-    print("\nGenerating zones from coast")
+show_mask = False
+
+def detect_coast(image_path,x,y):
+    # detect coast or sea at given point (x,y) on image
+    try:
+        image = io.imread(image_path)
+
+        hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+
+        lower_blue = np.array([80, 60,60])
+        upper_blue = np.array([120, 255, 255])
+
+        global mask
+        mask = cv2.inRange(hsv, lower_blue, upper_blue)
+        ox, oy = [], []
+
+        if mask is None:
+            raise ValueError("Image mask not set")
+        if x < 0 or x >= mask.shape[1] or y < 0 or y >= mask.shape[0]:
+            return False
+        h,w = mask.shape
+        y = h - y
+        if mask[y,x] == 0:
+            # if coast return True
+            return True
+        return False
+    except:
+        return False
+    
+
+def detect_coastline(image_path, grid_size):
+
+    print("Detecting coastline points...")
+
+    # load image
+    image = io.imread(image_path)
+    image1 = Image.open(image_path)
+
+    # convert image to hsv
+    hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+
+    # define blue color range and create mask
+    lower_blue = np.array([80, 60,60])
+    upper_blue = np.array([120, 255, 255])
+    mask = cv2.inRange(hsv, lower_blue, upper_blue)
+
+    # apply morphological operations to mask
+    mask = nd.binary_closing(mask, structure=np.ones((10,10)))
+
+    if show_mask:
+        plt.imshow(mask)
+        plt.show()
+
+    # Detect coastline points - points where the values in the mask changes from 1 to 0
+    px = mask
+
+    h,w = mask.shape
+
+    x_width = int(w/grid_size)
+    y_width = int(h/grid_size)
+    
+    directions = [(0,1), (1,0), (0,-1), (-1,0), (1,1), (-1,-1), (1,-1), (-1,1)]
+
+    coast_points = []
+
+    for i in range(0, x_width-1):
+        for j in range(0, y_width-1):
+
+            pixel_i = i*grid_size
+            pixel_j = j*grid_size
+
+            try:
+                for k in directions:
+                    k1 = k[0]
+                    k2 = k[1]
+                    if px[pixel_j, pixel_i] != px[(j+k2)*grid_size, (i+k1)*grid_size]:
+                        if [pixel_i, h-pixel_j] not in coast_points:
+                            coast_points.append([pixel_i, h-pixel_j])
+
+            except:
+                pass     
+
+    return coast_points, (image1.size[0], image1.size[1])
+
+def zones_from_coast(coast_points, image_path, grid_size):
+    print("\nGenerating zones from coast, it may take a while...\n")
     start_time = time.time()
     red_zone = []
     yellow_zone = []
@@ -98,15 +181,6 @@ def zones_from_coast(coast_points,results_name, image_path, binary_path,grid_siz
                 if [x,y] not in green_zone and not mask[h-y,x] == 0 and [x,y] not in red_zone and [x,y] not in yellow_zone:
                     green_zone.append([x,y])
     print("Green zone done")
-
-    
-    #save zones to binary files
-    with open(binary_path/"red_zone", "wb") as f:
-        pickle.dump(red_zone, f)
-    with open(binary_path/"yellow_zone", "wb") as f:
-        pickle.dump(yellow_zone, f)
-    with open(binary_path/"green_zone", "wb") as f:
-        pickle.dump(green_zone, f)
     
     end_time = time.time()
     print(f"Zones generated in {round(end_time-start_time,4)} seconds")

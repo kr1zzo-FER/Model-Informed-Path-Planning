@@ -12,12 +12,8 @@ from test import test
 from plot import plot
 
 def main():
-    test_thread = threading.Thread(target=test)
-    test_thread.start()
-    test_thread.join()
-    plot_thread = threading.Thread(target=plot)
-    plot_thread.start()
-    plot_thread.join()
+    test()
+    plot()
     
 if __name__ == '__main__':
     try:

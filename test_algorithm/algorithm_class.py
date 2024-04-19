@@ -22,8 +22,7 @@ import os
 from pathlib import Path
 import time
 import threading
-from plot import deg_to_dms
-
+import numpy as np
 from algorithms.a_star import AStarPlanner
 from algorithms.dstar import Map, State
 from algorithms.dstar import Dstar, Map, State
@@ -32,6 +31,7 @@ from algorithms.d_star_lite import Node
 from algorithms.d_star_lite_advanced import DStarLiteAdvanced
 from algorithms.dijkstra import Dijkstra
 from algorithms.bidirectional_a_star import BidirectionalAStarPlanner
+from algorithms.hybrid_a_star import hybrid_a_star_planning
 from algorithms.breadth_first_search import BreadthFirstSearchPlanner
 from algorithms.bidirectional_breadth_first_search import BidirectionalBreadthFirstSearchPlanner
 from algorithms.depth_first_search import DepthFirstSearchPlanner
@@ -92,6 +92,26 @@ class Algorithms:
         with open(binary_path/"bid_a_star_path_y", "wb") as f:
             pickle.dump(ry, f)
     
+    def hybrid_a_star(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
+        print("\nHybrid A* calculation started..")
+        start = [float(sx), float(sy), np.deg2rad(90.0)]
+        goal = [float(gx), float(gy), np.deg2rad(90.0)]
+        YAW_GRID_RESOLUTION = np.deg2rad(15.0)  # [rad]
+        start_time = time.time()
+        path = hybrid_a_star_planning(
+        start, goal, self.ox, self.oy, grid_size, YAW_GRID_RESOLUTION)
+        rx = path.x_list
+        ry = path.y_list
+        end_time = time.time()
+        function_time = round(end_time - start_time, 5)
+        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
+        self.values.append([function_time, distance])
+
+        with open(binary_path/"hybrid_a_star_path_x", "wb") as f:
+            pickle.dump(rx, f)
+        with open(binary_path/"hybrid_a_star_path_y", "wb") as f:
+            pickle.dump(ry, f)
+
     def dijkstra(self, sx, sy, gx, gy, grid_size, robot_radius, binary_path):
         print("\nDijkstra calculation started")
         self.rows.append("Dijkstra")

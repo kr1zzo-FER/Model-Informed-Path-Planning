@@ -72,11 +72,11 @@ Model-informed-path-planning
 
 * After [first run](#2.2.-Run-the-following-command-to-generate-map-and-detect-the-coastline), the `results` and `binary_dump` folders are created for saving the results and binary files for the path planning algorithms
 
-## Step 1 : Download data from OpenStreetMap 
+## Step 1 : Download data from OpenStreetMap (optional)
 
 ### Folder name : `input_data`
 
-`Steps 1.1. - 1.5. are optional and can be skipped if the default data is used. Feel free to download your data from OpenStreetMap and follow the instructions below!`
+`Step 1. is optional and can be skipped if the default data is used. Feel free to download your data from OpenStreetMap and follow the instructions below!`
 
 In the folder `input_data` are provided default data for the following locations:
 - Voz, island of Krk, Croatia
@@ -114,6 +114,22 @@ Figure 2: Copy HTML string from OpenStreetMap
 
 <br/>
 
+
+### 1.6. Update config.yaml file
+
+Example of the config.yaml file for the location `voz`:
+
+- location folder from the `input_data` folder in step 1.2 and location_image is the name of the .png file from step 1.3
+
+
+ ```yaml
+## Step 1: Download data from OpenStreetMap (optional)
+# Process OSM data
+location_folder : "voz"
+location_image: "voz.png"
+```
+### 1.7. Check the results
+
 Folder `input_data` should have the following structure:
 
 ```terminal
@@ -121,6 +137,9 @@ Folder `input_data` should have the following structure:
     ├── voz                  
     │   ├── osm_input.txt       # HTML string from the OpenStreetMa
     │   └── voz.png             # .png file from the OpenStreetMap
+    ├── voz2                  
+    │   ├── osm_input.txt       # HTML string from the OpenStreetMa
+    │   └── voz2.png             # .png file from the OpenStreetMap
     ├── jadranovo
     │   ├── osm_input.txt       # HTML string from the OpenStreetMap
     │   └── jadranovo.png       # .png file from the OpenStreetMap
@@ -133,58 +152,70 @@ Folder `input_data` should have the following structure:
 
 ```
 * location_1, location_2, ..., location_n are the names of the locations added by the user in the previous steps
-
-### 1.6. Update config.yaml file
-
-Example of the config.yaml file for the location `voz`:
-
-- location folder from the `input_data` folder in step 1.2 and location_image is the name of the .png file from step 1.3
-
-
- ```yaml
-# Process OSM data
-location_folder : "voz"
-location_image: "voz.png"
-```
-
 ## Step 2 : Data extraction and processing from OpenStreetMap
 
 ### Folder name: `osm_data_processing`
 
+`In this step, the OpenStreetMap data is processed and the map is resized to 1 pixel per 1 meter. Coastline is detected and start and goal points are set on the map.`
+
 ```terminal
   osm_data_processing
-    ├── detect_coastline.py
-    ├── generate_costmap.py
+    ├── detect_coast.py
     ├── process_osm_data.py
     ├── set_start_goal.py
     └── main.py
-
 ```
 
-* `main.py` - main file for data extraction and processing and runs the following files:
-    * `process_osm_data.py` - file for data extraction and processing from Step 1
-    * `detect_coastline.py` - file for detecting coastline and coast points and marking them on the map
-    * `set_start_goal.py` - file for setting start and goal points on the map and plotting them on the map
-    * `generate_costmap.py` - file for generating cost map from the map and coastline data - needed for later steps
+* `main.py` - main file for detecting coastline, setting start and goal points on the map and generating the cost map. Results are saved in the `binary_dump` folder for further steps and in the `results` folder for visualization
+  
+* `process_osm_data.py`:
+    * Processing the OpenStreetMap data from osm_data.txt file
+    * Converting GPS coordinates to the meters
+    * Converting GPS coordinates to the pixels
+    * Converting GPS coordinates to the DMS format
+    * Resize the map to 1 pixel per 1 meter
+    * Prepare image with geolocation data for plotting
+* `detect_coast.py` - file for detecting coastline and coast points and marking them on the map
+    * Detecting the coastline from the image
+    * Detecting if (x, y) point is on the coast or at the sea
+    * Detecting zones based on the distance from the coast (red, yellow, green) - cost map generation
+* `set_start_goal.py` - file for setting start and goal points on the map and plotting them on the map
+    * Setting start and goal points on the map
+      * Option 1: Set start and goal points with a mouse click on the map
+      * Option 2: Set start and goal points manually in the config.yaml file
+    * Plotting start and goal points on the map
 
 
-### 2.1. Choose start and goal points on the map
+### 2.1. Update config.yaml file
 
-- Set `resized_location_image` name for the resized map from the previous step. It is saved in the `results` folder for further steps
-- Set `custom_start_goal` to `True` if you want to choose start and goal points with a mouse click on the map or `False` if you want to add start and goal points manually in the config.yaml file
+* Set `resized_location_image` name for the resized map from the previous step. It is saved in the `results` folder for further steps
+* Disable the cost map generation by setting `cost_map` to `False`
+* Set `custom_start_goal` to `True` if you want to choose the start and goal points with a mouse click on the map or `False` if you want to add start and goal points manually in the config.yaml file
+    * If `custom_start_goal` is set to `False`, set the `start_latitude`, `start_longitude`, `goal_latitude`, and `goal_longitude` in the config.yaml file. You can get the coordinates from the [OpenStreetMap](https://www.openstreetmap.org/#map=15/45.2300/14.5868), [Google Maps](https://www.google.com/maps/@45.2353117,14.5923406,14.61z?entry=ttu), etc.
 
-### 2.2. Run the following command to generate a map and detect the coastline
-
-Disable cost map generation in the `config.yaml` file if you want to skip cost map generation in this step :
-
+The example of the config.yaml file for the location `voz`:
 ```yaml
-...
+## Step 2 : Data extraction and processing from OpenStreetMap 
 ## Step 4: Cost map generation
+
+resized_location_image : "voz_resized2.png"
+result_costmap_name : "voz_costmap.png"
+
+# Step 2 : False, Step 4 : True
 cost_map : False
-cost_map_show : False
+
+custom_start_goal : False
+# This is hardcoded start and goal position and applied only if custom_start_goal is False
+start_latitude : 45.234781
+start_longitude: 14.577538
+
+goal_latitude : 45.230241
+goal_longitude: 14.583173
 ```
 
-Run the following command in the folder `osm_data_processing` to generate a map and detect the coastline:
+### 2.2. Run the following command 
+
+Run the following command in the folder `osm_data_processing` to generate a map, detect the coastline and set the start and goal points on the map
 
  ```terminal
   python3 main.py
@@ -322,22 +353,23 @@ Figure 5: Example of the table with the runtime results and path length
 * the current cost map is based on the distance from the coast
 * TODO: Implement costmap based on the depth, obstacles, etc.
 * TODO: develop the solution for the bridge detections and elimination from the provided data
-* TODO : add more directions and fix empty spaces, connect meters with geolocations
 
 ### 4.1. Update config.yaml file
 
 - Set `cost_map` to `True` in the `config.yaml` file and set the `result_costmap_name` for the cost map figure name
+- Set `cost_map_show` to `True` if you want to show the cost map on the plots or `False` if you want to skip the cost map visualization
 
 ```yaml
 ## Step 4: Cost map generation
 result_costmap_name : "voz_costmap.png"
 cost_map : True
+cost_map_show : True
 ```
 
 ### 4.2. Run the following command to generate cost map
 
 * Same as in the Step 2.2. Run the following command in the folder `osm_data_processing` to generate a cost map, but set `generate_costmap` to `True` in the `config.yaml` file
-* 
+
  ```terminal
   python3 main.py
 ```
@@ -348,6 +380,10 @@ cost_map : True
 
 ### 4.4. Check the results
 
+* Zones are marked with different colors based on the distance from the coast
+and determined according to the prescribed [safety regulations in Croatia](https://www.angelina.hr/en/blog/minimum-distance-between-yachts-and-the-coast-in-croatia)
+* Zone under 50 meters is marked with red color, zone from 50 to 150 meters is marked with yellow color, and zone from 150 to 300 meters is marked with green color
+
 <p align="center">
 <img src="assets/example_costmap.png" alt="drawing" width="500"/>
 </p>
@@ -357,18 +393,29 @@ cost_map : True
 Figure 6: Example of the cost map
 </em>
 
-* Zones are marked with different colors based on the distance from the coast
-and determined according to the prescribed [safety regulations in Croatia](https://www.angelina.hr/en/blog/minimum-distance-between-yachts-and-the-coast-in-croatia)
+
 
 ## Step 5 : Testing of the path planning algorithms on the generated cost map
 
-* From the step 3, the path planning algorithm with the best results is chosen for the path interpolation and optimization (D*),and code is modified to fit the cost map generated in the previous step
+### Folder name: `test_algorithm`
+
+* From step 3, the path planning algorithm with the best results is chosen for the path interpolation and optimization (D* lite),and code is modified to fit the cost map generated in the previous step
+
+### 5.1. Update config.yaml file
+
+* Path optimization is based on the cost map generated in the previous step and zone cost values are set in the `config.yaml` file
+
+```yaml
+red_cost : 10
+yellow_cost : 5
+green_cost : 2
+```
 
 
 
 ## Step 6 : Path interpolation and optimization
 
-* From the results of the path planning algorithms, the path interpolation and optimization are needed for the path planning algorithms to be used in the real environment
+* From the results of the path planning algorithms, path interpolation and optimization are needed for the path planning algorithms to be used in the real environment
 
 //TODO
 
