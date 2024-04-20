@@ -88,7 +88,7 @@ def resize_image(image_path, image_wh):
 
     return resized_image
 
-def prepare_image_to_plot(image_path, latlong, coast_points = []):
+def prepare_image_to_plot(image_path, coordinates, coast_points = []):
      
     # Prepare image for plotting
     image = Image.open(image_path)
@@ -99,7 +99,6 @@ def prepare_image_to_plot(image_path, latlong, coast_points = []):
 
     im = ax.imshow(image, extent=[0, image.size[0], 0, image.size[1]])
 
-    coordinates = latlong
     size_x = image.size[0]
     size_y = image.size[1]
 
@@ -125,7 +124,6 @@ def prepare_image_to_plot(image_path, latlong, coast_points = []):
     plt.xticks(image_cordinates_x, coordinates_plot_x, rotation=90)
     plt.yticks(image_cordinates_y, coordinates_plot_y)
     
-    #plt.plot(ox, oy, ".k")
     plt.xlabel("Longitude")
     plt.ylabel("Latitude")
     plt.grid(True)
@@ -133,4 +131,5 @@ def prepare_image_to_plot(image_path, latlong, coast_points = []):
     for point in coast_points:
         ax.plot(point[0],point[1], 'bo', markersize=0.1)
     
+
     return fig, ax

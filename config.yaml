@@ -1,4 +1,3 @@
-
 ## Step 1: Download data from OpenStreetMap (optional)
 
 # Process OSM data
@@ -10,7 +9,6 @@ location_image: "voz2.png"
 ## Step 4: Cost map generation
 
 resized_location_image : "voz_resized2.png"
-result_costmap_name : "voz_costmap.png"
 
 custom_start_goal : False
 
@@ -26,9 +24,8 @@ goal_longitude: 14.583173
 
 
 ## Step 3: Path planning algorithms testing
-
-result_image : "voz2_result.png"
-table_name : "runtime_results2.png"
+result_image : "path_result.png"
+table_name : "table_results.png"
 
 grid_size : 10.0  # [m]
 robot_radius : 5.0  # [m]
@@ -36,7 +33,7 @@ robot_radius : 5.0  # [m]
 
 # thread_enable : True - thread for plotting map
 # thread_enable map : False - for algorithm runtime calculation
-thread_enable : False
+thread_enable : True
 
 #test and plot options
 # 1. a_star
@@ -49,7 +46,7 @@ thread_enable : False
 # 8. depth_first_search
 # 9. greedy_best_first_search
 
-test_algorithm : 
+test_algorithm :
 - "a_star"
 - "bidirectional_a_star"
 - "dijkstra"
@@ -59,8 +56,7 @@ test_algorithm :
 - "bidirectional_breadth_first_search"
 - "greedy_best_first_search"
 
-
-plot_algorithms:
+plot_algorithms :
 - "a_star"
 - "bidirectional_a_star"
 - "dijkstra"
@@ -70,7 +66,10 @@ plot_algorithms:
 - "bidirectional_breadth_first_search"
 - "greedy_best_first_search"
 
+## Step 4: Cost map generation
 
+result_costmap_name : "costmap_path.png"
+result_costmap_table : "costmap_table.png"
 
 ## Step 5: Path planning algorithms testing with cost map
 red_cost : 10

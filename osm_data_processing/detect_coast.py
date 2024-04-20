@@ -20,7 +20,7 @@ import time
 
 show_mask = False
 
-def detect_coast(image_path,x,y):
+def detect_coast_points(image_path,x,y):
     # detect coast or sea at given point (x,y) on image
     try:
         image = io.imread(image_path)

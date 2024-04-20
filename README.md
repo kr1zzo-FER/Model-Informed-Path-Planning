@@ -74,9 +74,10 @@ Model-informed-path-planning
 
 ## Step 1 : Download data from OpenStreetMap (optional)
 
-### Folder name : `input_data`
 
-`Step 1. is optional and can be skipped if the default data is used. Feel free to download your data from OpenStreetMap and follow the instructions below!`
+**Step 1. is optional and can be skipped if the default data is used. Feel free to download your data from OpenStreetMap and follow the instructions below!**
+
+### Folder name : `input_data`
 
 In the folder `input_data` are provided default data for the following locations:
 - Voz, island of Krk, Croatia
@@ -130,7 +131,7 @@ location_image: "voz.png"
 ```
 ### 1.7. Check the results
 
-Folder `input_data` should have the following structure:
+**Folder `input_data` should have the following structure:**
 
 ```terminal
     input_data
@@ -154,9 +155,9 @@ Folder `input_data` should have the following structure:
 * location_1, location_2, ..., location_n are the names of the locations added by the user in the previous steps
 ## Step 2 : Data extraction and processing from OpenStreetMap
 
-### Folder name: `osm_data_processing`
+**In this step, the OpenStreetMap data is processed and the map is resized to 1 pixel per 1 meter. Coastline is detected and start and goal points are set on the map.**
 
-`In this step, the OpenStreetMap data is processed and the map is resized to 1 pixel per 1 meter. Coastline is detected and start and goal points are set on the map.`
+### Folder name: `osm_data_processing`
 
 ```terminal
   osm_data_processing
@@ -189,9 +190,10 @@ Folder `input_data` should have the following structure:
 ### 2.1. Update config.yaml file
 
 * Set `resized_location_image` name for the resized map from the previous step. It is saved in the `results` folder for further steps
-* Disable the cost map generation by setting `cost_map` to `False`
 * Set `custom_start_goal` to `True` if you want to choose the start and goal points with a mouse click on the map or `False` if you want to add start and goal points manually in the config.yaml file
     * If `custom_start_goal` is set to `False`, set the `start_latitude`, `start_longitude`, `goal_latitude`, and `goal_longitude` in the config.yaml file. You can get the coordinates from the [OpenStreetMap](https://www.openstreetmap.org/#map=15/45.2300/14.5868), [Google Maps](https://www.google.com/maps/@45.2353117,14.5923406,14.61z?entry=ttu), etc.
+
+**Disable the cost map generation by setting `cost_map` to `False` in the `config.yaml` file. This step is used only for the path planning algorithms performance testing. The cost map is generated in Step 4 by setting `cost_map` to `True` and it is used for the path interpolation and optimization from Step 5!**
 
 The example of the config.yaml file for the location `voz`:
 ```yaml
@@ -218,17 +220,18 @@ goal_longitude: 14.583173
 Run the following command in the folder `osm_data_processing` to generate a map, detect the coastline and set the start and goal points on the map
 
  ```terminal
-  python3 main.py
-  ```
+python3 main.py
+```
 
 ### 2.2.1. Check the results
 
 * the map is resized to 1 $pixel$ per 1 $meter^2$
 * coastline is marked with a light blue color
-* the start is marked with a green circle and the goal with a blue X
-* axis are displayed in geographical coordinates
-* longitude and latitude of the grid the start and goal points are displayed in legend
-* geolocation data marked in the map should be the same as geolocation data in the OpenStreetMap, Google Maps, etc.
+* the start is marked with a blue circle and the goal with a blue X
+* axis are displayed in geographical coordinates in format dms (degrees, minutes, seconds)
+* longitude and latitude representation of the start and goal points are displayed in legend
+* If the `cost_map` is set to `False`, the cost map is not generated and the zones are not marked on the map
+* geolocation data marked in the map should be the same as geolocation data in the [OpenStreetMap](https://www.openstreetmap.org/#map=15/45.2300/14.5868), [Google Maps](https://www.google.com/maps/@45.2353117,14.5923406,14.61z?entry=ttu), etc
 
 **Example of the map with start and goal points hardcoded in the config.yaml file:**
 
@@ -243,7 +246,9 @@ Figure 3: Example of the map with start and goal points
 
 ## Step 3 : Path planning algorithms testing
 
-Folder name: `test_algorithm`
+**In this step, path planning algorithms are tested on the map with the start and goal points set in the previous step. This step is used for testing path planning algorithms from the PythonRobotics repository and comparing the results in order to choose the best path planning algorithm for the further steps**
+
+### Folder name: `test_algorithm`
 
 ```terminal
   test_algorithm
@@ -261,13 +266,12 @@ Folder name: `test_algorithm`
     ├── plot.py
     ├── test.py
     └── main.py
-
 ```
 
 * `main.py` - main file for testing path planning algorithms and runs following files:
-    * `test.py` - file for testing path planning algorithms and runs the algorithms from the `algorithms` folder
-    * `algorithms_class.py` - class for path planning algorithms
-    * `plot.py` - file for plotting the results of the path planning algorithms on the map and table with the result runtime and path length in meters
+* `test.py` - file for testing path planning algorithms and runs the algorithms from the `algorithms` folder
+* `algorithms_class.py` - class for path planning algorithms
+* `plot.py` - file for plotting the results of the path planning algorithms on the map and table with the result runtime and path length in meters
 
 ### 3.1. Update config.yaml file
 

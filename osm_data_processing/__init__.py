@@ -1,0 +1,6 @@
+# __init__.py
+
+import osm_data_processing.detect_coast
+import osm_data_processing.process_osm_data
+import osm_data_processing.set_start_goal
+import osm_data_processing.main

@@ -12,9 +12,9 @@ from pathlib import Path
 import yaml
 import sys
 import os
-from detect_coast import detect_coastline, zones_from_coast
-from process_osm_data import process_osm_data, resize_image 
-from set_start_goal import set_start_goal
+from osm_data_processing.detect_coast import detect_coastline, zones_from_coast
+from osm_data_processing.process_osm_data import process_osm_data, resize_image 
+from osm_data_processing.set_start_goal import set_start_goal
 
 import pickle 
 

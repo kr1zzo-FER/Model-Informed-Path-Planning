@@ -14,8 +14,8 @@ from matplotlib.backend_bases import MouseButton
 import sys
 from pathlib import Path
 from matplotlib.lines import Line2D
-from detect_coast import detect_coast
-from process_osm_data import deg_to_dms, gps_to_pixel, prepare_image_to_plot
+from osm_data_processing.detect_coast import detect_coast_points
+from osm_data_processing.process_osm_data import deg_to_dms, gps_to_pixel, prepare_image_to_plot
 
 root = Path(__file__).resolve().parents[1]
 
@@ -43,7 +43,7 @@ def onclick(event, image_path, grid_size, coordinates, size_x, size_y, binary_pa
         if counter % 2 != 0:
             x_data = int(round(event.xdata/grid_size)*grid_size)
             y_data = int(round(event.ydata/grid_size)*grid_size)
-            if detect_coast(image_path,x_data, y_data):
+            if detect_coast_points(image_path,x_data, y_data):
                 print("Start position is not set in the sea! Choose another position")
                 return
             counter += 1
@@ -65,7 +65,7 @@ def onclick(event, image_path, grid_size, coordinates, size_x, size_y, binary_pa
 
             x_data = int(round(event.xdata/grid_size)*grid_size)
             y_data = int(round(event.ydata/grid_size)*grid_size)
-            if detect_coast(image_path,x_data, y_data):
+            if detect_coast_points(image_path,x_data, y_data):
                 print("Goal position is not set in the sea! Choose another position")
                 return
             counter += 1
