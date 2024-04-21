@@ -325,7 +325,7 @@ Run for plotting the results:
 ```
 
 
-### 3.2.3. Check the results
+### 3.3. Check the results
 
 * Results are saved in the `results` folder with the name `result_image` and `table_name`
 
@@ -415,7 +415,29 @@ yellow_cost : 5
 green_cost : 2
 ```
 
+### 5.n. Check the results
 
+* Results are saved in the `results` folder with the name `result_costmap_name` and `table_costmap_table`
+
+
+<p align="center">
+
+<img src="assets/example_cm_path.png" alt="drawing" width="600"/>
+
+<p align="center">
+<em>
+Figure 7: Example of the cost map with the D* lite results
+</em>
+</p>
+
+<p align="center">
+
+<img src="assets/example_cm_table.png" alt="drawing" width="500"/>
+<p align="center">
+<em>
+Figure 8: Example of the table with the cost values, runtime results and path length
+<em>
+</p>
 
 ## Step 6 : Path interpolation and optimization
 
