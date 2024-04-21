@@ -200,14 +200,27 @@ class AdvancedAlgorithms(Algorithms):
     
     def __init__(self, start, goal, obstacles, grid_size, robot_radius,dimensions, red_zone:list, yellow_zone:list, green_zone:list):
         super().__init__(start, goal, obstacles, grid_size, robot_radius, dimensions)
-        self.redx = red_zone[0]
-        self.redy = red_zone[1]
-        self.yellowx = yellow_zone[0]
-        self.yellowy = yellow_zone[1]
-        self.greenx = green_zone[0]
-        self.greeny = green_zone[1]
+        self.redx = self.get_redx(red_zone)
+        self.redy = self.get_redy(red_zone)
+        self.yellowx = self.get_yellowx(yellow_zone)
+        self.yellowy = self.get_yellowy(yellow_zone)
+        self.greenx = self.get_greenx(green_zone)
+        self.greeny = self.get_greeny(green_zone)
         
-
+        
+    def get_redx(self,red_zone):
+        return [red[0] for red in red_zone]
+    def get_redy(self,red_zone):
+        return [red[1] for red in red_zone]
+    def get_yellowx(self,yellow_zone):
+        return [yellow[0] for yellow in yellow_zone]
+    def get_yellowy(self,yellow_zone):
+        return [yellow[1] for yellow in yellow_zone]
+    def get_greenx(self,green_zone):
+        return [green[0] for green in green_zone]
+    def get_greeny(self,green_zone):
+        return [green[1] for green in green_zone]
+    
     def d_star_lite_advanced(self,red_cost, yellow_cost, green_cost, q : mp.Queue = []):
         print(f"\nD* lite advanced calculation started[r:{red_cost},y:{yellow_cost},g:{green_cost}]")
         spoofed_ox = [[], [], [], []]

@@ -33,10 +33,13 @@ def load_data():
         result_image = config["result_image"]
         result_costmap_name = config["result_costmap_name"]
         result_costmap_table = config["result_costmap_table"]
+        test_parameters = config["test_parameters"]
 
     image_path = root / "results" / image_name
     result_image_path = root / "results" / result_image
     result_table_path = root / "results" / table_name
+    result_costmap_name = root / "results" / result_costmap_name
+    result_costmap_table = root / "results" / result_costmap_table
 
     with open(binary_path/"sx", "rb") as f:
         sx = pickle.load(f)
@@ -80,4 +83,4 @@ def load_data():
     goal = [gx, gy]
     obstacles = [ox, oy]
 
-    return binary_path, start, goal, obstacles, coordinates, coast_points, red_zone, yellow_zone, green_zone, grid_size, robot_radius, red_cost, yellow_cost, green_cost, dimensions, test_algorithm, plot_alg, thread_enable, cost_map, image_path, result_image_path, result_table_path, result_costmap_name, result_costmap_table
+    return binary_path, start, goal, obstacles, coordinates, coast_points, red_zone, yellow_zone, green_zone, grid_size, robot_radius, red_cost, yellow_cost, green_cost, dimensions, test_algorithm, plot_alg, thread_enable, cost_map, image_path, result_image_path, result_table_path, result_costmap_name, result_costmap_table, test_parameters

@@ -18,13 +18,28 @@ from load_data import load_data
 
 root = Path(__file__).resolve().parents[1]
 
-sys.path.append(str(root))
-from osm_data_processing.process_osm_data import deg_to_dms, gps_to_pixel, prepare_image_to_plot
+sys.path.insert(0, str(root)+"/osm_data_processing")
 
+from process_osm_data import deg_to_dms, gps_to_pixel, prepare_image_to_plot
+
+
+
+def plot_table(rows, values, columns):
+        fig, ax = plt.subplots()
+        try:
+            # hide axes
+            fig.patch.set_visible(False)
+            ax.axis('off')
+            ax.axis('tight')
+            ax.table(cellText=values, colLabels=columns, rowLabels=rows, loc='center', cellLoc='center', colLoc='center')
+            fig.tight_layout()
+            plt.show(block = False)
+        except:
+            print("No enough data to plot table!")
+        return fig, ax, plt
 
 def plot_algorithms(plot_alg, binary_path, image_path, result_image_path, result_table_path,start, goal, coordinates, coast_points):
-
-    global root
+    global root, plt
 
     fig,ax = prepare_image_to_plot(image_path, coordinates, coast_points)
 
@@ -121,29 +136,18 @@ def plot_algorithms(plot_alg, binary_path, image_path, result_image_path, result
         pass
     
     columns = ['Runtime [s]', 'Distance [m]']
-    plot_table(result_table_path, rows, values, columns)
+    print(rows, values, columns)
 
+    fig, ax, plt = plot_table(rows, values, columns)
+
+    plt.savefig(result_table_path)
     plt.show()
 
     return
 
-def plot_table(result_table_path,rows, values, columns):
-        fig, ax = plt.subplots()
-        try:
-            # hide axes
-            fig.patch.set_visible(False)
-            ax.axis('off')
-            ax.axis('tight')
-            ax.table(cellText=values, colLabels=columns, rowLabels=rows, loc='center', cellLoc='center', colLoc='center')
-            fig.tight_layout()
-            plt.savefig(result_table_path)
-            plt.show(block = False)
-        except:
-            print("No enough data to plot table!")
-        return
-
-def plot_costmap(binary_path, image_path, start, goal, red_zone, yellow_zone, green_zone, red_cost, yellow_cost, green_cost,coordinates, coast_points):
-    global root
+def plot_costmap(binary_path, image_path, start, goal, red_zone, yellow_zone, green_zone, coordinates, coast_points, result_costmap_name, result_costmap_table):
+    
+    global root, plt
 
     legend_elements = []
 
@@ -158,49 +162,33 @@ def plot_costmap(binary_path, image_path, start, goal, red_zone, yellow_zone, gr
     plt.plot(gx, gy, "xk")
     plt.grid(True)
 
-    with open(binary_path/"d_star_lite_advanced_results", "rb") as f:
-        results = pickle.load(f)
-    name = results[0]
-    values  = results[3:]
-    plt.plot(results[1], results[2], "orange")
-    
-    legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f'D* Lite advanced\n(Red cost: {red_cost}\n Yellow cost: {yellow_cost}\nGreen cost: {green_cost})'))
-    
     for point in red_zone:
         ax.plot(point[0],point[1],".r", markersize=1)
     for point in yellow_zone:
         ax.plot(point[0],point[1],".y", markersize=1)
     for point in green_zone:
         ax.plot(point[0],point[1],".g", markersize=1)
-  
 
-def plot_from_binary():
-    global root
-
-    binary_path, start, goal, obstacles, coordinates, coast_points, red_zone, yellow_zone, green_zone, grid_size, robot_radius, red_cost, yellow_cost, green_cost, dimensions, test_algorithm, plot_alg, thread_enable, cost_map, image_path, result_image_path, result_table_path, result_costmap_name = load_data()
-
+    rows,values = [],[]
+    with open(binary_path/"d_star_lite_advanced_results", "rb") as f:
+        results = pickle.load(f)
+    name = [results[0]]
+    values = [[f"r:{results[1][0]} y:{results[1][1]} g:{results[1][2]}", results[4], results[5]]]
+    red_cost = results[1][0]
+    yellow_cost = results[1][1]
+    green_cost = results[1][2]
+    plt.plot(results[2], results[3], "blue")
     
-    if cost_map:
-            #cost_map_test(binary_path,start, goal, obstacles, red_zone, yellow_zone, green_zone, grid_size, robot_radius, red_cost, yellow_cost, green_cost, dimensions)
-            pass
-    else:
-        with open(binary_path/"rows", "rb") as f:
-            rows = pickle.load(f)
-
-        for row in rows:
-                with open(binary_path/f"{row}_results", "rb") as f:
-                    values = pickle.load(f)
-
-        plot_algorithms(plot_alg,binary_path, image_path, result_image_path, start, goal, coordinates, coast_points, rows, values)
-        
-        columns = ['Time [s]', 'Distance [m]']
-        plot_table(result_table_path, rows, values, columns)
-
-        plt.show()
-
+    legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f'D* Lite advanced\n(Red cost: {red_cost}\n Yellow cost: {yellow_cost}\nGreen cost: {green_cost})'))
     
-if __name__ == '__main__':
-    try:
-        plot_from_binary()
-    except KeyboardInterrupt:
-        sys.exit(0)
+    plt.savefig(result_costmap_name)
+    plt.show(block=False)
+    
+    columns = ['Cost values','Runtime [s]', 'Distance [m]']
+
+    fig,ax,plt = plot_table(name, values, columns)
+    plt.savefig(result_costmap_table)  
+    plt.show()
+
+    return
+    

@@ -123,15 +123,11 @@ def test_algorithms(binary_path,start, goal, obstacles,test_algorithm, grid_size
     
         
 
-def test_dstar_lite_costmap(start, goal, obstacles, grid_size, robot_radius,dimensions, red_zone, yellow_zone, green_zone):
+def test_dstar_lite_costmap(test_parameters, start, goal, obstacles, grid_size, robot_radius,dimensions, red_zone, yellow_zone, green_zone, red_cost, yellow_cost, green_cost):
 
-   
-    
     print(__file__ + " start!!")
     mp.set_start_method('spawn')
     queue = mp.Queue()
-
-    print(red_zone)
     
     algorithm = AdvancedAlgorithms(start, goal, obstacles, grid_size, robot_radius,dimensions, red_zone, yellow_zone, green_zone)
 
@@ -139,19 +135,28 @@ def test_dstar_lite_costmap(start, goal, obstacles, grid_size, robot_radius,dime
     
     tested = []
 
-    parameters_list = [i for i in range(1, 10)]
+    if test_parameters:
+
+        parameters_list = [i for i in range(1, 10)]
     
-    combinations = list(itertools.combinations(parameters_list, 3))
+        combinations = list(itertools.combinations(parameters_list, 3))
 
-    for combination in combinations:
+        for combination in combinations:
 
-        thread = mp.Process(target = algorithm.d_star_lite_advanced, args=(combination[0], combination[1], combination[2], queue,))
-        threads.append(thread)
+            thread = mp.Process(target = algorithm.d_star_lite_advanced, args=(combination[0], combination[1], combination[2], queue,))
+            threads.append(thread)
 
+        
+        for thread in threads:
+            thread.start()
+
+        for thread in threads:
+            tested.append(queue.get())
+            thread.join()
     
-    for thread in threads:
-        thread.start()
+    else:
+        result = algorithm.d_star_lite_advanced(red_cost, yellow_cost, green_cost)
 
-    for thread in threads:
-        tested.append(queue.get())
-        thread.join()
+        tested.append(result)
+    
+    return tested
