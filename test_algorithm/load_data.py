@@ -17,29 +17,62 @@ def load_data():
     global root
     binary_path = root / "binary_dump"
     
+    results_dictionary = {}
+
+    results_dictionary["binary_path"] = binary_path
+
     with open(root/"config.yaml", "r") as f:
         config = yaml.safe_load(f)
         test_algorithm = config["test_algorithm"]
+        results_dictionary["test_algorithm"] = test_algorithm
         plot_alg = config["plot_algorithms"]
+        results_dictionary["plot_algorithms"] = plot_alg
         grid_size = config["grid_size"]
+        results_dictionary["grid_size"] = grid_size
         robot_radius = config["robot_radius"]
+        results_dictionary["robot_radius"] = robot_radius
         thread_enable = config["thread_enable"]
+        results_dictionary["thread_enable"] = thread_enable
         red_cost = config["red_cost"]
+        results_dictionary["red_cost"] = red_cost
         yellow_cost = config["yellow_cost"]
+        results_dictionary["yellow_cost"] = yellow_cost
         green_cost = config["green_cost"]
+        results_dictionary["green_cost"] = green_cost
         cost_map = config["cost_map"]
+        results_dictionary["cost_map"] = cost_map
         table_name = config["table_name"]
+        results_dictionary["table_name"] = table_name
         image_name = config["resized_location_image"]
+        results_dictionary["image_name"] = image_name
         result_image = config["result_image"]
+        results_dictionary["result_image"] = result_image
         result_costmap_name = config["result_costmap_name"]
+        results_dictionary["result_costmap_name"] = result_costmap_name
         result_costmap_table = config["result_costmap_table"]
+        results_dictionary["result_costmap_table"] = result_costmap_table
         test_parameters = config["test_parameters"]
+        results_dictionary["test_parameters"] = test_parameters
+        max_boat_speed = config["max_boat_speed"]
+        results_dictionary["max_boat_speed"] = max_boat_speed
+        red_speed = config["red_speed"]
+        results_dictionary["red_speed"] = red_speed
+        yellow_speed = config["yellow_speed"]
+        results_dictionary["yellow_speed"] = yellow_speed
+        green_speed = config["green_speed"]
+        results_dictionary["green_speed"] = green_speed
 
     image_path = root / "results" / image_name
     result_image_path = root / "results" / result_image
     result_table_path = root / "results" / table_name
     result_costmap_name = root / "results" / result_costmap_name
     result_costmap_table = root / "results" / result_costmap_table
+
+    results_dictionary["image_path"] = image_path
+    results_dictionary["result_image_path"] = result_image_path
+    results_dictionary["result_table_path"] = result_table_path
+    results_dictionary["result_costmap_name"] = result_costmap_name
+    results_dictionary["result_costmap_table"] = result_costmap_table
 
     with open(binary_path/"sx", "rb") as f:
         sx = pickle.load(f)
@@ -83,4 +116,14 @@ def load_data():
     goal = [gx, gy]
     obstacles = [ox, oy]
 
-    return binary_path, start, goal, obstacles, coordinates, coast_points, red_zone, yellow_zone, green_zone, grid_size, robot_radius, red_cost, yellow_cost, green_cost, dimensions, test_algorithm, plot_alg, thread_enable, cost_map, image_path, result_image_path, result_table_path, result_costmap_name, result_costmap_table, test_parameters
+    results_dictionary["start"] = start
+    results_dictionary["goal"] = goal
+    results_dictionary["obstacles"] = obstacles
+    results_dictionary["coordinates"] = coordinates
+    results_dictionary["coast_points"] = coast_points
+    results_dictionary["red_zone"] = red_zone
+    results_dictionary["yellow_zone"] = yellow_zone
+    results_dictionary["green_zone"] = green_zone
+    results_dictionary["dimensions"] = dimensions
+
+    return results_dictionary

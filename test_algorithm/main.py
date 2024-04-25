@@ -14,12 +14,43 @@ from plot import plot_algorithms, plot_table, plot_costmap
 
 def main(test = True):
 
-    binary_path, start, goal, obstacles, coordinates, coast_points, red_zone, yellow_zone, green_zone, grid_size, robot_radius, red_cost, yellow_cost, green_cost, dimensions, test_algorithm, plot_alg, thread_enable, cost_map, image_path, result_image_path, result_table_path, result_costmap_name, result_costmap_table,  test_parameters = load_data()
+    dict = load_data()
+
+    cost_map = dict["cost_map"]
+    test_algorithm = dict["test_algorithm"]
+    plot_alg = dict["plot_algorithms"]
+    grid_size = dict["grid_size"]
+    robot_radius = dict["robot_radius"]
+    thread_enable = dict["thread_enable"]
+    red_cost = dict["red_cost"]
+    yellow_cost = dict["yellow_cost"]
+    green_cost = dict["green_cost"]
+    result_costmap_name = dict["result_costmap_name"]
+    result_costmap_table = dict["result_costmap_table"]
+    test_parameters = dict["test_parameters"]
+    start = dict["start"]
+    goal = dict["goal"]
+    obstacles = dict["obstacles"]
+    dimensions = dict["dimensions"]
+    red_zone = dict["red_zone"]
+    yellow_zone = dict["yellow_zone"]
+    green_zone = dict["green_zone"]
+    coordinates = dict["coordinates"]
+    coast_points = dict["coast_points"]
+    image_path = dict["image_path"]
+    result_image_path = dict["result_image_path"]
+    result_table_path = dict["result_table_path"]
+    binary_path = dict["binary_path"]
+    max_boat_speed = dict["max_boat_speed"]
+    red_speed = dict["red_speed"]
+    yellow_speed = dict["yellow_speed"]
+    green_speed = dict["green_speed"]
+
     
     if cost_map:
 
         if test:
-            results = test_dstar_lite_costmap(test_parameters,start, goal, obstacles, grid_size, robot_radius,dimensions, red_zone, yellow_zone, green_zone, red_cost, yellow_cost, green_cost)
+            results = test_dstar_lite_costmap(test_parameters,start, goal, obstacles, grid_size, robot_radius,dimensions, red_zone, yellow_zone, green_zone, red_cost, yellow_cost, green_cost, max_boat_speed, red_speed, yellow_speed, green_speed)
             
             for results in results:
                 with open(binary_path/f"d_star_lite_advanced_results", "wb") as f:
@@ -41,6 +72,6 @@ def main(test = True):
 
 if __name__ == '__main__':
     try:
-        main(False)
+        main(True)
     except KeyboardInterrupt:
         sys.exit(0)

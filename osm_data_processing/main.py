@@ -9,103 +9,113 @@ Copyright: © Faculty of Electrical Engineering and Computing, University of Zag
 """
 
 from pathlib import Path
-import yaml
 import sys
-import os
-from osm_data_processing.detect_coast import detect_coastline, zones_from_coast
-from osm_data_processing.process_osm_data import process_osm_data, resize_image 
-from osm_data_processing.set_start_goal import set_start_goal
-
 import pickle 
+from detect_coast import CoastProcessing
+from process_osm_data import PathParameters, OSMProcessing
+from set_start_goal import set_start_goal
+
 
 root = Path(__file__).resolve().parents[1]
+
+from get_yaml_data import LoadYAMLData
+
+
+def save_to_binary_file(data, file_name):
+    with open(file_name, "wb") as f:
+        pickle.dump(data, f)
 
 def main():
 
     # start program
     print("\n"+__file__+ " start!!")
+    
+    yaml_object = LoadYAMLData(root/"config.yaml")
 
-    # load configuration file
-    with open(root/"config.yaml", "r") as f:
-        config = yaml.safe_load(f)
-        image_name = config["location_image"]
-        image_save = config["resized_location_image"]
-        grid_size = int(config["grid_size"])
-        folder_name = config["location_folder"]
-        cost_map = config["cost_map"]
-        custom_start_goal = config["custom_start_goal"]
-        slatitude = config["start_latitude"]
-        slongitude = config["start_longitude"]
-        glatitude = config["goal_latitude"]
-        glongitude = config["goal_longitude"]
+    yaml_dict = yaml_object.load_data()
+
+    image_name = yaml_dict["image_name"]
+    image_save_path = yaml_dict["image_save"]
+    grid_size = yaml_dict["grid_size"]
+    cost_map = yaml_dict["cost_map"]
+    custom_start_goal = yaml_dict["custom_start_goal"]
+    slatitude = yaml_dict["start_latitude"]
+    slongitude = yaml_dict["start_longitude"]
+    glatitude = yaml_dict["goal_latitude"]
+    glongitude = yaml_dict["goal_longitude"]
+    binary_path = yaml_dict["binary_path"]
+    input_data = yaml_dict["input_data"]
+    results = yaml_dict["results"]
+    folder_name = yaml_dict["folder_name"]
     
     start_goal = [float(slatitude), float(slongitude), float(glatitude), float(glongitude)]
+
     
-    # paths to files, make new directories if they don't exist
-    binary_path = root / "binary_dump"
-    isExist = os.path.exists(binary_path)
-    if not isExist:
-        os.makedirs(binary_path)
-    results = root / "results"
-    isExist = os.path.exists(results)
-    if not isExist:
-        os.makedirs(results)
-    input_data = root / "input_data" / folder_name
+    osm_object = OSMProcessing(input_data/'osm_info.txt', grid_size, input_data/image_name)
 
-    # process OSM data - latitutde and longitude to meters
-    latlong, image_wh_meters = process_osm_data(input_data/'osm_info.txt')
-
-    # Save results in binary files
-    with open(binary_path/"coordinates", "wb") as f:
-        pickle.dump(latlong, f)
-
-    with open(binary_path/"image_width_height_m", "wb") as f:
-        pickle.dump(image_wh_meters, f)
-    
     # Resize image to 1 m^2 = 1 pixel
-    resized_image = resize_image(input_data/image_name,image_wh_meters)
-
+    resized_image = osm_object.get_resized_image()
     # save resized image
-    resized_image.save(results/image_save)
+    resized_image.save(results/image_save_path)
 
-    # detect edges
-    coast_points, image_size = detect_coastline(results/image_save, grid_size)
-            
-    # save obstacles to binary files
-    with open(binary_path/"coast_points", "wb") as f:
-        pickle.dump(coast_points, f)
-    with open(binary_path/"dimensions", "wb") as f:
-        pickle.dump(image_size, f)
+    ## CoastProcessing object
 
-    # Cost map zones
-    red_zone, yellow_zone, green_zone = [], [], []
+    coast_object = CoastProcessing(results/image_save_path, grid_size)
     
     if cost_map:
-        red_zone, yellow_zone,green_zone = zones_from_coast(coast_points, results/image_save, grid_size) 
-        #save zones to binary files
-        with open(binary_path/"red_zone", "wb") as f:
-            pickle.dump(red_zone, f)
-        with open(binary_path/"yellow_zone", "wb") as f:
-            pickle.dump(yellow_zone, f)
-        with open(binary_path/"green_zone", "wb") as f:
-            pickle.dump(green_zone, f)
-        
+        coast_points,image_size, red_zone, yellow_zone, green_zone, zones_dictionary = coast_object.zones_from_coast(24)
+        # save zones to binary files
+    else:
+        coast_points, image_size = coast_object.detect_coastline()
+        # save coast points to binary file
+        red_zone, yellow_zone, green_zone, zones_dictionary = [], [], [], {}
+
+    osm_object.set_coast_points(coast_points)
+    osm_object.set_zones(red_zone, yellow_zone, green_zone)
+
     # set start and goal positions
-    sx__pixel, sy__pixel, gx__pixel, gy__pixel = set_start_goal(results/image_save,binary_path,grid_size,image_wh_meters,latlong,custom_start_goal,start_goal,cost_map,coast_points,red_zone,yellow_zone, green_zone)
+    sx__pixel, sy__pixel, gx__pixel, gy__pixel = set_start_goal(osm_object,coast_object,binary_path,custom_start_goal, start_goal, cost_map)
 
-    #print(f"Start position for calculation: \n{sx__pixel},{sy__pixel}\n")
-    #print(f"Goal position for calculation: \n{gx__pixel},{gy__pixel}\n")
+    start = sx__pixel, sy__pixel
+    goal = gx__pixel, gy__pixel
 
-    # Save start and goal positions in binary files
-    with open(binary_path/"sx", "wb") as f:
-        pickle.dump(sx__pixel, f)
-    with open(binary_path/"sy", "wb") as f:
-        pickle.dump(sy__pixel, f)
+    path_object = PathParameters(start,goal, coast_points, red_zone, yellow_zone, green_zone, zones_dictionary, grid_size)
 
-    with open(binary_path/"gx", "wb") as f:
-        pickle.dump(gx__pixel, f)
-    with open(binary_path/"gy", "wb") as f:
-        pickle.dump(gy__pixel, f)
+    start_gps = [osm_object.pixel_to_gps(start[0],start[1])]
+    goal_gps = [osm_object.pixel_to_gps(goal[0],goal[1])]
+
+    coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps = [], [], [], []
+    zones_dictionary_gps = {}
+    for point in coast_points:
+        p = osm_object.pixel_to_gps(point[0],point[1])
+        coast_points_gps.append(p)
+    
+    for point in red_zone:
+        p = osm_object.pixel_to_gps(point[0],point[1])
+        red_zone_gps.append(p)
+
+    for point in yellow_zone:
+        p = osm_object.pixel_to_gps(point[0],point[1])
+        yellow_zone_gps.append(p)
+    
+    for point in green_zone:
+        p = osm_object.pixel_to_gps(point[0],point[1])
+        green_zone_gps.append(p)
+    
+    for key in zones_dictionary:
+        k = tuple(osm_object.pixel_to_gps(key[0],key[1]))
+        value = zones_dictionary[key]
+        zones_dictionary_gps[k] = value
+    
+    path_parameters = PathParameters(start_gps, goal_gps, coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, zones_dictionary, grid_size)
+    
+    # save path parameters to binary file
+    save_to_binary_file(osm_object, binary_path/f'osm_object_{folder_name}')
+
+    save_to_binary_file(path_parameters, binary_path/f'path_parameters_gps_{folder_name}')
+
+    save_to_binary_file(path_object, binary_path/f'path_parameters_{folder_name}')
+
     sys.exit(0)
     
 if __name__ == '__main__':

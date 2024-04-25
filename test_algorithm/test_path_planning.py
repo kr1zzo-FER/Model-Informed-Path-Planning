@@ -123,13 +123,13 @@ def test_algorithms(binary_path,start, goal, obstacles,test_algorithm, grid_size
     
         
 
-def test_dstar_lite_costmap(test_parameters, start, goal, obstacles, grid_size, robot_radius,dimensions, red_zone, yellow_zone, green_zone, red_cost, yellow_cost, green_cost):
+def test_dstar_lite_costmap(test_parameters, start, goal, obstacles, grid_size, robot_radius,dimensions, red_zone, yellow_zone, green_zone, red_cost, yellow_cost, green_cost, max_boat_speed, red_speed, yellow_speed, green_speed):
 
     print(__file__ + " start!!")
     mp.set_start_method('spawn')
     queue = mp.Queue()
     
-    algorithm = AdvancedAlgorithms(start, goal, obstacles, grid_size, robot_radius,dimensions, red_zone, yellow_zone, green_zone)
+    algorithm = AdvancedAlgorithms(start, goal, obstacles, grid_size, robot_radius,dimensions, red_zone, yellow_zone, green_zone, max_boat_speed, red_speed, yellow_speed, green_speed)
 
     threads = []    
     
