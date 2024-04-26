@@ -28,23 +28,50 @@ import datetime
 root = Path(__file__).resolve().parents[1]
 
 class Algorithms:
-    def __init__(self, start, goal, obstacles, grid_size, robot_radius, size):
+    def __init__(self, start, goal, obstacles, grid_size, robot_radius, size, red_zone:list, yellow_zone:list, green_zone:list, zones_dictionary:dict):
         self.sx = start[0]
         self.sy = start[1]
         self.gx = goal[0]
         self.gy = goal[1]
-        self.ox = obstacles[0]
-        self.oy = obstacles[1]
+        self.ox, self.oy = self.get_obstacles(obstacles)
         self.grid_size = grid_size
         self.robot_radius = robot_radius
         self.size_x = size[0]
         self.size_y = size[1]
+        self.redx = self.get_redx(red_zone)
+        self.redy = self.get_redy(red_zone)
+        self.yellowx = self.get_yellowx(yellow_zone)
+        self.yellowy = self.get_yellowy(yellow_zone)
+        self.greenx = self.get_greenx(green_zone)
+        self.greeny = self.get_greeny(green_zone)
+        self.red_zone = red_zone
+        self.yellow_zone = yellow_zone
+        self.green_zone = green_zone
         
+        
+        
+    def get_redx(self,red_zone):
+        return [red[0] for red in red_zone]
+    def get_redy(self,red_zone):
+        return [red[1] for red in red_zone]
+    def get_yellowx(self,yellow_zone):
+        return [yellow[0] for yellow in yellow_zone]
+    def get_yellowy(self,yellow_zone):
+        return [yellow[1] for yellow in yellow_zone]
+    def get_greenx(self,green_zone):
+        return [green[0] for green in green_zone]
+    def get_greeny(self,green_zone):
+        return [green[1] for green in green_zone]
+
+    
+    def get_obstacles(self,obstacles):
+        return [obstacle[0] for obstacle in obstacles], [obstacle[1] for obstacle in obstacles]
 
     def euclidean_distance(self,x1,y1,x2,y2):
         return math.sqrt((x1-x2)**2 + (y1-y2)**2)
 
     def a_star(self,q : mp.Queue = []):
+        print(self.ox)
         print("\nA* calculation started..")
         start_time = time.time()
         a_star = AStarPlanner(self.ox, self.oy, self.grid_size, self.robot_radius)
@@ -196,69 +223,6 @@ class Algorithms:
             q.put(result)
         else:
             return result
-
-class AdvancedAlgorithms(Algorithms):
-    
-    def __init__(self, start, goal, obstacles, grid_size, robot_radius,dimensions, red_zone:list, yellow_zone:list, green_zone:list, max_boat_speed, red_speed, yellow_speed, green_speed):
-        super().__init__(start, goal, obstacles, grid_size, robot_radius, dimensions)
-        self.redx = self.get_redx(red_zone)
-        self.redy = self.get_redy(red_zone)
-        self.yellowx = self.get_yellowx(yellow_zone)
-        self.yellowy = self.get_yellowy(yellow_zone)
-        self.greenx = self.get_greenx(green_zone)
-        self.greeny = self.get_greeny(green_zone)
-        self.red_zone = red_zone
-        self.yellow_zone = yellow_zone
-        self.green_zone = green_zone
-        self.max_boat_speed = max_boat_speed
-        self.red_speed = red_speed * 0.514444444 #m/s
-        self.yellow_speed = yellow_speed * 0.514444444
-        self.green_speed = green_speed * 0.514444444
-        
-        
-    def get_redx(self,red_zone):
-        return [red[0] for red in red_zone]
-    def get_redy(self,red_zone):
-        return [red[1] for red in red_zone]
-    def get_yellowx(self,yellow_zone):
-        return [yellow[0] for yellow in yellow_zone]
-    def get_yellowy(self,yellow_zone):
-        return [yellow[1] for yellow in yellow_zone]
-    def get_greenx(self,green_zone):
-        return [green[0] for green in green_zone]
-    def get_greeny(self,green_zone):
-        return [green[1] for green in green_zone]
-
-    def calculate_arrival_time(self,rx,ry):
-        arrival_time = 0
-        current_time = datetime.datetime.now()
-        print(f"\nCurrent time: {current_time}")
-        counter = 0
-        
-        for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:]):
-            print(x1,y1)
-            if [y1,x1] in self.red_zone:
-                print(x1,y1)
-                counter += 1
-                time_factor = self.red_speed
-            if [y1,x1] in self.yellow_zone:
-                print(x1,y1)
-                counter += 1
-                speed_factor = self.yellow_speed
-            if [y1,x1] in self.green_zone:
-                print(x1,y1)
-                counter += 1
-                speed_factor = self.green_speed
-            else:
-                speed_factor = self.max_boat_speed 
-
-            arrival_time += (self.euclidean_distance(x1, y1, x2, y2)/speed_factor)
-        
-        arrival_datetime = current_time + datetime.timedelta(seconds=arrival_time)
-
-        print(f"Arrival time: {arrival_datetime} Counter: {counter}")
-        print(f"Red,yellow,green points in path : {counter}\n")
-        return arrival_time,arrival_datetime
     
     def d_star_lite_advanced(self,red_cost, yellow_cost, green_cost, q : mp.Queue = []):
         print(f"\nD* lite advanced calculation started[r:{red_cost},y:{yellow_cost},g:{green_cost}]")
@@ -287,7 +251,7 @@ class AdvancedAlgorithms(Algorithms):
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
         distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        arrival_time, arrival_datetime = self.calculate_arrival_time(rx,ry)
+        #arrival_time, arrival_datetime = self.calculate_arrival_time(rx,ry)
         print(f"D* Lite advanced calculation finished")
         print(f"Function time: {function_time} Distance: {distance}\n")
         result = ["d_star_lite", [red_cost,yellow_cost,green_cost] ,rx,ry,function_time,distance]
@@ -295,5 +259,6 @@ class AdvancedAlgorithms(Algorithms):
             q.put(result)
         else:
             return result
+
 
     

@@ -49,8 +49,8 @@ class LoadYAMLData:
             results_dictionary["goal_latitude"] = glatitude
             glongitude = config["goal_longitude"]
             results_dictionary["goal_longitude"] = glongitude
-            test_algorithm = config["test_algorithm"]
-            results_dictionary["test_algorithm"] = test_algorithm
+            test_algorithms = config["test_algorithms"]
+            results_dictionary["test_algorithms"] = test_algorithms
             plot_alg = config["plot_algorithms"]
             results_dictionary["plot_algorithms"] = plot_alg
             robot_radius = config["robot_radius"]

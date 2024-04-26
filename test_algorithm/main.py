@@ -7,66 +7,75 @@ author: Enio Krizman (@kr1zzo)
 """
 import sys
 import pickle
-from test_path_planning import test_algorithms, test_dstar_lite_costmap
+from test_path_planning import TestAlgorithms, TestAlgorithmsAdvanced
 from load_data import load_data
-from plot import plot_algorithms, plot_table, plot_costmap
+from pathlib import Path
 
+root = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(root)+"/osm_data_processing")
+from get_yaml_data import LoadYAMLData
+
+
+
+def load_binary_data(file_name):
+    with open(file_name, "rb") as f:
+        data = pickle.load(f)
+    return data
 
 def main(test = True):
 
-    dict = load_data()
+    print("\n"+__file__+ " start!!")
 
-    cost_map = dict["cost_map"]
-    test_algorithm = dict["test_algorithm"]
-    plot_alg = dict["plot_algorithms"]
-    grid_size = dict["grid_size"]
-    robot_radius = dict["robot_radius"]
-    thread_enable = dict["thread_enable"]
-    red_cost = dict["red_cost"]
-    yellow_cost = dict["yellow_cost"]
-    green_cost = dict["green_cost"]
-    result_costmap_name = dict["result_costmap_name"]
-    result_costmap_table = dict["result_costmap_table"]
-    test_parameters = dict["test_parameters"]
-    start = dict["start"]
-    goal = dict["goal"]
-    obstacles = dict["obstacles"]
-    dimensions = dict["dimensions"]
-    red_zone = dict["red_zone"]
-    yellow_zone = dict["yellow_zone"]
-    green_zone = dict["green_zone"]
-    coordinates = dict["coordinates"]
-    coast_points = dict["coast_points"]
-    image_path = dict["image_path"]
-    result_image_path = dict["result_image_path"]
-    result_table_path = dict["result_table_path"]
-    binary_path = dict["binary_path"]
-    max_boat_speed = dict["max_boat_speed"]
-    red_speed = dict["red_speed"]
-    yellow_speed = dict["yellow_speed"]
-    green_speed = dict["green_speed"]
+    yaml_object = LoadYAMLData(root/"config.yaml")
 
+    yaml_dict = yaml_object.load_data()
+
+    folder_name = yaml_dict["folder_name"]
+    binary_path = yaml_dict["binary_path"]
+    test_algorithms = yaml_dict["test_algorithms"]
+    plot_algorithms = yaml_dict["plot_algorithms"]
+    cost_map = yaml_dict["cost_map"]
+    thread_enable = yaml_dict["thread_enable"]
+    red_cost = yaml_dict["red_cost"]
+    yellow_cost = yaml_dict["yellow_cost"]
+    green_cost = yaml_dict["green_cost"]
+    max_boat_speed = yaml_dict["max_boat_speed"]
+    red_speed = yaml_dict["red_speed"]
+    yellow_speed = yaml_dict["yellow_speed"]
+    green_speed = yaml_dict["green_speed"]
+    red_cost = yaml_dict["red_cost"]
+    yellow_cost = yaml_dict["yellow_cost"]
+    green_cost = yaml_dict["green_cost"]
+    test_parameters = yaml_dict["test_parameters"]
+
+    gps_data = load_binary_data(binary_path/f"path_parameters_gps_{folder_name}")
+    osm_object = load_binary_data(binary_path/f"osm_object_{folder_name}")
+    image = osm_object.get_resized_image()
+
+    start = gps_data.get_start()
+    goal = gps_data.get_goal()
+
+    coast_points = gps_data.get_coast_points()
+    red_zone, yellow_zone, green_zone, zones_dictionary = gps_data.get_zones()
+    coast_points = gps_data.get_coast_points()
+
+    test_algorithms = TestAlgorithms(start, goal, coast_points,thread_enable, binary_path, test_algorithms)
+    test_algorithms_adv = TestAlgorithmsAdvanced(start, goal, coast_points, thread_enable, binary_path,test_parameters, red_zone, yellow_zone, green_zone, zones_dictionary, max_boat_speed, red_speed, yellow_speed, green_speed)
     
-    if cost_map:
-
-        if test:
-            results = test_dstar_lite_costmap(test_parameters,start, goal, obstacles, grid_size, robot_radius,dimensions, red_zone, yellow_zone, green_zone, red_cost, yellow_cost, green_cost, max_boat_speed, red_speed, yellow_speed, green_speed)
-            
-            for results in results:
-                with open(binary_path/f"d_star_lite_advanced_results", "wb") as f:
-                    pickle.dump(results, f)
-
-        plot_costmap(binary_path, image_path, start, goal, red_zone, yellow_zone, green_zone, coordinates, coast_points, result_costmap_name, result_costmap_table)
-   
-    else:
-        if test:
-            tested_algorithms = test_algorithms(binary_path,start, goal, obstacles,test_algorithm, grid_size, robot_radius, thread_enable, dimensions)
-
+    if test:
+        if not cost_map:
+            tested_algorithms = test_algorithms.test_algorithms_path()
+            test_algorithms.path_visualization()
             for algorithm in tested_algorithms:
                 with open(binary_path/f"{algorithm[0]}_results", "wb") as f:
                     pickle.dump(algorithm, f)
+        else:
+            tested_algorithms_adv = test_algorithms_adv.test_algorithms_path(red_cost, yellow_cost, green_cost)
+            test_algorithms_adv.path_visualization(image)
 
-        plot_algorithms(plot_alg,binary_path, image_path, result_image_path,result_table_path, start, goal, coordinates, coast_points)
+        
+        
+
 
     sys.exit(0)
 

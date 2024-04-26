@@ -16,8 +16,8 @@ from pathlib import Path
 import sys
 from load_data import load_data
 
-root = Path(__file__).resolve().parents[1]
 
+root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root)+"/osm_data_processing")
 
 from process_osm_data import deg_to_dms, gps_to_pixel, prepare_image_to_plot
