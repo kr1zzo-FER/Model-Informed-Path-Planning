@@ -7,8 +7,7 @@ author: Enio Krizman (@kr1zzo)
 """
 import sys
 import pickle
-from test_path_planning import TestAlgorithms, TestAlgorithmsAdvanced
-from load_data import load_data
+from algorithms_test import TestAlgorithms
 from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
@@ -59,17 +58,19 @@ def main(test = True):
     red_zone, yellow_zone, green_zone, zones_dictionary = gps_data.get_zones()
     coast_points = gps_data.get_coast_points()
 
-    test_algorithms = TestAlgorithms(start, goal, coast_points,thread_enable, binary_path, test_algorithms)
-    test_algorithms_adv = TestAlgorithmsAdvanced(start, goal, coast_points, thread_enable, binary_path,test_parameters, red_zone, yellow_zone, green_zone, zones_dictionary, max_boat_speed, red_speed, yellow_speed, green_speed)
+    
+   
     
     if test:
         if not cost_map:
-            tested_algorithms = test_algorithms.test_algorithms_path()
+            test_algorithms = TestAlgorithms(start, goal, coast_points,thread_enable, binary_path, test_algorithms)
+            coast_points_tested = test_algorithms.get_coast_points_gps()
+            test_algorithms.test_algorithms_path()
             test_algorithms.path_visualization()
-            for algorithm in tested_algorithms:
-                with open(binary_path/f"{algorithm[0]}_results", "wb") as f:
-                    pickle.dump(algorithm, f)
+            #tested_algorithms = test_algorithms.test_algorithms_path()
+            #test_algorithms.path_visualization(image)
         else:
+            test_algorithms_adv = TestAlgorithmsAdvanced(start, goal, coast_points, thread_enable, binary_path, test_parameters, red_zone, yellow_zone, green_zone, zones_dictionary, max_boat_speed, red_speed, yellow_speed, green_speed)
             tested_algorithms_adv = test_algorithms_adv.test_algorithms_path(red_cost, yellow_cost, green_cost)
             test_algorithms_adv.path_visualization(image)
 
