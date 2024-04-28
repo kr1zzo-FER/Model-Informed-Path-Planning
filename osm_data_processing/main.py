@@ -116,6 +116,8 @@ def main():
 
     save_to_binary_file(path_object, binary_path/f'path_parameters_{folder_name}')
 
+    print(f"Data saved to {binary_path} folder.")
+
     sys.exit(0)
     
 if __name__ == '__main__':

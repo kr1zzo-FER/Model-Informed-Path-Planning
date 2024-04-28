@@ -47,6 +47,9 @@ class OSMProcessing:
     def get_resized_image(self):
         return self.image
     
+    def get_coordinates(self):  
+        return self.coordinates
+    
     def process_osm_data(self):
         # input : path to text file
 
