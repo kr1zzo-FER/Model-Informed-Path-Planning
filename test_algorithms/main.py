@@ -1,0 +1,56 @@
+"""
+
+Thread module for running the main functions of the project in parallel.
+
+author: Enio Krizman (@kr1zzo)
+
+"""
+import sys
+import pickle
+from algorithms_test import TestAlgorithms
+from pathlib import Path
+import yaml
+
+root = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(root)+"/osm_data_processing")
+
+def load_binary_data(file_name):
+    binary_path = root / "binary_dump"
+    with open(binary_path/file_name, "rb") as f:
+        data = pickle.load(f)
+    return data
+
+def save_binary_data(data, file_name):
+    binary_path = root / "binary_dump"
+    with open(binary_path/file_name, "wb") as f:
+        pickle.dump(data, f)
+
+def main(test = True):
+
+    print("\n"+__file__+ " start!!")
+
+    # yaml
+    with open("config_test.yaml", "r") as f:
+        config = yaml.safe_load(f)
+        input_binary_file = config["input_binary_file"]
+        output_binary_file = config["output_binary_file"]
+        test_algorithms = config["test_algorithms"]
+        thread_enable = config["thread_enable"]
+
+    gps_data = load_binary_data(input_binary_file)
+
+    print(gps_data)
+    test_algorithms = TestAlgorithms(gps_data, test_algorithms, thread_enable)
+    test_algorithms.test_algorithms_path()
+    publish_data = test_algorithms.get_publish_data()
+    print(publish_data)
+    save_binary_data(publish_data, output_binary_file)
+    test_algorithms.path_visualization()
+
+    sys.exit(0)
+
+if __name__ == '__main__':
+    try:
+        main(True)
+    except KeyboardInterrupt:
+        sys.exit(0)

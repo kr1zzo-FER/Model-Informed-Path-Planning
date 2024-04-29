@@ -29,6 +29,7 @@ from path_results import PathResults,PathResultsInternal
 from matplotlib import pyplot as plt
 from matplotlib.lines import Line2D
 import numpy as np
+import os
 
 root = Path(__file__).resolve().parents[1]
 
@@ -36,13 +37,16 @@ root = Path(__file__).resolve().parents[1]
 
 class TestAlgorithms(AlgorithmBase):
     
-    def __init__(self, start, goal, coast_points, thread_enable, binary_path, test_algorithms):
-        super().__init__(start, goal, coast_points, thread_enable, binary_path, test_algorithms)
+    def __init__(self, gps_data, test_algorithms, thread_enable):
+        super().__init__(gps_data)
         self.ox, self.oy = self.get_obstacles()
         self.sx, self.sy = self.start_m[0], self.start_m[1]
         self.gx, self.gy = self.goal_m[0], self.goal_m[1]
         self.publish_path_results = []
         self.internal_path_results = []
+        self.robot_radius = self.grid_size/2
+        self.test_algorithms = test_algorithms
+        self.thread_enable = thread_enable
         
     def get_obstacles(self):
         return [obstacle[0] for obstacle in self.coast_points_m], [obstacle[1] for obstacle in self.coast_points_m]
@@ -51,6 +55,9 @@ class TestAlgorithms(AlgorithmBase):
         return math.sqrt((x1-x2)**2 + (y1-y2)**2)
     
     def get_path_results(self):
+        return self.publish_path_results
+    
+    def get_publish_data(self):
         return self.publish_path_results
     
     def test_algorithms_path(self):
@@ -244,6 +251,8 @@ class TestAlgorithms(AlgorithmBase):
         sy = round(self.sy/self.grid_size)
         gx = round(self.gx/self.grid_size)
         gy = round(self.gy/self.grid_size)
+        print(f"Start: {sx,sy} Goal: {gx,gy}")
+        print(f"Coastline points: {len(ox_)}")
         m.set_obstacle([(i, j) for i, j in zip(ox_, oy_)])
         start = [int(sx), int(sy)]
         goal = [int(gx), int(gy)]
@@ -278,6 +287,8 @@ class TestAlgorithms(AlgorithmBase):
         sy = round(self.sy/self.grid_size)
         gx = round(self.gx/self.grid_size)
         gy = round(self.gy/self.grid_size)
+        print(f"Start: {sx,sy} Goal: {gx,gy}")
+        print(f"Coastline points: {len(ox_)}")
         start_time = time.time()
         dstarlite = DStarLite(ox_,oy_)
         dstarlite.main(Node(x=sx, y=sy), Node(x=gx, y=gy),
@@ -385,18 +396,25 @@ class TestAlgorithms(AlgorithmBase):
              #remove random color from colors list
             colors.remove(random_color)
 
+        results = "results_test"
+        
+        isExist = os.path.exists(results)
+        if not isExist:
+            os.makedirs(results)
+        else:
+            #delete content
+            os.system(f"rm -r {results}/*")
+
         plt.legend(handles=legend_elements, loc='upper right')
         plt.draw()
         plt.grid(True)
+        plt.savefig(f"{results}/path_visualization_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png")
         plt.show(block = False)
-
-        self.plot_table(rows, values, columns)
+        self.plot_table(rows, values, columns, results)
         plt.show()
         return
-
-        
     
-    def plot_table(self, rows, values, columns):
+    def plot_table(self, rows, values, columns, results):
         fig, ax = plt.subplots()
         try:
             # hide axes
@@ -405,6 +423,7 @@ class TestAlgorithms(AlgorithmBase):
             ax.axis('tight')
             ax.table(cellText=values, colLabels=columns, rowLabels=rows, loc='center', cellLoc='center', colLoc='center')
             fig.tight_layout()
+            plt.savefig(f"{results}/table_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png")
             plt.show(block = False)
         except:
             print("No enough data to plot table!")

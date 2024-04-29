@@ -1,0 +1,34 @@
+input_binary_file : "path_parameters_gps_voz2"
+output_binary_file : "path_test_results_gps_voz2"
+osm_object : "osm_object_voz2"
+
+#test and plot options
+# 1. a_star
+# 2. bidirectional_a_star
+# 3. dijkstra
+# 4. d_star
+# 5. d_star_lite
+# 6. breadth_first_search
+# 7. bidirectional_breadth_first_search
+# 8. depth_first_search
+# 9. greedy_best_first_search
+
+test_algorithms :
+- "d_star"
+- "d_star_lite"
+
+
+test:
+- "a_star"
+- "bidirectional_a_star"
+- "dijkstra"
+- "d_star"
+- "d_star_lite"
+- "breadth_first_search"
+- "bidirectional_breadth_first_search"
+- "greedy_best_first_search"
+
+thread_enable : True
+
+
+
