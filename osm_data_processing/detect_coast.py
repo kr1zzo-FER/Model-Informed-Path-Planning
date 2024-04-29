@@ -65,7 +65,7 @@ def detect_coastline(image_path, grid_size):
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
     # apply morphological operations to mask
-    mask = nd.binary_closing(mask, structure=np.ones((10,10)))
+    mask = nd.binary_closing(mask, structure=np.ones((20,20)))
 
     if show_mask:
         plt.imshow(mask)

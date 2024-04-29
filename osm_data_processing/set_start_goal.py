@@ -14,8 +14,8 @@ from matplotlib.backend_bases import MouseButton
 import sys
 from pathlib import Path
 from matplotlib.lines import Line2D
-from osm_data_processing.detect_coast import detect_coast_points
-from osm_data_processing.process_osm_data import deg_to_dms, gps_to_pixel, prepare_image_to_plot
+from detect_coast import detect_coast_points
+from process_osm_data import deg_to_dms, gps_to_pixel, prepare_image_to_plot
 
 root = Path(__file__).resolve().parents[1]
 

@@ -12,6 +12,7 @@ from load_data import load_data
 from plot import plot_algorithms, plot_table, plot_costmap
 
 
+
 def main(test = True):
 
     binary_path, start, goal, obstacles, coordinates, coast_points, red_zone, yellow_zone, green_zone, grid_size, robot_radius, red_cost, yellow_cost, green_cost, dimensions, test_algorithm, plot_alg, thread_enable, cost_map, image_path, result_image_path, result_table_path, result_costmap_name, result_costmap_table,  test_parameters = load_data()
@@ -29,6 +30,7 @@ def main(test = True):
    
     else:
         if test:
+            print("Testing algorithms...")
             tested_algorithms = test_algorithms(binary_path,start, goal, obstacles,test_algorithm, grid_size, robot_radius, thread_enable, dimensions)
 
             for algorithm in tested_algorithms:
@@ -41,6 +43,6 @@ def main(test = True):
 
 if __name__ == '__main__':
     try:
-        main(False)
+        main(True)
     except KeyboardInterrupt:
         sys.exit(0)

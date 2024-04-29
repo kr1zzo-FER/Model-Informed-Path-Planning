@@ -83,4 +83,6 @@ def load_data():
     goal = [gx, gy]
     obstacles = [ox, oy]
 
+    print(start)
+
     return binary_path, start, goal, obstacles, coordinates, coast_points, red_zone, yellow_zone, green_zone, grid_size, robot_radius, red_cost, yellow_cost, green_cost, dimensions, test_algorithm, plot_alg, thread_enable, cost_map, image_path, result_image_path, result_table_path, result_costmap_name, result_costmap_table, test_parameters

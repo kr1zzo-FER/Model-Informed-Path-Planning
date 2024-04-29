@@ -1,8 +1,8 @@
 ## Step 1: Download data from OpenStreetMap (optional)
 
 # Process OSM data
-location_folder : "voz2"
-location_image: "voz2.png"
+location_folder : "toulon"
+location_image: "toulon.png"
 
 
 ## Step 2 : Data extraction and processing from OpenStreetMap 
@@ -16,8 +16,8 @@ custom_start_goal : False
 cost_map : True
 
 # This is hardcoded start and goal position and applied only if custom_start_goal is False
-start_latitude : 45.234781
-start_longitude: 14.577538
+start_latitude : 43.097449
+start_longitude: 5.948776
 
 goal_latitude : 45.230241
 goal_longitude: 14.583173
