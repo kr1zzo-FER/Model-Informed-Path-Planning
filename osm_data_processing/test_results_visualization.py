@@ -21,33 +21,37 @@ def main():
         osm_data = pickle.load(f)
     
     with open(root/"binary_dump"/output_binary_file, "rb") as f:
-        tested_algorithms = pickle.load(f)
-
-    with open(root/"binary_dump"/input_binary_file, "rb") as f:
-        input_coast = pickle.load(f)
-
-    coast_points = input_coast.get_coast_points()
+        results = pickle.load(f)
 
     # gps coordinates to pixels
     fig, ax = osm_data.prepare_image_to_plot()
 
-    print(osm_data.get_coordinates())
-    legend_elements = []
-    colors = ['red', 'crimson', 'lime', 'cyan', 'blue', 'gold', 'yellow', 'green', 'purple', 'pink']
-
+    data = results["data"]
+    coast_points = data["coast_points"]
     for point in coast_points:
         point = osm_data.gps_to_pixel(point[0], point[1])
         ax.plot(point[0], point[1], 'ro', markersize=1)
-    
-    algorithm = tested_algorithms[0]
-    start_ = algorithm.get_start()
-    goal_ = algorithm.get_goal()
+    start_ = data["start"]
+    goal_ = data["goal"]
     start = osm_data.gps_to_pixel(start_[0][0], start_[0][1])
     goal = osm_data.gps_to_pixel(goal_[0][0], goal_[0][1])
     ax.plot(start[0], start[1], 'go', markersize=5)
     ax.plot(goal[0], goal[1], 'bo', markersize=5)
     legend_elements.append(Line2D([0], [0], marker='o', color='w', label=f'Start : {start_[0][0], start_[0][1]}', markerfacecolor='g', markersize=10))
     legend_elements.append(Line2D([0], [0], marker='o', color='w', label=f'Goal : {goal_[0][0], goal_[0][1]}', markerfacecolor='b', markersize=10))
+
+
+    
+
+    print(osm_data.get_coordinates())
+    legend_elements = []
+    colors = ['red', 'crimson', 'lime', 'cyan', 'blue', 'gold', 'yellow', 'green', 'purple', 'pink']
+
+    
+    
+    algorithm = results[0]
+   
+   
     
     for algorithm in tested_algorithms:
         random_color = colors[np.random.randint(0, len(colors))]

@@ -13,11 +13,11 @@ import math
 
 class AlgorithmBase():
 
-    def __init__(self,gps_data):
-        self.coast_points = gps_data.get_coast_points()
-        self.start = gps_data.get_start()
-        self.goal = gps_data.get_goal()
-        self.grid_size = gps_data.get_grid_size()
+    def __init__(self,start,goal,coast_points,grid_size):
+        self.coast_points = coast_points
+        self.start = start
+        self.goal = goal
+        self.grid_size = grid_size
         self.coordinates = self.get_coordinates()
         self.size_x = self.get_width()
         self.size_y = self.get_height()
@@ -62,7 +62,6 @@ class AlgorithmBase():
         max_y = max(self.coast_points, key = lambda x: x[1])[1]
 
         result = [min_y, min_x, max_y, max_x]
-        print(result)
         return result
 
     def get_width(self):

@@ -13,7 +13,7 @@ resized_location_image : "voz_resized2.png"
 custom_start_goal : False
 
 # Step 2 : False, Step 4 : True
-cost_map : False
+cost_map : True
 
 # This is hardcoded start and goal position and applied only if custom_start_goal is False
 start_latitude : 45.234781

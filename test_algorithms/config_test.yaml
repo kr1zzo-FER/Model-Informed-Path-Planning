@@ -1,5 +1,5 @@
-input_binary_file : "path_parameters_gps_voz2"
-output_binary_file : "path_test_results_gps_voz2"
+input_binary_file : "test_param_publisher_voz2"
+output_binary_file : "test_results_voz2"
 osm_object : "osm_object_voz2"
 
 #test and plot options
@@ -14,8 +14,15 @@ osm_object : "osm_object_voz2"
 # 9. greedy_best_first_search
 
 test_algorithms :
+- "a_star"
+- "bidirectional_a_star"
+- "dijkstra"
 - "d_star"
 - "d_star_lite"
+- "breadth_first_search"
+- "bidirectional_breadth_first_search"
+- "greedy_best_first_search"
+
 
 
 test:
@@ -28,7 +35,6 @@ test:
 - "bidirectional_breadth_first_search"
 - "greedy_best_first_search"
 
-thread_enable : True
-
+thread_enable : False
 
 

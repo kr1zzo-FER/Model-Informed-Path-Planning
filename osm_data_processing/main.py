@@ -14,12 +14,14 @@ import pickle
 from detect_coast import CoastProcessing
 from process_osm_data import PathParameters, OSMProcessing
 from set_start_goal import set_start_goal
-
+import datetime
+from matplotlib import pyplot as plt
 
 root = Path(__file__).resolve().parents[1]
 
 from get_yaml_data import LoadYAMLData
 
+show_results = True
 
 def save_to_binary_file(data, file_name):
     with open(file_name, "wb") as f:
@@ -63,60 +65,62 @@ def main():
     coast_object = CoastProcessing(results/image_save_path, grid_size)
     
     if cost_map:
-        coast_points,image_size, red_zone, yellow_zone, green_zone, zones_dictionary = coast_object.zones_from_coast(24)
+        zones_dictionary = coast_object.zones_from_coast(24)
+        osm_object.set_zones_dictionary(zones_dictionary)
         # save zones to binary files
+        zones_dictionary_gps = {}
+        for key in zones_dictionary:
+            k = tuple(osm_object.pixel_to_gps(key[0],key[1]))
+            value = zones_dictionary[key]
+            zones_dictionary_gps[k] = value
+        
     else:
         coast_points, image_size = coast_object.detect_coastline()
         # save coast points to binary file
-        red_zone, yellow_zone, green_zone, zones_dictionary = [], [], [], {}
+        osm_object.set_coast_points(coast_points)
+        coast_points_gps = []
+        for point in coast_points:
+            p = osm_object.pixel_to_gps(point[0],point[1])
+            coast_points_gps.append(p)
 
-    osm_object.set_coast_points(coast_points)
-    osm_object.set_zones(red_zone, yellow_zone, green_zone)
-
+    
     # set start and goal positions
     sx__pixel, sy__pixel, gx__pixel, gy__pixel = set_start_goal(osm_object,coast_object,binary_path,custom_start_goal, start_goal, cost_map)
 
     start = sx__pixel, sy__pixel
     goal = gx__pixel, gy__pixel
 
-    path_object = PathParameters(start,goal, coast_points, red_zone, yellow_zone, green_zone, zones_dictionary, grid_size)
-
     start_gps = [osm_object.pixel_to_gps(start[0],start[1])]
     goal_gps = [osm_object.pixel_to_gps(goal[0],goal[1])]
 
-    coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps = [], [], [], []
-    zones_dictionary_gps = {}
-    for point in coast_points:
-        p = osm_object.pixel_to_gps(point[0],point[1])
-        coast_points_gps.append(p)
-    
-    for point in red_zone:
-        p = osm_object.pixel_to_gps(point[0],point[1])
-        red_zone_gps.append(p)
+    test_dictionary = {}
+    test_dictionary["header"] = "Test data"
+    test_dictionary["time_stamp"] = f"{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
+    test_dictionary["data"] = {}
+    test_dictionary["data"]["start"] = start_gps
+    test_dictionary["data"]["goal"] = goal_gps
+    test_dictionary["data"]["grid_size"] = grid_size
 
-    for point in yellow_zone:
-        p = osm_object.pixel_to_gps(point[0],point[1])
-        yellow_zone_gps.append(p)
-    
-    for point in green_zone:
-        p = osm_object.pixel_to_gps(point[0],point[1])
-        green_zone_gps.append(p)
-    
-    for key in zones_dictionary:
-        k = tuple(osm_object.pixel_to_gps(key[0],key[1]))
-        value = zones_dictionary[key]
-        zones_dictionary_gps[k] = value
-    
-    path_parameters = PathParameters(start_gps, goal_gps, coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, zones_dictionary, grid_size)
-    
+    if cost_map:
+        test_dictionary["data"]["zones_dictionary"] = zones_dictionary_gps
+        save_to_binary_file(test_dictionary, binary_path/f'costmap_param_publisher_{folder_name}')
+    else:
+        test_dictionary["data"]["coast_points"] = coast_points_gps
+        save_to_binary_file(test_dictionary, binary_path/f'test_param_publisher_{folder_name}')
+
     # save path parameters to binary file
     save_to_binary_file(osm_object, binary_path/f'osm_object_{folder_name}')
 
-    save_to_binary_file(path_parameters, binary_path/f'path_parameters_gps_{folder_name}')
-
-    save_to_binary_file(path_object, binary_path/f'path_parameters_{folder_name}')
-
-    print(f"Data saved to {binary_path} folder.")
+    if show_results:
+        fig,ax = plt.subplots()
+        ax.plot(start[0],start[1],'cx')
+        ax.plot(goal[0],goal[1],'co')
+        if cost_map:
+            ax = osm_object.prepare_zones_to_plot(ax)
+        else:
+            ax = osm_object.prepare_coast_to_plot(ax)
+        plt.show()
+    
 
     sys.exit(0)
     

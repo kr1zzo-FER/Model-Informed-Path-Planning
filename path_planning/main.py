@@ -43,10 +43,10 @@ def main(test = True):
     data = test_data["data"]
     start = data["start"]
     goal = data["goal"]
-    coast_points = data["coast_points"]
+    zones_dictionary = data["zones_dictionary"]
     grid_size = data["grid_size"]
 
-    test_algorithms = TestAlgorithms(start,goal,coast_points,grid_size, test_algorithms, thread_enable)
+    test_algorithms = TestAlgorithms(start,goal,zones_dictionary,grid_size,test_algorithms, thread_enable)
     test_algorithms.test_algorithms_path()
     publish_data = test_algorithms.get_publish_data()
 

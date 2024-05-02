@@ -26,15 +26,11 @@ class OSMProcessing:
         self.original_image = Image.open(self.image_path)
         self.image = self.resize_image()
         self.coast_points = []
-        self.red_zone = []
-        self.yellow_zone = []
-        self.green_zone = []
-    
-    def set_zones(self, red_zone, yellow_zone, green_zone):
-        self.red_zone = red_zone
-        self.yellow_zone = yellow_zone
-        self.green_zone = green_zone
-    
+        self.zones_dictionary = {}
+
+    def set_zones_dictionary(self, zones_dictionary):
+        self.zones_dictionary = zones_dictionary
+
     def set_coast_points(self, coast_points):
         self.coast_points = coast_points
 
@@ -170,12 +166,15 @@ class OSMProcessing:
     
     def prepare_zones_to_plot(self, ax):
         # plot zones on image
-        for point in self.red_zone:
-            ax.plot(point[0],point[1], 'ro', markersize=0.1)
-        for point in self.yellow_zone:
-            ax.plot(point[0],point[1], 'yo', markersize=0.1)
-        for point in self.green_zone:
-            ax.plot(point[0],point[1], 'go', markersize=0.1)
+        for key, value in self.zones_dictionary.items():
+            if value == 'c':
+                ax.plot(key[0],key[1],'bo', markersize=0.1)
+            elif value == 'r':
+                ax.plot(key[0],key[1],'ro', markersize=0.1)
+            elif value == 'g':
+                ax.plot(key[0],key[1],'go', markersize=0.1)
+            elif value == 'y':
+                ax.plot(key[0],key[1],'yo', markersize=0.1)
         
         return ax
     
@@ -183,7 +182,6 @@ class OSMProcessing:
         # plot coast points on image
         for point in self.coast_points:
             ax.plot(point[0],point[1], 'bo', markersize=0.1)
-        
         return ax
 
     

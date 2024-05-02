@@ -153,6 +153,8 @@ class CoastProcessing:
             for i in range(1, 6):
                 red_distance = i*self.grid_size
                 red_directions = [(round(direction[0]/self.grid_size*red_distance)*self.grid_size,round(direction[1]/self.grid_size*red_distance)*self.grid_size) for direction in directions]
+                red_directions.append((1,0))
+                red_directions.append((1,0))
                 for direction in red_directions:
                     #print(point[0],point[1])
                     #print(direction[0],direction[1])
@@ -172,6 +174,8 @@ class CoastProcessing:
             for i in range(6, 16):
                 yellow_distance = i*self.grid_size
                 yellow_directions = [(round(direction[0]/self.grid_size*yellow_distance)*self.grid_size,round(direction[1]/self.grid_size*yellow_distance)*self.grid_size) for direction in directions]
+                yellow_directions.append((1,0))
+                yellow_directions.append((-1,0))
                 for direction in yellow_directions:
                     
                     x = point[0] + direction[0]
@@ -188,6 +192,8 @@ class CoastProcessing:
             for i in range(16, 26):
                 green_distance = i*self.grid_size
                 green_directions = [(round(direction[0]/self.grid_size*green_distance)*self.grid_size,round(direction[1]/self.grid_size*green_distance)*self.grid_size) for direction in directions]
+                green_directions.append((1,0))
+                green_directions.append((-1,0))
                 for direction in green_directions:
                     try:
                         x = point[0] + direction[0]
@@ -200,7 +206,7 @@ class CoastProcessing:
                         continue
                     if [x,y] not in green_zone and not mask[h-y,x] == 0 and [x,y] not in red_zone and [x,y] not in yellow_zone:
                         green_zone.append([x,y])
-        print("Detected {len(green_zone)} green zone points\n")
+        print(f"Detected {len(green_zone)} green zone points\n")
         
         end_time = time.time()
         print(f"Zones generated in {round(end_time-start_time,4)} seconds")
@@ -216,9 +222,6 @@ class CoastProcessing:
         for point in coast_points:
             zones_dictionary[tuple(point)] = "c"
         
-        self.red_zone = red_zone
-        self.yellow_zone = yellow_zone
-        self.green_zone = green_zone
         self.zones_dictionary = zones_dictionary
 
-        return coast_points,image_size, red_zone, yellow_zone, green_zone, zones_dictionary
+        return zones_dictionary

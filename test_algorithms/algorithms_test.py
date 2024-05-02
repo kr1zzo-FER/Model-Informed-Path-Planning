@@ -16,7 +16,6 @@ from algorithms.a_star import AStarPlanner
 from algorithms.dstar import Dstar, Map
 from algorithms.d_star_lite import DStarLite
 from algorithms.d_star_lite import Node
-from algorithms.d_star_lite_advanced import DStarLiteAdvanced
 from algorithms.dijkstra import Dijkstra
 from algorithms.bidirectional_a_star import BidirectionalAStarPlanner
 from algorithms.breadth_first_search import BreadthFirstSearchPlanner
@@ -37,16 +36,16 @@ root = Path(__file__).resolve().parents[1]
 
 class TestAlgorithms(AlgorithmBase):
     
-    def __init__(self, gps_data, test_algorithms, thread_enable):
-        super().__init__(gps_data)
+    def __init__(self, start,goal,coast_points,grid_size, test_algorithms, thread_enable):
+        super().__init__(start,goal,coast_points,grid_size)
         self.ox, self.oy = self.get_obstacles()
         self.sx, self.sy = self.start_m[0], self.start_m[1]
         self.gx, self.gy = self.goal_m[0], self.goal_m[1]
-        self.publish_path_results = []
-        self.internal_path_results = []
         self.robot_radius = self.grid_size/2
         self.test_algorithms = test_algorithms
         self.thread_enable = thread_enable
+        self.publish_path_results = []
+        self.internal_path_results = []
         
     def get_obstacles(self):
         return [obstacle[0] for obstacle in self.coast_points_m], [obstacle[1] for obstacle in self.coast_points_m]
@@ -77,7 +76,7 @@ class TestAlgorithms(AlgorithmBase):
                     thread1 = mp.Process(target = self.a_star, args=(queue,))
                     threads.append(thread1)
                 else:
-                    result = self.a_star()
+                    result, internal_result = self.a_star()
 
                     tested.append(result)
                     internal_tested.append(internal_result)
