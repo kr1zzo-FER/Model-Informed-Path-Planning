@@ -40,19 +40,28 @@ def main(test = True):
 
     # load data
     test_data = load_binary_data(input_binary_file)
+    print(test_data)
     data = test_data["data"]
     start = data["start"]
     goal = data["goal"]
     zones_dictionary = data["zones_dictionary"]
-    grid_size = data["grid_size"]
+    #zones_dictionary = data["zones_dictionary"]
+    grid_size = 10.0
+
+    print("Start: ", start) 
+    print("Goal: ", goal)
 
     test_algorithms = TestAlgorithms(start,goal,zones_dictionary,grid_size,test_algorithms, thread_enable)
     test_algorithms.test_algorithms_path()
     publish_data = test_algorithms.get_publish_data()
+    internal_data = test_algorithms.get_internal_path_results()
+    optimized_data = test_algorithms.optimize_path()
+    print(internal_data)
 
     test_data["results"] = publish_data
 
     save_binary_data(test_data, output_binary_file)
+    save_binary_data(internal_data, "internal_data")
     test_algorithms.path_visualization()
 
     sys.exit(0)

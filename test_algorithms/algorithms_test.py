@@ -13,6 +13,7 @@ import math
 from pathlib import Path
 import time
 from algorithms.a_star import AStarPlanner
+from algorithms.hybrid_a_star import hybrid_a_star_planning
 from algorithms.dstar import Dstar, Map
 from algorithms.d_star_lite import DStarLite
 from algorithms.d_star_lite import Node
@@ -92,7 +93,16 @@ class TestAlgorithms(AlgorithmBase):
                     tested.append(result)
                     internal_tested.append(internal_result)
                 
-                    
+            if test_algorithm == "hybrid_a_star":
+                if self.thread_enable:
+                    thread2 = mp.Process(target = self.hybrid_a_star, args=(queue,))
+                    threads.append(thread2)
+                else:
+                    result, internal_result = self.hybrid_a_star()
+
+                    tested.append(result)
+                    internal_tested.append(internal_result)
+                
 
             if test_algorithm == "dijkstra":
                 if self.thread_enable:
@@ -215,6 +225,27 @@ class TestAlgorithms(AlgorithmBase):
         path_points_gps = [self.pixel_to_gps(point[0],point[1]) for point in path_points]
         result = PathResults("Bidirectional A*",self.start,self.goal,path_points_gps,distance, 0.0)
         internal_result = PathResultsInternal("Bidirectional A*",self.start_m,self.goal_m,path_points,distance,0.0,function_time)
+        if q:
+            q.put([result, internal_result])
+        else:
+            return result, internal_result
+        
+    def hybrid_a_star(self,q : mp.Queue = []):
+        print("\nHybrid A* calculation started..")
+        start_time = time.time()
+        start = [self.start_m[0], self.start_m[1], np.deg2rad(90.0)]
+        goal = [self.goal_m[0], self.goal_m[1], np.deg2rad(90.0)]
+        path = hybrid_a_star_planning(start, goal, self.ox, self.oy, 2.0, np.deg2rad(15.0))
+        rx, ry = path.x_list, path.y_list
+        end_time = time.time()
+        function_time = round(end_time - start_time, 5)
+        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
+        print("Hybrid A* calculation finished : ")
+        print(f"Function time: {function_time} Distance: {distance}\n")
+        path_points = [(rx[i],ry[i]) for i in range(len(rx))]
+        path_points_gps = [self.pixel_to_gps(point[0],point[1]) for point in path_points]
+        result = PathResults("Hybrid A*",self.start,self.goal,path_points_gps,distance, 0.0)
+        internal_result = PathResultsInternal("Hybrid A*",self.start_m,self.goal_m,path_points,distance,0.0,function_time)
         if q:
             q.put([result, internal_result])
         else:

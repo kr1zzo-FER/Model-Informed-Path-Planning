@@ -43,7 +43,7 @@ class State:
         *: closed state
         s: current state
         """
-        if state not in ["s", ".", "#", "e", "*"]:
+        if state not in ["s", ".", "#", "e", "*", "g", "r", "y"]:
             return
         self.state = state
 
@@ -77,12 +77,17 @@ class Map:
                 state_list.append(self.map[state.x + i][state.y + j])
         return state_list
 
-    def set_obstacle(self, point_list):
-        for x, y in point_list:
-            if x < 0 or x >= self.row or y < 0 or y >= self.col:
-                continue
-
-            self.map[x][y].set_state("#")
+    def set_obstacle(self, zones_dictionary):
+        for key, value in zones_dictionary.items():
+            x, y = key[0], key[1]
+            if value == "c":
+                self.map[x][y].set_state("#")
+            if value == "r":
+                self.map[x][y].set_state("r")
+            if value == "y":
+                self.map[x][y].set_state("y")
+            if value == "g":
+                self.map[x][y].set_state("g")
 
 
 class Dstar:
@@ -183,7 +188,7 @@ class Dstar:
             if show_animation:
                 plt.plot(rx, ry, "-r")
                 plt.pause(0.01)
-            if tmp.parent.state == "#":
+            if tmp.parent.state == "#" or tmp.parent.state == "r" or tmp.parent.state == "y" or tmp.parent.state == "g":
                 self.modify(tmp)
                 continue
             tmp = tmp.parent

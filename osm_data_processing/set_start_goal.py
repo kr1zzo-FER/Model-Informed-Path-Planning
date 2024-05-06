@@ -156,3 +156,10 @@ def set_start_goal(path_object,coast_object,binary_path,custom_start_goal, start
         plt.show()
 
     return sx__pixel, sy__pixel, gx__pixel, gy__pixel
+
+def main():
+     # set start and goal positions
+        sx__pixel, sy__pixel, gx__pixel, gy__pixel = set_start_goal(osm_object,coast_object,binary_path,custom_start_goal, start_goal, cost_map)
+
+        start = sx__pixel, sy__pixel
+        goal = gx__pixel, gy__pixel

@@ -3,4 +3,4 @@
 import detect_coast
 import process_osm_data
 import set_start_goal
-import main
+import map_process

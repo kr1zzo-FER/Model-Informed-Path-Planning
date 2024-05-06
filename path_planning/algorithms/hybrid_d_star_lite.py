@@ -61,6 +61,7 @@ class DStarLite:
         #if value == c, find min value key
         self.zones = zones
         self.x_min_world, self.y_min_world, self.x_max_world, self.y_max_world= self.get_minmax_world()
+        self.x_min_global, self.y_min_global , self.x_max_global, self.y_max_global = self.get_minmax_global()
         self.start = Node(start, 's')
         self.goal = Node(goal, 'g')
         self.U = list()  # Would normally be a priority queue
@@ -89,6 +90,18 @@ class DStarLite:
         for key, value in self.zones.items():
             if value == "c":
                 obstacle_list.append(key)
+
+        x_min = min(obstacle_list, key=lambda x: x[0])[0]
+        y_min = min(obstacle_list, key=lambda x: x[1])[1]
+        x_max = max(obstacle_list, key=lambda x: x[0])[0]
+        y_max = max(obstacle_list, key=lambda x: x[1])[1]
+
+        return x_min, y_min, x_max, y_max
+    
+    def get_minmax_global(self):
+        obstacle_list = []
+        for key, value in self.zones.items():
+            obstacle_list.append(key)
 
         x_min = min(obstacle_list, key=lambda x: x[0])[0]
         y_min = min(obstacle_list, key=lambda x: x[1])[1]
@@ -243,8 +256,8 @@ class DStarLite:
         pathy = []
         last = self.start
         self.compute_shortest_path()
-        pathx.append(self.start.x + self.x_min_world)
-        pathy.append(self.start.y + self.y_min_world)
+        pathx.append(self.start.x + self.x_min_global)
+        pathy.append(self.start.y + self.y_min_global)
 
 
         while not compare_coordinates(self.goal, self.start):
@@ -255,8 +268,8 @@ class DStarLite:
                              key=lambda sprime:
                              self.c(self.start, sprime) +
                              self.g[sprime.x][sprime.y])
-            pathx.append(self.start.x + self.x_min_world)
-            pathy.append(self.start.y + self.y_min_world)
+            pathx.append(self.start.x + self.x_min_global)
+            pathy.append(self.start.y + self.y_min_global)
 
 
         for px in pathx:

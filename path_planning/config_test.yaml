@@ -1,6 +1,8 @@
-input_binary_file : "costmap_param_publisher_voz2"
-output_binary_file : "costmap_results_publisher_voz2"
+input_binary_file : "publish_map_krk"
+output_binary_file : "costmap_results_publisher_krk"
 osm_object : "osm_object_voz2"
+
+custom_start_goal : False
 
 test_algorithms :
 - "d_star_lite"

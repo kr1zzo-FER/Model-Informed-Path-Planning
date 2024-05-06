@@ -1,0 +1,29 @@
+## Step 1: Download data from OpenStreetMap (optional)
+
+# Process OSM data
+locations_folder : 
+#- "omisalj"
+#- "selehovica"
+#- "sv_marko"
+- "voz"
+- "lokvisce"
+#- "rudine"
+
+save_file : krk
+
+custom_start_goal : False
+
+# Step 2 : False, Step 4 : True
+cost_map : True
+
+# This is hardcoded start and goal position and applied only if custom_start_goal is False
+start_latitude : 45.234781
+start_longitude: 14.577538
+
+goal_latitude : 45.230241
+goal_longitude: 14.583173
+
+grid_size : 10.0  # [m]
+
+
+

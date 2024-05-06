@@ -22,6 +22,7 @@ from matplotlib import pyplot as plt
 from matplotlib.lines import Line2D
 import numpy as np
 import os
+from curve_generation.path_optimization import PathOptimization
 
 root = Path(__file__).resolve().parents[1]
 
@@ -38,6 +39,8 @@ class TestAlgorithms(AlgorithmBase):
         self.thread_enable = thread_enable
         self.publish_path_results = []
         self.internal_path_results = []
+        self.internal_points = []
+        self.internal_optimized_points = []
 
     def get_obstacles(self):
         return [obstacle[0] for obstacle in self.coast_points_m], [obstacle[1] for obstacle in self.coast_points_m]
@@ -47,6 +50,9 @@ class TestAlgorithms(AlgorithmBase):
     
     def get_path_results(self):
         return self.publish_path_results
+    
+    def get_internal_path_results(self):
+        return self.internal_points
     
     def get_publish_data(self):
         return self.publish_path_results
@@ -59,6 +65,7 @@ class TestAlgorithms(AlgorithmBase):
         
         tested = []
         internal_tested = []
+        internal_path = []
     
         start_time = time.time()
 
@@ -84,7 +91,8 @@ class TestAlgorithms(AlgorithmBase):
 
                     tested.append(result)
                     internal_tested.append(internal_result)
-                
+        
+
 
         if self.thread_enable:
             for thread in threads:
@@ -94,6 +102,7 @@ class TestAlgorithms(AlgorithmBase):
                 queue_res = queue.get()
                 tested.append(queue_res[0])
                 internal_tested.append(queue_res[1])
+                internal_path = queue_res[2]
                 thread.join()
 
         end_time = time.time()
@@ -102,28 +111,24 @@ class TestAlgorithms(AlgorithmBase):
 
         self.publish_path_results = tested
         self.internal_path_results = internal_tested
+        self.internal_points = internal_path
 
         return tested
-
-  
+    
+    def optimize_path(self):
+        path_optimization = PathOptimization(self.internal_points)
+        path_optimization.optimize_path()
+        optimized_path = path_optimization.get_path()
+        self.internal_optimized_points = optimized_path
+        return optimized_path
 
         
     def d_star(self,q : mp.Queue = []):
         print("\nD* calculation started")
         m = Map(round(self.size_x/self.grid_size), round(self.size_y/self.grid_size))
-        ox_ = [round(ox/self.grid_size) for ox in self.ox]
-        oy_ = [round(oy/self.grid_size) for oy in self.oy]
-        sx = round(self.sx/self.grid_size)
-        sy = round(self.sy/self.grid_size)
-        gx = round(self.gx/self.grid_size)
-        gy = round(self.gy/self.grid_size)
-        print(f"Start: {sx,sy} Goal: {gx,gy}")
-        print(f"Coastline points: {len(ox_)}")
-        m.set_obstacle([(i, j) for i, j in zip(ox_, oy_)])
-        start = [int(sx), int(sy)]
-        goal = [int(gx), int(gy)]
-        start = m.map[start[0]][start[1]]
-        end = m.map[goal[0]][goal[1]]
+        m.set_obstacle(self.zones_m)
+        start = m.map[self.start_m[0]][self.start_m[1]]
+        end = m.map[self.goal_m[0]][self.goal_m[1]]
         start_time = time.time()
         dstar = Dstar(m)
         rx, ry = dstar.run(start, end)
@@ -163,9 +168,9 @@ class TestAlgorithms(AlgorithmBase):
         result = PathResults("D* Lite",self.start,self.goal,path_points_gps,distance,function_time)
         internal_result = PathResultsInternal("D* Lite",self.start_m,self.goal_m,path_points,distance,0.0,function_time)
         if q:
-            q.put([result, internal_result])
+            q.put([result, internal_result, path_points])
         else:
-            return result, internal_result
+            return result, internal_result, path_points
 
     
     
@@ -194,10 +199,16 @@ class TestAlgorithms(AlgorithmBase):
                 rx.append(point[0])
                 ry.append(point[1])
             random_color = colors[np.random.randint(0, len(colors))]
-            plt.plot(rx,ry, f"{random_color}", markersize=1)
+            ax.plot(rx,ry, f"{random_color}", markersize=1)
             legend_elements.append(Line2D([0], [0], color=random_color, lw=4, label=result.get_algorithm_name()))
              #remove random color from colors list
             colors.remove(random_color)
+        rx,ry = [], []
+        for point in self.internal_optimized_points:
+            rx.append(point[0])
+            ry.append(point[1])
+        
+        ax.plot(rx,ry, 'black', markersize=1)
 
         results = "results_test"
         

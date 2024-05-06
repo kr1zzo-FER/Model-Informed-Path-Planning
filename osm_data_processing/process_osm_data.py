@@ -100,8 +100,8 @@ class OSMProcessing:
         dLon = lon2 * 3.141592653589793 / 180 - lon1 * 3.141592653589793 / 180
         a = (dLat/2) * (dLat/2) + math.cos(lat1 * 3.141592653589793 / 180) * math.cos(lat2 * 3.141592653589793 / 180) * (dLon/2) * (dLon/2)
         c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
-        d = R * c
-        return d * 1000 # meters
+        d = R * c * 1000
+        return d 
     
     def deg_to_dms(self,deg):
         # convert degrees to dms for plot format
@@ -182,34 +182,5 @@ class OSMProcessing:
         # plot coast points on image
         for point in self.coast_points:
             ax.plot(point[0],point[1], 'bo', markersize=0.1)
-        return ax
-
+        return ax   
     
-class PathParameters():
-
-    def __init__(self, start, goal, coast_points, red_zone, yellow_zone, green_zone, zones_dictionary, grid_size):
-        self.start = start
-        self.goal = goal
-        self.coast_points = coast_points
-        self.red_zone = red_zone
-        self.yellow_zone = yellow_zone
-        self.green_zone = green_zone
-        self.zones_dictionary = zones_dictionary
-        self.grid_size = grid_size
-
-    def get_start(self):
-        return self.start
-    
-    def get_goal(self):
-        return self.goal
-    
-    def get_coast_points(self):
-        return self.coast_points
-    
-    def get_zones(self):
-        return self.red_zone, self.yellow_zone, self.green_zone, self.zones_dictionary
-    
-    def get_grid_size(self):
-        return self.grid_size
-       
-   
