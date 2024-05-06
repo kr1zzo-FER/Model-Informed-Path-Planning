@@ -17,21 +17,19 @@ costmap_visualization = False
 
 class AlgorithmBase():
 
-    def __init__(self,start,goal,zones_dictionary,grid_size):
+    def __init__(self,waypoints,zones_dictionary,grid_size):
         self.zones = zones_dictionary
-        self.start = (start[0][0], start[0][1])
-        self.goal = (goal[0][0], goal[0][1])
         self.grid_size = grid_size
         self.coordinates = self.get_coordinates()
         self.size_x = self.set_width()
         self.size_y = self.set_height()
+        self.waypoints = waypoints
+        self.waypoints_m, self.waypoints_m_plot = self.set_waypoints_m()
         self.size = (self.size_x, self.size_y)
         self.zones_m_plot, self.zones_m = self.set_zones_m()
-        self.start_m_plot, self.start_m = self.set_start_m()
-        self.goal_m_plot , self.goal_m  = self.set_goal_m()
-        print(f"Start: {self.start_m}, Goal: {self.goal_m}")
         if costmap_visualization:
             self.costmap_visualization()
+
     
     def gps_to_meters(self,lat1, lon1, lat2, lon2):
         # Convert gps cordinates to meters from (lat1,lon1) to (lat2,lon2)
@@ -87,15 +85,14 @@ class AlgorithmBase():
     def set_height(self):
         return round(self.gps_to_meters(self.coordinates[1], self.coordinates[0], self.coordinates[3], self.coordinates[0]))
 
-    def set_start_m(self):
-        start_m = self.gps_to_pixel(self.start[0],self.start[1])
-        start_m_resized = self.adapt_coordinates(self.start)
-        return start_m, start_m_resized
+    def set_waypoints_m(self):
+        waypoints = [self.gps_to_pixel(waypoint[0],waypoint[1]) for waypoint in self.waypoints]
+        waypoints_resized = [self.adapt_coordinates(waypoint) for waypoint in self.waypoints]
+        #integer
+        waypoints = [(int(waypoint[0]/self.grid_size),int(waypoint[1]/self.grid_size)) for waypoint in waypoints]
+        waypoints_resized = [(int(waypoint[0]),int(waypoint[1])) for waypoint in waypoints_resized]
+        return waypoints, waypoints_resized
     
-    def set_goal_m(self):
-        goal_m = self.gps_to_pixel(self.goal[0],self.goal[1])
-        goal_m_resized = self.adapt_coordinates(self.goal)
-        return goal_m,goal_m_resized
     
     def set_zones_m(self):
         gps_dictionary, gps_dictionary_resized = {}, {}
@@ -108,8 +105,6 @@ class AlgorithmBase():
     
     def costmap_visualization(self):
         fig,ax = plt.subplots()
-        ax.plot(self.start_m[0],self.start_m[1],'cx')
-        ax.plot(self.goal_m[0],self.goal_m[1],'co')
         for key, value in self.zones_m.items():
             if value == 'c':
                 ax.plot(key[0],key[1],'bo', markersize=0.1)
@@ -119,6 +114,8 @@ class AlgorithmBase():
                 ax.plot(key[0],key[1],'go', markersize=0.1)
             elif value == 'y':
                 ax.plot(key[0],key[1],'yo', markersize=0.1)
+        for wp in self.waypoints_m:
+            ax.plot(wp[0],wp[1],'bx', markersize=5)
         plt.show()
         return
             

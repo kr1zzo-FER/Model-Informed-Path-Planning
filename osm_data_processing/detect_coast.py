@@ -49,7 +49,7 @@ class CoastProcessing:
         mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
         # apply morphological operations to mask
-        mask = nd.binary_closing(mask, structure=np.ones((7,7)))
+        mask = nd.binary_closing(mask, structure=np.ones((12,12)))
 
         if show_mask:
             plt.imshow(mask)

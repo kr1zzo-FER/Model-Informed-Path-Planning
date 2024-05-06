@@ -32,7 +32,7 @@ def main():
 
     data = test_dictionary["data"]
 
-    coast_points_gps = data["coast_points_gps"][0]
+    coast_points_gps = data["coast_points_gps"]
     red_zone_gps = data["red_zone_gps"]
     yellow_zone_gps = data["yellow_zone_gps"]
     green_zone_gps = data["green_zone_gps"]

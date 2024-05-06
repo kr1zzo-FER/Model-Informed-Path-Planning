@@ -40,28 +40,20 @@ def main(test = True):
 
     # load data
     test_data = load_binary_data(input_binary_file)
-    print(test_data)
     data = test_data["data"]
     start = data["start"]
     goal = data["goal"]
+    waypoints = [(45.235309, 14.577240),(45.240601, 14.592553),(45.223621, 14.606432)] #, (45.205115, 14.623724), (45.188642, 14.634578), (45.164687, 14.637477), (45.153386, 14.603332)]
     zones_dictionary = data["zones_dictionary"]
     #zones_dictionary = data["zones_dictionary"]
     grid_size = 10.0
 
-    print("Start: ", start) 
-    print("Goal: ", goal)
-
-    test_algorithms = TestAlgorithms(start,goal,zones_dictionary,grid_size,test_algorithms, thread_enable)
+    test_algorithms = TestAlgorithms(waypoints,zones_dictionary,grid_size,test_algorithms, thread_enable)
+    #test_algorithms.costmap_visualization()
     test_algorithms.test_algorithms_path()
-    publish_data = test_algorithms.get_publish_data()
-    internal_data = test_algorithms.get_internal_path_results()
     optimized_data = test_algorithms.optimize_path()
-    print(internal_data)
-
-    test_data["results"] = publish_data
 
     save_binary_data(test_data, output_binary_file)
-    save_binary_data(internal_data, "internal_data")
     test_algorithms.path_visualization()
 
     sys.exit(0)

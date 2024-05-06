@@ -59,15 +59,23 @@ def main():
 
     if test_dictionary is None:
         processed_areas = locations_folder
+        coast_points_gps = []
+        red_zone_gps = []
+        yellow_zone_gps = []
+        green_zone_gps = []
     else:
-        processed_areas = test_dictionary["processed_areas"]
-        locations_folder = [location for location in locations_folder if location not in processed_areas]
-        processed_areas = processed_areas + locations_folder
+        processed = test_dictionary["processed_areas"]
+        for area in processed:
+            if area in locations_folder:
+                locations_folder.remove(area)
+        processed_areas = processed + locations_folder
+        coast_points_gps = test_dictionary["data"]["coast_points_gps"][0]
+        red_zone_gps = test_dictionary["data"]["red_zone_gps"][0]
+        yellow_zone_gps = test_dictionary["data"]["yellow_zone_gps"][0]
+        green_zone_gps = test_dictionary["data"]["green_zone_gps"][0]
 
-    coast_points_gps = []
-    red_zone_gps = []
-    yellow_zone_gps = []
-    green_zone_gps = []
+    print(red_zone_gps)
+    
 
     print(f"\nLocations to process: {locations_folder}")
 
@@ -115,7 +123,7 @@ def main():
 
     
     post_processing = PostProcessing(coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, grid_size)
-    coast_points_gps = post_processing.get_coordinates()
+    coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps = post_processing.get_coordinates()
 
     test_dictionary = {}
     test_dictionary["header"] = "Test data"

@@ -7,7 +7,9 @@ locations_folder :
 #- "sv_marko"
 - "voz"
 - "lokvisce"
-#- "rudine"
+- "rudine"
+- "dramalj"
+- "klimno"
 
 save_file : krk
 
