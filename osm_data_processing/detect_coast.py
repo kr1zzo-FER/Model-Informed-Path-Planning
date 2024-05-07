@@ -94,6 +94,8 @@ class CoastProcessing:
     def get_zones(self):
         return self.coast_points,self.red_zone, self.yellow_zone, self.green_zone
 
+    def get_sea_coordinates(self):  
+        return self.sea_coordinates
    
 
     def detect_coast_points(self,x,y):
