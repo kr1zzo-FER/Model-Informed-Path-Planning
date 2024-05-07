@@ -402,7 +402,7 @@ class TestAlgorithms(AlgorithmBase):
         plt.legend(handles=legend_elements, loc='upper right')
         plt.draw()
         plt.grid(True)
-        plt.savefig(root/"results"/f"path_visualization_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png")
+        #plt.savefig(root/"results"/f"path_visualization_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png")
         plt.show(block = False)
         self.plot_table(rows, values, columns)
         return
@@ -416,7 +416,7 @@ class TestAlgorithms(AlgorithmBase):
             ax.axis('tight')
             ax.table(cellText=values, colLabels=columns, rowLabels=rows, loc='center', cellLoc='center', colLoc='center')
             fig.tight_layout()
-            plt.savefig(root/"results"/f"results_table_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png", dpi = 100)
+            #plt.savefig(root/"results"/f"results_table_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png", dpi = 100)
             plt.show(block = False)
         except:
             print("No enough data to plot table!")

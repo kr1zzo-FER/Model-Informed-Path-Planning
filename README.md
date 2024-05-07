@@ -50,6 +50,14 @@ pip install -r requirements/requirements.txt
 
 ## Executing program
 
+Run the following command to test path-planning algorithms:
+
+```terminal
+python3 test_main.py
+```
+
+
+
 
 ### Folder structure
 
@@ -67,6 +75,7 @@ Model-informed-path-planning
     │   └── ...
     ├── requirements
     │   └── requirements.txt
+    ├── test_main.py
     ├── config.yaml
     ├── README.md
     ├── .gitignore
@@ -92,7 +101,16 @@ In the folder `input_data` are provided default data for the following locations
 
 #### 1.1.1. Go to [OpenStreetMap](https://www.openstreetmap.org/#map=15/45.2359/14.5844) and select the area you want to download
 
+`Note: zoom should be 300 m / 1000 ft or less due to the image processing restrictions`
 
+<p align="center">
+<img src="assets/zoom.png" alt="drawing" width="150"/>
+</p>
+<p align="center">
+<em>
+Figure 1: Zoom level on OpenStreetMap
+</em>
+</p>
 
 #### 1.1.2. Make new folder `geolocation_name` (for example `Rijeka`) in the `input_data` folder and put `osm_data.txt` file inside
 
@@ -103,7 +121,7 @@ In the folder `input_data` are provided default data for the following locations
 </p>
 <p align="center">
 <em>
-Figure 1: Download data from OpenStreetMap
+Figure 2: Download data from OpenStreetMap
 </em>
 </p>
 
@@ -117,7 +135,7 @@ Figure 1: Download data from OpenStreetMap
 </p>
 <p align="center">
 <em>
-Figure 2: Copy HTML string from OpenStreetMap
+Figure 3: Copy HTML string from OpenStreetMap
 </em>
 </p>
 
@@ -189,13 +207,7 @@ goal_latitude : 45.230241
 goal_longitude: 14.583173
 ```
 
-#### 1.2.2. Run the following command 
 
-Run the following command in the folder `osm_data_processing` to generate a map, detect the coastline and set the start and goal points on the map
-
- ```terminal
-python3 main.py
-```
 
 If `custom_start_goal` is set to `True`, left click on the map to set the start and goal points. Right click to save the results. Else the start and goal points are set according to the `config.yaml` file and the map is displayed with the start and goal points. Exit displayed map with to save the results.
 

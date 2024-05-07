@@ -34,7 +34,7 @@ def main():
     coast_points = data["coast_points"]
     for point in coast_points:
         point = osm_data.gps_to_pixel(point[0], point[1])
-        ax.plot(point[0], point[1], 'ro', markersize=1)
+        ax.plot(point[0], point[1], 'bo', markersize=0.1)
     start_ = data["start"]
     goal_ = data["goal"]
     start = osm_data.gps_to_pixel(start_[0][0], start_[0][1])
@@ -65,7 +65,7 @@ def main():
     plt.legend(handles=legend_elements, loc='upper right')
     plt.draw()
     plt.grid(True)
-    plt.savefig(root/"results"/f"path_visualization_map_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png")
+    #plt.savefig(root/"results"/f"path_visualization_map_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png")
     plt.show()
 
     binary_path = root / "binary_dump"
