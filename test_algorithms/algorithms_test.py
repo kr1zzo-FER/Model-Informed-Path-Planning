@@ -175,7 +175,7 @@ class TestAlgorithms(AlgorithmBase):
             print("Threads finished!")
                 
 
-            end_time = time.time()
+        end_time = time.time()
 
         print(f"Paths generated!\nTotal time: {round(end_time-start_time,4)} seconds\n")
 

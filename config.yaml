@@ -19,7 +19,7 @@ robot_radius : 5.0  # [m]
 
 # thread_enable : True - thread for plotting map
 # thread_enable map : False - for algorithm runtime calculation
-thread_enable : True
+thread_enable : False
 
 #test and plot options
 # 1. a_star
