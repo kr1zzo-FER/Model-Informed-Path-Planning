@@ -1,3 +1,1 @@
-<iframe width="425" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=14.555339813232424%2C45.22261674445821%2C14.624004364013674%2C45.24912016648356&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=15/45.2359/14.5897">Prikaži veću kartu</a></small>
-
-
+<iframe width="425" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=14.553966522216799%2C45.21938229957567%2C14.622631072998047%2C45.24951294065494&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=15/45.2344/14.5883">Prikaži veću kartu</a></small>

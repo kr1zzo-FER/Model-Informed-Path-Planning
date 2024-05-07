@@ -1,23 +1,16 @@
 ## Step 1: Download data from OpenStreetMap (optional)
 
 # Process OSM data
-location_folder : "toulon"
-location_image: "toulon.png"
+location_folder : "voz2"
 
 
 ## Step 2 : Data extraction and processing from OpenStreetMap 
 ## Step 4: Cost map generation
-
-resized_location_image : "voz_resized2.png"
-
-custom_start_goal : False
-
-# Step 2 : False, Step 4 : True
-cost_map : True
+custom_start_goal : True
 
 # This is hardcoded start and goal position and applied only if custom_start_goal is False
-start_latitude : 43.097449
-start_longitude: 5.948776
+start_latitude : 45.234781
+start_longitude: 14.577538
 
 goal_latitude : 45.230241
 goal_longitude: 14.583173
@@ -29,7 +22,6 @@ table_name : "table_results.png"
 
 grid_size : 10.0  # [m]
 robot_radius : 5.0  # [m]
-
 
 # thread_enable : True - thread for plotting map
 # thread_enable map : False - for algorithm runtime calculation
@@ -46,7 +38,7 @@ thread_enable : True
 # 8. depth_first_search
 # 9. greedy_best_first_search
 
-test_algorithm :
+test_algorithms :
 - "a_star"
 - "bidirectional_a_star"
 - "dijkstra"
@@ -75,13 +67,10 @@ result_costmap_table : "costmap_table.png"
 ## Step 5: Path planning algorithms testing with cost map
 test_parameters : False
 red_cost : 10
-yellow_cost : 5
+yellow_cost : 2.5
 green_cost : 2
 
 ## Step 6: Path optimization
-
-# optimization
-optimization : True
 
 # speed limits [knots]
 max_boat_speed : 12
