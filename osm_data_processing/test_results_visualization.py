@@ -5,17 +5,20 @@ import numpy as np
 from matplotlib.lines import Line2D
 import yaml
 import sys
+import datetime
+import os
 
 root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root)+"/test_algorithms")
 
 def main():
 
-    with open(root/"test_algorithms"/"config_test.yaml", "r") as f:
+    with open(root/"config.yaml", "r") as f:
         config = yaml.safe_load(f)
-        input_binary_file = config["input_binary_file"]
-        output_binary_file = config["output_binary_file"]
-        osm_object = config["osm_object"]
+        location_folder = config["location_folder"]
+
+    output_binary_file = f'test_results_{location_folder}'
+    osm_object = f'osm_object_{location_folder}'
 
     with open(root/"binary_dump"/osm_object, "rb") as f:
         osm_data = pickle.load(f)
@@ -25,6 +28,7 @@ def main():
 
     # gps coordinates to pixels
     fig, ax = osm_data.prepare_image_to_plot()
+    legend_elements = []
 
     data = results["data"]
     coast_points = data["coast_points"]
@@ -40,20 +44,13 @@ def main():
     legend_elements.append(Line2D([0], [0], marker='o', color='w', label=f'Start : {start_[0][0], start_[0][1]}', markerfacecolor='g', markersize=10))
     legend_elements.append(Line2D([0], [0], marker='o', color='w', label=f'Goal : {goal_[0][0], goal_[0][1]}', markerfacecolor='b', markersize=10))
 
-
     
-
-    print(osm_data.get_coordinates())
-    legend_elements = []
     colors = ['red', 'crimson', 'lime', 'cyan', 'blue', 'gold', 'yellow', 'green', 'purple', 'pink']
+    
+    path = results["results"]
 
-    
-    
-    algorithm = results[0]
-   
-   
-    
-    for algorithm in tested_algorithms:
+    for algorithm in results["results"]:
+        
         random_color = colors[np.random.randint(0, len(colors))]
         path = algorithm.get_path()
         path = [osm_data.gps_to_pixel(point[0], point[1]) for point in path]
@@ -68,7 +65,15 @@ def main():
     plt.legend(handles=legend_elements, loc='upper right')
     plt.draw()
     plt.grid(True)
+    plt.savefig(root/"results"/f"path_visualization_map_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png")
     plt.show()
+
+    binary_path = root / "binary_dump"
+    isExist = os.path.exists(binary_path)
+    if isExist:
+        #delete folder
+        os.rmdir(binary_path)
+
 
     sys.exit(0)
     

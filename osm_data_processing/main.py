@@ -11,9 +11,9 @@ Copyright: © Faculty of Electrical Engineering and Computing, University of Zag
 from pathlib import Path
 import sys
 import pickle 
-from detect_coast import CoastProcessing
-from process_osm_data import OSMProcessing
-from set_start_goal import set_start_goal
+from .detect_coast import CoastProcessing
+from .process_osm_data import OSMProcessing
+from .set_start_goal import set_start_goal
 import datetime
 from matplotlib import pyplot as plt
 import yaml
@@ -52,6 +52,11 @@ def main():
     isExist = os.path.exists(binary_path)
     if not isExist:
         os.makedirs(binary_path)
+    
+    results_path = root / "results"
+    isExist = os.path.exists(results_path)
+    if not isExist:
+        os.makedirs(results_path)
 
     image_name = f"{location_folder}.png"
     image_save = f"{location_folder}_resized.png"
@@ -105,9 +110,6 @@ def main():
         ax.plot(goal[0],goal[1],'co')
         ax = osm_object.prepare_coast_to_plot(ax)
         plt.show()
-    
-
-    sys.exit(0)
     
 if __name__ == '__main__':
     try:

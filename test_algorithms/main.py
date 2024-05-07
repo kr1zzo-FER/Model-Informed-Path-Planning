@@ -7,12 +7,11 @@ author: Enio Krizman (@kr1zzo)
 """
 import sys
 import pickle
-from algorithms_test import TestAlgorithms
+from .algorithms_test import TestAlgorithms
 from pathlib import Path
 import yaml
 
 root = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(root)+"/osm_data_processing")
 
 def load_binary_data(file_name):
     binary_path = root / "binary_dump"
@@ -25,7 +24,7 @@ def save_binary_data(data, file_name):
     with open(binary_path/file_name, "wb") as f:
         pickle.dump(data, f)
 
-def main(test = True):
+def main():
 
     print("\n"+__file__+ " start!!")
 
@@ -56,10 +55,9 @@ def main(test = True):
     save_binary_data(test_data, output_binary_file)
     test_algorithms.path_visualization()
 
-    sys.exit(0)
 
 if __name__ == '__main__':
     try:
-        main(True)
+        main()
     except KeyboardInterrupt:
         sys.exit(0)

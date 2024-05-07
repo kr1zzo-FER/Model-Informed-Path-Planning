@@ -1,6 +1,5 @@
 # __init__.py
 
-import detect_coast
-import process_osm_data
-import set_start_goal
-import main
+from .detect_coast import CoastProcessing
+from .process_osm_data import OSMProcessing
+from .set_start_goal import set_start_goal

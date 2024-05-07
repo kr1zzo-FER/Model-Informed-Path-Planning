@@ -125,13 +125,14 @@ class OSMProcessing:
     def prepare_image_to_plot(self):
         
         # plot image and detect start and goal positions
+        size_x = self.image.size[0]
+        size_y = self.image.size[1]
 
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(size_x/2, size_y/2))    
 
         im = ax.imshow(self.image, extent=[0, self.image.size[0], 0, self.image.size[1]])
 
-        size_x = self.image.size[0]
-        size_y = self.image.size[1]
+        
 
         coordinates = [round(float(self.coordinates[0]),6), round(float(self.coordinates[1]),6), round(float(self.coordinates[2]),6), round(float(self.coordinates[3]),6)]
         #print(coordinates[0])

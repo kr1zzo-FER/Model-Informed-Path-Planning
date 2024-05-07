@@ -12,20 +12,19 @@ Copyright: © Faculty of Electrical Engineering and Computing, University of Zag
 import math
 from pathlib import Path
 import time
-from algorithms.a_star import AStarPlanner
-from algorithms.hybrid_a_star import hybrid_a_star_planning
-from algorithms.dstar import Dstar, Map
-from algorithms.d_star_lite import DStarLite
-from algorithms.d_star_lite import Node
-from algorithms.dijkstra import Dijkstra
-from algorithms.bidirectional_a_star import BidirectionalAStarPlanner
-from algorithms.breadth_first_search import BreadthFirstSearchPlanner
-from algorithms.bidirectional_breadth_first_search import BidirectionalBreadthFirstSearchPlanner
-from algorithms.greedy_best_first_search import BestFirstSearchPlanner
+from .algorithms.a_star import AStarPlanner
+from .algorithms.dstar import Dstar, Map
+from .algorithms.d_star_lite import DStarLite
+from .algorithms.d_star_lite import Node
+from .algorithms.dijkstra import Dijkstra
+from .algorithms.bidirectional_a_star import BidirectionalAStarPlanner
+from .algorithms.breadth_first_search import BreadthFirstSearchPlanner
+from .algorithms.bidirectional_breadth_first_search import BidirectionalBreadthFirstSearchPlanner
+from .algorithms.greedy_best_first_search import BestFirstSearchPlanner
 import multiprocessing as mp
 import datetime
-from algorithms_base import AlgorithmBase
-from path_results import PathResults,PathResultsInternal
+from .algorithms_base import AlgorithmBase
+from .path_results import PathResults,PathResultsInternal
 from matplotlib import pyplot as plt
 from matplotlib.lines import Line2D
 import numpy as np
@@ -61,7 +60,6 @@ class TestAlgorithms(AlgorithmBase):
         return self.publish_path_results
     
     def test_algorithms_path(self):
-        mp.set_start_method('spawn')
         queue = mp.Queue()
     
         threads = []    
@@ -89,16 +87,6 @@ class TestAlgorithms(AlgorithmBase):
                     threads.append(thread2)
                 else:
                     result, internal_result = self.bidirectional_a_star()
-
-                    tested.append(result)
-                    internal_tested.append(internal_result)
-                
-            if test_algorithm == "hybrid_a_star":
-                if self.thread_enable:
-                    thread2 = mp.Process(target = self.hybrid_a_star, args=(queue,))
-                    threads.append(thread2)
-                else:
-                    result, internal_result = self.hybrid_a_star()
 
                     tested.append(result)
                     internal_tested.append(internal_result)
@@ -176,12 +164,14 @@ class TestAlgorithms(AlgorithmBase):
                 thread.start()
         
             for thread in threads:
+                print(f"Thread {thread} joined!")
                 queue_res = queue.get()
                 tested.append(queue_res[0])
                 internal_tested.append(queue_res[1])
                 thread.join()
+                
 
-        end_time = time.time()
+            end_time = time.time()
 
         print(f"Paths generated!\nTotal time: {round(end_time-start_time,4)} seconds\n")
 
@@ -225,27 +215,6 @@ class TestAlgorithms(AlgorithmBase):
         path_points_gps = [self.pixel_to_gps(point[0],point[1]) for point in path_points]
         result = PathResults("Bidirectional A*",self.start,self.goal,path_points_gps,distance, 0.0)
         internal_result = PathResultsInternal("Bidirectional A*",self.start_m,self.goal_m,path_points,distance,0.0,function_time)
-        if q:
-            q.put([result, internal_result])
-        else:
-            return result, internal_result
-        
-    def hybrid_a_star(self,q : mp.Queue = []):
-        print("\nHybrid A* calculation started..")
-        start_time = time.time()
-        start = [self.start_m[0], self.start_m[1], np.deg2rad(90.0)]
-        goal = [self.goal_m[0], self.goal_m[1], np.deg2rad(90.0)]
-        path = hybrid_a_star_planning(start, goal, self.ox, self.oy, 2.0, np.deg2rad(15.0))
-        rx, ry = path.x_list, path.y_list
-        end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        print("Hybrid A* calculation finished : ")
-        print(f"Function time: {function_time} Distance: {distance}\n")
-        path_points = [(rx[i],ry[i]) for i in range(len(rx))]
-        path_points_gps = [self.pixel_to_gps(point[0],point[1]) for point in path_points]
-        result = PathResults("Hybrid A*",self.start,self.goal,path_points_gps,distance, 0.0)
-        internal_result = PathResultsInternal("Hybrid A*",self.start_m,self.goal_m,path_points,distance,0.0,function_time)
         if q:
             q.put([result, internal_result])
         else:
@@ -405,7 +374,7 @@ class TestAlgorithms(AlgorithmBase):
         rows, values, columns = [], [], ["Distance", "Time"]
         legend_elements = []
         colors = ['red', 'crimson', 'lime', 'cyan', 'blue', 'gold', 'yellow', 'green', 'purple', 'pink']
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(self.size_x, self.size_y))
         for point in self.coast_points_m:
             plt.plot(point[0],point[1], f"bo",markersize=1)
         for result in self.internal_path_results:
@@ -426,25 +395,15 @@ class TestAlgorithms(AlgorithmBase):
              #remove random color from colors list
             colors.remove(random_color)
 
-        results = "results_test"
-        
-        isExist = os.path.exists(results)
-        if not isExist:
-            os.makedirs(results)
-        else:
-            #delete content
-            os.system(f"rm -r {results}/*")
-
         plt.legend(handles=legend_elements, loc='upper right')
         plt.draw()
         plt.grid(True)
-        plt.savefig(f"{results}/path_visualization_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png")
+        plt.savefig(root/"results"/f"path_visualization_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png")
         plt.show(block = False)
-        self.plot_table(rows, values, columns, results)
-        plt.show()
+        self.plot_table(rows, values, columns)
         return
     
-    def plot_table(self, rows, values, columns, results):
+    def plot_table(self, rows, values, columns):
         fig, ax = plt.subplots()
         try:
             # hide axes
@@ -453,7 +412,7 @@ class TestAlgorithms(AlgorithmBase):
             ax.axis('tight')
             ax.table(cellText=values, colLabels=columns, rowLabels=rows, loc='center', cellLoc='center', colLoc='center')
             fig.tight_layout()
-            plt.savefig(f"{results}/table_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png")
+            plt.savefig(root/"results"/f"results_table_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.png", dpi = 100)
             plt.show(block = False)
         except:
             print("No enough data to plot table!")
