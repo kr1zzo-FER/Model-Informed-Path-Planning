@@ -60,6 +60,8 @@ class TestAlgorithms(AlgorithmBase):
         return self.publish_path_results
     
     def test_algorithms_path(self):
+
+        mp.set_start_method('spawn')
         queue = mp.Queue()
     
         threads = []    
@@ -162,13 +164,15 @@ class TestAlgorithms(AlgorithmBase):
         if self.thread_enable:
             for thread in threads:
                 thread.start()
-        
+                
+            print("Threads started!")
             for thread in threads:
-                print(f"Thread {thread} joined!")
                 queue_res = queue.get()
                 tested.append(queue_res[0])
                 internal_tested.append(queue_res[1])
                 thread.join()
+
+            print("Threads finished!")
                 
 
             end_time = time.time()

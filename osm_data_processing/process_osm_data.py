@@ -128,7 +128,7 @@ class OSMProcessing:
         size_x = self.image.size[0]
         size_y = self.image.size[1]
 
-        fig, ax = plt.subplots(figsize=(size_x/2, size_y/2))    
+        fig, ax = plt.subplots()    
 
         im = ax.imshow(self.image, extent=[0, self.image.size[0], 0, self.image.size[1]])
 
