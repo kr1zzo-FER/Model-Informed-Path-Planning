@@ -5,7 +5,7 @@ import math
 
 class PostProcessing:
 
-    def __init__(self, coast_points, red_zone, yellow_zone, green_zone, sea_coordinates, grid_size):
+    def __init__(self, coast_points, red_zone, yellow_zone, green_zone, grid_size):
         self.coast_points = coast_points
         self.red_zone = red_zone
         self.yellow_zone = yellow_zone
@@ -19,10 +19,9 @@ class PostProcessing:
         self.internal_red = self.allign_coordinates(red_zone)
         self.internal_yellow = self.allign_coordinates(yellow_zone)
         self.internal_green = self.allign_coordinates(green_zone)
-        self.internal_sea = self.allign_coordinates(sea_coordinates)
 
     def get_coordinates(self):
-        return self.internal_coast, self.internal_red, self.internal_yellow, self.internal_green, self.internal_sea
+        return self.internal_coast, self.internal_red, self.internal_yellow, self.internal_green
     
     def set_coordinates(self):
 
@@ -37,7 +36,6 @@ class PostProcessing:
         max_y = max(coordinates_list, key = lambda x: x[1])[1]
 
         result = [min_y, min_x, max_y, max_x]
-        print(f"Coordinates: {result}")
         return result
     
     def gps_to_meters(self,lat1, lon1, lat2, lon2):
@@ -83,9 +81,6 @@ class PostProcessing:
         for point in internal_coordinates:
             point_ = self.pixel_to_gps(point[0], point[1])
             internal_coordinates_g.append(point_)
-        
-        print(f"Internal coordinates: {internal_coordinates}")
-
 
         return internal_coordinates_g
     

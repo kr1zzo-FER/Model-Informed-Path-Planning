@@ -7,11 +7,19 @@ locations_folder :
 #- "sv_marko"
 - "voz"
 - "lokvisce"
-- "rudine"
-- "dramalj"
-- "klimno"
+#- "rudine"
+#- "dramalj"
+#- "klimno"
+#- "crikvenica"
+#- "selce"
+#- "novi"
+#- "silo"
+#- "povile"
+#- "petrina"
+#- "melska"
+#- "vrbnik"
 
-save_file : krk
+save_file : jadranovo
 
 custom_start_goal : False
 

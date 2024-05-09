@@ -11,6 +11,7 @@ Copyright: © Faculty of Electrical Engineering and Computing, University of Zag
 from pathlib import Path
 import sys
 import pickle 
+import os
 from detect_coast import CoastProcessing
 from process_osm_data import OSMProcessing
 from post_processing import PostProcessing
@@ -42,6 +43,15 @@ def main():
     # start program
     print("\n"+__file__+ " start!!")
     
+    # paths to files, make new directories if they don't exist
+    binary_path = root / "binary_dump"
+    isExist = os.path.exists(binary_path)
+    if not isExist:
+        os.makedirs(binary_path)
+    results = root / "results"
+    isExist = os.path.exists(results)
+    if not isExist:
+        os.makedirs(results)
     
     with open("config.yaml", "r") as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
@@ -51,7 +61,6 @@ def main():
     
     test_dictionary = load_binary_data(f'processed_map_{save_file}')
 
-    print(test_dictionary)
 
     if test_dictionary is None:
         processed_areas = locations_folder
@@ -59,21 +68,16 @@ def main():
         red_zone_gps = []
         yellow_zone_gps = []
         green_zone_gps = []
-        sea_coordinates_gps = []
     else:
         processed = test_dictionary["processed_areas"]
         for area in processed:
             if area in locations_folder:
                 locations_folder.remove(area)
         processed_areas = processed + locations_folder
-        coast_points_gps = test_dictionary["data"]["coast_points_gps"][0]
-        red_zone_gps = test_dictionary["data"]["red_zone_gps"][0]
-        yellow_zone_gps = test_dictionary["data"]["yellow_zone_gps"][0]
-        green_zone_gps = test_dictionary["data"]["green_zone_gps"][0]
-        sea_coordinates_gps = test_dictionary["data"]["sea_coordinates_gps"][0]
-
-    print(red_zone_gps)
-    
+        coast_points_gps = test_dictionary["data"]["coast_points_gps"]
+        red_zone_gps = test_dictionary["data"]["red_zone_gps"]
+        yellow_zone_gps = test_dictionary["data"]["yellow_zone_gps"]
+        green_zone_gps = test_dictionary["data"]["green_zone_gps"]
 
     print(f"\nLocations to process: {locations_folder}")
 
@@ -97,8 +101,6 @@ def main():
 
         coast_object = CoastProcessing(input_data/image_save, grid_size)
         
-        sea_coordinates = coast_object.get_sea_coordinates()
-        
         coast_points, red_zone, yellow_zone, green_zone = coast_object.zones_from_coast(12)
         # save coast points to binary file
         osm_object.set_coast_points(coast_points)
@@ -107,26 +109,28 @@ def main():
             p = osm_object.pixel_to_gps(point[0],point[1])
             if p not in coast_points_gps:
                 coast_points_gps.append(p)
+        print(f"Coast points: {len(coast_points)}")
         for point in red_zone:
             p = osm_object.pixel_to_gps(point[0],point[1])
             if p not in red_zone_gps:
                 red_zone_gps.append(p)
+        print(f"Red zone: {len(red_zone)}")
         for point in yellow_zone:
             p = osm_object.pixel_to_gps(point[0],point[1])
             if p not in yellow_zone_gps:
                 yellow_zone_gps.append(p)
+        print(f"Yellow zone: {len(yellow_zone)}")
         for point in green_zone:
             p = osm_object.pixel_to_gps(point[0],point[1])
             if p not in green_zone_gps:
                 green_zone_gps.append(p)
-        for point in sea_coordinates:
-            p = osm_object.pixel_to_gps(point[0],point[1])
-            if p not in sea_coordinates_gps:
-                sea_coordinates_gps.append(p)
-
+        print(f"Green zone: {len(green_zone)}")
+        
     
-    post_processing = PostProcessing(coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, sea_coordinates_gps,grid_size)
-    coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, sea_coordinates_gps = post_processing.get_coordinates()
+    print("Post processing...")
+    post_processing = PostProcessing(coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps,grid_size)
+    coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps = post_processing.get_coordinates()
+    print("Post processing done!")
 
     test_dictionary = {}
     test_dictionary["header"] = "Test data"
@@ -138,7 +142,6 @@ def main():
     test_dictionary["data"]["red_zone_gps"] = red_zone_gps
     test_dictionary["data"]["yellow_zone_gps"] = yellow_zone_gps
     test_dictionary["data"]["green_zone_gps"] = green_zone_gps
-    test_dictionary["data"]["sea_coordinates_gps"] = sea_coordinates_gps
 
     save_to_binary_file(test_dictionary, binary_path/f'processed_map_{save_file}')
     
