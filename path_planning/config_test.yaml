@@ -1,0 +1,11 @@
+input_binary_file : "publish_map_kacjak"
+output_binary_file : "costmap_results_publisher_kacjak"
+
+custom_start_goal : False
+
+test_algorithms :
+- "d_star_lite"
+
+thread_enable : True
+
+

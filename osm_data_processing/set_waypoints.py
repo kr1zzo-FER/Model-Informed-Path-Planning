@@ -1,5 +1,3 @@
-
-
 import sys
 import pickle
 from pathlib import Path
@@ -48,7 +46,7 @@ def main():
     gx,gy = [point[1] for point in green_zone_gps], [point[0] for point in green_zone_gps]
     ax.plot(gx, gy, 'go', label='green zone', markersize = 0.1)
 
-    plt.show()
+    
 
     zones_dictionary = {}
     for point in red_zone_gps:
@@ -63,11 +61,14 @@ def main():
 
     publish_dict = {}
     publish_dict["data"] = {}
-    publish_dict["data"]["start"] = [(45.211981, 14.633187)]
-    publish_dict["data"]["goal"] = [(45.235506, 14.576740)]
+    publish_dict["data"]["start"] = [(45.238578, 14.572589)]
+    publish_dict["data"]["goal"] = [(45.204359, 14.644172)]
     publish_dict["data"]["zones_dictionary"] = zones_dictionary
 
     save_to_binary_file(publish_dict, f'publish_map_{save_file}')
+    
+    plt.show()
+
 
 
 if __name__ == '__main__':

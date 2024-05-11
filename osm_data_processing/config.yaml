@@ -7,7 +7,7 @@ locations_folder :
 #- "sv_marko"
 - "voz"
 - "lokvisce"
-#- "rudine"
+- "rudine"
 #- "dramalj"
 #- "klimno"
 #- "crikvenica"
@@ -19,7 +19,7 @@ locations_folder :
 #- "melska"
 #- "vrbnik"
 
-save_file : jadranovo
+save_file : kacjak
 
 custom_start_goal : False
 
