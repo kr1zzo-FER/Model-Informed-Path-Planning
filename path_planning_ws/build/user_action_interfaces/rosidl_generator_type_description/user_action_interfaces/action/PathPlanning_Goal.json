@@ -1,0 +1,26 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "user_action_interfaces/action/PathPlanning_Goal",
+      "fields": [
+        {
+          "name": "start_goal",
+          "type": {
+            "type_id": 150,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": []
+  },
+  "type_hashes": [
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_Goal",
+      "hash_string": "RIHS01_5ca5b6afdadc2202e1a45982d95c2d7c48f72d243da0bf381ae284db6a7f531e"
+    }
+  ]
+}

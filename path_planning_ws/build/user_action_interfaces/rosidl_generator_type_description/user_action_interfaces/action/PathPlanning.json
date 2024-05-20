@@ -1,0 +1,522 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "user_action_interfaces/action/PathPlanning",
+      "fields": [
+        {
+          "name": "goal",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "user_action_interfaces/action/PathPlanning_Goal"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "result",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "user_action_interfaces/action/PathPlanning_Result"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "feedback",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "user_action_interfaces/action/PathPlanning_Feedback"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "send_goal_service",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "user_action_interfaces/action/PathPlanning_SendGoal"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "get_result_service",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "user_action_interfaces/action/PathPlanning_GetResult"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "feedback_message",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "user_action_interfaces/action/PathPlanning_FeedbackMessage"
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": [
+      {
+        "type_name": "builtin_interfaces/msg/Time",
+        "fields": [
+          {
+            "name": "sec",
+            "type": {
+              "type_id": 6,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "nanosec",
+            "type": {
+              "type_id": 7,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "service_msgs/msg/ServiceEventInfo",
+        "fields": [
+          {
+            "name": "event_type",
+            "type": {
+              "type_id": 3,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "stamp",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "builtin_interfaces/msg/Time"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "client_gid",
+            "type": {
+              "type_id": 51,
+              "capacity": 16,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "sequence_number",
+            "type": {
+              "type_id": 8,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "unique_identifier_msgs/msg/UUID",
+        "fields": [
+          {
+            "name": "uuid",
+            "type": {
+              "type_id": 51,
+              "capacity": 16,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/PathPlanning_Feedback",
+        "fields": [
+          {
+            "name": "partial_path",
+            "type": {
+              "type_id": 150,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/PathPlanning_FeedbackMessage",
+        "fields": [
+          {
+            "name": "goal_id",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "unique_identifier_msgs/msg/UUID"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "feedback",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_Feedback"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/PathPlanning_GetResult",
+        "fields": [
+          {
+            "name": "request_message",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_GetResult_Request"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "response_message",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_GetResult_Response"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "event_message",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_GetResult_Event"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/PathPlanning_GetResult_Event",
+        "fields": [
+          {
+            "name": "info",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "service_msgs/msg/ServiceEventInfo"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "request",
+            "type": {
+              "type_id": 97,
+              "capacity": 1,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_GetResult_Request"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "response",
+            "type": {
+              "type_id": 97,
+              "capacity": 1,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_GetResult_Response"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/PathPlanning_GetResult_Request",
+        "fields": [
+          {
+            "name": "goal_id",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "unique_identifier_msgs/msg/UUID"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/PathPlanning_GetResult_Response",
+        "fields": [
+          {
+            "name": "status",
+            "type": {
+              "type_id": 2,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "result",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_Result"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/PathPlanning_Goal",
+        "fields": [
+          {
+            "name": "start_goal",
+            "type": {
+              "type_id": 150,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/PathPlanning_Result",
+        "fields": [
+          {
+            "name": "path",
+            "type": {
+              "type_id": 150,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/PathPlanning_SendGoal",
+        "fields": [
+          {
+            "name": "request_message",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_SendGoal_Request"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "response_message",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_SendGoal_Response"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "event_message",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_SendGoal_Event"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/PathPlanning_SendGoal_Event",
+        "fields": [
+          {
+            "name": "info",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "service_msgs/msg/ServiceEventInfo"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "request",
+            "type": {
+              "type_id": 97,
+              "capacity": 1,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_SendGoal_Request"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "response",
+            "type": {
+              "type_id": 97,
+              "capacity": 1,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_SendGoal_Response"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/PathPlanning_SendGoal_Request",
+        "fields": [
+          {
+            "name": "goal_id",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "unique_identifier_msgs/msg/UUID"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "goal",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "user_action_interfaces/action/PathPlanning_Goal"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/PathPlanning_SendGoal_Response",
+        "fields": [
+          {
+            "name": "accepted",
+            "type": {
+              "type_id": 15,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "stamp",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "builtin_interfaces/msg/Time"
+            },
+            "default_value": ""
+          }
+        ]
+      }
+    ]
+  },
+  "type_hashes": [
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning",
+      "hash_string": "RIHS01_98810b8982a40cab0a27a339ac22851433e1b01eeaefc748c789e1acbb587012"
+    },
+    {
+      "type_name": "builtin_interfaces/msg/Time",
+      "hash_string": "RIHS01_b106235e25a4c5ed35098aa0a61a3ee9c9b18d197f398b0e4206cea9acf9c197"
+    },
+    {
+      "type_name": "service_msgs/msg/ServiceEventInfo",
+      "hash_string": "RIHS01_41bcbbe07a75c9b52bc96bfd5c24d7f0fc0a08c0cb7921b3373c5732345a6f45"
+    },
+    {
+      "type_name": "unique_identifier_msgs/msg/UUID",
+      "hash_string": "RIHS01_1b8e8aca958cbea28fe6ef60bf6c19b683c97a9ef60bb34752067d0f2f7ab437"
+    },
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_Feedback",
+      "hash_string": "RIHS01_e4a174587eb5b93f5afc9bb1334fdf7b8fe79ad479d72d2b0aded57d7abd0160"
+    },
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_FeedbackMessage",
+      "hash_string": "RIHS01_eb4372ced0493ec739cde66abead6cf113253b0982ee866d01f899341edfc094"
+    },
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_GetResult",
+      "hash_string": "RIHS01_d58795566e439e640e0ea81b04320b6de2dcf032a1ff1782582a85ded815cb4b"
+    },
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_GetResult_Event",
+      "hash_string": "RIHS01_360b848608fa31cee74d257a3a4c14ea5aa90000ffb03a6f5d15e3eb2bbcfb59"
+    },
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_GetResult_Request",
+      "hash_string": "RIHS01_7c771a66a1a7a3051869e3050622bb9561447cd6bcb442728b26591967a96c2c"
+    },
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_GetResult_Response",
+      "hash_string": "RIHS01_0f00dfe87a23aa746ea04e0e08d2ae36e4cea7a912d20824dbcd8cca56bc8f27"
+    },
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_Goal",
+      "hash_string": "RIHS01_5ca5b6afdadc2202e1a45982d95c2d7c48f72d243da0bf381ae284db6a7f531e"
+    },
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_Result",
+      "hash_string": "RIHS01_b6ea52865c40e81f02513bcf9aaccade40f72c5670e6bb656b33c578ef629eec"
+    },
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_SendGoal",
+      "hash_string": "RIHS01_3c2ea2436313062fbce3c9c5f49c186ca16ad1ecaa58c8b6e48bc64f5f198643"
+    },
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_SendGoal_Event",
+      "hash_string": "RIHS01_42232db49613a327804bc4f53615c289280b79ef5b963ca3d5668e897cd05d23"
+    },
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_SendGoal_Request",
+      "hash_string": "RIHS01_3037c89c878f2d9fc4a69677f792b624bdab87a1049155e6a6c37b4d9d35b347"
+    },
+    {
+      "type_name": "user_action_interfaces/action/PathPlanning_SendGoal_Response",
+      "hash_string": "RIHS01_426bda9486e054f98c352c77a8b588261039e324d8b5d268b01ca9184da0f86a"
+    }
+  ]
+}

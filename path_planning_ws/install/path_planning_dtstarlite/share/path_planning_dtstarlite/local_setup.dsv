@@ -1,0 +1,2 @@
+source;share/path_planning_dtstarlite/environment/ament_prefix_path.sh
+source;share/path_planning_dtstarlite/environment/path.sh

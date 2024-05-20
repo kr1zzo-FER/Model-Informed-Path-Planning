@@ -1,0 +1,20 @@
+[0.007s] Invoking command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite -- -j20 -l20
+[0.027s] Invoked command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite -- -j20 -l20
+[0.044s] Invoking command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --install /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite
+[0.048s] -- Install configuration: ""
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/ament_index/resource_index/package_run_dependencies/path_planning_dtstarlite
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/ament_index/resource_index/parent_prefix_path/path_planning_dtstarlite
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/environment/ament_prefix_path.sh
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/environment/ament_prefix_path.dsv
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/environment/path.sh
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/environment/path.dsv
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/local_setup.bash
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/local_setup.sh
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/local_setup.zsh
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/local_setup.dsv
+[0.048s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/package.dsv
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/ament_index/resource_index/packages/path_planning_dtstarlite
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/cmake/path_planning_dtstarliteConfig.cmake
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/cmake/path_planning_dtstarliteConfig-version.cmake
+[0.048s] -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/package.xml
+[0.049s] Invoked command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --install /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite

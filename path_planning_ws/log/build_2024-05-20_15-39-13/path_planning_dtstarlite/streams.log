@@ -1,0 +1,42 @@
+[0.006s] Invoking command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/path_planning_dtstarlite -DCMAKE_INSTALL_PREFIX=/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite
+[0.123s] -- The C compiler identification is GNU 11.4.0
+[0.188s] -- The CXX compiler identification is GNU 11.4.0
+[0.198s] -- Detecting C compiler ABI info
+[0.264s] -- Detecting C compiler ABI info - done
+[0.271s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.272s] -- Detecting C compile features
+[0.273s] -- Detecting C compile features - done
+[0.277s] -- Detecting CXX compiler ABI info
+[0.347s] -- Detecting CXX compiler ABI info - done
+[0.352s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.352s] -- Detecting CXX compile features
+[0.352s] -- Detecting CXX compile features - done
+[0.358s] -- Found ament_cmake: 2.0.5 (/opt/ros/iron/share/ament_cmake/cmake)
+[0.471s] -- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+[0.532s] -- Found ament_lint_auto: 0.14.3 (/opt/ros/iron/share/ament_lint_auto/cmake)
+[0.582s] -- Added test 'lint_cmake' to check CMake code style
+[0.583s] -- Added test 'xmllint' to check XML markup files
+[0.584s] -- Configuring done
+[0.586s] -- Generating done
+[0.586s] -- Build files have been written to: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite
+[0.590s] Invoked command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/path_planning_dtstarlite -DCMAKE_INSTALL_PREFIX=/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite
+[0.590s] Invoking command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite -- -j20 -l20
+[0.618s] Invoked command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --build /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite -- -j20 -l20
+[0.647s] Invoking command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --install /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite
+[0.654s] -- Install configuration: ""
+[0.654s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/ament_index/resource_index/package_run_dependencies/path_planning_dtstarlite
+[0.654s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/ament_index/resource_index/parent_prefix_path/path_planning_dtstarlite
+[0.654s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/environment/ament_prefix_path.sh
+[0.655s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/environment/ament_prefix_path.dsv
+[0.655s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/environment/path.sh
+[0.655s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/environment/path.dsv
+[0.655s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/local_setup.bash
+[0.655s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/local_setup.sh
+[0.655s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/local_setup.zsh
+[0.655s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/local_setup.dsv
+[0.655s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/package.dsv
+[0.655s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/ament_index/resource_index/packages/path_planning_dtstarlite
+[0.655s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/cmake/path_planning_dtstarliteConfig.cmake
+[0.655s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/cmake/path_planning_dtstarliteConfig-version.cmake
+[0.655s] -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_dtstarlite/share/path_planning_dtstarlite/package.xml
+[0.657s] Invoked command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite' returned '0': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake --install /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_dtstarlite

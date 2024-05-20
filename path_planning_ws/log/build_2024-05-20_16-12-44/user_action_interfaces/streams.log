@@ -1,0 +1,17 @@
+[0.006s] Invoking command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces -DCMAKE_INSTALL_PREFIX=/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces
+[0.011s] -- Found ament_cmake: 2.0.5 (/opt/ros/iron/share/ament_cmake/cmake)
+[0.089s] -- Found rosidl_default_generators: 1.5.0 (/opt/ros/iron/share/rosidl_default_generators/cmake)
+[0.090s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.108s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.122s] -- Found rosidl_adapter: 4.0.1 (/opt/ros/iron/share/rosidl_adapter/cmake)
+[0.125s] [31mCMake Error at /opt/ros/iron/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:95 (message):
+[0.125s]   rosidl_generate_interfaces() the passed file 'action/Path_planning.action'
+[0.125s]   doesn't exist relative to the CMAKE_CURRENT_SOURCE_DIR
+[0.125s]   '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces'
+[0.125s] Call Stack (most recent call first):
+[0.125s]   CMakeLists.txt:13 (rosidl_generate_interfaces)
+[0.125s] 
+[0.125s] [0m
+[0.125s] -- Configuring incomplete, errors occurred!
+[0.125s] See also "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/CMakeFiles/CMakeOutput.log".
+[0.128s] Invoked command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces' returned '1': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces -DCMAKE_INSTALL_PREFIX=/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces

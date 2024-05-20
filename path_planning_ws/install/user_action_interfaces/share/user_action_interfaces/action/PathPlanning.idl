@@ -1,0 +1,18 @@
+// generated from rosidl_adapter/resource/action.idl.em
+// with input from user_action_interfaces/action/PathPlanning.action
+// generated code does not contain a copyright notice
+
+
+module user_action_interfaces {
+  module action {
+    struct PathPlanning_Goal {
+      sequence<int32> start_goal;
+    };
+    struct PathPlanning_Result {
+      sequence<int32> path;
+    };
+    struct PathPlanning_Feedback {
+      sequence<int32> partial_path;
+    };
+  };
+};

@@ -1,0 +1,13 @@
+{
+  "package_name": "user_action_interfaces",
+  "output_dir": "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_generator_type_description/user_action_interfaces",
+  "idl_tuples": [
+    "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces:action/PathPlanning.idl"
+  ],
+  "include_paths": [
+    "service_msgs:/opt/ros/iron/share/service_msgs",
+    "builtin_interfaces:/opt/ros/iron/share/builtin_interfaces",
+    "action_msgs:/opt/ros/iron/share/action_msgs",
+    "unique_identifier_msgs:/opt/ros/iron/share/unique_identifier_msgs"
+  ]
+}

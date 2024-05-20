@@ -1,0 +1,15 @@
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/ament_index/resource_index/package_run_dependencies/path_management
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/ament_index/resource_index/parent_prefix_path/path_management
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/path_management/environment/ament_prefix_path.sh
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/path_management/environment/ament_prefix_path.dsv
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/path_management/environment/path.sh
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/path_management/environment/path.dsv
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/path_management/local_setup.bash
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/path_management/local_setup.sh
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/path_management/local_setup.zsh
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/path_management/local_setup.dsv
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/path_management/package.dsv
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/ament_index/resource_index/packages/path_management
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/path_management/cmake/path_managementConfig.cmake
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/path_management/cmake/path_managementConfig-version.cmake
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_management/share/path_management/package.xml

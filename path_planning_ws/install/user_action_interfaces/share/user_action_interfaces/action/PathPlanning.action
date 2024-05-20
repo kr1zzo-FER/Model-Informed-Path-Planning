@@ -1,0 +1,5 @@
+int32[] start_goal
+---
+int32[] path
+---
+int32[] partial_path

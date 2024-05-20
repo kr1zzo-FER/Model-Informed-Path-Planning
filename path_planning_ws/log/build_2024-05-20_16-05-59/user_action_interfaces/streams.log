@@ -1,0 +1,9 @@
+[0.006s] Invoking command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces -DCMAKE_INSTALL_PREFIX=/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces
+[0.013s] -- Found ament_cmake: 2.0.5 (/opt/ros/iron/share/ament_cmake/cmake)
+[0.094s] -- Configuring incomplete, errors occurred!
+[0.094s] See also "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/CMakeFiles/CMakeOutput.log".
+[0.094s] [31mCMake Error at CMakeLists.txt:12 (rosidl_generate_interfaces):
+[0.094s]   Unknown CMake command "rosidl_generate_interfaces".
+[0.094s] 
+[0.094s] [0m
+[0.095s] Invoked command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces' returned '1': CMAKE_PREFIX_PATH=/opt/ros/iron /usr/bin/cmake /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces -DCMAKE_INSTALL_PREFIX=/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces

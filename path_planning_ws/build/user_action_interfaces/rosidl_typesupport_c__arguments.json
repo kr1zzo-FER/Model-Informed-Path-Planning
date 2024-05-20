@@ -1,0 +1,35 @@
+{
+  "package_name": "user_action_interfaces",
+  "output_dir": "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_typesupport_c/user_action_interfaces",
+  "template_dir": "/opt/ros/iron/share/rosidl_typesupport_c/resource",
+  "idl_tuples": [
+    "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces:action/PathPlanning.idl"
+  ],
+  "ros_interface_dependencies": [
+    "service_msgs:/opt/ros/iron/share/service_msgs/msg/ServiceEventInfo.idl",
+    "builtin_interfaces:/opt/ros/iron/share/builtin_interfaces/msg/Duration.idl",
+    "builtin_interfaces:/opt/ros/iron/share/builtin_interfaces/msg/Time.idl",
+    "action_msgs:/opt/ros/iron/share/action_msgs/msg/GoalInfo.idl",
+    "action_msgs:/opt/ros/iron/share/action_msgs/msg/GoalStatus.idl",
+    "action_msgs:/opt/ros/iron/share/action_msgs/msg/GoalStatusArray.idl",
+    "action_msgs:/opt/ros/iron/share/action_msgs/srv/CancelGoal.idl",
+    "unique_identifier_msgs:/opt/ros/iron/share/unique_identifier_msgs/msg/UUID.idl"
+  ],
+  "target_dependencies": [
+    "/opt/ros/iron/lib/rosidl_typesupport_c/rosidl_typesupport_c",
+    "/opt/ros/iron/lib/python3.10/site-packages/rosidl_typesupport_c/__init__.py",
+    "/opt/ros/iron/share/rosidl_typesupport_c/resource/action__type_support.c.em",
+    "/opt/ros/iron/share/rosidl_typesupport_c/resource/idl__type_support.cpp.em",
+    "/opt/ros/iron/share/rosidl_typesupport_c/resource/msg__type_support.cpp.em",
+    "/opt/ros/iron/share/rosidl_typesupport_c/resource/srv__type_support.cpp.em",
+    "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces/action/PathPlanning.idl",
+    "/opt/ros/iron/share/service_msgs/msg/ServiceEventInfo.idl",
+    "/opt/ros/iron/share/builtin_interfaces/msg/Duration.idl",
+    "/opt/ros/iron/share/builtin_interfaces/msg/Time.idl",
+    "/opt/ros/iron/share/action_msgs/msg/GoalInfo.idl",
+    "/opt/ros/iron/share/action_msgs/msg/GoalStatus.idl",
+    "/opt/ros/iron/share/action_msgs/msg/GoalStatusArray.idl",
+    "/opt/ros/iron/share/action_msgs/srv/CancelGoal.idl",
+    "/opt/ros/iron/share/unique_identifier_msgs/msg/UUID.idl"
+  ]
+}
