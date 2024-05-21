@@ -21,16 +21,32 @@ namespace action
 namespace builder
 {
 
-class Init_PathPlanning_Goal_start_goal
+class Init_PathPlanning_Goal_goal
 {
 public:
-  Init_PathPlanning_Goal_start_goal()
+  explicit Init_PathPlanning_Goal_goal(::user_action_interfaces::action::PathPlanning_Goal & msg)
+  : msg_(msg)
+  {}
+  ::user_action_interfaces::action::PathPlanning_Goal goal(::user_action_interfaces::action::PathPlanning_Goal::_goal_type arg)
+  {
+    msg_.goal = std::move(arg);
+    return std::move(msg_);
+  }
+
+private:
+  ::user_action_interfaces::action::PathPlanning_Goal msg_;
+};
+
+class Init_PathPlanning_Goal_start
+{
+public:
+  Init_PathPlanning_Goal_start()
   : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
   {}
-  ::user_action_interfaces::action::PathPlanning_Goal start_goal(::user_action_interfaces::action::PathPlanning_Goal::_start_goal_type arg)
+  Init_PathPlanning_Goal_goal start(::user_action_interfaces::action::PathPlanning_Goal::_start_type arg)
   {
-    msg_.start_goal = std::move(arg);
-    return std::move(msg_);
+    msg_.start = std::move(arg);
+    return Init_PathPlanning_Goal_goal(msg_);
   }
 
 private:
@@ -48,7 +64,7 @@ template<>
 inline
 auto build<::user_action_interfaces::action::PathPlanning_Goal>()
 {
-  return user_action_interfaces::action::builder::Init_PathPlanning_Goal_start_goal();
+  return user_action_interfaces::action::builder::Init_PathPlanning_Goal_start();
 }
 
 }  // namespace user_action_interfaces

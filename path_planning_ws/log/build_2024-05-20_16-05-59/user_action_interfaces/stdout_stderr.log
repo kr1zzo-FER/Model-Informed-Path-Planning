@@ -1,7 +1,0 @@
--- Found ament_cmake: 2.0.5 (/opt/ros/iron/share/ament_cmake/cmake)
--- Configuring incomplete, errors occurred!
-See also "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/CMakeFiles/CMakeOutput.log".
-[31mCMake Error at CMakeLists.txt:12 (rosidl_generate_interfaces):
-  Unknown CMake command "rosidl_generate_interfaces".
-
-[0m

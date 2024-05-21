@@ -1,4 +1,5 @@
-int32[] start_goal
+int32[] start
+int32[] goal
 ---
 int32[] path
 ---

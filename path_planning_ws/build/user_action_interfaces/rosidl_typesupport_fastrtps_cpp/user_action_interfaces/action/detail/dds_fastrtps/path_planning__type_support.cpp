@@ -33,9 +33,13 @@ cdr_serialize(
   const user_action_interfaces::action::PathPlanning_Goal & ros_message,
   eprosima::fastcdr::Cdr & cdr)
 {
-  // Member: start_goal
+  // Member: start
   {
-    cdr << ros_message.start_goal;
+    cdr << ros_message.start;
+  }
+  // Member: goal
+  {
+    cdr << ros_message.goal;
   }
   return true;
 }
@@ -46,9 +50,14 @@ cdr_deserialize(
   eprosima::fastcdr::Cdr & cdr,
   user_action_interfaces::action::PathPlanning_Goal & ros_message)
 {
-  // Member: start_goal
+  // Member: start
   {
-    cdr >> ros_message.start_goal;
+    cdr >> ros_message.start;
+  }
+
+  // Member: goal
+  {
+    cdr >> ros_message.goal;
   }
 
   return true;
@@ -67,13 +76,23 @@ get_serialized_size(
   (void)padding;
   (void)wchar_size;
 
-  // Member: start_goal
+  // Member: start
   {
-    size_t array_size = ros_message.start_goal.size();
+    size_t array_size = ros_message.start.size();
 
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-    size_t item_size = sizeof(ros_message.start_goal[0]);
+    size_t item_size = sizeof(ros_message.start[0]);
+    current_alignment += array_size * item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // Member: goal
+  {
+    size_t array_size = ros_message.goal.size();
+
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+    size_t item_size = sizeof(ros_message.goal[0]);
     current_alignment += array_size * item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
@@ -101,7 +120,20 @@ max_serialized_size_PathPlanning_Goal(
   is_plain = true;
 
 
-  // Member: start_goal
+  // Member: start
+  {
+    size_t array_size = 0;
+    full_bounded = false;
+    is_plain = false;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+    last_member_size = array_size * sizeof(uint32_t);
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
+
+  // Member: goal
   {
     size_t array_size = 0;
     full_bounded = false;
@@ -122,7 +154,7 @@ max_serialized_size_PathPlanning_Goal(
     using DataType = user_action_interfaces::action::PathPlanning_Goal;
     is_plain =
       (
-      offsetof(DataType, start_goal) +
+      offsetof(DataType, goal) +
       last_member_size
       ) == ret_val;
   }

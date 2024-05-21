@@ -6,7 +6,9 @@
 module user_action_interfaces {
   module action {
     struct PathPlanning_Goal {
-      sequence<int32> start_goal;
+      sequence<int32> start;
+
+      sequence<int32> goal;
     };
     struct PathPlanning_Result {
       sequence<int32> path;

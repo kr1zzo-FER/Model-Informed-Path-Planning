@@ -13,7 +13,8 @@
 
 
 // Include directives for member types
-// Member `start_goal`
+// Member `start`
+// Member `goal`
 #include "rosidl_runtime_c/primitives_sequence_functions.h"
 
 #ifdef __cplusplus
@@ -35,7 +36,7 @@ void user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_intro
   user_action_interfaces__action__PathPlanning_Goal__fini(message_memory);
 }
 
-size_t user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__size_function__PathPlanning_Goal__start_goal(
+size_t user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__size_function__PathPlanning_Goal__start(
   const void * untyped_member)
 {
   const rosidl_runtime_c__int32__Sequence * member =
@@ -43,7 +44,7 @@ size_t user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_int
   return member->size;
 }
 
-const void * user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_const_function__PathPlanning_Goal__start_goal(
+const void * user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_const_function__PathPlanning_Goal__start(
   const void * untyped_member, size_t index)
 {
   const rosidl_runtime_c__int32__Sequence * member =
@@ -51,7 +52,7 @@ const void * user_action_interfaces__action__PathPlanning_Goal__rosidl_typesuppo
   return &member->data[index];
 }
 
-void * user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_function__PathPlanning_Goal__start_goal(
+void * user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_function__PathPlanning_Goal__start(
   void * untyped_member, size_t index)
 {
   rosidl_runtime_c__int32__Sequence * member =
@@ -59,29 +60,29 @@ void * user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_int
   return &member->data[index];
 }
 
-void user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__fetch_function__PathPlanning_Goal__start_goal(
+void user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__fetch_function__PathPlanning_Goal__start(
   const void * untyped_member, size_t index, void * untyped_value)
 {
   const int32_t * item =
     ((const int32_t *)
-    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_const_function__PathPlanning_Goal__start_goal(untyped_member, index));
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_const_function__PathPlanning_Goal__start(untyped_member, index));
   int32_t * value =
     (int32_t *)(untyped_value);
   *value = *item;
 }
 
-void user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__assign_function__PathPlanning_Goal__start_goal(
+void user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__assign_function__PathPlanning_Goal__start(
   void * untyped_member, size_t index, const void * untyped_value)
 {
   int32_t * item =
     ((int32_t *)
-    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_function__PathPlanning_Goal__start_goal(untyped_member, index));
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_function__PathPlanning_Goal__start(untyped_member, index));
   const int32_t * value =
     (const int32_t *)(untyped_value);
   *item = *value;
 }
 
-bool user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__resize_function__PathPlanning_Goal__start_goal(
+bool user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__resize_function__PathPlanning_Goal__start(
   void * untyped_member, size_t size)
 {
   rosidl_runtime_c__int32__Sequence * member =
@@ -90,30 +91,102 @@ bool user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_intro
   return rosidl_runtime_c__int32__Sequence__init(member, size);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__PathPlanning_Goal_message_member_array[1] = {
+size_t user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__size_function__PathPlanning_Goal__goal(
+  const void * untyped_member)
+{
+  const rosidl_runtime_c__int32__Sequence * member =
+    (const rosidl_runtime_c__int32__Sequence *)(untyped_member);
+  return member->size;
+}
+
+const void * user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_const_function__PathPlanning_Goal__goal(
+  const void * untyped_member, size_t index)
+{
+  const rosidl_runtime_c__int32__Sequence * member =
+    (const rosidl_runtime_c__int32__Sequence *)(untyped_member);
+  return &member->data[index];
+}
+
+void * user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_function__PathPlanning_Goal__goal(
+  void * untyped_member, size_t index)
+{
+  rosidl_runtime_c__int32__Sequence * member =
+    (rosidl_runtime_c__int32__Sequence *)(untyped_member);
+  return &member->data[index];
+}
+
+void user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__fetch_function__PathPlanning_Goal__goal(
+  const void * untyped_member, size_t index, void * untyped_value)
+{
+  const int32_t * item =
+    ((const int32_t *)
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_const_function__PathPlanning_Goal__goal(untyped_member, index));
+  int32_t * value =
+    (int32_t *)(untyped_value);
+  *value = *item;
+}
+
+void user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__assign_function__PathPlanning_Goal__goal(
+  void * untyped_member, size_t index, const void * untyped_value)
+{
+  int32_t * item =
+    ((int32_t *)
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_function__PathPlanning_Goal__goal(untyped_member, index));
+  const int32_t * value =
+    (const int32_t *)(untyped_value);
+  *item = *value;
+}
+
+bool user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__resize_function__PathPlanning_Goal__goal(
+  void * untyped_member, size_t size)
+{
+  rosidl_runtime_c__int32__Sequence * member =
+    (rosidl_runtime_c__int32__Sequence *)(untyped_member);
+  rosidl_runtime_c__int32__Sequence__fini(member);
+  return rosidl_runtime_c__int32__Sequence__init(member, size);
+}
+
+static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__PathPlanning_Goal_message_member_array[2] = {
   {
-    "start_goal",  // name
+    "start",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_INT32,  // type
     0,  // upper bound of string
     NULL,  // members of sub message
     true,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces__action__PathPlanning_Goal, start_goal),  // bytes offset in struct
+    offsetof(user_action_interfaces__action__PathPlanning_Goal, start),  // bytes offset in struct
     NULL,  // default value
-    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__size_function__PathPlanning_Goal__start_goal,  // size() function pointer
-    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_const_function__PathPlanning_Goal__start_goal,  // get_const(index) function pointer
-    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_function__PathPlanning_Goal__start_goal,  // get(index) function pointer
-    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__fetch_function__PathPlanning_Goal__start_goal,  // fetch(index, &value) function pointer
-    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__assign_function__PathPlanning_Goal__start_goal,  // assign(index, value) function pointer
-    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__resize_function__PathPlanning_Goal__start_goal  // resize(index) function pointer
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__size_function__PathPlanning_Goal__start,  // size() function pointer
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_const_function__PathPlanning_Goal__start,  // get_const(index) function pointer
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_function__PathPlanning_Goal__start,  // get(index) function pointer
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__fetch_function__PathPlanning_Goal__start,  // fetch(index, &value) function pointer
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__assign_function__PathPlanning_Goal__start,  // assign(index, value) function pointer
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__resize_function__PathPlanning_Goal__start  // resize(index) function pointer
+  },
+  {
+    "goal",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_INT32,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message
+    true,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces__action__PathPlanning_Goal, goal),  // bytes offset in struct
+    NULL,  // default value
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__size_function__PathPlanning_Goal__goal,  // size() function pointer
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_const_function__PathPlanning_Goal__goal,  // get_const(index) function pointer
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__get_function__PathPlanning_Goal__goal,  // get(index) function pointer
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__fetch_function__PathPlanning_Goal__goal,  // fetch(index, &value) function pointer
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__assign_function__PathPlanning_Goal__goal,  // assign(index, value) function pointer
+    user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__resize_function__PathPlanning_Goal__goal  // resize(index) function pointer
   }
 };
 
 static const rosidl_typesupport_introspection_c__MessageMembers user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__PathPlanning_Goal_message_members = {
   "user_action_interfaces__action",  // message namespace
   "PathPlanning_Goal",  // message name
-  1,  // number of fields
+  2,  // number of fields
   sizeof(user_action_interfaces__action__PathPlanning_Goal),
   user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__PathPlanning_Goal_message_member_array,  // message members
   user_action_interfaces__action__PathPlanning_Goal__rosidl_typesupport_introspection_c__PathPlanning_Goal_init_function,  // function to initialize message memory (memory has to be allocated)

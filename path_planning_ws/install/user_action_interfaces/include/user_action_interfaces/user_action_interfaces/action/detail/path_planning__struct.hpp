@@ -45,15 +45,24 @@ struct PathPlanning_Goal_
   }
 
   // field types and members
-  using _start_goal_type =
+  using _start_type =
     std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>>;
-  _start_goal_type start_goal;
+  _start_type start;
+  using _goal_type =
+    std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>>;
+  _goal_type goal;
 
   // setters for named parameter idiom
-  Type & set__start_goal(
+  Type & set__start(
     const std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>> & _arg)
   {
-    this->start_goal = _arg;
+    this->start = _arg;
+    return *this;
+  }
+  Type & set__goal(
+    const std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>> & _arg)
+  {
+    this->goal = _arg;
     return *this;
   }
 
@@ -99,7 +108,10 @@ struct PathPlanning_Goal_
   // comparison operators
   bool operator==(const PathPlanning_Goal_ & other) const
   {
-    if (this->start_goal != other.start_goal) {
+    if (this->start != other.start) {
+      return false;
+    }
+    if (this->goal != other.goal) {
       return false;
     }
     return true;

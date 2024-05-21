@@ -4,7 +4,17 @@
       "type_name": "user_action_interfaces/action/PathPlanning_Goal",
       "fields": [
         {
-          "name": "start_goal",
+          "name": "start",
+          "type": {
+            "type_id": 150,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        },
+        {
+          "name": "goal",
           "type": {
             "type_id": 150,
             "capacity": 0,
@@ -20,7 +30,7 @@
   "type_hashes": [
     {
       "type_name": "user_action_interfaces/action/PathPlanning_Goal",
-      "hash_string": "RIHS01_5ca5b6afdadc2202e1a45982d95c2d7c48f72d243da0bf381ae284db6a7f531e"
+      "hash_string": "RIHS01_b3c70c9af425226f5e8d3f5645e746f1df23114ef7a23e30845430254015070d"
     }
   ]
 }

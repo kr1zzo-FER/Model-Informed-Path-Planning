@@ -25,14 +25,32 @@ inline void to_flow_style_yaml(
   std::ostream & out)
 {
   out << "{";
-  // member: start_goal
+  // member: start
   {
-    if (msg.start_goal.size() == 0) {
-      out << "start_goal: []";
+    if (msg.start.size() == 0) {
+      out << "start: []";
     } else {
-      out << "start_goal: [";
-      size_t pending_items = msg.start_goal.size();
-      for (auto item : msg.start_goal) {
+      out << "start: [";
+      size_t pending_items = msg.start.size();
+      for (auto item : msg.start) {
+        rosidl_generator_traits::value_to_yaml(item, out);
+        if (--pending_items > 0) {
+          out << ", ";
+        }
+      }
+      out << "]";
+    }
+    out << ", ";
+  }
+
+  // member: goal
+  {
+    if (msg.goal.size() == 0) {
+      out << "goal: []";
+    } else {
+      out << "goal: [";
+      size_t pending_items = msg.goal.size();
+      for (auto item : msg.goal) {
         rosidl_generator_traits::value_to_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -48,16 +66,36 @@ inline void to_block_style_yaml(
   const PathPlanning_Goal & msg,
   std::ostream & out, size_t indentation = 0)
 {
-  // member: start_goal
+  // member: start
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    if (msg.start_goal.size() == 0) {
-      out << "start_goal: []\n";
+    if (msg.start.size() == 0) {
+      out << "start: []\n";
     } else {
-      out << "start_goal:\n";
-      for (auto item : msg.start_goal) {
+      out << "start:\n";
+      for (auto item : msg.start) {
+        if (indentation > 0) {
+          out << std::string(indentation, ' ');
+        }
+        out << "- ";
+        rosidl_generator_traits::value_to_yaml(item, out);
+        out << "\n";
+      }
+    }
+  }
+
+  // member: goal
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    if (msg.goal.size() == 0) {
+      out << "goal: []\n";
+    } else {
+      out << "goal:\n";
+      for (auto item : msg.goal) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }

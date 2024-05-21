@@ -1,0 +1,41 @@
+## Step 1: Download data from OpenStreetMap (optional)
+
+# Process OSM data
+locations_folder : 
+#- "omisalj"
+#- "selehovica"
+#- "sv_marko"
+- "voz"
+- "lokvisce"
+- "rudine"
+#- "dramalj"
+#- "klimno"
+#- "crikvenica"
+#- "selce"
+#- "novi"
+#- "silo"
+#- "povile"
+#- "petrina"
+#- "melska"
+#- "vrbnik"
+
+save_file : kacjak
+
+custom_start_goal : False
+
+# Step 2 : False, Step 4 : True
+cost_map : True
+
+waypoints :
+- [45.235309, 14.577240]
+- [45.240601, 14.592553]
+- [45.223621, 14.606432] 
+- [45.205115, 14.623724] 
+- [45.188642, 14.634578]
+- [45.164687, 14.637477]
+- [45.153386, 14.603332]
+
+grid_size : 10.0  # [m]
+
+
+

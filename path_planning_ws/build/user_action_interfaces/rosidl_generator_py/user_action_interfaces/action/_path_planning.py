@@ -12,7 +12,8 @@ ros_python_check_fields = getenv('ROS_PYTHON_CHECK_FIELDS', default='')
 
 # Import statements for member types
 
-# Member 'start_goal'
+# Member 'start'
+# Member 'goal'
 import array  # noqa: E402, I100
 
 import builtins  # noqa: E402, I100
@@ -65,17 +66,20 @@ class PathPlanning_Goal(metaclass=Metaclass_PathPlanning_Goal):
     """Message class 'PathPlanning_Goal'."""
 
     __slots__ = [
-        '_start_goal',
+        '_start',
+        '_goal',
         '_check_fields',
     ]
 
     _fields_and_field_types = {
-        'start_goal': 'sequence<int32>',
+        'start': 'sequence<int32>',
+        'goal': 'sequence<int32>',
     }
 
     # This attribute is used to store an rosidl_parser.definition variable
     # related to the data type of each of the components the message.
     SLOT_TYPES = (
+        rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('int32')),  # noqa: E501
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('int32')),  # noqa: E501
     )
 
@@ -88,7 +92,8 @@ class PathPlanning_Goal(metaclass=Metaclass_PathPlanning_Goal):
             assert all('_' + key in self.__slots__ for key in kwargs.keys()), \
                 'Invalid arguments passed to constructor: %s' % \
                 ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
-        self.start_goal = array.array('i', kwargs.get('start_goal', []))
+        self.start = array.array('i', kwargs.get('start', []))
+        self.goal = array.array('i', kwargs.get('goal', []))
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -120,7 +125,9 @@ class PathPlanning_Goal(metaclass=Metaclass_PathPlanning_Goal):
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return False
-        if self.start_goal != other.start_goal:
+        if self.start != other.start:
+            return False
+        if self.goal != other.goal:
             return False
         return True
 
@@ -130,17 +137,17 @@ class PathPlanning_Goal(metaclass=Metaclass_PathPlanning_Goal):
         return copy(cls._fields_and_field_types)
 
     @builtins.property
-    def start_goal(self):
-        """Message field 'start_goal'."""
-        return self._start_goal
+    def start(self):
+        """Message field 'start'."""
+        return self._start
 
-    @start_goal.setter
-    def start_goal(self, value):
+    @start.setter
+    def start(self, value):
         if self._check_fields:
             if isinstance(value, array.array):
                 assert value.typecode == 'i', \
-                    "The 'start_goal' array.array() must have the type code of 'i'"
-                self._start_goal = value
+                    "The 'start' array.array() must have the type code of 'i'"
+                self._start = value
                 return
             from collections.abc import Sequence
             from collections.abc import Set
@@ -154,8 +161,36 @@ class PathPlanning_Goal(metaclass=Metaclass_PathPlanning_Goal):
                  not isinstance(value, UserString) and
                  all(isinstance(v, int) for v in value) and
                  all(val >= -2147483648 and val < 2147483648 for val in value)), \
-                "The 'start_goal' field must be a set or sequence and each value of type 'int' and each integer in [-2147483648, 2147483647]"
-        self._start_goal = array.array('i', value)
+                "The 'start' field must be a set or sequence and each value of type 'int' and each integer in [-2147483648, 2147483647]"
+        self._start = array.array('i', value)
+
+    @builtins.property
+    def goal(self):
+        """Message field 'goal'."""
+        return self._goal
+
+    @goal.setter
+    def goal(self, value):
+        if self._check_fields:
+            if isinstance(value, array.array):
+                assert value.typecode == 'i', \
+                    "The 'goal' array.array() must have the type code of 'i'"
+                self._goal = value
+                return
+            from collections.abc import Sequence
+            from collections.abc import Set
+            from collections import UserList
+            from collections import UserString
+            assert \
+                ((isinstance(value, Sequence) or
+                  isinstance(value, Set) or
+                  isinstance(value, UserList)) and
+                 not isinstance(value, str) and
+                 not isinstance(value, UserString) and
+                 all(isinstance(v, int) for v in value) and
+                 all(val >= -2147483648 and val < 2147483648 for val in value)), \
+                "The 'goal' field must be a set or sequence and each value of type 'int' and each integer in [-2147483648, 2147483647]"
+        self._goal = array.array('i', value)
 
 
 # Import statements for member types

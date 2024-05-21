@@ -18,13 +18,15 @@ extern "C"
 // Constants defined in the message
 
 // Include directives for member types
-// Member 'start_goal'
+// Member 'start'
+// Member 'goal'
 #include "rosidl_runtime_c/primitives_sequence.h"
 
 /// Struct defined in action/PathPlanning in the package user_action_interfaces.
 typedef struct user_action_interfaces__action__PathPlanning_Goal
 {
-  rosidl_runtime_c__int32__Sequence start_goal;
+  rosidl_runtime_c__int32__Sequence start;
+  rosidl_runtime_c__int32__Sequence goal;
 } user_action_interfaces__action__PathPlanning_Goal;
 
 // Struct for a sequence of user_action_interfaces__action__PathPlanning_Goal.

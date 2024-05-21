@@ -34,8 +34,8 @@ extern "C"
 {
 #endif
 
-#include "rosidl_runtime_c/primitives_sequence.h"  // start_goal
-#include "rosidl_runtime_c/primitives_sequence_functions.h"  // start_goal
+#include "rosidl_runtime_c/primitives_sequence.h"  // goal, start
+#include "rosidl_runtime_c/primitives_sequence_functions.h"  // goal, start
 
 // forward declare type support functions
 
@@ -51,10 +51,18 @@ static bool _PathPlanning_Goal__cdr_serialize(
     return false;
   }
   const _PathPlanning_Goal__ros_msg_type * ros_message = static_cast<const _PathPlanning_Goal__ros_msg_type *>(untyped_ros_message);
-  // Field name: start_goal
+  // Field name: start
   {
-    size_t size = ros_message->start_goal.size;
-    auto array_ptr = ros_message->start_goal.data;
+    size_t size = ros_message->start.size;
+    auto array_ptr = ros_message->start.data;
+    cdr << static_cast<uint32_t>(size);
+    cdr.serializeArray(array_ptr, size);
+  }
+
+  // Field name: goal
+  {
+    size_t size = ros_message->goal.size;
+    auto array_ptr = ros_message->goal.data;
     cdr << static_cast<uint32_t>(size);
     cdr.serializeArray(array_ptr, size);
   }
@@ -71,19 +79,35 @@ static bool _PathPlanning_Goal__cdr_deserialize(
     return false;
   }
   _PathPlanning_Goal__ros_msg_type * ros_message = static_cast<_PathPlanning_Goal__ros_msg_type *>(untyped_ros_message);
-  // Field name: start_goal
+  // Field name: start
   {
     uint32_t cdrSize;
     cdr >> cdrSize;
     size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->start_goal.data) {
-      rosidl_runtime_c__int32__Sequence__fini(&ros_message->start_goal);
+    if (ros_message->start.data) {
+      rosidl_runtime_c__int32__Sequence__fini(&ros_message->start);
     }
-    if (!rosidl_runtime_c__int32__Sequence__init(&ros_message->start_goal, size)) {
-      fprintf(stderr, "failed to create array for field 'start_goal'");
+    if (!rosidl_runtime_c__int32__Sequence__init(&ros_message->start, size)) {
+      fprintf(stderr, "failed to create array for field 'start'");
       return false;
     }
-    auto array_ptr = ros_message->start_goal.data;
+    auto array_ptr = ros_message->start.data;
+    cdr.deserializeArray(array_ptr, size);
+  }
+
+  // Field name: goal
+  {
+    uint32_t cdrSize;
+    cdr >> cdrSize;
+    size_t size = static_cast<size_t>(cdrSize);
+    if (ros_message->goal.data) {
+      rosidl_runtime_c__int32__Sequence__fini(&ros_message->goal);
+    }
+    if (!rosidl_runtime_c__int32__Sequence__init(&ros_message->goal, size)) {
+      fprintf(stderr, "failed to create array for field 'goal'");
+      return false;
+    }
+    auto array_ptr = ros_message->goal.data;
     cdr.deserializeArray(array_ptr, size);
   }
 
@@ -104,10 +128,21 @@ size_t get_serialized_size_user_action_interfaces__action__PathPlanning_Goal(
   (void)padding;
   (void)wchar_size;
 
-  // field.name start_goal
+  // field.name start
   {
-    size_t array_size = ros_message->start_goal.size;
-    auto array_ptr = ros_message->start_goal.data;
+    size_t array_size = ros_message->start.size;
+    auto array_ptr = ros_message->start.data;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+    (void)array_ptr;
+    size_t item_size = sizeof(array_ptr[0]);
+    current_alignment += array_size * item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name goal
+  {
+    size_t array_size = ros_message->goal.size;
+    auto array_ptr = ros_message->goal.data;
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
     (void)array_ptr;
@@ -144,7 +179,19 @@ size_t max_serialized_size_user_action_interfaces__action__PathPlanning_Goal(
   full_bounded = true;
   is_plain = true;
 
-  // member: start_goal
+  // member: start
+  {
+    size_t array_size = 0;
+    full_bounded = false;
+    is_plain = false;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+    last_member_size = array_size * sizeof(uint32_t);
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
+  // member: goal
   {
     size_t array_size = 0;
     full_bounded = false;
@@ -165,7 +212,7 @@ size_t max_serialized_size_user_action_interfaces__action__PathPlanning_Goal(
     using DataType = user_action_interfaces__action__PathPlanning_Goal;
     is_plain =
       (
-      offsetof(DataType, start_goal) +
+      offsetof(DataType, goal) +
       last_member_size
       ) == ret_val;
   }

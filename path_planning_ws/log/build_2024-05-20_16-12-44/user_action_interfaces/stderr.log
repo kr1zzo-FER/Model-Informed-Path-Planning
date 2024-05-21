@@ -1,8 +1,0 @@
-[31mCMake Error at /opt/ros/iron/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:95 (message):
-  rosidl_generate_interfaces() the passed file 'action/Path_planning.action'
-  doesn't exist relative to the CMAKE_CURRENT_SOURCE_DIR
-  '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces'
-Call Stack (most recent call first):
-  CMakeLists.txt:13 (rosidl_generate_interfaces)
-
-[0m

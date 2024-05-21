@@ -1,0 +1,8 @@
+[console_scripts]
+coast_pointcloud = path_planning_action.coast_pointcloud:main
+detect_coast = path_planning_action.detect_coast:CoastProcessing
+map_process = path_planning_action.map_process:main
+post_processing = path_planning_action.post_processing
+process_osm_data = path_planning_action.process_osm_data
+start_goal_action = path_planning_action.start_goal_action:main
+

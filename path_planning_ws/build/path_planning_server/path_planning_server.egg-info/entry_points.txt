@@ -1,0 +1,3 @@
+[console_scripts]
+planning_server = path_planning_server.planning_server:main
+

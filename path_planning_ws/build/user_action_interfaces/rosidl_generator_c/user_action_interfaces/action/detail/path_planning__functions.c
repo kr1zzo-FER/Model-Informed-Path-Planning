@@ -12,7 +12,8 @@
 
 
 // Include directives for member types
-// Member `start_goal`
+// Member `start`
+// Member `goal`
 #include "rosidl_runtime_c/primitives_sequence_functions.h"
 
 bool
@@ -21,8 +22,13 @@ user_action_interfaces__action__PathPlanning_Goal__init(user_action_interfaces__
   if (!msg) {
     return false;
   }
-  // start_goal
-  if (!rosidl_runtime_c__int32__Sequence__init(&msg->start_goal, 0)) {
+  // start
+  if (!rosidl_runtime_c__int32__Sequence__init(&msg->start, 0)) {
+    user_action_interfaces__action__PathPlanning_Goal__fini(msg);
+    return false;
+  }
+  // goal
+  if (!rosidl_runtime_c__int32__Sequence__init(&msg->goal, 0)) {
     user_action_interfaces__action__PathPlanning_Goal__fini(msg);
     return false;
   }
@@ -35,8 +41,10 @@ user_action_interfaces__action__PathPlanning_Goal__fini(user_action_interfaces__
   if (!msg) {
     return;
   }
-  // start_goal
-  rosidl_runtime_c__int32__Sequence__fini(&msg->start_goal);
+  // start
+  rosidl_runtime_c__int32__Sequence__fini(&msg->start);
+  // goal
+  rosidl_runtime_c__int32__Sequence__fini(&msg->goal);
 }
 
 bool
@@ -45,9 +53,15 @@ user_action_interfaces__action__PathPlanning_Goal__are_equal(const user_action_i
   if (!lhs || !rhs) {
     return false;
   }
-  // start_goal
+  // start
   if (!rosidl_runtime_c__int32__Sequence__are_equal(
-      &(lhs->start_goal), &(rhs->start_goal)))
+      &(lhs->start), &(rhs->start)))
+  {
+    return false;
+  }
+  // goal
+  if (!rosidl_runtime_c__int32__Sequence__are_equal(
+      &(lhs->goal), &(rhs->goal)))
   {
     return false;
   }
@@ -62,9 +76,15 @@ user_action_interfaces__action__PathPlanning_Goal__copy(
   if (!input || !output) {
     return false;
   }
-  // start_goal
+  // start
   if (!rosidl_runtime_c__int32__Sequence__copy(
-      &(input->start_goal), &(output->start_goal)))
+      &(input->start), &(output->start)))
+  {
+    return false;
+  }
+  // goal
+  if (!rosidl_runtime_c__int32__Sequence__copy(
+      &(input->goal), &(output->goal)))
   {
     return false;
   }
