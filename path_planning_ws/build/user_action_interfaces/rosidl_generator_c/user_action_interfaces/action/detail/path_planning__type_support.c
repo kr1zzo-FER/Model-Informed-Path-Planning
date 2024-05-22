@@ -4,9 +4,9 @@
 
 #include <string.h>
 
-#include "user_action_interfaces/action/detail/path_planning__type_support.h"
 #include "user_action_interfaces/action/detail/path_planning__functions.h"
 #include "rosidl_typesupport_interface/macros.h"
+#include "user_action_interfaces/action/detail/path_planning__type_support.h"
 #include "user_action_interfaces/action/detail/path_planning__struct.h"
 
 #ifdef __cplusplus

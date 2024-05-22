@@ -15,15 +15,18 @@ import matplotlib.pyplot as plt
 
 class LocalCoordinatesConverter():
 
-    def __init__(self,coast_points,zones_dictionary,grid_size):
+    def __init__(self, zones_dictionary,grid_size, start, goal):
         self.zones = zones_dictionary
-        self.coast_points = coast_points
+        self.start = (start[0], start[1])
+        self.goal = (goal[0], goal[1])
         self.grid_size = grid_size
         self.coordinates = self.get_coordinates()
         self.size_x = self.set_width()
         self.size_y = self.set_height()
         self.size = (self.size_x, self.size_y)
         self.zones_m_plot, self.zones_m = self.set_zones_m()
+        self.start_m_plot, self.start_m = self.set_start_m()
+        self.goal_m_plot , self.goal_m  = self.set_goal_m()
 
     def gps_to_meters(self,lat1, lon1, lat2, lon2):
         # Convert gps cordinates to meters from (lat1,lon1) to (lat2,lon2)
@@ -80,13 +83,28 @@ class LocalCoordinatesConverter():
         return round(self.gps_to_meters(self.coordinates[1], self.coordinates[0], self.coordinates[3], self.coordinates[0]))
 
     
-    def get_coast_points_m(self):
+    def get_points_m(self):
         coast_points_m = []
+        red_points_m = []
+        yellow_points_m = []
+        green_points_m = []
         for key, value in self.zones_m.items():
             if value == 'c':
                 coast_points_m.append(key)
-        return coast_points_m
+            if value == 'r':
+                red_points_m.append(key)
+            if value == 'y':
+                yellow_points_m.append(key)
+            if value == 'g':
+                green_points_m.append(key)
+        return coast_points_m, red_points_m, yellow_points_m, green_points_m
     
+    def get_start_m(self):
+        return self.start_m
+    
+    def get_goal_m(self):
+        return self.goal_m
+
     def set_zones_m(self):
         gps_dictionary, gps_dictionary_resized = {}, {}
         for key in self.zones:
@@ -95,6 +113,16 @@ class LocalCoordinatesConverter():
             new_key = self.adapt_coordinates(key)
             gps_dictionary_resized[new_key] = self.zones[key]
         return gps_dictionary, gps_dictionary_resized
+    
+    def set_start_m(self):
+        start_m = self.gps_to_pixel(self.start[0],self.start[1])
+        start_m_resized = self.adapt_coordinates(self.start)
+        return start_m, start_m_resized
+    
+    def set_goal_m(self):
+        goal_m = self.gps_to_pixel(self.goal[0],self.goal[1])
+        goal_m_resized = self.adapt_coordinates(self.goal)
+        return goal_m,goal_m_resized
     
     def costmap_visualization(self):
         fig,ax = plt.subplots()

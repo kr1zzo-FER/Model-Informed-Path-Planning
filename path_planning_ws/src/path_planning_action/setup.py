@@ -42,7 +42,7 @@ setup(
     name=package_name,
     version='0.0.0',
     packages=[package_name],
-    data_files=package_files(data_files, ['input_data/', 'launch/']),
+    data_files=package_files(data_files, ['input_data/', 'launch/', 'rviz2/']),
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='enio',
@@ -57,7 +57,8 @@ setup(
            'detect_coast = path_planning_action.detect_coast:CoastProcessing',
            'process_osm_data = path_planning_action.process_osm_data',
            'post_processing = path_planning_action.post_processing',
-           'coast_pointcloud = path_planning_action.coast_pointcloud:main'
+           'pointcloud_publisher = path_planning_action.pointcloud_publisher:main',
+           'rviz2_launch = path_planning_action.rviz2_launch:main',
            
         ],
     },
