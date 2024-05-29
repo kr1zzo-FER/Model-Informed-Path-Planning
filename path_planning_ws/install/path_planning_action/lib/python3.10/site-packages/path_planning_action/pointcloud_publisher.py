@@ -17,7 +17,7 @@ import sensor_msgs.msg as sensor_msgs
 import std_msgs.msg as std_msgs
 import geometry_msgs.msg as geometry_msgs
 from geometry_msgs.msg import PoseStamped
-from geometry_msgs.msg import Quaternion
+from geometry_msgs.msg import PoseWithCovarianceStamped
 import numpy as np
 
 show_plot = True
@@ -76,13 +76,16 @@ class CoastToPointCloud(Node):
         #green points
         self.green_pcd_publisher = self.create_publisher(sensor_msgs.PointCloud2, 'green_pcd_points', 10)
         #start point
-        self.start_publisher = self.create_publisher(PoseStamped, 'start_pose', 10)
+        self.start_publisher = self.create_publisher(PoseStamped, 'start_pose_costume', 10)
         #goal point
-        self.goal_publisher = self.create_publisher(PoseStamped, 'goal_pose', 10)
+        self.goal_publisher = self.create_publisher(PoseStamped, 'goal_pose_costume', 10)
         
         self.timer = self.create_timer(0.1, self.timer_callback)
 
-        self.update = True
+        self.start_update_subscriber = self.create_subscription(PoseWithCovarianceStamped, 'initialpose', self.start_update_callback, 10)   
+        self.goal_update_subscriber = self.create_subscription(PoseStamped, 'goal_pose', self.goal_update_callback, 10)
+
+        self.start_goal_update_publisher = self.create_publisher(StartGoalMsg, 'start_goal_msg_update', 10)
 
     def timer_callback(self):
         self.get_logger().info('Publishing coast points')
@@ -104,6 +107,18 @@ class CoastToPointCloud(Node):
 
 
         self.coast_publisher_rviz.publish(coast_msg)
+
+    def start_update_callback(self, msg):
+        print("Start update")
+        self.start = [msg.pose.pose.position.x*self.grid_size, msg.pose.pose.position.y*self.grid_size]
+        start_gps = self.lcc.pixel_to_gps(self.start[0], self.start[1])
+        self.start_goal_update_publisher.publish(StartGoalMsg(start=[start_gps[0], start_gps[1]], goal=self.goal))
+
+    def goal_update_callback(self, msg):
+        print("Goal update")
+        self.goal = [msg.pose.position.x*self.grid_size, msg.pose.position.y*self.grid_size]
+        goal_gps = self.lcc.pixel_to_gps(self.goal[0], self.goal[1])
+        self.start_goal_update_publisher.publish(StartGoalMsg(start=self.start, goal=[goal_gps[0], goal_gps[1]]))
     
     def start_goal_callback(self, msg):
         self.update = True

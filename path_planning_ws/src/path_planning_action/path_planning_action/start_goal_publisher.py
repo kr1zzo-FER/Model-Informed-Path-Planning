@@ -45,11 +45,10 @@ class PathPlanningPublisher(Node):
         self.coast_points, self.red_points, self.yellow_points, self.green_points, grid_size = self.get_data()
         
         self.start_goal_publisher = self.create_publisher(StartGoalMsg, 'start_goal_msg', 10)
-        self.start_goal_subscriber = self.create_subscription(StartGoalMsg, 'start_goal_msg', self.start_goal_callback, 10)
+        self.start_goal_subscriber = self.create_subscription(StartGoalMsg, 'start_goal_msg_update', self.start_goal_callback, 10)
 
         self.timer = self.create_timer(0.1, self.timer_callback)
 
-        self.display_map()
 
     def start_goal_callback(self, msg):
         self.get_logger().info('Received start and goal')
@@ -65,31 +64,7 @@ class PathPlanningPublisher(Node):
         start_goal_msg.goal = self.goal
 
         self.start_goal_publisher.publish(start_goal_msg)
-        self.get_logger().info('Publishing start and goal')
 
-
-    
-    def display_map(self):
-        coast_points = self.coast_points
-        red_points = self.red_points
-        yellow_points = self.yellow_points
-        green_points = self.green_points
-        fig, ax = plt.subplots()
-        coast_points = np.array(coast_points)
-        red_points = np.array(red_points)
-        yellow_points = np.array(yellow_points)
-        green_points = np.array(green_points)
-        ax.plot(coast_points[:,1], coast_points[:,0], 'b.', markersize=0.1)
-        ax.plot(red_points[:,1], red_points[:,0], 'r.', markersize=0.1)
-        ax.plot(yellow_points[:,1], yellow_points[:,0], 'y.', markersize=0.1)
-        ax.plot(green_points[:,1], green_points[:,0], 'g.', markersize=0.1)
-        ax.plot(self.start[1], self.start[0], 'ro', markersize=0.5)
-        ax.plot(self.goal[1], self.goal[0], 'go', markersize=0.5)
-
-        plt.draw()
-        plt.pause(0.01)
-
-        return fig, ax
     
     def get_data(self):
         path = ws_root / f"src/path_planning_action/input_data/processed_maps/processed_map_{self.save_file}"

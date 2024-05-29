@@ -4,8 +4,8 @@
 
 #include <string.h>
 
-#include "user_action_interfaces/action/detail/start_goal_action__struct.h"
 #include "rosidl_typesupport_interface/macros.h"
+#include "user_action_interfaces/action/detail/start_goal_action__struct.h"
 #include "user_action_interfaces/action/detail/start_goal_action__functions.h"
 #include "user_action_interfaces/action/detail/start_goal_action__type_support.h"
 

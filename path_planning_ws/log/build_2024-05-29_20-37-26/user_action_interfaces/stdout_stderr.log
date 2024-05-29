@@ -49,42 +49,42 @@ writing manifest file 'user_action_interfaces.egg-info/SOURCES.txt'
 [  5%] [34m[1mGenerating C++ code for ROS interfaces[0m
 [  5%] Built target ament_cmake_python_build_user_action_interfaces_egg
 [  5%] Built target user_action_interfaces__cpp
-[  9%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/action/detail/start_goal_action__functions.c.o[0m
+[  7%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/action/detail/start_goal_action__functions.c.o[0m
 [  9%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/action/detail/start_goal_action__type_support.c.o[0m
-[ 11%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/action/detail/start_goal_action__description.c.o[0m
-[ 12%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/msg/detail/start_goal_msg__description.c.o[0m
+[ 11%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/msg/detail/start_goal_msg__description.c.o[0m
+[ 12%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/action/detail/start_goal_action__description.c.o[0m
 [ 14%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/msg/detail/start_goal_msg__functions.c.o[0m
-[ 16%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/msg/detail/coast_msg__functions.c.o[0m
-[ 20%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/msg/detail/start_goal_msg__type_support.c.o[0m
+[ 16%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/msg/detail/start_goal_msg__type_support.c.o[0m
 [ 20%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/msg/detail/coast_msg__description.c.o[0m
+[ 20%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/msg/detail/coast_msg__functions.c.o[0m
 [ 22%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_c.dir/rosidl_generator_c/user_action_interfaces/msg/detail/coast_msg__type_support.c.o[0m
 [ 24%] [32m[1mLinking C shared library libuser_action_interfaces__rosidl_generator_c.so[0m
 [ 24%] Built target user_action_interfaces__rosidl_generator_c
-[ 27%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[ 25%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
 [ 27%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
 [ 29%] [34m[1mGenerating C introspection for ROS interfaces[0m
 [ 31%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
 [ 33%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
 [ 35%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
-[ 38%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/user_action_interfaces/action/start_goal_action__type_support.cpp.o[0m
-[ 38%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/user_action_interfaces/msg/coast_msg__type_support.cpp.o[0m
-[ 40%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/user_action_interfaces/action/start_goal_action__type_support.cpp.o[0m
-[ 42%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/user_action_interfaces/msg/start_goal_msg__type_support.cpp.o[0m
-[ 44%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/user_action_interfaces/msg/start_goal_msg__type_support.cpp.o[0m
+[ 37%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/user_action_interfaces/msg/coast_msg__type_support.cpp.o[0m
+[ 38%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/user_action_interfaces/action/start_goal_action__type_support.cpp.o[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/user_action_interfaces/msg/start_goal_msg__type_support.cpp.o[0m
+[ 42%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/user_action_interfaces/action/start_goal_action__type_support.cpp.o[0m
+[ 46%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/user_action_interfaces/msg/start_goal_msg__type_support.cpp.o[0m
 [ 46%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/user_action_interfaces/msg/coast_msg__type_support.cpp.o[0m
-[ 51%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/user_action_interfaces/msg/detail/coast_msg__type_support.cpp.o[0m
+[ 48%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/user_action_interfaces/msg/detail/start_goal_msg__type_support.cpp.o[0m
 [ 51%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/user_action_interfaces/action/detail/start_goal_action__type_support.cpp.o[0m
-[ 51%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/user_action_interfaces/msg/detail/start_goal_msg__type_support.cpp.o[0m
+[ 51%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/user_action_interfaces/msg/detail/coast_msg__type_support.cpp.o[0m
 [ 53%] [32m[1mLinking CXX shared library libuser_action_interfaces__rosidl_typesupport_c.so[0m
 [ 55%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/user_action_interfaces/action/detail/start_goal_action__type_support.c.o[0m
-[ 59%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/coast_msg__type_support.c.o[0m
+[ 57%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/coast_msg__type_support.c.o[0m
 [ 59%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/start_goal_msg__type_support.c.o[0m
-[ 59%] Built target user_action_interfaces__rosidl_typesupport_c
-[ 64%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__type_support_c.cpp.o[0m
-[ 64%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/start_goal_msg__type_support_c.cpp.o[0m
+[ 61%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/start_goal_msg__type_support_c.cpp.o[0m
+[ 62%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__type_support_c.cpp.o[0m
 [ 64%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__type_support_c.cpp.o[0m
-[ 66%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/user_action_interfaces/action/detail/dds_fastrtps/start_goal_action__type_support.cpp.o[0m
-[ 70%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/user_action_interfaces/msg/detail/dds_fastrtps/coast_msg__type_support.cpp.o[0m
+[ 64%] Built target user_action_interfaces__rosidl_typesupport_c
+[ 66%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/user_action_interfaces/msg/detail/dds_fastrtps/coast_msg__type_support.cpp.o[0m
+[ 68%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/user_action_interfaces/action/detail/dds_fastrtps/start_goal_action__type_support.cpp.o[0m
 [ 70%] [32mBuilding CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/user_action_interfaces/msg/detail/dds_fastrtps/start_goal_msg__type_support.cpp.o[0m
 [ 72%] [32m[1mLinking C shared library libuser_action_interfaces__rosidl_typesupport_introspection_c.so[0m
 [ 72%] Built target user_action_interfaces__rosidl_typesupport_introspection_c
@@ -104,15 +104,15 @@ writing manifest file 'user_action_interfaces.egg-info/SOURCES.txt'
 [ 87%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_generator_py.dir/rosidl_generator_py/user_action_interfaces/msg/_coast_msg_s.c.o[0m
 [ 88%] [32m[1mLinking C shared library rosidl_generator_py/user_action_interfaces/libuser_action_interfaces__rosidl_generator_py.so[0m
 [ 88%] Built target user_action_interfaces__rosidl_generator_py
-[ 90%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/user_action_interfaces/_user_action_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
-[ 94%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/user_action_interfaces/_user_action_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[ 92%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/user_action_interfaces/_user_action_interfaces_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[ 92%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/user_action_interfaces/_user_action_interfaces_s.ep.rosidl_typesupport_introspection_c.c.o[0m
 [ 94%] [32mBuilding C object CMakeFiles/user_action_interfaces__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/user_action_interfaces/_user_action_interfaces_s.ep.rosidl_typesupport_c.c.o[0m
-[ 98%] [32m[1mLinking C shared library rosidl_generator_py/user_action_interfaces/user_action_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
-[ 98%] [32m[1mLinking C shared library rosidl_generator_py/user_action_interfaces/user_action_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
 [100%] [32m[1mLinking C shared library rosidl_generator_py/user_action_interfaces/user_action_interfaces_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[100%] [32m[1mLinking C shared library rosidl_generator_py/user_action_interfaces/user_action_interfaces_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[100%] [32m[1mLinking C shared library rosidl_generator_py/user_action_interfaces/user_action_interfaces_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
 [100%] Built target user_action_interfaces__rosidl_typesupport_fastrtps_c__pyext
-[100%] Built target user_action_interfaces__rosidl_typesupport_introspection_c__pyext
 [100%] Built target user_action_interfaces__rosidl_typesupport_c__pyext
+[100%] Built target user_action_interfaces__rosidl_typesupport_introspection_c__pyext
 -- Install configuration: ""
 -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/share/ament_index/resource_index/rosidl_interfaces/user_action_interfaces
 -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/share/user_action_interfaces/action/StartGoalAction.json
@@ -163,14 +163,14 @@ writing manifest file 'user_action_interfaces.egg-info/SOURCES.txt'
 -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces
 -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/msg
 -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/msg/detail
--- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/msg/detail/coast_msg__type_support.c
+-- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/msg/detail/coast_msg__type_support.c
 -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/msg/detail/start_goal_msg__rosidl_typesupport_introspection_c.h
 -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/msg/detail/coast_msg__rosidl_typesupport_introspection_c.h
--- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/msg/detail/start_goal_msg__type_support.c
+-- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/msg/detail/start_goal_msg__type_support.c
 -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
 -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/action
 -- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/action/detail
--- Up-to-date: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/action/detail/start_goal_action__type_support.c
+-- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/action/detail/start_goal_action__type_support.c
 -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/include/user_action_interfaces/user_action_interfaces/action/detail/start_goal_action__rosidl_typesupport_introspection_c.h
 -- Installing: /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/lib/libuser_action_interfaces__rosidl_typesupport_introspection_c.so
 -- Set runtime path of "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/user_action_interfaces/lib/libuser_action_interfaces__rosidl_typesupport_introspection_c.so" to ""

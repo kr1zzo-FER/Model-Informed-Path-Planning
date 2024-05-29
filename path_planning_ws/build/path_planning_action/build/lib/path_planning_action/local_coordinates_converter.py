@@ -50,6 +50,8 @@ class LocalCoordinatesConverter():
     
     def pixel_to_gps(self,x_pixel, y_pixel):
         # Convert pixel coordinates to gps coordinates
+        x_pixel = round(x_pixel/self.grid_size)*self.grid_size
+        y_pixel = round(y_pixel/self.grid_size)*self.grid_size
         latitude = self.coordinates[1] + y_pixel * (self.coordinates[3] - self.coordinates[1]) / self.size_y
         longitude = self.coordinates[0] + x_pixel * (self.coordinates[2] - self.coordinates[0]) / self.size_x
         return latitude, longitude
@@ -129,6 +131,8 @@ class LocalCoordinatesConverter():
         goal_m = self.gps_to_pixel(self.goal[0],self.goal[1])
         goal_m_resized = self.adapt_coordinates(self.goal)
         return goal_m,goal_m_resized
+
+    
     
     def costmap_visualization(self):
         fig,ax = plt.subplots()
