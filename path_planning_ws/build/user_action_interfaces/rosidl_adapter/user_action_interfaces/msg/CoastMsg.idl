@@ -1,0 +1,26 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from user_action_interfaces/msg/CoastMsg.msg
+// generated code does not contain a copyright notice
+
+#include "sensor_msgs/msg/PointCloud2.idl"
+#include "std_msgs/msg/Header.idl"
+
+module user_action_interfaces {
+  module msg {
+    struct CoastMsg {
+      std_msgs::msg::Header header;
+
+      string frame_id;
+
+      sensor_msgs::msg::PointCloud2 coast_points;
+
+      sensor_msgs::msg::PointCloud2 green_points;
+
+      sensor_msgs::msg::PointCloud2 red_points;
+
+      sensor_msgs::msg::PointCloud2 yellow_points;
+
+      int32 grid_size;
+    };
+  };
+};

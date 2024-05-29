@@ -1,0 +1,26 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "user_action_interfaces/action/StartGoalAction_Feedback",
+      "fields": [
+        {
+          "name": "partial_path",
+          "type": {
+            "type_id": 154,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": []
+  },
+  "type_hashes": [
+    {
+      "type_name": "user_action_interfaces/action/StartGoalAction_Feedback",
+      "hash_string": "RIHS01_55e8f8d72593b2288b7d14d06a9fce262a197ee81b8041ccd09eec14321b9332"
+    }
+  ]
+}

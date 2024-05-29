@@ -47,7 +47,15 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/user_action_interfaces/action" TYPE FILE FILES "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_generator_type_description/user_action_interfaces/action/PathPlanning.json")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/user_action_interfaces/action" TYPE FILE FILES "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_generator_type_description/user_action_interfaces/action/StartGoalAction.json")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/user_action_interfaces/msg" TYPE FILE FILES "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_generator_type_description/user_action_interfaces/msg/StartGoalMsg.json")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/user_action_interfaces/msg" TYPE FILE FILES "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_generator_type_description/user_action_interfaces/msg/CoastMsg.json")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -360,11 +368,27 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/user_action_interfaces/action" TYPE FILE FILES "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces/action/PathPlanning.idl")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/user_action_interfaces/action" TYPE FILE FILES "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces/action/StartGoalAction.idl")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/user_action_interfaces/action" TYPE FILE FILES "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces/action/PathPlanning.action")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/user_action_interfaces/msg" TYPE FILE FILES "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces/msg/StartGoalMsg.idl")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/user_action_interfaces/msg" TYPE FILE FILES "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces/msg/CoastMsg.idl")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/user_action_interfaces/action" TYPE FILE FILES "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces/action/StartGoalAction.action")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/user_action_interfaces/msg" TYPE FILE FILES "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces/msg/StartGoalMsg.msg")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/user_action_interfaces/msg" TYPE FILE FILES "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces/msg/CoastMsg.msg")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)

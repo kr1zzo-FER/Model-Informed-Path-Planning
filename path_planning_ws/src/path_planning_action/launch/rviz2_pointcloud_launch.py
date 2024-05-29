@@ -24,9 +24,8 @@ def generate_launch_description():
             output='screen',
             emulate_tty=True,
             name='coast_pointcloud',
-            parameters=[{'save_file' : save_file,
-                          'start' : start,
-                          'goal' : goal}]
+            parameters=[{'save_file' : save_file
+                         }]
         ),
 
         launch_ros.actions.Node(

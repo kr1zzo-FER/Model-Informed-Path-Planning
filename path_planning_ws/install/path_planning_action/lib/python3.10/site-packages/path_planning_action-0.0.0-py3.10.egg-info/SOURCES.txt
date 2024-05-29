@@ -72,10 +72,11 @@ path_planning_action/map_process.py
 path_planning_action/pointcloud_publisher.py
 path_planning_action/post_processing.py
 path_planning_action/process_osm_data.py
+path_planning_action/pyplot_visualization.py
 path_planning_action/rviz2_launch.py
 path_planning_action/set_start_goal.py
-path_planning_action/set_waypoints.py
 path_planning_action/start_goal_action.py
+path_planning_action/start_goal_publisher.py
 resource/path_planning_action
 rviz2/map_visualization.rviz
 test/test_copyright.py

@@ -1,0 +1,56 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "user_action_interfaces/action/StartGoalAction_GetResult_Response",
+      "fields": [
+        {
+          "name": "status",
+          "type": {
+            "type_id": 2,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        },
+        {
+          "name": "result",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "user_action_interfaces/action/StartGoalAction_Result"
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": [
+      {
+        "type_name": "user_action_interfaces/action/StartGoalAction_Result",
+        "fields": [
+          {
+            "name": "path",
+            "type": {
+              "type_id": 154,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      }
+    ]
+  },
+  "type_hashes": [
+    {
+      "type_name": "user_action_interfaces/action/StartGoalAction_GetResult_Response",
+      "hash_string": "RIHS01_63dbd9fbd784ed8330c0805a7faaefa2344e87bc754333ae3f7edc7e590a6796"
+    },
+    {
+      "type_name": "user_action_interfaces/action/StartGoalAction_Result",
+      "hash_string": "RIHS01_8459edca47b5b003ae9c787d5124554fbf3b928c0cfbfe7cbae10dfd2cfd8d9e"
+    }
+  ]
+}

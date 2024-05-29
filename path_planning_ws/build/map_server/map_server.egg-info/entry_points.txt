@@ -1,0 +1,9 @@
+[console_scripts]
+detect_coast = map_server.map_process.detect_coast:CoastProcessing
+map_process = map_server.map_process.map_process:main
+pointcloud_publisher = map_server.map_visualization.pointcloud_publisher:main
+post_processing = map_server.map_process.post_processing
+process_osm_data = map_server.map_process.process_osm_data
+rviz2_launch = map_server.map_visualization.rviz2_launch:main
+start_goal_action = map_server.start_goal_action:main
+

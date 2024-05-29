@@ -3,9 +3,10 @@
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/process_osm_data.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/post_processing.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__init__.py
-/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/set_waypoints.py
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/pyplot_visualization.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/pointcloud_publisher.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/local_coordinates_converter.py
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/start_goal_publisher.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/start_goal_action.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/set_start_goal.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/calculation.py
@@ -15,9 +16,10 @@
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__pycache__/process_osm_data.cpython-310.pyc
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__pycache__/post_processing.cpython-310.pyc
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__pycache__/__init__.cpython-310.pyc
-/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__pycache__/set_waypoints.cpython-310.pyc
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__pycache__/pyplot_visualization.cpython-310.pyc
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__pycache__/pointcloud_publisher.cpython-310.pyc
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__pycache__/local_coordinates_converter.cpython-310.pyc
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__pycache__/start_goal_publisher.cpython-310.pyc
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__pycache__/start_goal_action.cpython-310.pyc
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__pycache__/set_start_goal.cpython-310.pyc
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__pycache__/calculation.cpython-310.pyc
@@ -206,3 +208,4 @@
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/process_osm_data
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/rviz2_launch
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/start_goal_action
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/start_goal_publisher

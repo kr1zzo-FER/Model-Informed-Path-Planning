@@ -1,0 +1,75 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "user_action_interfaces/action/StartGoalAction_FeedbackMessage",
+      "fields": [
+        {
+          "name": "goal_id",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "unique_identifier_msgs/msg/UUID"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "feedback",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "user_action_interfaces/action/StartGoalAction_Feedback"
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": [
+      {
+        "type_name": "unique_identifier_msgs/msg/UUID",
+        "fields": [
+          {
+            "name": "uuid",
+            "type": {
+              "type_id": 51,
+              "capacity": 16,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "user_action_interfaces/action/StartGoalAction_Feedback",
+        "fields": [
+          {
+            "name": "partial_path",
+            "type": {
+              "type_id": 154,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      }
+    ]
+  },
+  "type_hashes": [
+    {
+      "type_name": "user_action_interfaces/action/StartGoalAction_FeedbackMessage",
+      "hash_string": "RIHS01_528012b0da16d7a35f1b359d3c2be93f3b28296639f18e3d1d118a5a81def6f6"
+    },
+    {
+      "type_name": "unique_identifier_msgs/msg/UUID",
+      "hash_string": "RIHS01_1b8e8aca958cbea28fe6ef60bf6c19b683c97a9ef60bb34752067d0f2f7ab437"
+    },
+    {
+      "type_name": "user_action_interfaces/action/StartGoalAction_Feedback",
+      "hash_string": "RIHS01_55e8f8d72593b2288b7d14d06a9fce262a197ee81b8041ccd09eec14321b9332"
+    }
+  ]
+}

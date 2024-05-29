@@ -53,6 +53,7 @@ setup(
     entry_points={
         'console_scripts': [
            'start_goal_action = path_planning_action.start_goal_action:main',
+           'start_goal_publisher = path_planning_action.start_goal_publisher:main',
            'map_process = path_planning_action.map_process:main',
            'detect_coast = path_planning_action.detect_coast:CoastProcessing',
            'process_osm_data = path_planning_action.process_osm_data',

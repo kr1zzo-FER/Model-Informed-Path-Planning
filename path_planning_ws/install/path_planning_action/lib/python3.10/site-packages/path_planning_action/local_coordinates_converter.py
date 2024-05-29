@@ -15,18 +15,18 @@ import matplotlib.pyplot as plt
 
 class LocalCoordinatesConverter():
 
-    def __init__(self, zones_dictionary,grid_size, start, goal):
+    def __init__(self, zones_dictionary,grid_size):
         self.zones = zones_dictionary
-        self.start = (start[0], start[1])
-        self.goal = (goal[0], goal[1])
+        self.start = [0.0,0.0]
+        self.goal = [0.0,0.0]
+        self.goal_m = (0,0)
+        self.start_m = (0,0)
         self.grid_size = grid_size
         self.coordinates = self.get_coordinates()
         self.size_x = self.set_width()
         self.size_y = self.set_height()
         self.size = (self.size_x, self.size_y)
         self.zones_m_plot, self.zones_m = self.set_zones_m()
-        self.start_m_plot, self.start_m = self.set_start_m()
-        self.goal_m_plot , self.goal_m  = self.set_goal_m()
 
     def gps_to_meters(self,lat1, lon1, lat2, lon2):
         # Convert gps cordinates to meters from (lat1,lon1) to (lat2,lon2)
@@ -99,11 +99,17 @@ class LocalCoordinatesConverter():
                 green_points_m.append(key)
         return coast_points_m, red_points_m, yellow_points_m, green_points_m
     
+    def set_start_goal(self,start,goal):   
+        self.start = start
+        self.goal = goal
+        self.start_m, self.start_m_resized = self.set_start_m()
+        self.goal_m, self.goal_m_resized = self.set_goal_m()
+    
     def get_start_m(self):
-        return self.start_m
+        return self.start_m_resized
     
     def get_goal_m(self):
-        return self.goal_m
+        return self.goal_m_resized
 
     def set_zones_m(self):
         gps_dictionary, gps_dictionary_resized = {}, {}

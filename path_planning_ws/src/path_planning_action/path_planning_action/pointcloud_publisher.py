@@ -7,7 +7,10 @@ from rclpy.node import Node
 import sys
 import os
 from .local_coordinates_converter import LocalCoordinatesConverter
+from user_action_interfaces.msg import CoastMsg
+from user_action_interfaces.msg import StartGoalMsg
 
+from matplotlib import pyplot as plt
 import rclpy 
 from rclpy.node import Node
 import sensor_msgs.msg as sensor_msgs
@@ -17,6 +20,7 @@ from geometry_msgs.msg import PoseStamped
 from geometry_msgs.msg import Quaternion
 import numpy as np
 
+show_plot = True
 
 path = Path(__file__).resolve().parent
 ws_root = Path(__file__).resolve().parents[6]
@@ -40,39 +44,27 @@ class CoastToPointCloud(Node):
         #ros log
         self.get_logger().info("Publishing coast points node started")
         self.declare_parameter('save_file', 'test')
-        self.declare_parameter('start', [0.0,0.0])
-        self.declare_parameter('goal', [0.0,0.0])
         self.save_file = self.get_parameter('save_file').get_parameter_value().string_value
-        self.start = self.get_parameter('start').get_parameter_value().double_array_value
-        self.goal = self.get_parameter('goal').get_parameter_value().double_array_value
 
-        zones_dictionary, grid_size = self.get_zones_dictionary()
-        lcc = LocalCoordinatesConverter(zones_dictionary, grid_size, self.start, self.goal)
+        self.start_goal_subscriber = self.create_subscription(StartGoalMsg, 'start_goal_msg', self.start_goal_callback, 10)
 
-        #lcc.costmap_visualization()
+        self.start = [0.0,0.0]
+        self.goal = [0.0,0.0]
+        self.start_pose = PoseStamped()
+        self.goal_pose = PoseStamped()
 
-        start = lcc.get_start_m()
-        goal = lcc.get_goal_m()
+        self.zones_dictionary, self.coast_points, self.red_points, self.yellow_points, self.green_points, grid_size = self.get_zones_dictionary()
 
-        print(f"Start: {start}")
-        print(f"Goal: {goal}")  
+        self.lcc = LocalCoordinatesConverter(self.zones_dictionary, grid_size)
 
-        self.start_pose = self.get_pose(start)
-        self.goal_pose = self.get_pose(goal)
+        coast_points_m, red_points_m, yellow_points_m, green_points_m = self.lcc.get_points_m()
 
-        print(f"Start pose: {self.start_pose}")
-
-        self.start_publisher = self.create_publisher(geometry_msgs.PoseStamped, 'start_pose', 10)
-        self.goal_publisher = self.create_publisher(geometry_msgs.PoseStamped, 'goal_pose', 10)
-
-
-        coast_points, red_points, yellow_points, green_points = lcc.get_points_m()
-
-        self.coast_pcd_points = self.convert_to_pcd(coast_points, 2)
-        self.red_pcd_points = self.convert_to_pcd(red_points, 0)
-        self.yellow_pcd_points = self.convert_to_pcd(yellow_points, 0)
-        self.green_pcd_points = self.convert_to_pcd(green_points, 0)
+        self.coast_pcd_points = self.convert_to_pcd(coast_points_m, 2)
+        self.red_pcd_points = self.convert_to_pcd(red_points_m, 0)
+        self.yellow_pcd_points = self.convert_to_pcd(yellow_points_m, 0)
+        self.green_pcd_points = self.convert_to_pcd(green_points_m, 0)
         
+        self.coast_publisher_rviz = self.create_publisher(CoastMsg, 'coast_pcd_rviz2', 10)
 
 
         #coast points
@@ -83,10 +75,14 @@ class CoastToPointCloud(Node):
         self.yellow_pcd_publisher = self.create_publisher(sensor_msgs.PointCloud2, 'yellow_pcd_points', 10)
         #green points
         self.green_pcd_publisher = self.create_publisher(sensor_msgs.PointCloud2, 'green_pcd_points', 10)
+        #start point
+        self.start_publisher = self.create_publisher(PoseStamped, 'start_pose', 10)
+        #goal point
+        self.goal_publisher = self.create_publisher(PoseStamped, 'goal_pose', 10)
         
         self.timer = self.create_timer(0.1, self.timer_callback)
 
-        #os.system(f"cd {ws_root}/src/path_planning_action/rviz2 && rviz2 -d {self.save_file}.rviz ")
+        self.update = True
 
     def timer_callback(self):
         self.get_logger().info('Publishing coast points')
@@ -96,6 +92,28 @@ class CoastToPointCloud(Node):
         self.red_pcd_publisher.publish(self.red_pcd_points)
         self.yellow_pcd_publisher.publish(self.yellow_pcd_points)
         self.green_pcd_publisher.publish(self.green_pcd_points)
+
+        coast_msg = CoastMsg()
+        coast_msg.coast_points = self.coast_pcd_points
+        coast_msg.red_points = self.red_pcd_points
+        coast_msg.yellow_points = self.yellow_pcd_points
+        coast_msg.green_points = self.green_pcd_points
+        coast_msg.header.stamp = self.get_clock().now().to_msg()
+        coast_msg.header.frame_id = 'map'
+        coast_msg.grid_size = self.grid_size
+
+
+        self.coast_publisher_rviz.publish(coast_msg)
+    
+    def start_goal_callback(self, msg):
+        self.update = True
+        self.get_logger().info('Received start and goal')
+        self.start = msg.start
+        self.goal = msg.goal
+        self.lcc.set_start_goal(self.start, self.goal)
+        start_m, goal_m = self.lcc.get_start_m(), self.lcc.get_goal_m()
+        self.start_pose = self.get_pose(start_m)
+        self.goal_pose = self.get_pose(goal_m)
 
     def get_zones_dictionary(self):
         path = ws_root / f"src/path_planning_action/input_data/processed_maps/processed_map_{self.save_file}"
@@ -122,7 +140,7 @@ class CoastToPointCloud(Node):
         for point in coast_points_gps:
             zones_dictionary[tuple(point)] = "c"
         
-        return zones_dictionary, grid_size
+        return zones_dictionary, coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, grid_size
 
     
     def convert_to_pcd(self, points, height, parent_frame_id="map"):
@@ -162,6 +180,12 @@ class CoastToPointCloud(Node):
         pose.pose.position.x = float(point[0])
         pose.pose.position.y = float(point[1])
         pose.pose.position.z = 0.0
+
+        pose.pose.orientation.x = 0.0
+        pose.pose.orientation.y = 0.0
+        pose.pose.orientation.z = 10.0
+        pose.pose.orientation.w = 10.0
+
         return pose
 
 

@@ -225,17 +225,17 @@ Visualization Manager:
       Use rainbow: true
       Value: true
     - Alpha: 1
-      Axes Length: 100
-      Axes Radius: 100
+      Axes Length: 1
+      Axes Radius: 1
       Class: rviz_default_plugins/Pose
-      Color: 255; 25; 0
+      Color: 0; 0; 255
       Enabled: true
-      Head Length: 100
-      Head Radius: 100
+      Head Length: 2
+      Head Radius: 1
       Name: Pose
-      Shaft Length: 100
-      Shaft Radius: 100
-      Shape: Axes
+      Shaft Length: 1
+      Shaft Radius: 1
+      Shape: Arrow
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -248,13 +248,13 @@ Visualization Manager:
       Axes Length: 1
       Axes Radius: 0.10000000149011612
       Class: rviz_default_plugins/Pose
-      Color: 255; 25; 0
+      Color: 0; 0; 255
       Enabled: true
-      Head Length: 0.30000001192092896
-      Head Radius: 0.10000000149011612
+      Head Length: 0
+      Head Radius: 0
       Name: Pose
       Shaft Length: 1
-      Shaft Radius: 0.05000000074505806
+      Shaft Radius: 2
       Shape: Arrow
       Topic:
         Depth: 5
@@ -310,25 +310,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/XYOrbit
-      Distance: 256.1396179199219
+      Distance: 960.196044921875
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 315.08966064453125
-        Y: 368.4259948730469
-        Z: -0.00020278817100916058
+        X: 482.7369689941406
+        Y: 60.32422637939453
+        Z: -0.0005377510096877813
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.17479710280895233
+      Pitch: 0.5602021813392639
       Target Frame: <Fixed Frame>
       Value: XYOrbit (rviz_default_plugins)
-      Yaw: 4.375548839569092
+      Yaw: 4.923649787902832
     Saved:
       - Angle: 0.14000001549720764
         Class: rviz_default_plugins/TopDownOrtho
