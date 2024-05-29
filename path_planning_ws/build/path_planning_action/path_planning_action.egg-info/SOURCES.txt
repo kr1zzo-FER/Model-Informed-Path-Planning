@@ -59,11 +59,12 @@ input_data/voz/voz_resized.png
 input_data/vrbnik/osm_info.txt
 input_data/vrbnik/vrbnik.png
 input_data/vrbnik/vrbnik_resized.png
-launch/init_launch.py
 launch/make_map_jadranovo_launch.py
 launch/make_map_omisalj_launch.py
 launch/pointcloud_launch.py
 launch/rviz2_pointcloud_launch.py
+launch/start_goal_action_launch.py
+launch/start_goal_launch.py
 path_planning_action/__init__.py
 path_planning_action/calculation.py
 path_planning_action/detect_coast.py

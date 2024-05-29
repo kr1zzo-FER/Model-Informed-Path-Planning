@@ -39,11 +39,7 @@ class PathPlanningPublisher(Node):
         self.declare_parameter('goal', [0.0,0.0])
         self.start = self.get_parameter('start').get_parameter_value().double_array_value
         self.goal = self.get_parameter('goal').get_parameter_value().double_array_value
-        self.declare_parameter('save_file', 'test')
-        self.save_file = self.get_parameter('save_file').get_parameter_value().string_value
 
-        self.coast_points, self.red_points, self.yellow_points, self.green_points, grid_size = self.get_data()
-        
         self.start_goal_publisher = self.create_publisher(StartGoalMsg, 'start_goal_msg', 10)
         self.start_goal_subscriber = self.create_subscription(StartGoalMsg, 'start_goal_msg_update', self.start_goal_callback, 10)
 
@@ -64,28 +60,6 @@ class PathPlanningPublisher(Node):
         start_goal_msg.goal = self.goal
 
         self.start_goal_publisher.publish(start_goal_msg)
-
-    
-    def get_data(self):
-        path = ws_root / f"src/path_planning_action/input_data/processed_maps/processed_map_{self.save_file}"
-        self.get_logger().info(f"Path: {path}")
-        coast_dictionary = load_binary_data(path)
-
-        data = coast_dictionary["data"]
-
-        coast_points_gps = data["coast_points_gps"]
-        red_zone_gps = data["red_zone_gps"]
-        yellow_zone_gps = data["yellow_zone_gps"]
-        green_zone_gps = data["green_zone_gps"]
-        grid_size = data["grid_size"]
-
-        self.grid_size = grid_size
-
-        
-        return coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, grid_size
-
-    def onclick(event):
-        pass
     
 def main(args=None):
     rclpy.init(args=args)

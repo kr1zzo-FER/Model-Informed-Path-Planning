@@ -27,25 +27,25 @@ class PathPlanningActionClient(Node):
 
     def __init__(self):
         super().__init__('path_planning_action_client')
-        self.get_logger().info("Publishing coast points node started")
-        self.declare_parameter('start', [0.0,0.0])
-        self.declare_parameter('goal', [0.0,0.0])
-        self.start = self.get_parameter('start').get_parameter_value().double_array_value
-        self.goal = self.get_parameter('goal').get_parameter_value().double_array_value
+
+        self. start = [0.0,0.0]
+        self.goal = [0.0,0.0]
+
+        self.start_subscriber = self.create_subscription(StartGoalMsg, 'start_goal_msg', self.start_goal_callback, 10)
 
         self._action_client = ActionClient(self, StartGoalAction, 'start_goal_action')
 
-        self.send_goal()
+        self.first_time = True
 
-        self.start_subscriber = self.create_subscription(StartGoalMsg, 'start_goal_msg', self.start_goal_callback, 10)
-    
     def start_goal_callback(self, msg):
-        self.get_logger().info('Received start and goal')
         self.start = msg.start
         self.goal = msg.goal
-        self.send_goal()
+        if self.first_time:
+            self.first_time = False
+            self.send_goal()
 
     def send_goal(self):
+        self.get_logger().info('Sending goal request')
         goal_msg = StartGoalAction.Goal()
         goal_msg.start = self.start
         goal_msg.goal = self.goal

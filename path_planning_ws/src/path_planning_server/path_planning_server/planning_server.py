@@ -2,7 +2,7 @@ import rclpy
 from rclpy.action import ActionServer
 from rclpy.node import Node
 import time
-from user_action_interfaces.action import PathPlanning
+from user_action_interfaces.action import StartGoalAction
 
 
 class PathPlanningActionServer(Node):
@@ -11,15 +11,20 @@ class PathPlanningActionServer(Node):
         super().__init__('path_planning_action_server')
         self._action_server = ActionServer(
             self,
-            PathPlanning,
-            'path_planning',
+            StartGoalAction,
+            'start_goal_action',
             self.execute_callback)
+        self.start = [0,0]
+        self.goal = [0,0]
 
     def execute_callback(self, goal_handle):
-
-        self.get_logger().info('Start and goal set, waiting for the result...')
         
-        feedback_msg = PathPlanning.Feedback()
+        self.start = goal_handle.request.start
+        self.goal = goal_handle.request.goal
+
+        self.get_logger().info(f'Start: {self.start}, Goal: {self.goal}')
+       
+        feedback_msg = StartGoalAction.Feedback()
 
         sequence = [0,1,2,3,4,5,6,7,8,9]
 
@@ -34,7 +39,7 @@ class PathPlanningActionServer(Node):
         goal_handle.succeed()
 
 
-        result = PathPlanning.Result()
+        result = StartGoalAction.Result()
         result.path = sequence
 
         return result

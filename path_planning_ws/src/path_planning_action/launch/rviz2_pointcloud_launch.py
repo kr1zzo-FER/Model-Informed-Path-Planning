@@ -36,5 +36,12 @@ def generate_launch_description():
             name=f'map_visualization',
             parameters=[{'save_file' : save_file }]
         ),
+
+        launch_ros.actions.Node(
+            package='path_planning_action',
+            executable='start_goal_publisher',
+            name='start_goal_publisher',
+            parameters=[{ 'start' : start,
+                          'goal' : goal}]),
   
   ])

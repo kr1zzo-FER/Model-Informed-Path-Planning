@@ -132,10 +132,11 @@ copying input_data/crikvenica/osm_info.txt -> /home/enio/develop_fer/Model-Infor
 copying input_data/crikvenica/crikvenica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/input_data/crikvenica
 copying input_data/crikvenica/crikvenica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/input_data/crikvenica
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch
+copying launch/start_goal_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
+copying launch/start_goal_action_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
 copying launch/make_map_omisalj_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
 copying launch/pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
 copying launch/rviz2_pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
-copying launch/init_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
 copying launch/make_map_jadranovo_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/rviz2
 copying rviz2/map_visualization.rviz -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/rviz2/
@@ -210,10 +211,11 @@ copying input_data/crikvenica/osm_info.txt -> /home/enio/develop_fer/Model-Infor
 copying input_data/crikvenica/crikvenica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/input_data/crikvenica
 copying input_data/crikvenica/crikvenica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/input_data/crikvenica
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch
+copying launch/start_goal_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
+copying launch/start_goal_action_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
 copying launch/make_map_omisalj_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
 copying launch/pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
 copying launch/rviz2_pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
-copying launch/init_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
 copying launch/make_map_jadranovo_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/rviz2
 copying rviz2/map_visualization.rviz -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/rviz2/
@@ -287,10 +289,11 @@ copying input_data/crikvenica/osm_info.txt -> /home/enio/develop_fer/Model-Infor
 copying input_data/crikvenica/crikvenica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/input_data/crikvenica
 copying input_data/crikvenica/crikvenica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/input_data/crikvenica
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch
+copying launch/start_goal_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
+copying launch/start_goal_action_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
 copying launch/make_map_omisalj_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
 copying launch/pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
 copying launch/rviz2_pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
-copying launch/init_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
 copying launch/make_map_jadranovo_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/rviz2
 copying rviz2/map_visualization.rviz -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/rviz2/

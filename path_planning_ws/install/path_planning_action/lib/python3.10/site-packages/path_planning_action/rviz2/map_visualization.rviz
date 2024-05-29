@@ -230,11 +230,11 @@ Visualization Manager:
       Class: rviz_default_plugins/Pose
       Color: 0; 0; 255
       Enabled: true
-      Head Length: 2
+      Head Length: 0
       Head Radius: 1
       Name: Pose
       Shaft Length: 1
-      Shaft Radius: 1
+      Shaft Radius: 0.5
       Shape: Arrow
       Topic:
         Depth: 5
@@ -242,11 +242,11 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /goal_pose
+        Value: /goal_pose_costume
       Value: true
     - Alpha: 1
-      Axes Length: 1
-      Axes Radius: 0.10000000149011612
+      Axes Length: 2
+      Axes Radius: 0.5
       Class: rviz_default_plugins/Pose
       Color: 0; 0; 255
       Enabled: true
@@ -255,14 +255,14 @@ Visualization Manager:
       Name: Pose
       Shaft Length: 1
       Shaft Radius: 2
-      Shape: Arrow
+      Shape: Axes
       Topic:
         Depth: 5
         Durability Policy: Volatile
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /start_pose
+        Value: /start_pose_costume
       Value: true
   Enabled: true
   Global Options:
@@ -310,25 +310,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/XYOrbit
-      Distance: 960.196044921875
+      Distance: 239.9169921875
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 482.7369689941406
-        Y: 60.32422637939453
-        Z: -0.0005377510096877813
+        X: 323.4783935546875
+        Y: 341.0381774902344
+        Z: 0.00022033241111785173
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5602021813392639
+      Pitch: -0.0351925790309906
       Target Frame: <Fixed Frame>
       Value: XYOrbit (rviz_default_plugins)
-      Yaw: 4.923649787902832
+      Yaw: 3.308619260787964
     Saved:
       - Angle: 0.14000001549720764
         Class: rviz_default_plugins/TopDownOrtho
@@ -361,5 +361,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1850
-  X: 1990
+  X: 70
   Y: 27
