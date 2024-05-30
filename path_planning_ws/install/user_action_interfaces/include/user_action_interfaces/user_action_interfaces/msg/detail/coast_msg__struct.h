@@ -21,21 +21,29 @@ extern "C"
 #include "std_msgs/msg/detail/header__struct.h"
 // Member 'frame_id'
 #include "rosidl_runtime_c/string.h"
-// Member 'coast_points'
-// Member 'green_points'
-// Member 'red_points'
-// Member 'yellow_points'
-#include "sensor_msgs/msg/detail/point_cloud2__struct.h"
+// Member 'coast_points_x'
+// Member 'green_points_x'
+// Member 'red_points_x'
+// Member 'yellow_points_x'
+// Member 'coast_points_y'
+// Member 'green_points_y'
+// Member 'red_points_y'
+// Member 'yellow_points_y'
+#include "std_msgs/msg/detail/float32_multi_array__struct.h"
 
 /// Struct defined in msg/CoastMsg in the package user_action_interfaces.
 typedef struct user_action_interfaces__msg__CoastMsg
 {
   std_msgs__msg__Header header;
   rosidl_runtime_c__String frame_id;
-  sensor_msgs__msg__PointCloud2 coast_points;
-  sensor_msgs__msg__PointCloud2 green_points;
-  sensor_msgs__msg__PointCloud2 red_points;
-  sensor_msgs__msg__PointCloud2 yellow_points;
+  std_msgs__msg__Float32MultiArray coast_points_x;
+  std_msgs__msg__Float32MultiArray green_points_x;
+  std_msgs__msg__Float32MultiArray red_points_x;
+  std_msgs__msg__Float32MultiArray yellow_points_x;
+  std_msgs__msg__Float32MultiArray coast_points_y;
+  std_msgs__msg__Float32MultiArray green_points_y;
+  std_msgs__msg__Float32MultiArray red_points_y;
+  std_msgs__msg__Float32MultiArray yellow_points_y;
   int32_t grid_size;
 } user_action_interfaces__msg__CoastMsg;
 

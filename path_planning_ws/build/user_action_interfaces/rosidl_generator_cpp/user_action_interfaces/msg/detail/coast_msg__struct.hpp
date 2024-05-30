@@ -18,11 +18,15 @@
 // Include directives for member types
 // Member 'header'
 #include "std_msgs/msg/detail/header__struct.hpp"
-// Member 'coast_points'
-// Member 'green_points'
-// Member 'red_points'
-// Member 'yellow_points'
-#include "sensor_msgs/msg/detail/point_cloud2__struct.hpp"
+// Member 'coast_points_x'
+// Member 'green_points_x'
+// Member 'red_points_x'
+// Member 'yellow_points_x'
+// Member 'coast_points_y'
+// Member 'green_points_y'
+// Member 'red_points_y'
+// Member 'yellow_points_y'
+#include "std_msgs/msg/detail/float32_multi_array__struct.hpp"
 
 #ifndef _WIN32
 # define DEPRECATED__user_action_interfaces__msg__CoastMsg __attribute__((deprecated))
@@ -44,10 +48,14 @@ struct CoastMsg_
 
   explicit CoastMsg_(rosidl_runtime_cpp::MessageInitialization _init = rosidl_runtime_cpp::MessageInitialization::ALL)
   : header(_init),
-    coast_points(_init),
-    green_points(_init),
-    red_points(_init),
-    yellow_points(_init)
+    coast_points_x(_init),
+    green_points_x(_init),
+    red_points_x(_init),
+    yellow_points_x(_init),
+    coast_points_y(_init),
+    green_points_y(_init),
+    red_points_y(_init),
+    yellow_points_y(_init)
   {
     if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
@@ -60,10 +68,14 @@ struct CoastMsg_
   explicit CoastMsg_(const ContainerAllocator & _alloc, rosidl_runtime_cpp::MessageInitialization _init = rosidl_runtime_cpp::MessageInitialization::ALL)
   : header(_alloc, _init),
     frame_id(_alloc),
-    coast_points(_alloc, _init),
-    green_points(_alloc, _init),
-    red_points(_alloc, _init),
-    yellow_points(_alloc, _init)
+    coast_points_x(_alloc, _init),
+    green_points_x(_alloc, _init),
+    red_points_x(_alloc, _init),
+    yellow_points_x(_alloc, _init),
+    coast_points_y(_alloc, _init),
+    green_points_y(_alloc, _init),
+    red_points_y(_alloc, _init),
+    yellow_points_y(_alloc, _init)
   {
     if (rosidl_runtime_cpp::MessageInitialization::ALL == _init ||
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
@@ -80,18 +92,30 @@ struct CoastMsg_
   using _frame_id_type =
     std::basic_string<char, std::char_traits<char>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<char>>;
   _frame_id_type frame_id;
-  using _coast_points_type =
-    sensor_msgs::msg::PointCloud2_<ContainerAllocator>;
-  _coast_points_type coast_points;
-  using _green_points_type =
-    sensor_msgs::msg::PointCloud2_<ContainerAllocator>;
-  _green_points_type green_points;
-  using _red_points_type =
-    sensor_msgs::msg::PointCloud2_<ContainerAllocator>;
-  _red_points_type red_points;
-  using _yellow_points_type =
-    sensor_msgs::msg::PointCloud2_<ContainerAllocator>;
-  _yellow_points_type yellow_points;
+  using _coast_points_x_type =
+    std_msgs::msg::Float32MultiArray_<ContainerAllocator>;
+  _coast_points_x_type coast_points_x;
+  using _green_points_x_type =
+    std_msgs::msg::Float32MultiArray_<ContainerAllocator>;
+  _green_points_x_type green_points_x;
+  using _red_points_x_type =
+    std_msgs::msg::Float32MultiArray_<ContainerAllocator>;
+  _red_points_x_type red_points_x;
+  using _yellow_points_x_type =
+    std_msgs::msg::Float32MultiArray_<ContainerAllocator>;
+  _yellow_points_x_type yellow_points_x;
+  using _coast_points_y_type =
+    std_msgs::msg::Float32MultiArray_<ContainerAllocator>;
+  _coast_points_y_type coast_points_y;
+  using _green_points_y_type =
+    std_msgs::msg::Float32MultiArray_<ContainerAllocator>;
+  _green_points_y_type green_points_y;
+  using _red_points_y_type =
+    std_msgs::msg::Float32MultiArray_<ContainerAllocator>;
+  _red_points_y_type red_points_y;
+  using _yellow_points_y_type =
+    std_msgs::msg::Float32MultiArray_<ContainerAllocator>;
+  _yellow_points_y_type yellow_points_y;
   using _grid_size_type =
     int32_t;
   _grid_size_type grid_size;
@@ -109,28 +133,52 @@ struct CoastMsg_
     this->frame_id = _arg;
     return *this;
   }
-  Type & set__coast_points(
-    const sensor_msgs::msg::PointCloud2_<ContainerAllocator> & _arg)
+  Type & set__coast_points_x(
+    const std_msgs::msg::Float32MultiArray_<ContainerAllocator> & _arg)
   {
-    this->coast_points = _arg;
+    this->coast_points_x = _arg;
     return *this;
   }
-  Type & set__green_points(
-    const sensor_msgs::msg::PointCloud2_<ContainerAllocator> & _arg)
+  Type & set__green_points_x(
+    const std_msgs::msg::Float32MultiArray_<ContainerAllocator> & _arg)
   {
-    this->green_points = _arg;
+    this->green_points_x = _arg;
     return *this;
   }
-  Type & set__red_points(
-    const sensor_msgs::msg::PointCloud2_<ContainerAllocator> & _arg)
+  Type & set__red_points_x(
+    const std_msgs::msg::Float32MultiArray_<ContainerAllocator> & _arg)
   {
-    this->red_points = _arg;
+    this->red_points_x = _arg;
     return *this;
   }
-  Type & set__yellow_points(
-    const sensor_msgs::msg::PointCloud2_<ContainerAllocator> & _arg)
+  Type & set__yellow_points_x(
+    const std_msgs::msg::Float32MultiArray_<ContainerAllocator> & _arg)
   {
-    this->yellow_points = _arg;
+    this->yellow_points_x = _arg;
+    return *this;
+  }
+  Type & set__coast_points_y(
+    const std_msgs::msg::Float32MultiArray_<ContainerAllocator> & _arg)
+  {
+    this->coast_points_y = _arg;
+    return *this;
+  }
+  Type & set__green_points_y(
+    const std_msgs::msg::Float32MultiArray_<ContainerAllocator> & _arg)
+  {
+    this->green_points_y = _arg;
+    return *this;
+  }
+  Type & set__red_points_y(
+    const std_msgs::msg::Float32MultiArray_<ContainerAllocator> & _arg)
+  {
+    this->red_points_y = _arg;
+    return *this;
+  }
+  Type & set__yellow_points_y(
+    const std_msgs::msg::Float32MultiArray_<ContainerAllocator> & _arg)
+  {
+    this->yellow_points_y = _arg;
     return *this;
   }
   Type & set__grid_size(
@@ -188,16 +236,28 @@ struct CoastMsg_
     if (this->frame_id != other.frame_id) {
       return false;
     }
-    if (this->coast_points != other.coast_points) {
+    if (this->coast_points_x != other.coast_points_x) {
       return false;
     }
-    if (this->green_points != other.green_points) {
+    if (this->green_points_x != other.green_points_x) {
       return false;
     }
-    if (this->red_points != other.red_points) {
+    if (this->red_points_x != other.red_points_x) {
       return false;
     }
-    if (this->yellow_points != other.yellow_points) {
+    if (this->yellow_points_x != other.yellow_points_x) {
+      return false;
+    }
+    if (this->coast_points_y != other.coast_points_y) {
+      return false;
+    }
+    if (this->green_points_y != other.green_points_y) {
+      return false;
+    }
+    if (this->red_points_y != other.red_points_y) {
+      return false;
+    }
+    if (this->yellow_points_y != other.yellow_points_y) {
       return false;
     }
     if (this->grid_size != other.grid_size) {

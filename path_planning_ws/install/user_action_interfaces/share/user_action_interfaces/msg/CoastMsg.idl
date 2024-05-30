@@ -2,7 +2,7 @@
 // with input from user_action_interfaces/msg/CoastMsg.msg
 // generated code does not contain a copyright notice
 
-#include "sensor_msgs/msg/PointCloud2.idl"
+#include "std_msgs/msg/Float32MultiArray.idl"
 #include "std_msgs/msg/Header.idl"
 
 module user_action_interfaces {
@@ -12,13 +12,21 @@ module user_action_interfaces {
 
       string frame_id;
 
-      sensor_msgs::msg::PointCloud2 coast_points;
+      std_msgs::msg::Float32MultiArray coast_points_x;
 
-      sensor_msgs::msg::PointCloud2 green_points;
+      std_msgs::msg::Float32MultiArray green_points_x;
 
-      sensor_msgs::msg::PointCloud2 red_points;
+      std_msgs::msg::Float32MultiArray red_points_x;
 
-      sensor_msgs::msg::PointCloud2 yellow_points;
+      std_msgs::msg::Float32MultiArray yellow_points_x;
+
+      std_msgs::msg::Float32MultiArray coast_points_y;
+
+      std_msgs::msg::Float32MultiArray green_points_y;
+
+      std_msgs::msg::Float32MultiArray red_points_y;
+
+      std_msgs::msg::Float32MultiArray yellow_points_y;
 
       int32 grid_size;
     };

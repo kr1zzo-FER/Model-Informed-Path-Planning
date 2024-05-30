@@ -41,35 +41,43 @@ max_serialized_size_Header(
 }  // namespace msg
 }  // namespace std_msgs
 
-namespace sensor_msgs
+namespace std_msgs
 {
 namespace msg
 {
 namespace typesupport_fastrtps_cpp
 {
 bool cdr_serialize(
-  const sensor_msgs::msg::PointCloud2 &,
+  const std_msgs::msg::Float32MultiArray &,
   eprosima::fastcdr::Cdr &);
 bool cdr_deserialize(
   eprosima::fastcdr::Cdr &,
-  sensor_msgs::msg::PointCloud2 &);
+  std_msgs::msg::Float32MultiArray &);
 size_t get_serialized_size(
-  const sensor_msgs::msg::PointCloud2 &,
+  const std_msgs::msg::Float32MultiArray &,
   size_t current_alignment);
 size_t
-max_serialized_size_PointCloud2(
+max_serialized_size_Float32MultiArray(
   bool & full_bounded,
   bool & is_plain,
   size_t current_alignment);
 }  // namespace typesupport_fastrtps_cpp
 }  // namespace msg
-}  // namespace sensor_msgs
+}  // namespace std_msgs
 
-// functions for sensor_msgs::msg::PointCloud2 already declared above
+// functions for std_msgs::msg::Float32MultiArray already declared above
 
-// functions for sensor_msgs::msg::PointCloud2 already declared above
+// functions for std_msgs::msg::Float32MultiArray already declared above
 
-// functions for sensor_msgs::msg::PointCloud2 already declared above
+// functions for std_msgs::msg::Float32MultiArray already declared above
+
+// functions for std_msgs::msg::Float32MultiArray already declared above
+
+// functions for std_msgs::msg::Float32MultiArray already declared above
+
+// functions for std_msgs::msg::Float32MultiArray already declared above
+
+// functions for std_msgs::msg::Float32MultiArray already declared above
 
 
 namespace user_action_interfaces
@@ -93,21 +101,37 @@ cdr_serialize(
     cdr);
   // Member: frame_id
   cdr << ros_message.frame_id;
-  // Member: coast_points
-  sensor_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
-    ros_message.coast_points,
+  // Member: coast_points_x
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
+    ros_message.coast_points_x,
     cdr);
-  // Member: green_points
-  sensor_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
-    ros_message.green_points,
+  // Member: green_points_x
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
+    ros_message.green_points_x,
     cdr);
-  // Member: red_points
-  sensor_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
-    ros_message.red_points,
+  // Member: red_points_x
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
+    ros_message.red_points_x,
     cdr);
-  // Member: yellow_points
-  sensor_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
-    ros_message.yellow_points,
+  // Member: yellow_points_x
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
+    ros_message.yellow_points_x,
+    cdr);
+  // Member: coast_points_y
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
+    ros_message.coast_points_y,
+    cdr);
+  // Member: green_points_y
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
+    ros_message.green_points_y,
+    cdr);
+  // Member: red_points_y
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
+    ros_message.red_points_y,
+    cdr);
+  // Member: yellow_points_y
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
+    ros_message.yellow_points_y,
     cdr);
   // Member: grid_size
   cdr << ros_message.grid_size;
@@ -127,21 +151,37 @@ cdr_deserialize(
   // Member: frame_id
   cdr >> ros_message.frame_id;
 
-  // Member: coast_points
-  sensor_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
-    cdr, ros_message.coast_points);
+  // Member: coast_points_x
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
+    cdr, ros_message.coast_points_x);
 
-  // Member: green_points
-  sensor_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
-    cdr, ros_message.green_points);
+  // Member: green_points_x
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
+    cdr, ros_message.green_points_x);
 
-  // Member: red_points
-  sensor_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
-    cdr, ros_message.red_points);
+  // Member: red_points_x
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
+    cdr, ros_message.red_points_x);
 
-  // Member: yellow_points
-  sensor_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
-    cdr, ros_message.yellow_points);
+  // Member: yellow_points_x
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
+    cdr, ros_message.yellow_points_x);
+
+  // Member: coast_points_y
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
+    cdr, ros_message.coast_points_y);
+
+  // Member: green_points_y
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
+    cdr, ros_message.green_points_y);
+
+  // Member: red_points_y
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
+    cdr, ros_message.red_points_y);
+
+  // Member: yellow_points_y
+  std_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
+    cdr, ros_message.yellow_points_y);
 
   // Member: grid_size
   cdr >> ros_message.grid_size;
@@ -171,26 +211,46 @@ get_serialized_size(
   current_alignment += padding +
     eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
     (ros_message.frame_id.size() + 1);
-  // Member: coast_points
+  // Member: coast_points_x
 
   current_alignment +=
-    sensor_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
-    ros_message.coast_points, current_alignment);
-  // Member: green_points
+    std_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
+    ros_message.coast_points_x, current_alignment);
+  // Member: green_points_x
 
   current_alignment +=
-    sensor_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
-    ros_message.green_points, current_alignment);
-  // Member: red_points
+    std_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
+    ros_message.green_points_x, current_alignment);
+  // Member: red_points_x
 
   current_alignment +=
-    sensor_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
-    ros_message.red_points, current_alignment);
-  // Member: yellow_points
+    std_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
+    ros_message.red_points_x, current_alignment);
+  // Member: yellow_points_x
 
   current_alignment +=
-    sensor_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
-    ros_message.yellow_points, current_alignment);
+    std_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
+    ros_message.yellow_points_x, current_alignment);
+  // Member: coast_points_y
+
+  current_alignment +=
+    std_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
+    ros_message.coast_points_y, current_alignment);
+  // Member: green_points_y
+
+  current_alignment +=
+    std_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
+    ros_message.green_points_y, current_alignment);
+  // Member: red_points_y
+
+  current_alignment +=
+    std_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
+    ros_message.red_points_y, current_alignment);
+  // Member: yellow_points_y
+
+  current_alignment +=
+    std_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
+    ros_message.yellow_points_y, current_alignment);
   // Member: grid_size
   {
     size_t item_size = sizeof(ros_message.grid_size);
@@ -253,7 +313,7 @@ max_serialized_size_CoastMsg(
     }
   }
 
-  // Member: coast_points
+  // Member: coast_points_x
   {
     size_t array_size = 1;
 
@@ -263,7 +323,7 @@ max_serialized_size_CoastMsg(
       bool inner_full_bounded;
       bool inner_is_plain;
       size_t inner_size =
-        sensor_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_PointCloud2(
+        std_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_Float32MultiArray(
         inner_full_bounded, inner_is_plain, current_alignment);
       last_member_size += inner_size;
       current_alignment += inner_size;
@@ -272,7 +332,7 @@ max_serialized_size_CoastMsg(
     }
   }
 
-  // Member: green_points
+  // Member: green_points_x
   {
     size_t array_size = 1;
 
@@ -282,7 +342,7 @@ max_serialized_size_CoastMsg(
       bool inner_full_bounded;
       bool inner_is_plain;
       size_t inner_size =
-        sensor_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_PointCloud2(
+        std_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_Float32MultiArray(
         inner_full_bounded, inner_is_plain, current_alignment);
       last_member_size += inner_size;
       current_alignment += inner_size;
@@ -291,7 +351,7 @@ max_serialized_size_CoastMsg(
     }
   }
 
-  // Member: red_points
+  // Member: red_points_x
   {
     size_t array_size = 1;
 
@@ -301,7 +361,7 @@ max_serialized_size_CoastMsg(
       bool inner_full_bounded;
       bool inner_is_plain;
       size_t inner_size =
-        sensor_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_PointCloud2(
+        std_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_Float32MultiArray(
         inner_full_bounded, inner_is_plain, current_alignment);
       last_member_size += inner_size;
       current_alignment += inner_size;
@@ -310,7 +370,7 @@ max_serialized_size_CoastMsg(
     }
   }
 
-  // Member: yellow_points
+  // Member: yellow_points_x
   {
     size_t array_size = 1;
 
@@ -320,7 +380,83 @@ max_serialized_size_CoastMsg(
       bool inner_full_bounded;
       bool inner_is_plain;
       size_t inner_size =
-        sensor_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_PointCloud2(
+        std_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_Float32MultiArray(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      last_member_size += inner_size;
+      current_alignment += inner_size;
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+
+  // Member: coast_points_y
+  {
+    size_t array_size = 1;
+
+
+    last_member_size = 0;
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      size_t inner_size =
+        std_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_Float32MultiArray(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      last_member_size += inner_size;
+      current_alignment += inner_size;
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+
+  // Member: green_points_y
+  {
+    size_t array_size = 1;
+
+
+    last_member_size = 0;
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      size_t inner_size =
+        std_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_Float32MultiArray(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      last_member_size += inner_size;
+      current_alignment += inner_size;
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+
+  // Member: red_points_y
+  {
+    size_t array_size = 1;
+
+
+    last_member_size = 0;
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      size_t inner_size =
+        std_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_Float32MultiArray(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      last_member_size += inner_size;
+      current_alignment += inner_size;
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+
+  // Member: yellow_points_y
+  {
+    size_t array_size = 1;
+
+
+    last_member_size = 0;
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      size_t inner_size =
+        std_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_Float32MultiArray(
         inner_full_bounded, inner_is_plain, current_alignment);
       last_member_size += inner_size;
       current_alignment += inner_size;

@@ -49,9 +49,9 @@ class Metaclass_CoastMsg(type):
             cls._TYPE_SUPPORT = module.type_support_msg__msg__coast_msg
             cls._DESTROY_ROS_MESSAGE = module.destroy_ros_message_msg__msg__coast_msg
 
-            from sensor_msgs.msg import PointCloud2
-            if PointCloud2.__class__._TYPE_SUPPORT is None:
-                PointCloud2.__class__.__import_type_support__()
+            from std_msgs.msg import Float32MultiArray
+            if Float32MultiArray.__class__._TYPE_SUPPORT is None:
+                Float32MultiArray.__class__.__import_type_support__()
 
             from std_msgs.msg import Header
             if Header.__class__._TYPE_SUPPORT is None:
@@ -72,10 +72,14 @@ class CoastMsg(metaclass=Metaclass_CoastMsg):
     __slots__ = [
         '_header',
         '_frame_id',
-        '_coast_points',
-        '_green_points',
-        '_red_points',
-        '_yellow_points',
+        '_coast_points_x',
+        '_green_points_x',
+        '_red_points_x',
+        '_yellow_points_x',
+        '_coast_points_y',
+        '_green_points_y',
+        '_red_points_y',
+        '_yellow_points_y',
         '_grid_size',
         '_check_fields',
     ]
@@ -83,10 +87,14 @@ class CoastMsg(metaclass=Metaclass_CoastMsg):
     _fields_and_field_types = {
         'header': 'std_msgs/Header',
         'frame_id': 'string',
-        'coast_points': 'sensor_msgs/PointCloud2',
-        'green_points': 'sensor_msgs/PointCloud2',
-        'red_points': 'sensor_msgs/PointCloud2',
-        'yellow_points': 'sensor_msgs/PointCloud2',
+        'coast_points_x': 'std_msgs/Float32MultiArray',
+        'green_points_x': 'std_msgs/Float32MultiArray',
+        'red_points_x': 'std_msgs/Float32MultiArray',
+        'yellow_points_x': 'std_msgs/Float32MultiArray',
+        'coast_points_y': 'std_msgs/Float32MultiArray',
+        'green_points_y': 'std_msgs/Float32MultiArray',
+        'red_points_y': 'std_msgs/Float32MultiArray',
+        'yellow_points_y': 'std_msgs/Float32MultiArray',
         'grid_size': 'int32',
     }
 
@@ -95,10 +103,14 @@ class CoastMsg(metaclass=Metaclass_CoastMsg):
     SLOT_TYPES = (
         rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Header'),  # noqa: E501
         rosidl_parser.definition.UnboundedString(),  # noqa: E501
-        rosidl_parser.definition.NamespacedType(['sensor_msgs', 'msg'], 'PointCloud2'),  # noqa: E501
-        rosidl_parser.definition.NamespacedType(['sensor_msgs', 'msg'], 'PointCloud2'),  # noqa: E501
-        rosidl_parser.definition.NamespacedType(['sensor_msgs', 'msg'], 'PointCloud2'),  # noqa: E501
-        rosidl_parser.definition.NamespacedType(['sensor_msgs', 'msg'], 'PointCloud2'),  # noqa: E501
+        rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Float32MultiArray'),  # noqa: E501
+        rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Float32MultiArray'),  # noqa: E501
+        rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Float32MultiArray'),  # noqa: E501
+        rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Float32MultiArray'),  # noqa: E501
+        rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Float32MultiArray'),  # noqa: E501
+        rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Float32MultiArray'),  # noqa: E501
+        rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Float32MultiArray'),  # noqa: E501
+        rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Float32MultiArray'),  # noqa: E501
         rosidl_parser.definition.BasicType('int32'),  # noqa: E501
     )
 
@@ -114,14 +126,22 @@ class CoastMsg(metaclass=Metaclass_CoastMsg):
         from std_msgs.msg import Header
         self.header = kwargs.get('header', Header())
         self.frame_id = kwargs.get('frame_id', str())
-        from sensor_msgs.msg import PointCloud2
-        self.coast_points = kwargs.get('coast_points', PointCloud2())
-        from sensor_msgs.msg import PointCloud2
-        self.green_points = kwargs.get('green_points', PointCloud2())
-        from sensor_msgs.msg import PointCloud2
-        self.red_points = kwargs.get('red_points', PointCloud2())
-        from sensor_msgs.msg import PointCloud2
-        self.yellow_points = kwargs.get('yellow_points', PointCloud2())
+        from std_msgs.msg import Float32MultiArray
+        self.coast_points_x = kwargs.get('coast_points_x', Float32MultiArray())
+        from std_msgs.msg import Float32MultiArray
+        self.green_points_x = kwargs.get('green_points_x', Float32MultiArray())
+        from std_msgs.msg import Float32MultiArray
+        self.red_points_x = kwargs.get('red_points_x', Float32MultiArray())
+        from std_msgs.msg import Float32MultiArray
+        self.yellow_points_x = kwargs.get('yellow_points_x', Float32MultiArray())
+        from std_msgs.msg import Float32MultiArray
+        self.coast_points_y = kwargs.get('coast_points_y', Float32MultiArray())
+        from std_msgs.msg import Float32MultiArray
+        self.green_points_y = kwargs.get('green_points_y', Float32MultiArray())
+        from std_msgs.msg import Float32MultiArray
+        self.red_points_y = kwargs.get('red_points_y', Float32MultiArray())
+        from std_msgs.msg import Float32MultiArray
+        self.yellow_points_y = kwargs.get('yellow_points_y', Float32MultiArray())
         self.grid_size = kwargs.get('grid_size', int())
 
     def __repr__(self):
@@ -158,13 +178,21 @@ class CoastMsg(metaclass=Metaclass_CoastMsg):
             return False
         if self.frame_id != other.frame_id:
             return False
-        if self.coast_points != other.coast_points:
+        if self.coast_points_x != other.coast_points_x:
             return False
-        if self.green_points != other.green_points:
+        if self.green_points_x != other.green_points_x:
             return False
-        if self.red_points != other.red_points:
+        if self.red_points_x != other.red_points_x:
             return False
-        if self.yellow_points != other.yellow_points:
+        if self.yellow_points_x != other.yellow_points_x:
+            return False
+        if self.coast_points_y != other.coast_points_y:
+            return False
+        if self.green_points_y != other.green_points_y:
+            return False
+        if self.red_points_y != other.red_points_y:
+            return False
+        if self.yellow_points_y != other.yellow_points_y:
             return False
         if self.grid_size != other.grid_size:
             return False
@@ -203,60 +231,116 @@ class CoastMsg(metaclass=Metaclass_CoastMsg):
         self._frame_id = value
 
     @builtins.property
-    def coast_points(self):
-        """Message field 'coast_points'."""
-        return self._coast_points
+    def coast_points_x(self):
+        """Message field 'coast_points_x'."""
+        return self._coast_points_x
 
-    @coast_points.setter
-    def coast_points(self, value):
+    @coast_points_x.setter
+    def coast_points_x(self, value):
         if self._check_fields:
-            from sensor_msgs.msg import PointCloud2
+            from std_msgs.msg import Float32MultiArray
             assert \
-                isinstance(value, PointCloud2), \
-                "The 'coast_points' field must be a sub message of type 'PointCloud2'"
-        self._coast_points = value
+                isinstance(value, Float32MultiArray), \
+                "The 'coast_points_x' field must be a sub message of type 'Float32MultiArray'"
+        self._coast_points_x = value
 
     @builtins.property
-    def green_points(self):
-        """Message field 'green_points'."""
-        return self._green_points
+    def green_points_x(self):
+        """Message field 'green_points_x'."""
+        return self._green_points_x
 
-    @green_points.setter
-    def green_points(self, value):
+    @green_points_x.setter
+    def green_points_x(self, value):
         if self._check_fields:
-            from sensor_msgs.msg import PointCloud2
+            from std_msgs.msg import Float32MultiArray
             assert \
-                isinstance(value, PointCloud2), \
-                "The 'green_points' field must be a sub message of type 'PointCloud2'"
-        self._green_points = value
+                isinstance(value, Float32MultiArray), \
+                "The 'green_points_x' field must be a sub message of type 'Float32MultiArray'"
+        self._green_points_x = value
 
     @builtins.property
-    def red_points(self):
-        """Message field 'red_points'."""
-        return self._red_points
+    def red_points_x(self):
+        """Message field 'red_points_x'."""
+        return self._red_points_x
 
-    @red_points.setter
-    def red_points(self, value):
+    @red_points_x.setter
+    def red_points_x(self, value):
         if self._check_fields:
-            from sensor_msgs.msg import PointCloud2
+            from std_msgs.msg import Float32MultiArray
             assert \
-                isinstance(value, PointCloud2), \
-                "The 'red_points' field must be a sub message of type 'PointCloud2'"
-        self._red_points = value
+                isinstance(value, Float32MultiArray), \
+                "The 'red_points_x' field must be a sub message of type 'Float32MultiArray'"
+        self._red_points_x = value
 
     @builtins.property
-    def yellow_points(self):
-        """Message field 'yellow_points'."""
-        return self._yellow_points
+    def yellow_points_x(self):
+        """Message field 'yellow_points_x'."""
+        return self._yellow_points_x
 
-    @yellow_points.setter
-    def yellow_points(self, value):
+    @yellow_points_x.setter
+    def yellow_points_x(self, value):
         if self._check_fields:
-            from sensor_msgs.msg import PointCloud2
+            from std_msgs.msg import Float32MultiArray
             assert \
-                isinstance(value, PointCloud2), \
-                "The 'yellow_points' field must be a sub message of type 'PointCloud2'"
-        self._yellow_points = value
+                isinstance(value, Float32MultiArray), \
+                "The 'yellow_points_x' field must be a sub message of type 'Float32MultiArray'"
+        self._yellow_points_x = value
+
+    @builtins.property
+    def coast_points_y(self):
+        """Message field 'coast_points_y'."""
+        return self._coast_points_y
+
+    @coast_points_y.setter
+    def coast_points_y(self, value):
+        if self._check_fields:
+            from std_msgs.msg import Float32MultiArray
+            assert \
+                isinstance(value, Float32MultiArray), \
+                "The 'coast_points_y' field must be a sub message of type 'Float32MultiArray'"
+        self._coast_points_y = value
+
+    @builtins.property
+    def green_points_y(self):
+        """Message field 'green_points_y'."""
+        return self._green_points_y
+
+    @green_points_y.setter
+    def green_points_y(self, value):
+        if self._check_fields:
+            from std_msgs.msg import Float32MultiArray
+            assert \
+                isinstance(value, Float32MultiArray), \
+                "The 'green_points_y' field must be a sub message of type 'Float32MultiArray'"
+        self._green_points_y = value
+
+    @builtins.property
+    def red_points_y(self):
+        """Message field 'red_points_y'."""
+        return self._red_points_y
+
+    @red_points_y.setter
+    def red_points_y(self, value):
+        if self._check_fields:
+            from std_msgs.msg import Float32MultiArray
+            assert \
+                isinstance(value, Float32MultiArray), \
+                "The 'red_points_y' field must be a sub message of type 'Float32MultiArray'"
+        self._red_points_y = value
+
+    @builtins.property
+    def yellow_points_y(self):
+        """Message field 'yellow_points_y'."""
+        return self._yellow_points_y
+
+    @yellow_points_y.setter
+    def yellow_points_y(self, value):
+        if self._check_fields:
+            from std_msgs.msg import Float32MultiArray
+            assert \
+                isinstance(value, Float32MultiArray), \
+                "The 'yellow_points_y' field must be a sub message of type 'Float32MultiArray'"
+        self._yellow_points_y = value
 
     @builtins.property
     def grid_size(self):

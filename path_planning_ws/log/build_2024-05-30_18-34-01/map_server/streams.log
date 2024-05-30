@@ -1,0 +1,282 @@
+[0.595s] Invoking command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/map_server': PYTHONPATH=/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/prefix_override:/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/map_server build --build-base /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/build install --record /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/install.log --single-version-externally-managed install_data
+[0.717s] running egg_info
+[0.717s] creating ../../build/map_server/map_server.egg-info
+[0.717s] writing ../../build/map_server/map_server.egg-info/PKG-INFO
+[0.717s] writing dependency_links to ../../build/map_server/map_server.egg-info/dependency_links.txt
+[0.717s] writing entry points to ../../build/map_server/map_server.egg-info/entry_points.txt
+[0.717s] writing requirements to ../../build/map_server/map_server.egg-info/requires.txt
+[0.717s] writing top-level names to ../../build/map_server/map_server.egg-info/top_level.txt
+[0.719s] writing manifest file '../../build/map_server/map_server.egg-info/SOURCES.txt'
+[0.719s] reading manifest file '../../build/map_server/map_server.egg-info/SOURCES.txt'
+[0.719s] adding license file 'LICENSE'
+[0.721s] writing manifest file '../../build/map_server/map_server.egg-info/SOURCES.txt'
+[0.721s] running build
+[0.721s] running build_py
+[0.721s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/build
+[0.721s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/build/lib
+[0.721s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/build/lib/map_server
+[0.721s] copying map_server/__init__.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/build/lib/map_server
+[0.721s] copying map_server/start_goal_action.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/build/lib/map_server
+[0.721s] copying map_server/rviz2_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/build/lib/map_server
+[0.721s] running install
+[0.721s] running install_lib
+[0.722s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server
+[0.722s] copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/build/lib/map_server/__init__.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server
+[0.722s] copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/build/lib/map_server/start_goal_action.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server
+[0.722s] copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/build/lib/map_server/rviz2_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server
+[0.722s] byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/__init__.py to __init__.cpython-310.pyc
+[0.722s] byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/start_goal_action.py to start_goal_action.cpython-310.pyc
+[0.723s] byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/rviz2_launch.py to rviz2_launch.cpython-310.pyc
+[0.723s] running install_data
+[0.723s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/ament_index
+[0.723s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/ament_index/resource_index
+[0.723s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/ament_index/resource_index/packages
+[0.723s] copying resource/map_server -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/ament_index/resource_index/packages
+[0.724s] copying package.xml -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server
+[0.724s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data
+[0.724s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/jadranovo
+[0.724s] copying input_data/jadranovo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/jadranovo
+[0.724s] copying input_data/jadranovo/jadranovo.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/jadranovo
+[0.724s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/petrina
+[0.724s] copying input_data/petrina/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/petrina
+[0.724s] copying input_data/petrina/petrina_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/petrina
+[0.725s] copying input_data/petrina/petrina.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/petrina
+[0.725s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/processed_maps
+[0.725s] copying input_data/processed_maps/processed_map_jadranovo_map -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/processed_maps
+[0.726s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/vrbnik
+[0.726s] copying input_data/vrbnik/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/vrbnik
+[0.726s] copying input_data/vrbnik/vrbnik.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/vrbnik
+[0.726s] copying input_data/vrbnik/vrbnik_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/vrbnik
+[0.727s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/novi
+[0.727s] copying input_data/novi/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/novi
+[0.727s] copying input_data/novi/novi.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/novi
+[0.728s] copying input_data/novi/novi_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/novi
+[0.729s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/selehovica
+[0.729s] copying input_data/selehovica/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/selehovica
+[0.729s] copying input_data/selehovica/selehovica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/selehovica
+[0.730s] copying input_data/selehovica/selehovica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/selehovica
+[0.730s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/voz
+[0.730s] copying input_data/voz/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/voz
+[0.730s] copying input_data/voz/voz_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/voz
+[0.734s] copying input_data/voz/voz.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/voz
+[0.734s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/sv_marko
+[0.734s] copying input_data/sv_marko/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/sv_marko
+[0.734s] copying input_data/sv_marko/sv_marko.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/sv_marko
+[0.734s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/melska
+[0.734s] copying input_data/melska/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/melska
+[0.734s] copying input_data/melska/melska.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/melska
+[0.734s] copying input_data/melska/melska_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/melska
+[0.735s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/selce
+[0.736s] copying input_data/selce/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/selce
+[0.736s] copying input_data/selce/selce_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/selce
+[0.737s] copying input_data/selce/selce.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/selce
+[0.737s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/klimno
+[0.737s] copying input_data/klimno/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/klimno
+[0.737s] copying input_data/klimno/klimno.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/klimno
+[0.738s] copying input_data/klimno/klimno_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/klimno
+[0.740s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/rudine
+[0.740s] copying input_data/rudine/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/rudine
+[0.740s] copying input_data/rudine/rudine.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/rudine
+[0.740s] copying input_data/rudine/rudine_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/rudine
+[0.742s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/silo
+[0.742s] copying input_data/silo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/silo
+[0.742s] copying input_data/silo/silo.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/silo
+[0.742s] copying input_data/silo/silo_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/silo
+[0.744s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/lokvisce
+[0.744s] copying input_data/lokvisce/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/lokvisce
+[0.744s] copying input_data/lokvisce/lokvisce.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/lokvisce
+[0.744s] copying input_data/lokvisce/lokvisce_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/lokvisce
+[0.746s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/omisalj
+[0.746s] copying input_data/omisalj/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/omisalj
+[0.746s] copying input_data/omisalj/omisalj.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/omisalj
+[0.746s] copying input_data/omisalj/omisalj_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/omisalj
+[0.748s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/povile
+[0.748s] copying input_data/povile/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/povile
+[0.748s] copying input_data/povile/povile.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/povile
+[0.748s] copying input_data/povile/povile_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/povile
+[0.750s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/dramalj
+[0.750s] copying input_data/dramalj/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/dramalj
+[0.750s] copying input_data/dramalj/dramalj_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/dramalj
+[0.750s] copying input_data/dramalj/dramalj.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/dramalj
+[0.751s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/crikvenica
+[0.751s] copying input_data/crikvenica/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/crikvenica
+[0.751s] copying input_data/crikvenica/crikvenica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/crikvenica
+[0.753s] copying input_data/crikvenica/crikvenica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/input_data/crikvenica
+[0.754s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/launch
+[0.754s] copying launch/pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/launch/
+[0.754s] copying launch/rviz2_pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/launch/
+[0.754s] copying launch/make_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/launch/
+[0.754s] copying launch/init_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/launch/
+[0.754s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/rviz2
+[0.754s] copying rviz2/map_visualization.rviz -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/rviz2/
+[0.754s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/processed_maps
+[0.754s] copying processed_maps/test.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/share/map_server/processed_maps/
+[0.755s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server
+[0.755s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data
+[0.755s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/jadranovo
+[0.755s] copying input_data/jadranovo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/jadranovo
+[0.755s] copying input_data/jadranovo/jadranovo.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/jadranovo
+[0.755s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/petrina
+[0.755s] copying input_data/petrina/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/petrina
+[0.755s] copying input_data/petrina/petrina_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/petrina
+[0.756s] copying input_data/petrina/petrina.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/petrina
+[0.756s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/processed_maps
+[0.757s] copying input_data/processed_maps/processed_map_jadranovo_map -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/processed_maps
+[0.757s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/vrbnik
+[0.757s] copying input_data/vrbnik/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/vrbnik
+[0.757s] copying input_data/vrbnik/vrbnik.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/vrbnik
+[0.758s] copying input_data/vrbnik/vrbnik_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/vrbnik
+[0.759s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/novi
+[0.759s] copying input_data/novi/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/novi
+[0.759s] copying input_data/novi/novi.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/novi
+[0.759s] copying input_data/novi/novi_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/novi
+[0.761s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/selehovica
+[0.761s] copying input_data/selehovica/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/selehovica
+[0.761s] copying input_data/selehovica/selehovica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/selehovica
+[0.761s] copying input_data/selehovica/selehovica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/selehovica
+[0.762s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/voz
+[0.762s] copying input_data/voz/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/voz
+[0.762s] copying input_data/voz/voz_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/voz
+[0.765s] copying input_data/voz/voz.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/voz
+[0.765s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/sv_marko
+[0.765s] copying input_data/sv_marko/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/sv_marko
+[0.765s] copying input_data/sv_marko/sv_marko.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/sv_marko
+[0.765s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/melska
+[0.766s] copying input_data/melska/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/melska
+[0.766s] copying input_data/melska/melska.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/melska
+[0.766s] copying input_data/melska/melska_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/melska
+[0.767s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/selce
+[0.767s] copying input_data/selce/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/selce
+[0.767s] copying input_data/selce/selce_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/selce
+[0.769s] copying input_data/selce/selce.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/selce
+[0.769s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/klimno
+[0.769s] copying input_data/klimno/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/klimno
+[0.769s] copying input_data/klimno/klimno.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/klimno
+[0.769s] copying input_data/klimno/klimno_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/klimno
+[0.772s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/rudine
+[0.772s] copying input_data/rudine/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/rudine
+[0.772s] copying input_data/rudine/rudine.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/rudine
+[0.772s] copying input_data/rudine/rudine_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/rudine
+[0.773s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/silo
+[0.773s] copying input_data/silo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/silo
+[0.773s] copying input_data/silo/silo.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/silo
+[0.774s] copying input_data/silo/silo_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/silo
+[0.775s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/lokvisce
+[0.775s] copying input_data/lokvisce/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/lokvisce
+[0.775s] copying input_data/lokvisce/lokvisce.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/lokvisce
+[0.776s] copying input_data/lokvisce/lokvisce_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/lokvisce
+[0.778s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/omisalj
+[0.778s] copying input_data/omisalj/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/omisalj
+[0.778s] copying input_data/omisalj/omisalj.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/omisalj
+[0.778s] copying input_data/omisalj/omisalj_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/omisalj
+[0.780s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/povile
+[0.780s] copying input_data/povile/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/povile
+[0.780s] copying input_data/povile/povile.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/povile
+[0.780s] copying input_data/povile/povile_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/povile
+[0.781s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/dramalj
+[0.781s] copying input_data/dramalj/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/dramalj
+[0.781s] copying input_data/dramalj/dramalj_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/dramalj
+[0.782s] copying input_data/dramalj/dramalj.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/dramalj
+[0.782s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/crikvenica
+[0.782s] copying input_data/crikvenica/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/crikvenica
+[0.782s] copying input_data/crikvenica/crikvenica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/crikvenica
+[0.785s] copying input_data/crikvenica/crikvenica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/input_data/crikvenica
+[0.785s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/launch
+[0.785s] copying launch/pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/launch/
+[0.785s] copying launch/rviz2_pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/launch/
+[0.785s] copying launch/make_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/launch/
+[0.785s] copying launch/init_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/launch/
+[0.785s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/rviz2
+[0.786s] copying rviz2/map_visualization.rviz -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/rviz2/
+[0.786s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/processed_maps
+[0.786s] copying processed_maps/test.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server/processed_maps/
+[0.787s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data
+[0.787s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/jadranovo
+[0.787s] copying input_data/jadranovo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/jadranovo
+[0.787s] copying input_data/jadranovo/jadranovo.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/jadranovo
+[0.787s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/petrina
+[0.787s] copying input_data/petrina/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/petrina
+[0.787s] copying input_data/petrina/petrina_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/petrina
+[0.788s] copying input_data/petrina/petrina.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/petrina
+[0.788s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/processed_maps
+[0.789s] copying input_data/processed_maps/processed_map_jadranovo_map -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/processed_maps
+[0.790s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/vrbnik
+[0.790s] copying input_data/vrbnik/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/vrbnik
+[0.790s] copying input_data/vrbnik/vrbnik.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/vrbnik
+[0.790s] copying input_data/vrbnik/vrbnik_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/vrbnik
+[0.791s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/novi
+[0.791s] copying input_data/novi/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/novi
+[0.791s] copying input_data/novi/novi.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/novi
+[0.791s] copying input_data/novi/novi_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/novi
+[0.793s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/selehovica
+[0.793s] copying input_data/selehovica/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/selehovica
+[0.793s] copying input_data/selehovica/selehovica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/selehovica
+[0.793s] copying input_data/selehovica/selehovica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/selehovica
+[0.794s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/voz
+[0.794s] copying input_data/voz/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/voz
+[0.794s] copying input_data/voz/voz_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/voz
+[0.796s] copying input_data/voz/voz.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/voz
+[0.797s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/sv_marko
+[0.797s] copying input_data/sv_marko/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/sv_marko
+[0.797s] copying input_data/sv_marko/sv_marko.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/sv_marko
+[0.797s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/melska
+[0.797s] copying input_data/melska/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/melska
+[0.797s] copying input_data/melska/melska.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/melska
+[0.797s] copying input_data/melska/melska_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/melska
+[0.798s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/selce
+[0.798s] copying input_data/selce/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/selce
+[0.798s] copying input_data/selce/selce_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/selce
+[0.800s] copying input_data/selce/selce.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/selce
+[0.800s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/klimno
+[0.800s] copying input_data/klimno/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/klimno
+[0.800s] copying input_data/klimno/klimno.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/klimno
+[0.801s] copying input_data/klimno/klimno_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/klimno
+[0.803s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/rudine
+[0.803s] copying input_data/rudine/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/rudine
+[0.803s] copying input_data/rudine/rudine.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/rudine
+[0.803s] copying input_data/rudine/rudine_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/rudine
+[0.804s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/silo
+[0.804s] copying input_data/silo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/silo
+[0.804s] copying input_data/silo/silo.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/silo
+[0.805s] copying input_data/silo/silo_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/silo
+[0.807s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/lokvisce
+[0.807s] copying input_data/lokvisce/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/lokvisce
+[0.807s] copying input_data/lokvisce/lokvisce.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/lokvisce
+[0.807s] copying input_data/lokvisce/lokvisce_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/lokvisce
+[0.809s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/omisalj
+[0.809s] copying input_data/omisalj/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/omisalj
+[0.809s] copying input_data/omisalj/omisalj.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/omisalj
+[0.809s] copying input_data/omisalj/omisalj_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/omisalj
+[0.811s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/povile
+[0.811s] copying input_data/povile/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/povile
+[0.811s] copying input_data/povile/povile.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/povile
+[0.811s] copying input_data/povile/povile_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/povile
+[0.812s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/dramalj
+[0.812s] copying input_data/dramalj/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/dramalj
+[0.812s] copying input_data/dramalj/dramalj_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/dramalj
+[0.813s] copying input_data/dramalj/dramalj.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/dramalj
+[0.813s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/crikvenica
+[0.813s] copying input_data/crikvenica/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/crikvenica
+[0.813s] copying input_data/crikvenica/crikvenica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/crikvenica
+[0.816s] copying input_data/crikvenica/crikvenica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/input_data/crikvenica
+[0.816s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/launch
+[0.816s] copying launch/pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/launch/
+[0.817s] copying launch/rviz2_pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/launch/
+[0.817s] copying launch/make_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/launch/
+[0.817s] copying launch/init_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/launch/
+[0.817s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/rviz2
+[0.817s] copying rviz2/map_visualization.rviz -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/rviz2/
+[0.817s] creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/processed_maps
+[0.817s] copying processed_maps/test.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server/processed_maps/
+[0.817s] running install_egg_info
+[0.818s] Copying ../../build/map_server/map_server.egg-info to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages/map_server-0.0.0-py3.10.egg-info
+[0.818s] running install_scripts
+[0.832s] Installing detect_coast script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server
+[0.833s] Installing map_process script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server
+[0.833s] Installing pointcloud_publisher script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server
+[0.833s] Installing post_processing script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server
+[0.833s] Installing process_osm_data script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server
+[0.833s] Installing rviz2_launch script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server
+[0.833s] Installing start_goal_action script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/map_server
+[0.833s] writing list of installed files to '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/install.log'
+[0.851s] Invoked command in '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/map_server' returned '0': PYTHONPATH=/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/prefix_override:/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_server/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/map_server build --build-base /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/build install --record /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_server/install.log --single-version-externally-managed install_data

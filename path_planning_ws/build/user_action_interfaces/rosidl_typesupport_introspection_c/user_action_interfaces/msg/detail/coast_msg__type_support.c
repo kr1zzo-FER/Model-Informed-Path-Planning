@@ -19,16 +19,24 @@
 #include "std_msgs/msg/detail/header__rosidl_typesupport_introspection_c.h"
 // Member `frame_id`
 #include "rosidl_runtime_c/string_functions.h"
-// Member `coast_points`
-// Member `green_points`
-// Member `red_points`
-// Member `yellow_points`
-#include "sensor_msgs/msg/point_cloud2.h"
-// Member `coast_points`
-// Member `green_points`
-// Member `red_points`
-// Member `yellow_points`
-#include "sensor_msgs/msg/detail/point_cloud2__rosidl_typesupport_introspection_c.h"
+// Member `coast_points_x`
+// Member `green_points_x`
+// Member `red_points_x`
+// Member `yellow_points_x`
+// Member `coast_points_y`
+// Member `green_points_y`
+// Member `red_points_y`
+// Member `yellow_points_y`
+#include "std_msgs/msg/float32_multi_array.h"
+// Member `coast_points_x`
+// Member `green_points_x`
+// Member `red_points_x`
+// Member `yellow_points_x`
+// Member `coast_points_y`
+// Member `green_points_y`
+// Member `red_points_y`
+// Member `yellow_points_y`
+#include "std_msgs/msg/detail/float32_multi_array__rosidl_typesupport_introspection_c.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -49,7 +57,7 @@ void user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__
   user_action_interfaces__msg__CoastMsg__fini(message_memory);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_member_array[7] = {
+static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_member_array[11] = {
   {
     "header",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
@@ -85,14 +93,14 @@ static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces_
     NULL  // resize(index) function pointer
   },
   {
-    "coast_points",  // name
+    "coast_points_x",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
     NULL,  // members of sub message (initialized later)
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces__msg__CoastMsg, coast_points),  // bytes offset in struct
+    offsetof(user_action_interfaces__msg__CoastMsg, coast_points_x),  // bytes offset in struct
     NULL,  // default value
     NULL,  // size() function pointer
     NULL,  // get_const(index) function pointer
@@ -102,14 +110,14 @@ static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces_
     NULL  // resize(index) function pointer
   },
   {
-    "green_points",  // name
+    "green_points_x",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
     NULL,  // members of sub message (initialized later)
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces__msg__CoastMsg, green_points),  // bytes offset in struct
+    offsetof(user_action_interfaces__msg__CoastMsg, green_points_x),  // bytes offset in struct
     NULL,  // default value
     NULL,  // size() function pointer
     NULL,  // get_const(index) function pointer
@@ -119,14 +127,14 @@ static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces_
     NULL  // resize(index) function pointer
   },
   {
-    "red_points",  // name
+    "red_points_x",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
     NULL,  // members of sub message (initialized later)
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces__msg__CoastMsg, red_points),  // bytes offset in struct
+    offsetof(user_action_interfaces__msg__CoastMsg, red_points_x),  // bytes offset in struct
     NULL,  // default value
     NULL,  // size() function pointer
     NULL,  // get_const(index) function pointer
@@ -136,14 +144,82 @@ static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces_
     NULL  // resize(index) function pointer
   },
   {
-    "yellow_points",  // name
+    "yellow_points_x",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
     NULL,  // members of sub message (initialized later)
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces__msg__CoastMsg, yellow_points),  // bytes offset in struct
+    offsetof(user_action_interfaces__msg__CoastMsg, yellow_points_x),  // bytes offset in struct
+    NULL,  // default value
+    NULL,  // size() function pointer
+    NULL,  // get_const(index) function pointer
+    NULL,  // get(index) function pointer
+    NULL,  // fetch(index, &value) function pointer
+    NULL,  // assign(index, value) function pointer
+    NULL  // resize(index) function pointer
+  },
+  {
+    "coast_points_y",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message (initialized later)
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces__msg__CoastMsg, coast_points_y),  // bytes offset in struct
+    NULL,  // default value
+    NULL,  // size() function pointer
+    NULL,  // get_const(index) function pointer
+    NULL,  // get(index) function pointer
+    NULL,  // fetch(index, &value) function pointer
+    NULL,  // assign(index, value) function pointer
+    NULL  // resize(index) function pointer
+  },
+  {
+    "green_points_y",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message (initialized later)
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces__msg__CoastMsg, green_points_y),  // bytes offset in struct
+    NULL,  // default value
+    NULL,  // size() function pointer
+    NULL,  // get_const(index) function pointer
+    NULL,  // get(index) function pointer
+    NULL,  // fetch(index, &value) function pointer
+    NULL,  // assign(index, value) function pointer
+    NULL  // resize(index) function pointer
+  },
+  {
+    "red_points_y",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message (initialized later)
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces__msg__CoastMsg, red_points_y),  // bytes offset in struct
+    NULL,  // default value
+    NULL,  // size() function pointer
+    NULL,  // get_const(index) function pointer
+    NULL,  // get(index) function pointer
+    NULL,  // fetch(index, &value) function pointer
+    NULL,  // assign(index, value) function pointer
+    NULL  // resize(index) function pointer
+  },
+  {
+    "yellow_points_y",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message (initialized later)
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces__msg__CoastMsg, yellow_points_y),  // bytes offset in struct
     NULL,  // default value
     NULL,  // size() function pointer
     NULL,  // get_const(index) function pointer
@@ -174,7 +250,7 @@ static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces_
 static const rosidl_typesupport_introspection_c__MessageMembers user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_members = {
   "user_action_interfaces__msg",  // message namespace
   "CoastMsg",  // message name
-  7,  // number of fields
+  11,  // number of fields
   sizeof(user_action_interfaces__msg__CoastMsg),
   user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_member_array,  // message members
   user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_init_function,  // function to initialize message memory (memory has to be allocated)
@@ -198,13 +274,21 @@ ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspecti
   user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_member_array[0].members_ =
     ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, std_msgs, msg, Header)();
   user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_member_array[2].members_ =
-    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, sensor_msgs, msg, PointCloud2)();
+    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, std_msgs, msg, Float32MultiArray)();
   user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_member_array[3].members_ =
-    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, sensor_msgs, msg, PointCloud2)();
+    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, std_msgs, msg, Float32MultiArray)();
   user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_member_array[4].members_ =
-    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, sensor_msgs, msg, PointCloud2)();
+    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, std_msgs, msg, Float32MultiArray)();
   user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_member_array[5].members_ =
-    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, sensor_msgs, msg, PointCloud2)();
+    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, std_msgs, msg, Float32MultiArray)();
+  user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_member_array[6].members_ =
+    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, std_msgs, msg, Float32MultiArray)();
+  user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_member_array[7].members_ =
+    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, std_msgs, msg, Float32MultiArray)();
+  user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_member_array[8].members_ =
+    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, std_msgs, msg, Float32MultiArray)();
+  user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_member_array[9].members_ =
+    ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspection_c, std_msgs, msg, Float32MultiArray)();
   if (!user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_type_support_handle.typesupport_identifier) {
     user_action_interfaces__msg__CoastMsg__rosidl_typesupport_introspection_c__CoastMsg_message_type_support_handle.typesupport_identifier =
       rosidl_typesupport_introspection_c__identifier;

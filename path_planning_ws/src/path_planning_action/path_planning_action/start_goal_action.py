@@ -4,6 +4,7 @@ from rclpy.node import Node
 
 from user_action_interfaces.action import StartGoalAction
 from user_action_interfaces.msg import StartGoalMsg
+from nav_msgs.msg import Path as PathMsg
 from pathlib import Path
 import sys
 import pickle 
@@ -36,6 +37,16 @@ class PathPlanningActionClient(Node):
         self._action_client = ActionClient(self, StartGoalAction, 'start_goal_action')
 
         self.first_time = True
+
+        self.send_path_publisher = self.create_publisher(PathMsg, 'path', 10)
+
+        self.path = PathMsg()
+
+        self.timer = self.create_timer(0.1, self.timer_callback)
+    
+    def timer_callback(self):
+        if self.path.poses:
+            self.send_path_publisher.publish(self.path)
 
     def start_goal_callback(self, msg):
         self.start = msg.start
@@ -70,13 +81,21 @@ class PathPlanningActionClient(Node):
     def get_result_callback(self, future):
         result = future.result().result
         self.get_logger().info('Result: {0}'.format(result.path))
-        rclpy.shutdown()
+
+        path = PathMsg()
+        path.poses = result.path
+
+        self.path = path
+    
+        
+
 
 
     def feedback_callback(self, feedback_msg):
         feedback = feedback_msg.feedback
         self.get_logger().info('Received feedback: {0}'.format(feedback.partial_path))
-    
+
+        
 def main(args=None):
     rclpy.init(args=args)
 

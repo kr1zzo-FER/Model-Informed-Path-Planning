@@ -17,11 +17,15 @@
 // Include directives for member types
 // Member 'header'
 #include "std_msgs/msg/detail/header__traits.hpp"
-// Member 'coast_points'
-// Member 'green_points'
-// Member 'red_points'
-// Member 'yellow_points'
-#include "sensor_msgs/msg/detail/point_cloud2__traits.hpp"
+// Member 'coast_points_x'
+// Member 'green_points_x'
+// Member 'red_points_x'
+// Member 'yellow_points_x'
+// Member 'coast_points_y'
+// Member 'green_points_y'
+// Member 'red_points_y'
+// Member 'yellow_points_y'
+#include "std_msgs/msg/detail/float32_multi_array__traits.hpp"
 
 namespace user_action_interfaces
 {
@@ -48,31 +52,59 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
-  // member: coast_points
+  // member: coast_points_x
   {
-    out << "coast_points: ";
-    to_flow_style_yaml(msg.coast_points, out);
+    out << "coast_points_x: ";
+    to_flow_style_yaml(msg.coast_points_x, out);
     out << ", ";
   }
 
-  // member: green_points
+  // member: green_points_x
   {
-    out << "green_points: ";
-    to_flow_style_yaml(msg.green_points, out);
+    out << "green_points_x: ";
+    to_flow_style_yaml(msg.green_points_x, out);
     out << ", ";
   }
 
-  // member: red_points
+  // member: red_points_x
   {
-    out << "red_points: ";
-    to_flow_style_yaml(msg.red_points, out);
+    out << "red_points_x: ";
+    to_flow_style_yaml(msg.red_points_x, out);
     out << ", ";
   }
 
-  // member: yellow_points
+  // member: yellow_points_x
   {
-    out << "yellow_points: ";
-    to_flow_style_yaml(msg.yellow_points, out);
+    out << "yellow_points_x: ";
+    to_flow_style_yaml(msg.yellow_points_x, out);
+    out << ", ";
+  }
+
+  // member: coast_points_y
+  {
+    out << "coast_points_y: ";
+    to_flow_style_yaml(msg.coast_points_y, out);
+    out << ", ";
+  }
+
+  // member: green_points_y
+  {
+    out << "green_points_y: ";
+    to_flow_style_yaml(msg.green_points_y, out);
+    out << ", ";
+  }
+
+  // member: red_points_y
+  {
+    out << "red_points_y: ";
+    to_flow_style_yaml(msg.red_points_y, out);
+    out << ", ";
+  }
+
+  // member: yellow_points_y
+  {
+    out << "yellow_points_y: ";
+    to_flow_style_yaml(msg.yellow_points_y, out);
     out << ", ";
   }
 
@@ -107,40 +139,76 @@ inline void to_block_style_yaml(
     out << "\n";
   }
 
-  // member: coast_points
+  // member: coast_points_x
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    out << "coast_points:\n";
-    to_block_style_yaml(msg.coast_points, out, indentation + 2);
+    out << "coast_points_x:\n";
+    to_block_style_yaml(msg.coast_points_x, out, indentation + 2);
   }
 
-  // member: green_points
+  // member: green_points_x
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    out << "green_points:\n";
-    to_block_style_yaml(msg.green_points, out, indentation + 2);
+    out << "green_points_x:\n";
+    to_block_style_yaml(msg.green_points_x, out, indentation + 2);
   }
 
-  // member: red_points
+  // member: red_points_x
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    out << "red_points:\n";
-    to_block_style_yaml(msg.red_points, out, indentation + 2);
+    out << "red_points_x:\n";
+    to_block_style_yaml(msg.red_points_x, out, indentation + 2);
   }
 
-  // member: yellow_points
+  // member: yellow_points_x
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    out << "yellow_points:\n";
-    to_block_style_yaml(msg.yellow_points, out, indentation + 2);
+    out << "yellow_points_x:\n";
+    to_block_style_yaml(msg.yellow_points_x, out, indentation + 2);
+  }
+
+  // member: coast_points_y
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "coast_points_y:\n";
+    to_block_style_yaml(msg.coast_points_y, out, indentation + 2);
+  }
+
+  // member: green_points_y
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "green_points_y:\n";
+    to_block_style_yaml(msg.green_points_y, out, indentation + 2);
+  }
+
+  // member: red_points_y
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "red_points_y:\n";
+    to_block_style_yaml(msg.red_points_y, out, indentation + 2);
+  }
+
+  // member: yellow_points_y
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    out << "yellow_points_y:\n";
+    to_block_style_yaml(msg.yellow_points_y, out, indentation + 2);
   }
 
   // member: grid_size

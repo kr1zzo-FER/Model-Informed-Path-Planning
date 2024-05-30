@@ -1,7 +1,11 @@
 std_msgs/Header header
 string frame_id  
-sensor_msgs/PointCloud2 coast_points
-sensor_msgs/PointCloud2 green_points
-sensor_msgs/PointCloud2 red_points
-sensor_msgs/PointCloud2 yellow_points
+std_msgs/Float32MultiArray coast_points_x
+std_msgs/Float32MultiArray green_points_x
+std_msgs/Float32MultiArray red_points_x
+std_msgs/Float32MultiArray yellow_points_x
+std_msgs/Float32MultiArray coast_points_y
+std_msgs/Float32MultiArray green_points_y
+std_msgs/Float32MultiArray red_points_y
+std_msgs/Float32MultiArray yellow_points_y
 int32 grid_size

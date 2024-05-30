@@ -16,11 +16,15 @@
 #include "std_msgs/msg/detail/header__functions.h"
 // Member `frame_id`
 #include "rosidl_runtime_c/string_functions.h"
-// Member `coast_points`
-// Member `green_points`
-// Member `red_points`
-// Member `yellow_points`
-#include "sensor_msgs/msg/detail/point_cloud2__functions.h"
+// Member `coast_points_x`
+// Member `green_points_x`
+// Member `red_points_x`
+// Member `yellow_points_x`
+// Member `coast_points_y`
+// Member `green_points_y`
+// Member `red_points_y`
+// Member `yellow_points_y`
+#include "std_msgs/msg/detail/float32_multi_array__functions.h"
 
 bool
 user_action_interfaces__msg__CoastMsg__init(user_action_interfaces__msg__CoastMsg * msg)
@@ -38,23 +42,43 @@ user_action_interfaces__msg__CoastMsg__init(user_action_interfaces__msg__CoastMs
     user_action_interfaces__msg__CoastMsg__fini(msg);
     return false;
   }
-  // coast_points
-  if (!sensor_msgs__msg__PointCloud2__init(&msg->coast_points)) {
+  // coast_points_x
+  if (!std_msgs__msg__Float32MultiArray__init(&msg->coast_points_x)) {
     user_action_interfaces__msg__CoastMsg__fini(msg);
     return false;
   }
-  // green_points
-  if (!sensor_msgs__msg__PointCloud2__init(&msg->green_points)) {
+  // green_points_x
+  if (!std_msgs__msg__Float32MultiArray__init(&msg->green_points_x)) {
     user_action_interfaces__msg__CoastMsg__fini(msg);
     return false;
   }
-  // red_points
-  if (!sensor_msgs__msg__PointCloud2__init(&msg->red_points)) {
+  // red_points_x
+  if (!std_msgs__msg__Float32MultiArray__init(&msg->red_points_x)) {
     user_action_interfaces__msg__CoastMsg__fini(msg);
     return false;
   }
-  // yellow_points
-  if (!sensor_msgs__msg__PointCloud2__init(&msg->yellow_points)) {
+  // yellow_points_x
+  if (!std_msgs__msg__Float32MultiArray__init(&msg->yellow_points_x)) {
+    user_action_interfaces__msg__CoastMsg__fini(msg);
+    return false;
+  }
+  // coast_points_y
+  if (!std_msgs__msg__Float32MultiArray__init(&msg->coast_points_y)) {
+    user_action_interfaces__msg__CoastMsg__fini(msg);
+    return false;
+  }
+  // green_points_y
+  if (!std_msgs__msg__Float32MultiArray__init(&msg->green_points_y)) {
+    user_action_interfaces__msg__CoastMsg__fini(msg);
+    return false;
+  }
+  // red_points_y
+  if (!std_msgs__msg__Float32MultiArray__init(&msg->red_points_y)) {
+    user_action_interfaces__msg__CoastMsg__fini(msg);
+    return false;
+  }
+  // yellow_points_y
+  if (!std_msgs__msg__Float32MultiArray__init(&msg->yellow_points_y)) {
     user_action_interfaces__msg__CoastMsg__fini(msg);
     return false;
   }
@@ -72,14 +96,22 @@ user_action_interfaces__msg__CoastMsg__fini(user_action_interfaces__msg__CoastMs
   std_msgs__msg__Header__fini(&msg->header);
   // frame_id
   rosidl_runtime_c__String__fini(&msg->frame_id);
-  // coast_points
-  sensor_msgs__msg__PointCloud2__fini(&msg->coast_points);
-  // green_points
-  sensor_msgs__msg__PointCloud2__fini(&msg->green_points);
-  // red_points
-  sensor_msgs__msg__PointCloud2__fini(&msg->red_points);
-  // yellow_points
-  sensor_msgs__msg__PointCloud2__fini(&msg->yellow_points);
+  // coast_points_x
+  std_msgs__msg__Float32MultiArray__fini(&msg->coast_points_x);
+  // green_points_x
+  std_msgs__msg__Float32MultiArray__fini(&msg->green_points_x);
+  // red_points_x
+  std_msgs__msg__Float32MultiArray__fini(&msg->red_points_x);
+  // yellow_points_x
+  std_msgs__msg__Float32MultiArray__fini(&msg->yellow_points_x);
+  // coast_points_y
+  std_msgs__msg__Float32MultiArray__fini(&msg->coast_points_y);
+  // green_points_y
+  std_msgs__msg__Float32MultiArray__fini(&msg->green_points_y);
+  // red_points_y
+  std_msgs__msg__Float32MultiArray__fini(&msg->red_points_y);
+  // yellow_points_y
+  std_msgs__msg__Float32MultiArray__fini(&msg->yellow_points_y);
   // grid_size
 }
 
@@ -101,27 +133,51 @@ user_action_interfaces__msg__CoastMsg__are_equal(const user_action_interfaces__m
   {
     return false;
   }
-  // coast_points
-  if (!sensor_msgs__msg__PointCloud2__are_equal(
-      &(lhs->coast_points), &(rhs->coast_points)))
+  // coast_points_x
+  if (!std_msgs__msg__Float32MultiArray__are_equal(
+      &(lhs->coast_points_x), &(rhs->coast_points_x)))
   {
     return false;
   }
-  // green_points
-  if (!sensor_msgs__msg__PointCloud2__are_equal(
-      &(lhs->green_points), &(rhs->green_points)))
+  // green_points_x
+  if (!std_msgs__msg__Float32MultiArray__are_equal(
+      &(lhs->green_points_x), &(rhs->green_points_x)))
   {
     return false;
   }
-  // red_points
-  if (!sensor_msgs__msg__PointCloud2__are_equal(
-      &(lhs->red_points), &(rhs->red_points)))
+  // red_points_x
+  if (!std_msgs__msg__Float32MultiArray__are_equal(
+      &(lhs->red_points_x), &(rhs->red_points_x)))
   {
     return false;
   }
-  // yellow_points
-  if (!sensor_msgs__msg__PointCloud2__are_equal(
-      &(lhs->yellow_points), &(rhs->yellow_points)))
+  // yellow_points_x
+  if (!std_msgs__msg__Float32MultiArray__are_equal(
+      &(lhs->yellow_points_x), &(rhs->yellow_points_x)))
+  {
+    return false;
+  }
+  // coast_points_y
+  if (!std_msgs__msg__Float32MultiArray__are_equal(
+      &(lhs->coast_points_y), &(rhs->coast_points_y)))
+  {
+    return false;
+  }
+  // green_points_y
+  if (!std_msgs__msg__Float32MultiArray__are_equal(
+      &(lhs->green_points_y), &(rhs->green_points_y)))
+  {
+    return false;
+  }
+  // red_points_y
+  if (!std_msgs__msg__Float32MultiArray__are_equal(
+      &(lhs->red_points_y), &(rhs->red_points_y)))
+  {
+    return false;
+  }
+  // yellow_points_y
+  if (!std_msgs__msg__Float32MultiArray__are_equal(
+      &(lhs->yellow_points_y), &(rhs->yellow_points_y)))
   {
     return false;
   }
@@ -152,27 +208,51 @@ user_action_interfaces__msg__CoastMsg__copy(
   {
     return false;
   }
-  // coast_points
-  if (!sensor_msgs__msg__PointCloud2__copy(
-      &(input->coast_points), &(output->coast_points)))
+  // coast_points_x
+  if (!std_msgs__msg__Float32MultiArray__copy(
+      &(input->coast_points_x), &(output->coast_points_x)))
   {
     return false;
   }
-  // green_points
-  if (!sensor_msgs__msg__PointCloud2__copy(
-      &(input->green_points), &(output->green_points)))
+  // green_points_x
+  if (!std_msgs__msg__Float32MultiArray__copy(
+      &(input->green_points_x), &(output->green_points_x)))
   {
     return false;
   }
-  // red_points
-  if (!sensor_msgs__msg__PointCloud2__copy(
-      &(input->red_points), &(output->red_points)))
+  // red_points_x
+  if (!std_msgs__msg__Float32MultiArray__copy(
+      &(input->red_points_x), &(output->red_points_x)))
   {
     return false;
   }
-  // yellow_points
-  if (!sensor_msgs__msg__PointCloud2__copy(
-      &(input->yellow_points), &(output->yellow_points)))
+  // yellow_points_x
+  if (!std_msgs__msg__Float32MultiArray__copy(
+      &(input->yellow_points_x), &(output->yellow_points_x)))
+  {
+    return false;
+  }
+  // coast_points_y
+  if (!std_msgs__msg__Float32MultiArray__copy(
+      &(input->coast_points_y), &(output->coast_points_y)))
+  {
+    return false;
+  }
+  // green_points_y
+  if (!std_msgs__msg__Float32MultiArray__copy(
+      &(input->green_points_y), &(output->green_points_y)))
+  {
+    return false;
+  }
+  // red_points_y
+  if (!std_msgs__msg__Float32MultiArray__copy(
+      &(input->red_points_y), &(output->red_points_y)))
+  {
+    return false;
+  }
+  // yellow_points_y
+  if (!std_msgs__msg__Float32MultiArray__copy(
+      &(input->yellow_points_y), &(output->yellow_points_y)))
   {
     return false;
   }

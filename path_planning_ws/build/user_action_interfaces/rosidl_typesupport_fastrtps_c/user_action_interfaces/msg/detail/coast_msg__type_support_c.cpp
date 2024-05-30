@@ -36,24 +36,24 @@ extern "C"
 
 #include "rosidl_runtime_c/string.h"  // frame_id
 #include "rosidl_runtime_c/string_functions.h"  // frame_id
-#include "sensor_msgs/msg/detail/point_cloud2__functions.h"  // coast_points, green_points, red_points, yellow_points
+#include "std_msgs/msg/detail/float32_multi_array__functions.h"  // coast_points_x, coast_points_y, green_points_x, green_points_y, red_points_x, red_points_y, yellow_points_x, yellow_points_y
 #include "std_msgs/msg/detail/header__functions.h"  // header
 
 // forward declare type support functions
 ROSIDL_TYPESUPPORT_FASTRTPS_C_IMPORT_user_action_interfaces
-size_t get_serialized_size_sensor_msgs__msg__PointCloud2(
+size_t get_serialized_size_std_msgs__msg__Float32MultiArray(
   const void * untyped_ros_message,
   size_t current_alignment);
 
 ROSIDL_TYPESUPPORT_FASTRTPS_C_IMPORT_user_action_interfaces
-size_t max_serialized_size_sensor_msgs__msg__PointCloud2(
+size_t max_serialized_size_std_msgs__msg__Float32MultiArray(
   bool & full_bounded,
   bool & is_plain,
   size_t current_alignment);
 
 ROSIDL_TYPESUPPORT_FASTRTPS_C_IMPORT_user_action_interfaces
 const rosidl_message_type_support_t *
-  ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_fastrtps_c, sensor_msgs, msg, PointCloud2)();
+  ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray)();
 ROSIDL_TYPESUPPORT_FASTRTPS_C_IMPORT_user_action_interfaces
 size_t get_serialized_size_std_msgs__msg__Header(
   const void * untyped_ros_message,
@@ -109,57 +109,113 @@ static bool _CoastMsg__cdr_serialize(
     cdr << str->data;
   }
 
-  // Field name: coast_points
+  // Field name: coast_points_x
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
-        rosidl_typesupport_fastrtps_c, sensor_msgs, msg, PointCloud2
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
       )()->data);
     if (!callbacks->cdr_serialize(
-        &ros_message->coast_points, cdr))
+        &ros_message->coast_points_x, cdr))
     {
       return false;
     }
   }
 
-  // Field name: green_points
+  // Field name: green_points_x
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
-        rosidl_typesupport_fastrtps_c, sensor_msgs, msg, PointCloud2
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
       )()->data);
     if (!callbacks->cdr_serialize(
-        &ros_message->green_points, cdr))
+        &ros_message->green_points_x, cdr))
     {
       return false;
     }
   }
 
-  // Field name: red_points
+  // Field name: red_points_x
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
-        rosidl_typesupport_fastrtps_c, sensor_msgs, msg, PointCloud2
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
       )()->data);
     if (!callbacks->cdr_serialize(
-        &ros_message->red_points, cdr))
+        &ros_message->red_points_x, cdr))
     {
       return false;
     }
   }
 
-  // Field name: yellow_points
+  // Field name: yellow_points_x
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
-        rosidl_typesupport_fastrtps_c, sensor_msgs, msg, PointCloud2
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
       )()->data);
     if (!callbacks->cdr_serialize(
-        &ros_message->yellow_points, cdr))
+        &ros_message->yellow_points_x, cdr))
+    {
+      return false;
+    }
+  }
+
+  // Field name: coast_points_y
+  {
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
+      )()->data);
+    if (!callbacks->cdr_serialize(
+        &ros_message->coast_points_y, cdr))
+    {
+      return false;
+    }
+  }
+
+  // Field name: green_points_y
+  {
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
+      )()->data);
+    if (!callbacks->cdr_serialize(
+        &ros_message->green_points_y, cdr))
+    {
+      return false;
+    }
+  }
+
+  // Field name: red_points_y
+  {
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
+      )()->data);
+    if (!callbacks->cdr_serialize(
+        &ros_message->red_points_y, cdr))
+    {
+      return false;
+    }
+  }
+
+  // Field name: yellow_points_y
+  {
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
+      )()->data);
+    if (!callbacks->cdr_serialize(
+        &ros_message->yellow_points_y, cdr))
     {
       return false;
     }
@@ -212,57 +268,113 @@ static bool _CoastMsg__cdr_deserialize(
     }
   }
 
-  // Field name: coast_points
+  // Field name: coast_points_x
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
-        rosidl_typesupport_fastrtps_c, sensor_msgs, msg, PointCloud2
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
       )()->data);
     if (!callbacks->cdr_deserialize(
-        cdr, &ros_message->coast_points))
+        cdr, &ros_message->coast_points_x))
     {
       return false;
     }
   }
 
-  // Field name: green_points
+  // Field name: green_points_x
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
-        rosidl_typesupport_fastrtps_c, sensor_msgs, msg, PointCloud2
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
       )()->data);
     if (!callbacks->cdr_deserialize(
-        cdr, &ros_message->green_points))
+        cdr, &ros_message->green_points_x))
     {
       return false;
     }
   }
 
-  // Field name: red_points
+  // Field name: red_points_x
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
-        rosidl_typesupport_fastrtps_c, sensor_msgs, msg, PointCloud2
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
       )()->data);
     if (!callbacks->cdr_deserialize(
-        cdr, &ros_message->red_points))
+        cdr, &ros_message->red_points_x))
     {
       return false;
     }
   }
 
-  // Field name: yellow_points
+  // Field name: yellow_points_x
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
-        rosidl_typesupport_fastrtps_c, sensor_msgs, msg, PointCloud2
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
       )()->data);
     if (!callbacks->cdr_deserialize(
-        cdr, &ros_message->yellow_points))
+        cdr, &ros_message->yellow_points_x))
+    {
+      return false;
+    }
+  }
+
+  // Field name: coast_points_y
+  {
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
+      )()->data);
+    if (!callbacks->cdr_deserialize(
+        cdr, &ros_message->coast_points_y))
+    {
+      return false;
+    }
+  }
+
+  // Field name: green_points_y
+  {
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
+      )()->data);
+    if (!callbacks->cdr_deserialize(
+        cdr, &ros_message->green_points_y))
+    {
+      return false;
+    }
+  }
+
+  // Field name: red_points_y
+  {
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
+      )()->data);
+    if (!callbacks->cdr_deserialize(
+        cdr, &ros_message->red_points_y))
+    {
+      return false;
+    }
+  }
+
+  // Field name: yellow_points_y
+  {
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
+        rosidl_typesupport_fastrtps_c, std_msgs, msg, Float32MultiArray
+      )()->data);
+    if (!callbacks->cdr_deserialize(
+        cdr, &ros_message->yellow_points_y))
     {
       return false;
     }
@@ -298,22 +410,38 @@ size_t get_serialized_size_user_action_interfaces__msg__CoastMsg(
   current_alignment += padding +
     eprosima::fastcdr::Cdr::alignment(current_alignment, padding) +
     (ros_message->frame_id.size + 1);
-  // field.name coast_points
+  // field.name coast_points_x
 
-  current_alignment += get_serialized_size_sensor_msgs__msg__PointCloud2(
-    &(ros_message->coast_points), current_alignment);
-  // field.name green_points
+  current_alignment += get_serialized_size_std_msgs__msg__Float32MultiArray(
+    &(ros_message->coast_points_x), current_alignment);
+  // field.name green_points_x
 
-  current_alignment += get_serialized_size_sensor_msgs__msg__PointCloud2(
-    &(ros_message->green_points), current_alignment);
-  // field.name red_points
+  current_alignment += get_serialized_size_std_msgs__msg__Float32MultiArray(
+    &(ros_message->green_points_x), current_alignment);
+  // field.name red_points_x
 
-  current_alignment += get_serialized_size_sensor_msgs__msg__PointCloud2(
-    &(ros_message->red_points), current_alignment);
-  // field.name yellow_points
+  current_alignment += get_serialized_size_std_msgs__msg__Float32MultiArray(
+    &(ros_message->red_points_x), current_alignment);
+  // field.name yellow_points_x
 
-  current_alignment += get_serialized_size_sensor_msgs__msg__PointCloud2(
-    &(ros_message->yellow_points), current_alignment);
+  current_alignment += get_serialized_size_std_msgs__msg__Float32MultiArray(
+    &(ros_message->yellow_points_x), current_alignment);
+  // field.name coast_points_y
+
+  current_alignment += get_serialized_size_std_msgs__msg__Float32MultiArray(
+    &(ros_message->coast_points_y), current_alignment);
+  // field.name green_points_y
+
+  current_alignment += get_serialized_size_std_msgs__msg__Float32MultiArray(
+    &(ros_message->green_points_y), current_alignment);
+  // field.name red_points_y
+
+  current_alignment += get_serialized_size_std_msgs__msg__Float32MultiArray(
+    &(ros_message->red_points_y), current_alignment);
+  // field.name yellow_points_y
+
+  current_alignment += get_serialized_size_std_msgs__msg__Float32MultiArray(
+    &(ros_message->yellow_points_y), current_alignment);
   // field.name grid_size
   {
     size_t item_size = sizeof(ros_message->grid_size);
@@ -380,7 +508,7 @@ size_t max_serialized_size_user_action_interfaces__msg__CoastMsg(
         1;
     }
   }
-  // member: coast_points
+  // member: coast_points_x
   {
     size_t array_size = 1;
 
@@ -391,7 +519,7 @@ size_t max_serialized_size_user_action_interfaces__msg__CoastMsg(
       bool inner_is_plain;
       size_t inner_size;
       inner_size =
-        max_serialized_size_sensor_msgs__msg__PointCloud2(
+        max_serialized_size_std_msgs__msg__Float32MultiArray(
         inner_full_bounded, inner_is_plain, current_alignment);
       last_member_size += inner_size;
       current_alignment += inner_size;
@@ -399,7 +527,7 @@ size_t max_serialized_size_user_action_interfaces__msg__CoastMsg(
       is_plain &= inner_is_plain;
     }
   }
-  // member: green_points
+  // member: green_points_x
   {
     size_t array_size = 1;
 
@@ -410,7 +538,7 @@ size_t max_serialized_size_user_action_interfaces__msg__CoastMsg(
       bool inner_is_plain;
       size_t inner_size;
       inner_size =
-        max_serialized_size_sensor_msgs__msg__PointCloud2(
+        max_serialized_size_std_msgs__msg__Float32MultiArray(
         inner_full_bounded, inner_is_plain, current_alignment);
       last_member_size += inner_size;
       current_alignment += inner_size;
@@ -418,7 +546,7 @@ size_t max_serialized_size_user_action_interfaces__msg__CoastMsg(
       is_plain &= inner_is_plain;
     }
   }
-  // member: red_points
+  // member: red_points_x
   {
     size_t array_size = 1;
 
@@ -429,7 +557,7 @@ size_t max_serialized_size_user_action_interfaces__msg__CoastMsg(
       bool inner_is_plain;
       size_t inner_size;
       inner_size =
-        max_serialized_size_sensor_msgs__msg__PointCloud2(
+        max_serialized_size_std_msgs__msg__Float32MultiArray(
         inner_full_bounded, inner_is_plain, current_alignment);
       last_member_size += inner_size;
       current_alignment += inner_size;
@@ -437,7 +565,7 @@ size_t max_serialized_size_user_action_interfaces__msg__CoastMsg(
       is_plain &= inner_is_plain;
     }
   }
-  // member: yellow_points
+  // member: yellow_points_x
   {
     size_t array_size = 1;
 
@@ -448,7 +576,83 @@ size_t max_serialized_size_user_action_interfaces__msg__CoastMsg(
       bool inner_is_plain;
       size_t inner_size;
       inner_size =
-        max_serialized_size_sensor_msgs__msg__PointCloud2(
+        max_serialized_size_std_msgs__msg__Float32MultiArray(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      last_member_size += inner_size;
+      current_alignment += inner_size;
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+  // member: coast_points_y
+  {
+    size_t array_size = 1;
+
+
+    last_member_size = 0;
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      size_t inner_size;
+      inner_size =
+        max_serialized_size_std_msgs__msg__Float32MultiArray(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      last_member_size += inner_size;
+      current_alignment += inner_size;
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+  // member: green_points_y
+  {
+    size_t array_size = 1;
+
+
+    last_member_size = 0;
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      size_t inner_size;
+      inner_size =
+        max_serialized_size_std_msgs__msg__Float32MultiArray(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      last_member_size += inner_size;
+      current_alignment += inner_size;
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+  // member: red_points_y
+  {
+    size_t array_size = 1;
+
+
+    last_member_size = 0;
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      size_t inner_size;
+      inner_size =
+        max_serialized_size_std_msgs__msg__Float32MultiArray(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      last_member_size += inner_size;
+      current_alignment += inner_size;
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+  // member: yellow_points_y
+  {
+    size_t array_size = 1;
+
+
+    last_member_size = 0;
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      size_t inner_size;
+      inner_size =
+        max_serialized_size_std_msgs__msg__Float32MultiArray(
         inner_full_bounded, inner_is_plain, current_alignment);
       last_member_size += inner_size;
       current_alignment += inner_size;

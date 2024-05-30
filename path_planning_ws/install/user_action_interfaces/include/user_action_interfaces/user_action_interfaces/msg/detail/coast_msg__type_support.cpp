@@ -38,7 +38,7 @@ void CoastMsg_fini_function(void * message_memory)
   typed_message->~CoastMsg();
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember CoastMsg_message_member_array[7] = {
+static const ::rosidl_typesupport_introspection_cpp::MessageMember CoastMsg_message_member_array[11] = {
   {
     "header",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
@@ -74,14 +74,14 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember CoastMsg_mess
     nullptr  // resize(index) function pointer
   },
   {
-    "coast_points",  // name
+    "coast_points_x",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
-    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<sensor_msgs::msg::PointCloud2>(),  // members of sub message
+    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<std_msgs::msg::Float32MultiArray>(),  // members of sub message
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces::msg::CoastMsg, coast_points),  // bytes offset in struct
+    offsetof(user_action_interfaces::msg::CoastMsg, coast_points_x),  // bytes offset in struct
     nullptr,  // default value
     nullptr,  // size() function pointer
     nullptr,  // get_const(index) function pointer
@@ -91,14 +91,14 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember CoastMsg_mess
     nullptr  // resize(index) function pointer
   },
   {
-    "green_points",  // name
+    "green_points_x",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
-    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<sensor_msgs::msg::PointCloud2>(),  // members of sub message
+    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<std_msgs::msg::Float32MultiArray>(),  // members of sub message
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces::msg::CoastMsg, green_points),  // bytes offset in struct
+    offsetof(user_action_interfaces::msg::CoastMsg, green_points_x),  // bytes offset in struct
     nullptr,  // default value
     nullptr,  // size() function pointer
     nullptr,  // get_const(index) function pointer
@@ -108,14 +108,14 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember CoastMsg_mess
     nullptr  // resize(index) function pointer
   },
   {
-    "red_points",  // name
+    "red_points_x",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
-    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<sensor_msgs::msg::PointCloud2>(),  // members of sub message
+    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<std_msgs::msg::Float32MultiArray>(),  // members of sub message
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces::msg::CoastMsg, red_points),  // bytes offset in struct
+    offsetof(user_action_interfaces::msg::CoastMsg, red_points_x),  // bytes offset in struct
     nullptr,  // default value
     nullptr,  // size() function pointer
     nullptr,  // get_const(index) function pointer
@@ -125,14 +125,82 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember CoastMsg_mess
     nullptr  // resize(index) function pointer
   },
   {
-    "yellow_points",  // name
+    "yellow_points_x",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
-    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<sensor_msgs::msg::PointCloud2>(),  // members of sub message
+    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<std_msgs::msg::Float32MultiArray>(),  // members of sub message
     false,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces::msg::CoastMsg, yellow_points),  // bytes offset in struct
+    offsetof(user_action_interfaces::msg::CoastMsg, yellow_points_x),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    nullptr,  // fetch(index, &value) function pointer
+    nullptr,  // assign(index, value) function pointer
+    nullptr  // resize(index) function pointer
+  },
+  {
+    "coast_points_y",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
+    0,  // upper bound of string
+    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<std_msgs::msg::Float32MultiArray>(),  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces::msg::CoastMsg, coast_points_y),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    nullptr,  // fetch(index, &value) function pointer
+    nullptr,  // assign(index, value) function pointer
+    nullptr  // resize(index) function pointer
+  },
+  {
+    "green_points_y",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
+    0,  // upper bound of string
+    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<std_msgs::msg::Float32MultiArray>(),  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces::msg::CoastMsg, green_points_y),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    nullptr,  // fetch(index, &value) function pointer
+    nullptr,  // assign(index, value) function pointer
+    nullptr  // resize(index) function pointer
+  },
+  {
+    "red_points_y",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
+    0,  // upper bound of string
+    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<std_msgs::msg::Float32MultiArray>(),  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces::msg::CoastMsg, red_points_y),  // bytes offset in struct
+    nullptr,  // default value
+    nullptr,  // size() function pointer
+    nullptr,  // get_const(index) function pointer
+    nullptr,  // get(index) function pointer
+    nullptr,  // fetch(index, &value) function pointer
+    nullptr,  // assign(index, value) function pointer
+    nullptr  // resize(index) function pointer
+  },
+  {
+    "yellow_points_y",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
+    0,  // upper bound of string
+    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<std_msgs::msg::Float32MultiArray>(),  // members of sub message
+    false,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces::msg::CoastMsg, yellow_points_y),  // bytes offset in struct
     nullptr,  // default value
     nullptr,  // size() function pointer
     nullptr,  // get_const(index) function pointer
@@ -163,7 +231,7 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember CoastMsg_mess
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers CoastMsg_message_members = {
   "user_action_interfaces::msg",  // message namespace
   "CoastMsg",  // message name
-  7,  // number of fields
+  11,  // number of fields
   sizeof(user_action_interfaces::msg::CoastMsg),
   CoastMsg_message_member_array,  // message members
   CoastMsg_init_function,  // function to initialize message memory (memory has to be allocated)

@@ -15,10 +15,12 @@ import rclpy
 from rclpy.node import Node
 import sensor_msgs.msg as sensor_msgs
 import std_msgs.msg as std_msgs
+from std_msgs.msg import Float32MultiArray
 import geometry_msgs.msg as geometry_msgs
 from geometry_msgs.msg import PoseStamped
 from geometry_msgs.msg import PoseWithCovarianceStamped
 import numpy as np
+
 
 show_plot = True
 
@@ -55,6 +57,16 @@ class CoastToPointCloud(Node):
 
         self.zones_dictionary, self.coast_points, self.red_points, self.yellow_points, self.green_points, grid_size = self.get_zones_dictionary()
 
+        print(self.coast_points)
+        self.coast_points_x = [point[0] for point in self.coast_points]
+        self.coast_points_y = [point[1] for point in self.coast_points]
+        self.red_points_x = [point[0] for point in self.red_points]
+        self.red_points_y = [point[1] for point in self.red_points]
+        self.yellow_points_x = [point[0] for point in self.yellow_points]
+        self.yellow_points_y = [point[1] for point in self.yellow_points]
+        self.green_points_x = [point[0] for point in self.green_points]
+        self.green_points_y = [point[1] for point in self.green_points]
+
         self.lcc = LocalCoordinatesConverter(self.zones_dictionary, grid_size)
 
         coast_points_m, red_points_m, yellow_points_m, green_points_m = self.lcc.get_points_m()
@@ -87,6 +99,8 @@ class CoastToPointCloud(Node):
 
         self.start_goal_update_publisher = self.create_publisher(StartGoalMsg, 'start_goal_msg_update', 10)
 
+        self.zones_publisher = self.create_publisher(CoastMsg, 'coast_points_gps', 10)
+
     def timer_callback(self):
         self.get_logger().info('Publishing coast points')
         self.start_publisher.publish(self.start_pose)
@@ -96,17 +110,19 @@ class CoastToPointCloud(Node):
         self.yellow_pcd_publisher.publish(self.yellow_pcd_points)
         self.green_pcd_publisher.publish(self.green_pcd_points)
 
+
         coast_msg = CoastMsg()
-        coast_msg.coast_points = self.coast_pcd_points
-        coast_msg.red_points = self.red_pcd_points
-        coast_msg.yellow_points = self.yellow_pcd_points
-        coast_msg.green_points = self.green_pcd_points
         coast_msg.header.stamp = self.get_clock().now().to_msg()
-        coast_msg.header.frame_id = 'map'
-        coast_msg.grid_size = self.grid_size
+        coast_msg.coast_points_x.data = self.coast_points_x
+        coast_msg.coast_points_y.data = self.coast_points_y
+        coast_msg.red_points_x.data = self.red_points_x
+        coast_msg.red_points_y.data = self.red_points_y
+        coast_msg.yellow_points_x.data = self.yellow_points_x
+        coast_msg.yellow_points_y.data = self.yellow_points_y
+        coast_msg.green_points_x.data = self.green_points_x
+        coast_msg.green_points_y.data = self.green_points_y
 
-
-        self.coast_publisher_rviz.publish(coast_msg)
+        self.zones_publisher.publish(coast_msg)
 
     def start_update_callback(self, msg):
         print("Start update")

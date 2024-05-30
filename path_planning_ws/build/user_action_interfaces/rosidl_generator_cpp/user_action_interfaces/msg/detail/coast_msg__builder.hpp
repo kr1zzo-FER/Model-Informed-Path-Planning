@@ -37,15 +37,15 @@ private:
   ::user_action_interfaces::msg::CoastMsg msg_;
 };
 
-class Init_CoastMsg_yellow_points
+class Init_CoastMsg_yellow_points_y
 {
 public:
-  explicit Init_CoastMsg_yellow_points(::user_action_interfaces::msg::CoastMsg & msg)
+  explicit Init_CoastMsg_yellow_points_y(::user_action_interfaces::msg::CoastMsg & msg)
   : msg_(msg)
   {}
-  Init_CoastMsg_grid_size yellow_points(::user_action_interfaces::msg::CoastMsg::_yellow_points_type arg)
+  Init_CoastMsg_grid_size yellow_points_y(::user_action_interfaces::msg::CoastMsg::_yellow_points_y_type arg)
   {
-    msg_.yellow_points = std::move(arg);
+    msg_.yellow_points_y = std::move(arg);
     return Init_CoastMsg_grid_size(msg_);
   }
 
@@ -53,48 +53,112 @@ private:
   ::user_action_interfaces::msg::CoastMsg msg_;
 };
 
-class Init_CoastMsg_red_points
+class Init_CoastMsg_red_points_y
 {
 public:
-  explicit Init_CoastMsg_red_points(::user_action_interfaces::msg::CoastMsg & msg)
+  explicit Init_CoastMsg_red_points_y(::user_action_interfaces::msg::CoastMsg & msg)
   : msg_(msg)
   {}
-  Init_CoastMsg_yellow_points red_points(::user_action_interfaces::msg::CoastMsg::_red_points_type arg)
+  Init_CoastMsg_yellow_points_y red_points_y(::user_action_interfaces::msg::CoastMsg::_red_points_y_type arg)
   {
-    msg_.red_points = std::move(arg);
-    return Init_CoastMsg_yellow_points(msg_);
+    msg_.red_points_y = std::move(arg);
+    return Init_CoastMsg_yellow_points_y(msg_);
   }
 
 private:
   ::user_action_interfaces::msg::CoastMsg msg_;
 };
 
-class Init_CoastMsg_green_points
+class Init_CoastMsg_green_points_y
 {
 public:
-  explicit Init_CoastMsg_green_points(::user_action_interfaces::msg::CoastMsg & msg)
+  explicit Init_CoastMsg_green_points_y(::user_action_interfaces::msg::CoastMsg & msg)
   : msg_(msg)
   {}
-  Init_CoastMsg_red_points green_points(::user_action_interfaces::msg::CoastMsg::_green_points_type arg)
+  Init_CoastMsg_red_points_y green_points_y(::user_action_interfaces::msg::CoastMsg::_green_points_y_type arg)
   {
-    msg_.green_points = std::move(arg);
-    return Init_CoastMsg_red_points(msg_);
+    msg_.green_points_y = std::move(arg);
+    return Init_CoastMsg_red_points_y(msg_);
   }
 
 private:
   ::user_action_interfaces::msg::CoastMsg msg_;
 };
 
-class Init_CoastMsg_coast_points
+class Init_CoastMsg_coast_points_y
 {
 public:
-  explicit Init_CoastMsg_coast_points(::user_action_interfaces::msg::CoastMsg & msg)
+  explicit Init_CoastMsg_coast_points_y(::user_action_interfaces::msg::CoastMsg & msg)
   : msg_(msg)
   {}
-  Init_CoastMsg_green_points coast_points(::user_action_interfaces::msg::CoastMsg::_coast_points_type arg)
+  Init_CoastMsg_green_points_y coast_points_y(::user_action_interfaces::msg::CoastMsg::_coast_points_y_type arg)
   {
-    msg_.coast_points = std::move(arg);
-    return Init_CoastMsg_green_points(msg_);
+    msg_.coast_points_y = std::move(arg);
+    return Init_CoastMsg_green_points_y(msg_);
+  }
+
+private:
+  ::user_action_interfaces::msg::CoastMsg msg_;
+};
+
+class Init_CoastMsg_yellow_points_x
+{
+public:
+  explicit Init_CoastMsg_yellow_points_x(::user_action_interfaces::msg::CoastMsg & msg)
+  : msg_(msg)
+  {}
+  Init_CoastMsg_coast_points_y yellow_points_x(::user_action_interfaces::msg::CoastMsg::_yellow_points_x_type arg)
+  {
+    msg_.yellow_points_x = std::move(arg);
+    return Init_CoastMsg_coast_points_y(msg_);
+  }
+
+private:
+  ::user_action_interfaces::msg::CoastMsg msg_;
+};
+
+class Init_CoastMsg_red_points_x
+{
+public:
+  explicit Init_CoastMsg_red_points_x(::user_action_interfaces::msg::CoastMsg & msg)
+  : msg_(msg)
+  {}
+  Init_CoastMsg_yellow_points_x red_points_x(::user_action_interfaces::msg::CoastMsg::_red_points_x_type arg)
+  {
+    msg_.red_points_x = std::move(arg);
+    return Init_CoastMsg_yellow_points_x(msg_);
+  }
+
+private:
+  ::user_action_interfaces::msg::CoastMsg msg_;
+};
+
+class Init_CoastMsg_green_points_x
+{
+public:
+  explicit Init_CoastMsg_green_points_x(::user_action_interfaces::msg::CoastMsg & msg)
+  : msg_(msg)
+  {}
+  Init_CoastMsg_red_points_x green_points_x(::user_action_interfaces::msg::CoastMsg::_green_points_x_type arg)
+  {
+    msg_.green_points_x = std::move(arg);
+    return Init_CoastMsg_red_points_x(msg_);
+  }
+
+private:
+  ::user_action_interfaces::msg::CoastMsg msg_;
+};
+
+class Init_CoastMsg_coast_points_x
+{
+public:
+  explicit Init_CoastMsg_coast_points_x(::user_action_interfaces::msg::CoastMsg & msg)
+  : msg_(msg)
+  {}
+  Init_CoastMsg_green_points_x coast_points_x(::user_action_interfaces::msg::CoastMsg::_coast_points_x_type arg)
+  {
+    msg_.coast_points_x = std::move(arg);
+    return Init_CoastMsg_green_points_x(msg_);
   }
 
 private:
@@ -107,10 +171,10 @@ public:
   explicit Init_CoastMsg_frame_id(::user_action_interfaces::msg::CoastMsg & msg)
   : msg_(msg)
   {}
-  Init_CoastMsg_coast_points frame_id(::user_action_interfaces::msg::CoastMsg::_frame_id_type arg)
+  Init_CoastMsg_coast_points_x frame_id(::user_action_interfaces::msg::CoastMsg::_frame_id_type arg)
   {
     msg_.frame_id = std::move(arg);
-    return Init_CoastMsg_coast_points(msg_);
+    return Init_CoastMsg_coast_points_x(msg_);
   }
 
 private:

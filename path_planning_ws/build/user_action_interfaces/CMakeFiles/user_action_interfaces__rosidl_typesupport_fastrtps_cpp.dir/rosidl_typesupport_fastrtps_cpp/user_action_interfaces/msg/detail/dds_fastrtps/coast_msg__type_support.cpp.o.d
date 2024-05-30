@@ -189,8 +189,9 @@ CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_ty
  /opt/ros/iron/include/rosidl_runtime_c/rosidl_runtime_c/message_initialization.h \
  /opt/ros/iron/include/std_msgs/std_msgs/msg/detail/header__struct.hpp \
  /opt/ros/iron/include/builtin_interfaces/builtin_interfaces/msg/detail/time__struct.hpp \
- /opt/ros/iron/include/sensor_msgs/sensor_msgs/msg/detail/point_cloud2__struct.hpp \
- /opt/ros/iron/include/sensor_msgs/sensor_msgs/msg/detail/point_field__struct.hpp \
+ /opt/ros/iron/include/std_msgs/std_msgs/msg/detail/float32_multi_array__struct.hpp \
+ /opt/ros/iron/include/std_msgs/std_msgs/msg/detail/multi_array_layout__struct.hpp \
+ /opt/ros/iron/include/std_msgs/std_msgs/msg/detail/multi_array_dimension__struct.hpp \
  /opt/ros/iron/include/fastcdr/Cdr.h \
  /opt/ros/iron/include/fastcdr/fastcdr_dll.h \
  /opt/ros/iron/include/fastcdr/config.h \
@@ -227,8 +228,9 @@ CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_ty
  /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_generator_c/user_action_interfaces/msg/detail/coast_msg__struct.h \
  /opt/ros/iron/include/std_msgs/std_msgs/msg/detail/header__struct.h \
  /opt/ros/iron/include/builtin_interfaces/builtin_interfaces/msg/detail/time__struct.h \
- /opt/ros/iron/include/sensor_msgs/sensor_msgs/msg/detail/point_cloud2__struct.h \
- /opt/ros/iron/include/sensor_msgs/sensor_msgs/msg/detail/point_field__struct.h \
+ /opt/ros/iron/include/std_msgs/std_msgs/msg/detail/float32_multi_array__struct.h \
+ /opt/ros/iron/include/std_msgs/std_msgs/msg/detail/multi_array_layout__struct.h \
+ /opt/ros/iron/include/std_msgs/std_msgs/msg/detail/multi_array_dimension__struct.h \
  /usr/include/c++/11/limits \
  /opt/ros/iron/include/rosidl_runtime_cpp/rosidl_typesupport_cpp/message_type_support.hpp \
  /opt/ros/iron/include/rosidl_typesupport_fastrtps_cpp/rosidl_typesupport_fastrtps_cpp/identifier.hpp \
