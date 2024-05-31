@@ -78,6 +78,10 @@ CMakeFiles/user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfa
 CMakeFiles/user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/coast_msg__builder.hpp
 CMakeFiles/user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/coast_msg__struct.hpp
 CMakeFiles/user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/coast_msg__traits.hpp
+CMakeFiles/user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/path_msg.hpp
+CMakeFiles/user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__builder.hpp
+CMakeFiles/user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__struct.hpp
+CMakeFiles/user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__traits.hpp
 
 rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp: /opt/ros/iron/lib/rosidl_generator_cpp/rosidl_generator_cpp
 rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp: /opt/ros/iron/lib/python3.10/site-packages/rosidl_generator_cpp/__init__.py
@@ -97,6 +101,7 @@ rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp: /opt/r
 rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp: rosidl_adapter/user_action_interfaces/action/StartGoalAction.idl
 rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp: rosidl_adapter/user_action_interfaces/msg/StartGoalMsg.idl
 rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp: rosidl_adapter/user_action_interfaces/msg/CoastMsg.idl
+rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp: rosidl_adapter/user_action_interfaces/msg/PathMsg.idl
 rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp: /opt/ros/iron/share/builtin_interfaces/msg/Duration.idl
 rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp: /opt/ros/iron/share/builtin_interfaces/msg/Time.idl
 rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp: /opt/ros/iron/share/std_msgs/msg/Bool.idl
@@ -229,6 +234,18 @@ rosidl_generator_cpp/user_action_interfaces/msg/detail/coast_msg__struct.hpp: ro
 rosidl_generator_cpp/user_action_interfaces/msg/detail/coast_msg__traits.hpp: rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/user_action_interfaces/msg/detail/coast_msg__traits.hpp
 
+rosidl_generator_cpp/user_action_interfaces/msg/path_msg.hpp: rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/user_action_interfaces/msg/path_msg.hpp
+
+rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__builder.hpp: rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__builder.hpp
+
+rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__struct.hpp: rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__struct.hpp
+
+rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__traits.hpp: rosidl_generator_cpp/user_action_interfaces/action/start_goal_action.hpp
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__traits.hpp
+
 user_action_interfaces__cpp: CMakeFiles/user_action_interfaces__cpp
 user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/action/detail/start_goal_action__builder.hpp
 user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/action/detail/start_goal_action__struct.hpp
@@ -238,9 +255,13 @@ user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/coa
 user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/coast_msg__builder.hpp
 user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/coast_msg__struct.hpp
 user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/coast_msg__traits.hpp
+user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__builder.hpp
+user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__struct.hpp
+user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__traits.hpp
 user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/start_goal_msg__builder.hpp
 user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/start_goal_msg__struct.hpp
 user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/detail/start_goal_msg__traits.hpp
+user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/path_msg.hpp
 user_action_interfaces__cpp: rosidl_generator_cpp/user_action_interfaces/msg/start_goal_msg.hpp
 user_action_interfaces__cpp: CMakeFiles/user_action_interfaces__cpp.dir/build.make
 .PHONY : user_action_interfaces__cpp

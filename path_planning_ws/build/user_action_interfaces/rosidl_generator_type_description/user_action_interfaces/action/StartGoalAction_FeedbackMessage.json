@@ -45,7 +45,17 @@
         "type_name": "user_action_interfaces/action/StartGoalAction_Feedback",
         "fields": [
           {
-            "name": "partial_path",
+            "name": "partial_path_x",
+            "type": {
+              "type_id": 154,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "partial_path_y",
             "type": {
               "type_id": 154,
               "capacity": 0,
@@ -61,7 +71,7 @@
   "type_hashes": [
     {
       "type_name": "user_action_interfaces/action/StartGoalAction_FeedbackMessage",
-      "hash_string": "RIHS01_528012b0da16d7a35f1b359d3c2be93f3b28296639f18e3d1d118a5a81def6f6"
+      "hash_string": "RIHS01_06d9ebd1ddb92e9037167f510db3d92f466c07e94d879ae4b89c6d10c27e1948"
     },
     {
       "type_name": "unique_identifier_msgs/msg/UUID",
@@ -69,7 +79,7 @@
     },
     {
       "type_name": "user_action_interfaces/action/StartGoalAction_Feedback",
-      "hash_string": "RIHS01_55e8f8d72593b2288b7d14d06a9fce262a197ee81b8041ccd09eec14321b9332"
+      "hash_string": "RIHS01_8aecc65c4455930cc2ce0bd988b2c93c214276e9899d2a44debb9d016b7bb9f2"
     }
   ]
 }

@@ -8,9 +8,13 @@ file(REMOVE_RECURSE
   "rosidl_generator_cpp/user_action_interfaces/msg/detail/coast_msg__builder.hpp"
   "rosidl_generator_cpp/user_action_interfaces/msg/detail/coast_msg__struct.hpp"
   "rosidl_generator_cpp/user_action_interfaces/msg/detail/coast_msg__traits.hpp"
+  "rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__builder.hpp"
+  "rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__struct.hpp"
+  "rosidl_generator_cpp/user_action_interfaces/msg/detail/path_msg__traits.hpp"
   "rosidl_generator_cpp/user_action_interfaces/msg/detail/start_goal_msg__builder.hpp"
   "rosidl_generator_cpp/user_action_interfaces/msg/detail/start_goal_msg__struct.hpp"
   "rosidl_generator_cpp/user_action_interfaces/msg/detail/start_goal_msg__traits.hpp"
+  "rosidl_generator_cpp/user_action_interfaces/msg/path_msg.hpp"
   "rosidl_generator_cpp/user_action_interfaces/msg/start_goal_msg.hpp"
 )
 

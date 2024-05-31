@@ -5,7 +5,8 @@
   "idl_tuples": [
     "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces:action/StartGoalAction.idl",
     "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces:msg/StartGoalMsg.idl",
-    "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces:msg/CoastMsg.idl"
+    "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces:msg/CoastMsg.idl",
+    "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces:msg/PathMsg.idl"
   ],
   "ros_interface_dependencies": [
     "builtin_interfaces:/opt/ros/iron/share/builtin_interfaces/msg/Duration.idl",
@@ -122,6 +123,7 @@
     "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces/action/StartGoalAction.idl",
     "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces/msg/StartGoalMsg.idl",
     "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces/msg/CoastMsg.idl",
+    "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_adapter/user_action_interfaces/msg/PathMsg.idl",
     "/opt/ros/iron/share/builtin_interfaces/msg/Duration.idl",
     "/opt/ros/iron/share/builtin_interfaces/msg/Time.idl",
     "/opt/ros/iron/share/std_msgs/msg/Bool.idl",

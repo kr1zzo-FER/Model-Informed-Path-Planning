@@ -11,10 +11,14 @@ module user_action_interfaces {
       sequence<float> goal;
     };
     struct StartGoalAction_Result {
-      sequence<float> path;
+      sequence<float> path_x;
+
+      sequence<float> path_y;
     };
     struct StartGoalAction_Feedback {
-      sequence<float> partial_path;
+      sequence<float> partial_path_x;
+
+      sequence<float> partial_path_y;
     };
   };
 };

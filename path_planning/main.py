@@ -47,6 +47,10 @@ def main(test = True):
     #zones_dictionary = data["zones_dictionary"]
     grid_size = 10.0
 
+    print(zones_dictionary)
+    print("start: ", start)
+    print("goal: ", goal)
+
     test_algorithms = TestAlgorithms(start,goal,zones_dictionary,grid_size,test_algorithms, thread_enable)
     #test_algorithms.costmap_visualization()
     test_algorithms.test_algorithms_path()

@@ -197,7 +197,8 @@ class StartGoalAction_Goal(metaclass=Metaclass_StartGoalAction_Goal):
 
 # Import statements for member types
 
-# Member 'path'
+# Member 'path_x'
+# Member 'path_y'
 # already imported above
 # import array
 
@@ -256,17 +257,20 @@ class StartGoalAction_Result(metaclass=Metaclass_StartGoalAction_Result):
     """Message class 'StartGoalAction_Result'."""
 
     __slots__ = [
-        '_path',
+        '_path_x',
+        '_path_y',
         '_check_fields',
     ]
 
     _fields_and_field_types = {
-        'path': 'sequence<float>',
+        'path_x': 'sequence<float>',
+        'path_y': 'sequence<float>',
     }
 
     # This attribute is used to store an rosidl_parser.definition variable
     # related to the data type of each of the components the message.
     SLOT_TYPES = (
+        rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('float')),  # noqa: E501
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('float')),  # noqa: E501
     )
 
@@ -279,7 +283,8 @@ class StartGoalAction_Result(metaclass=Metaclass_StartGoalAction_Result):
             assert all('_' + key in self.__slots__ for key in kwargs.keys()), \
                 'Invalid arguments passed to constructor: %s' % \
                 ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
-        self.path = array.array('f', kwargs.get('path', []))
+        self.path_x = array.array('f', kwargs.get('path_x', []))
+        self.path_y = array.array('f', kwargs.get('path_y', []))
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -311,7 +316,9 @@ class StartGoalAction_Result(metaclass=Metaclass_StartGoalAction_Result):
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return False
-        if self.path != other.path:
+        if self.path_x != other.path_x:
+            return False
+        if self.path_y != other.path_y:
             return False
         return True
 
@@ -321,17 +328,17 @@ class StartGoalAction_Result(metaclass=Metaclass_StartGoalAction_Result):
         return copy(cls._fields_and_field_types)
 
     @builtins.property
-    def path(self):
-        """Message field 'path'."""
-        return self._path
+    def path_x(self):
+        """Message field 'path_x'."""
+        return self._path_x
 
-    @path.setter
-    def path(self, value):
+    @path_x.setter
+    def path_x(self, value):
         if self._check_fields:
             if isinstance(value, array.array):
                 assert value.typecode == 'f', \
-                    "The 'path' array.array() must have the type code of 'f'"
-                self._path = value
+                    "The 'path_x' array.array() must have the type code of 'f'"
+                self._path_x = value
                 return
             from collections.abc import Sequence
             from collections.abc import Set
@@ -345,13 +352,42 @@ class StartGoalAction_Result(metaclass=Metaclass_StartGoalAction_Result):
                  not isinstance(value, UserString) and
                  all(isinstance(v, float) for v in value) and
                  all(not (val < -3.402823466e+38 or val > 3.402823466e+38) or math.isinf(val) for val in value)), \
-                "The 'path' field must be a set or sequence and each value of type 'float' and each float in [-340282346600000016151267322115014000640.000000, 340282346600000016151267322115014000640.000000]"
-        self._path = array.array('f', value)
+                "The 'path_x' field must be a set or sequence and each value of type 'float' and each float in [-340282346600000016151267322115014000640.000000, 340282346600000016151267322115014000640.000000]"
+        self._path_x = array.array('f', value)
+
+    @builtins.property
+    def path_y(self):
+        """Message field 'path_y'."""
+        return self._path_y
+
+    @path_y.setter
+    def path_y(self, value):
+        if self._check_fields:
+            if isinstance(value, array.array):
+                assert value.typecode == 'f', \
+                    "The 'path_y' array.array() must have the type code of 'f'"
+                self._path_y = value
+                return
+            from collections.abc import Sequence
+            from collections.abc import Set
+            from collections import UserList
+            from collections import UserString
+            assert \
+                ((isinstance(value, Sequence) or
+                  isinstance(value, Set) or
+                  isinstance(value, UserList)) and
+                 not isinstance(value, str) and
+                 not isinstance(value, UserString) and
+                 all(isinstance(v, float) for v in value) and
+                 all(not (val < -3.402823466e+38 or val > 3.402823466e+38) or math.isinf(val) for val in value)), \
+                "The 'path_y' field must be a set or sequence and each value of type 'float' and each float in [-340282346600000016151267322115014000640.000000, 340282346600000016151267322115014000640.000000]"
+        self._path_y = array.array('f', value)
 
 
 # Import statements for member types
 
-# Member 'partial_path'
+# Member 'partial_path_x'
+# Member 'partial_path_y'
 # already imported above
 # import array
 
@@ -410,17 +446,20 @@ class StartGoalAction_Feedback(metaclass=Metaclass_StartGoalAction_Feedback):
     """Message class 'StartGoalAction_Feedback'."""
 
     __slots__ = [
-        '_partial_path',
+        '_partial_path_x',
+        '_partial_path_y',
         '_check_fields',
     ]
 
     _fields_and_field_types = {
-        'partial_path': 'sequence<float>',
+        'partial_path_x': 'sequence<float>',
+        'partial_path_y': 'sequence<float>',
     }
 
     # This attribute is used to store an rosidl_parser.definition variable
     # related to the data type of each of the components the message.
     SLOT_TYPES = (
+        rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('float')),  # noqa: E501
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('float')),  # noqa: E501
     )
 
@@ -433,7 +472,8 @@ class StartGoalAction_Feedback(metaclass=Metaclass_StartGoalAction_Feedback):
             assert all('_' + key in self.__slots__ for key in kwargs.keys()), \
                 'Invalid arguments passed to constructor: %s' % \
                 ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
-        self.partial_path = array.array('f', kwargs.get('partial_path', []))
+        self.partial_path_x = array.array('f', kwargs.get('partial_path_x', []))
+        self.partial_path_y = array.array('f', kwargs.get('partial_path_y', []))
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -465,7 +505,9 @@ class StartGoalAction_Feedback(metaclass=Metaclass_StartGoalAction_Feedback):
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return False
-        if self.partial_path != other.partial_path:
+        if self.partial_path_x != other.partial_path_x:
+            return False
+        if self.partial_path_y != other.partial_path_y:
             return False
         return True
 
@@ -475,17 +517,17 @@ class StartGoalAction_Feedback(metaclass=Metaclass_StartGoalAction_Feedback):
         return copy(cls._fields_and_field_types)
 
     @builtins.property
-    def partial_path(self):
-        """Message field 'partial_path'."""
-        return self._partial_path
+    def partial_path_x(self):
+        """Message field 'partial_path_x'."""
+        return self._partial_path_x
 
-    @partial_path.setter
-    def partial_path(self, value):
+    @partial_path_x.setter
+    def partial_path_x(self, value):
         if self._check_fields:
             if isinstance(value, array.array):
                 assert value.typecode == 'f', \
-                    "The 'partial_path' array.array() must have the type code of 'f'"
-                self._partial_path = value
+                    "The 'partial_path_x' array.array() must have the type code of 'f'"
+                self._partial_path_x = value
                 return
             from collections.abc import Sequence
             from collections.abc import Set
@@ -499,8 +541,36 @@ class StartGoalAction_Feedback(metaclass=Metaclass_StartGoalAction_Feedback):
                  not isinstance(value, UserString) and
                  all(isinstance(v, float) for v in value) and
                  all(not (val < -3.402823466e+38 or val > 3.402823466e+38) or math.isinf(val) for val in value)), \
-                "The 'partial_path' field must be a set or sequence and each value of type 'float' and each float in [-340282346600000016151267322115014000640.000000, 340282346600000016151267322115014000640.000000]"
-        self._partial_path = array.array('f', value)
+                "The 'partial_path_x' field must be a set or sequence and each value of type 'float' and each float in [-340282346600000016151267322115014000640.000000, 340282346600000016151267322115014000640.000000]"
+        self._partial_path_x = array.array('f', value)
+
+    @builtins.property
+    def partial_path_y(self):
+        """Message field 'partial_path_y'."""
+        return self._partial_path_y
+
+    @partial_path_y.setter
+    def partial_path_y(self, value):
+        if self._check_fields:
+            if isinstance(value, array.array):
+                assert value.typecode == 'f', \
+                    "The 'partial_path_y' array.array() must have the type code of 'f'"
+                self._partial_path_y = value
+                return
+            from collections.abc import Sequence
+            from collections.abc import Set
+            from collections import UserList
+            from collections import UserString
+            assert \
+                ((isinstance(value, Sequence) or
+                  isinstance(value, Set) or
+                  isinstance(value, UserList)) and
+                 not isinstance(value, str) and
+                 not isinstance(value, UserString) and
+                 all(isinstance(v, float) for v in value) and
+                 all(not (val < -3.402823466e+38 or val > 3.402823466e+38) or math.isinf(val) for val in value)), \
+                "The 'partial_path_y' field must be a set or sequence and each value of type 'float' and each float in [-340282346600000016151267322115014000640.000000, 340282346600000016151267322115014000640.000000]"
+        self._partial_path_y = array.array('f', value)
 
 
 # Import statements for member types

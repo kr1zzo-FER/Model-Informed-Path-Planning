@@ -9,14 +9,7 @@ setup.py
 ../../build/path_planning_server/path_planning_server.egg-info/requires.txt
 ../../build/path_planning_server/path_planning_server.egg-info/top_level.txt
 ../../build/path_planning_server/path_planning_server.egg-info/zip-safe
-algorithms/car.py
-algorithms/dynamic_programming_heuristic.py
 algorithms/hybrid_d_star_lite.py
-algorithms/hybrid_dstar.py
-algorithms/reeds_shepp_path_planning.py
-algorithms/utils/__init__.py
-algorithms/utils/angle.py
-algorithms/utils/plot.py
 curve_generation/bezier_curve.py
 curve_generation/bspline_curve.py
 curve_generation/cubic_spline.py
@@ -77,7 +70,6 @@ launch/init_launch.py
 path_planning_server/__init__.py
 path_planning_server/algorithms_base.py
 path_planning_server/algorithms_test.py
-path_planning_server/main.py
 path_planning_server/path_results.py
 path_planning_server/planning_server.py
 path_planning_server/plot.py

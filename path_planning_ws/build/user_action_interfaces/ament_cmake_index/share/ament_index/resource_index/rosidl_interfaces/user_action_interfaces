@@ -2,5 +2,7 @@ action/StartGoalAction.action
 action/StartGoalAction.idl
 msg/CoastMsg.idl
 msg/CoastMsg.msg
+msg/PathMsg.idl
+msg/PathMsg.msg
 msg/StartGoalMsg.idl
 msg/StartGoalMsg.msg

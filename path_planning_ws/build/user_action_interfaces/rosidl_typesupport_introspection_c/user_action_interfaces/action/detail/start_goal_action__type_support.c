@@ -236,7 +236,8 @@ ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspecti
 
 
 // Include directives for member types
-// Member `path`
+// Member `path_x`
+// Member `path_y`
 // already included above
 // #include "rosidl_runtime_c/primitives_sequence_functions.h"
 
@@ -259,7 +260,7 @@ void user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_
   user_action_interfaces__action__StartGoalAction_Result__fini(message_memory);
 }
 
-size_t user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__size_function__StartGoalAction_Result__path(
+size_t user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__size_function__StartGoalAction_Result__path_x(
   const void * untyped_member)
 {
   const rosidl_runtime_c__float__Sequence * member =
@@ -267,7 +268,7 @@ size_t user_action_interfaces__action__StartGoalAction_Result__rosidl_typesuppor
   return member->size;
 }
 
-const void * user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Result__path(
+const void * user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Result__path_x(
   const void * untyped_member, size_t index)
 {
   const rosidl_runtime_c__float__Sequence * member =
@@ -275,7 +276,7 @@ const void * user_action_interfaces__action__StartGoalAction_Result__rosidl_type
   return &member->data[index];
 }
 
-void * user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Result__path(
+void * user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Result__path_x(
   void * untyped_member, size_t index)
 {
   rosidl_runtime_c__float__Sequence * member =
@@ -283,29 +284,29 @@ void * user_action_interfaces__action__StartGoalAction_Result__rosidl_typesuppor
   return &member->data[index];
 }
 
-void user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__fetch_function__StartGoalAction_Result__path(
+void user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__fetch_function__StartGoalAction_Result__path_x(
   const void * untyped_member, size_t index, void * untyped_value)
 {
   const float * item =
     ((const float *)
-    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Result__path(untyped_member, index));
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Result__path_x(untyped_member, index));
   float * value =
     (float *)(untyped_value);
   *value = *item;
 }
 
-void user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__assign_function__StartGoalAction_Result__path(
+void user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__assign_function__StartGoalAction_Result__path_x(
   void * untyped_member, size_t index, const void * untyped_value)
 {
   float * item =
     ((float *)
-    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Result__path(untyped_member, index));
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Result__path_x(untyped_member, index));
   const float * value =
     (const float *)(untyped_value);
   *item = *value;
 }
 
-bool user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__resize_function__StartGoalAction_Result__path(
+bool user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__resize_function__StartGoalAction_Result__path_x(
   void * untyped_member, size_t size)
 {
   rosidl_runtime_c__float__Sequence * member =
@@ -314,30 +315,102 @@ bool user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_
   return rosidl_runtime_c__float__Sequence__init(member, size);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__StartGoalAction_Result_message_member_array[1] = {
+size_t user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__size_function__StartGoalAction_Result__path_y(
+  const void * untyped_member)
+{
+  const rosidl_runtime_c__float__Sequence * member =
+    (const rosidl_runtime_c__float__Sequence *)(untyped_member);
+  return member->size;
+}
+
+const void * user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Result__path_y(
+  const void * untyped_member, size_t index)
+{
+  const rosidl_runtime_c__float__Sequence * member =
+    (const rosidl_runtime_c__float__Sequence *)(untyped_member);
+  return &member->data[index];
+}
+
+void * user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Result__path_y(
+  void * untyped_member, size_t index)
+{
+  rosidl_runtime_c__float__Sequence * member =
+    (rosidl_runtime_c__float__Sequence *)(untyped_member);
+  return &member->data[index];
+}
+
+void user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__fetch_function__StartGoalAction_Result__path_y(
+  const void * untyped_member, size_t index, void * untyped_value)
+{
+  const float * item =
+    ((const float *)
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Result__path_y(untyped_member, index));
+  float * value =
+    (float *)(untyped_value);
+  *value = *item;
+}
+
+void user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__assign_function__StartGoalAction_Result__path_y(
+  void * untyped_member, size_t index, const void * untyped_value)
+{
+  float * item =
+    ((float *)
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Result__path_y(untyped_member, index));
+  const float * value =
+    (const float *)(untyped_value);
+  *item = *value;
+}
+
+bool user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__resize_function__StartGoalAction_Result__path_y(
+  void * untyped_member, size_t size)
+{
+  rosidl_runtime_c__float__Sequence * member =
+    (rosidl_runtime_c__float__Sequence *)(untyped_member);
+  rosidl_runtime_c__float__Sequence__fini(member);
+  return rosidl_runtime_c__float__Sequence__init(member, size);
+}
+
+static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__StartGoalAction_Result_message_member_array[2] = {
   {
-    "path",  // name
+    "path_x",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_FLOAT,  // type
     0,  // upper bound of string
     NULL,  // members of sub message
     true,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces__action__StartGoalAction_Result, path),  // bytes offset in struct
+    offsetof(user_action_interfaces__action__StartGoalAction_Result, path_x),  // bytes offset in struct
     NULL,  // default value
-    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__size_function__StartGoalAction_Result__path,  // size() function pointer
-    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Result__path,  // get_const(index) function pointer
-    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Result__path,  // get(index) function pointer
-    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__fetch_function__StartGoalAction_Result__path,  // fetch(index, &value) function pointer
-    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__assign_function__StartGoalAction_Result__path,  // assign(index, value) function pointer
-    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__resize_function__StartGoalAction_Result__path  // resize(index) function pointer
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__size_function__StartGoalAction_Result__path_x,  // size() function pointer
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Result__path_x,  // get_const(index) function pointer
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Result__path_x,  // get(index) function pointer
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__fetch_function__StartGoalAction_Result__path_x,  // fetch(index, &value) function pointer
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__assign_function__StartGoalAction_Result__path_x,  // assign(index, value) function pointer
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__resize_function__StartGoalAction_Result__path_x  // resize(index) function pointer
+  },
+  {
+    "path_y",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_FLOAT,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message
+    true,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces__action__StartGoalAction_Result, path_y),  // bytes offset in struct
+    NULL,  // default value
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__size_function__StartGoalAction_Result__path_y,  // size() function pointer
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Result__path_y,  // get_const(index) function pointer
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Result__path_y,  // get(index) function pointer
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__fetch_function__StartGoalAction_Result__path_y,  // fetch(index, &value) function pointer
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__assign_function__StartGoalAction_Result__path_y,  // assign(index, value) function pointer
+    user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__resize_function__StartGoalAction_Result__path_y  // resize(index) function pointer
   }
 };
 
 static const rosidl_typesupport_introspection_c__MessageMembers user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__StartGoalAction_Result_message_members = {
   "user_action_interfaces__action",  // message namespace
   "StartGoalAction_Result",  // message name
-  1,  // number of fields
+  2,  // number of fields
   sizeof(user_action_interfaces__action__StartGoalAction_Result),
   user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__StartGoalAction_Result_message_member_array,  // message members
   user_action_interfaces__action__StartGoalAction_Result__rosidl_typesupport_introspection_c__StartGoalAction_Result_init_function,  // function to initialize message memory (memory has to be allocated)
@@ -387,7 +460,8 @@ ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(rosidl_typesupport_introspecti
 
 
 // Include directives for member types
-// Member `partial_path`
+// Member `partial_path_x`
+// Member `partial_path_y`
 // already included above
 // #include "rosidl_runtime_c/primitives_sequence_functions.h"
 
@@ -410,7 +484,7 @@ void user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesuppor
   user_action_interfaces__action__StartGoalAction_Feedback__fini(message_memory);
 }
 
-size_t user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__size_function__StartGoalAction_Feedback__partial_path(
+size_t user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__size_function__StartGoalAction_Feedback__partial_path_x(
   const void * untyped_member)
 {
   const rosidl_runtime_c__float__Sequence * member =
@@ -418,7 +492,7 @@ size_t user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupp
   return member->size;
 }
 
-const void * user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Feedback__partial_path(
+const void * user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Feedback__partial_path_x(
   const void * untyped_member, size_t index)
 {
   const rosidl_runtime_c__float__Sequence * member =
@@ -426,7 +500,7 @@ const void * user_action_interfaces__action__StartGoalAction_Feedback__rosidl_ty
   return &member->data[index];
 }
 
-void * user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Feedback__partial_path(
+void * user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Feedback__partial_path_x(
   void * untyped_member, size_t index)
 {
   rosidl_runtime_c__float__Sequence * member =
@@ -434,29 +508,29 @@ void * user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupp
   return &member->data[index];
 }
 
-void user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__fetch_function__StartGoalAction_Feedback__partial_path(
+void user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__fetch_function__StartGoalAction_Feedback__partial_path_x(
   const void * untyped_member, size_t index, void * untyped_value)
 {
   const float * item =
     ((const float *)
-    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Feedback__partial_path(untyped_member, index));
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Feedback__partial_path_x(untyped_member, index));
   float * value =
     (float *)(untyped_value);
   *value = *item;
 }
 
-void user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__assign_function__StartGoalAction_Feedback__partial_path(
+void user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__assign_function__StartGoalAction_Feedback__partial_path_x(
   void * untyped_member, size_t index, const void * untyped_value)
 {
   float * item =
     ((float *)
-    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Feedback__partial_path(untyped_member, index));
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Feedback__partial_path_x(untyped_member, index));
   const float * value =
     (const float *)(untyped_value);
   *item = *value;
 }
 
-bool user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__resize_function__StartGoalAction_Feedback__partial_path(
+bool user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__resize_function__StartGoalAction_Feedback__partial_path_x(
   void * untyped_member, size_t size)
 {
   rosidl_runtime_c__float__Sequence * member =
@@ -465,30 +539,102 @@ bool user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesuppor
   return rosidl_runtime_c__float__Sequence__init(member, size);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__StartGoalAction_Feedback_message_member_array[1] = {
+size_t user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__size_function__StartGoalAction_Feedback__partial_path_y(
+  const void * untyped_member)
+{
+  const rosidl_runtime_c__float__Sequence * member =
+    (const rosidl_runtime_c__float__Sequence *)(untyped_member);
+  return member->size;
+}
+
+const void * user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Feedback__partial_path_y(
+  const void * untyped_member, size_t index)
+{
+  const rosidl_runtime_c__float__Sequence * member =
+    (const rosidl_runtime_c__float__Sequence *)(untyped_member);
+  return &member->data[index];
+}
+
+void * user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Feedback__partial_path_y(
+  void * untyped_member, size_t index)
+{
+  rosidl_runtime_c__float__Sequence * member =
+    (rosidl_runtime_c__float__Sequence *)(untyped_member);
+  return &member->data[index];
+}
+
+void user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__fetch_function__StartGoalAction_Feedback__partial_path_y(
+  const void * untyped_member, size_t index, void * untyped_value)
+{
+  const float * item =
+    ((const float *)
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Feedback__partial_path_y(untyped_member, index));
+  float * value =
+    (float *)(untyped_value);
+  *value = *item;
+}
+
+void user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__assign_function__StartGoalAction_Feedback__partial_path_y(
+  void * untyped_member, size_t index, const void * untyped_value)
+{
+  float * item =
+    ((float *)
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Feedback__partial_path_y(untyped_member, index));
+  const float * value =
+    (const float *)(untyped_value);
+  *item = *value;
+}
+
+bool user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__resize_function__StartGoalAction_Feedback__partial_path_y(
+  void * untyped_member, size_t size)
+{
+  rosidl_runtime_c__float__Sequence * member =
+    (rosidl_runtime_c__float__Sequence *)(untyped_member);
+  rosidl_runtime_c__float__Sequence__fini(member);
+  return rosidl_runtime_c__float__Sequence__init(member, size);
+}
+
+static rosidl_typesupport_introspection_c__MessageMember user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__StartGoalAction_Feedback_message_member_array[2] = {
   {
-    "partial_path",  // name
+    "partial_path_x",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_FLOAT,  // type
     0,  // upper bound of string
     NULL,  // members of sub message
     true,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces__action__StartGoalAction_Feedback, partial_path),  // bytes offset in struct
+    offsetof(user_action_interfaces__action__StartGoalAction_Feedback, partial_path_x),  // bytes offset in struct
     NULL,  // default value
-    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__size_function__StartGoalAction_Feedback__partial_path,  // size() function pointer
-    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Feedback__partial_path,  // get_const(index) function pointer
-    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Feedback__partial_path,  // get(index) function pointer
-    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__fetch_function__StartGoalAction_Feedback__partial_path,  // fetch(index, &value) function pointer
-    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__assign_function__StartGoalAction_Feedback__partial_path,  // assign(index, value) function pointer
-    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__resize_function__StartGoalAction_Feedback__partial_path  // resize(index) function pointer
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__size_function__StartGoalAction_Feedback__partial_path_x,  // size() function pointer
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Feedback__partial_path_x,  // get_const(index) function pointer
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Feedback__partial_path_x,  // get(index) function pointer
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__fetch_function__StartGoalAction_Feedback__partial_path_x,  // fetch(index, &value) function pointer
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__assign_function__StartGoalAction_Feedback__partial_path_x,  // assign(index, value) function pointer
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__resize_function__StartGoalAction_Feedback__partial_path_x  // resize(index) function pointer
+  },
+  {
+    "partial_path_y",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_FLOAT,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message
+    true,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces__action__StartGoalAction_Feedback, partial_path_y),  // bytes offset in struct
+    NULL,  // default value
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__size_function__StartGoalAction_Feedback__partial_path_y,  // size() function pointer
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_const_function__StartGoalAction_Feedback__partial_path_y,  // get_const(index) function pointer
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__get_function__StartGoalAction_Feedback__partial_path_y,  // get(index) function pointer
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__fetch_function__StartGoalAction_Feedback__partial_path_y,  // fetch(index, &value) function pointer
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__assign_function__StartGoalAction_Feedback__partial_path_y,  // assign(index, value) function pointer
+    user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__resize_function__StartGoalAction_Feedback__partial_path_y  // resize(index) function pointer
   }
 };
 
 static const rosidl_typesupport_introspection_c__MessageMembers user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__StartGoalAction_Feedback_message_members = {
   "user_action_interfaces__action",  // message namespace
   "StartGoalAction_Feedback",  // message name
-  1,  // number of fields
+  2,  // number of fields
   sizeof(user_action_interfaces__action__StartGoalAction_Feedback),
   user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__StartGoalAction_Feedback_message_member_array,  // message members
   user_action_interfaces__action__StartGoalAction_Feedback__rosidl_typesupport_introspection_c__StartGoalAction_Feedback_init_function,  // function to initialize message memory (memory has to be allocated)

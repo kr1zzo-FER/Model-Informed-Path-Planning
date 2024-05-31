@@ -272,7 +272,8 @@ user_action_interfaces__action__StartGoalAction_Goal__Sequence__copy(
 
 
 // Include directives for member types
-// Member `path`
+// Member `path_x`
+// Member `path_y`
 // already included above
 // #include "rosidl_runtime_c/primitives_sequence_functions.h"
 
@@ -282,8 +283,13 @@ user_action_interfaces__action__StartGoalAction_Result__init(user_action_interfa
   if (!msg) {
     return false;
   }
-  // path
-  if (!rosidl_runtime_c__float__Sequence__init(&msg->path, 0)) {
+  // path_x
+  if (!rosidl_runtime_c__float__Sequence__init(&msg->path_x, 0)) {
+    user_action_interfaces__action__StartGoalAction_Result__fini(msg);
+    return false;
+  }
+  // path_y
+  if (!rosidl_runtime_c__float__Sequence__init(&msg->path_y, 0)) {
     user_action_interfaces__action__StartGoalAction_Result__fini(msg);
     return false;
   }
@@ -296,8 +302,10 @@ user_action_interfaces__action__StartGoalAction_Result__fini(user_action_interfa
   if (!msg) {
     return;
   }
-  // path
-  rosidl_runtime_c__float__Sequence__fini(&msg->path);
+  // path_x
+  rosidl_runtime_c__float__Sequence__fini(&msg->path_x);
+  // path_y
+  rosidl_runtime_c__float__Sequence__fini(&msg->path_y);
 }
 
 bool
@@ -306,9 +314,15 @@ user_action_interfaces__action__StartGoalAction_Result__are_equal(const user_act
   if (!lhs || !rhs) {
     return false;
   }
-  // path
+  // path_x
   if (!rosidl_runtime_c__float__Sequence__are_equal(
-      &(lhs->path), &(rhs->path)))
+      &(lhs->path_x), &(rhs->path_x)))
+  {
+    return false;
+  }
+  // path_y
+  if (!rosidl_runtime_c__float__Sequence__are_equal(
+      &(lhs->path_y), &(rhs->path_y)))
   {
     return false;
   }
@@ -323,9 +337,15 @@ user_action_interfaces__action__StartGoalAction_Result__copy(
   if (!input || !output) {
     return false;
   }
-  // path
+  // path_x
   if (!rosidl_runtime_c__float__Sequence__copy(
-      &(input->path), &(output->path)))
+      &(input->path_x), &(output->path_x)))
+  {
+    return false;
+  }
+  // path_y
+  if (!rosidl_runtime_c__float__Sequence__copy(
+      &(input->path_y), &(output->path_y)))
   {
     return false;
   }
@@ -513,7 +533,8 @@ user_action_interfaces__action__StartGoalAction_Result__Sequence__copy(
 
 
 // Include directives for member types
-// Member `partial_path`
+// Member `partial_path_x`
+// Member `partial_path_y`
 // already included above
 // #include "rosidl_runtime_c/primitives_sequence_functions.h"
 
@@ -523,8 +544,13 @@ user_action_interfaces__action__StartGoalAction_Feedback__init(user_action_inter
   if (!msg) {
     return false;
   }
-  // partial_path
-  if (!rosidl_runtime_c__float__Sequence__init(&msg->partial_path, 0)) {
+  // partial_path_x
+  if (!rosidl_runtime_c__float__Sequence__init(&msg->partial_path_x, 0)) {
+    user_action_interfaces__action__StartGoalAction_Feedback__fini(msg);
+    return false;
+  }
+  // partial_path_y
+  if (!rosidl_runtime_c__float__Sequence__init(&msg->partial_path_y, 0)) {
     user_action_interfaces__action__StartGoalAction_Feedback__fini(msg);
     return false;
   }
@@ -537,8 +563,10 @@ user_action_interfaces__action__StartGoalAction_Feedback__fini(user_action_inter
   if (!msg) {
     return;
   }
-  // partial_path
-  rosidl_runtime_c__float__Sequence__fini(&msg->partial_path);
+  // partial_path_x
+  rosidl_runtime_c__float__Sequence__fini(&msg->partial_path_x);
+  // partial_path_y
+  rosidl_runtime_c__float__Sequence__fini(&msg->partial_path_y);
 }
 
 bool
@@ -547,9 +575,15 @@ user_action_interfaces__action__StartGoalAction_Feedback__are_equal(const user_a
   if (!lhs || !rhs) {
     return false;
   }
-  // partial_path
+  // partial_path_x
   if (!rosidl_runtime_c__float__Sequence__are_equal(
-      &(lhs->partial_path), &(rhs->partial_path)))
+      &(lhs->partial_path_x), &(rhs->partial_path_x)))
+  {
+    return false;
+  }
+  // partial_path_y
+  if (!rosidl_runtime_c__float__Sequence__are_equal(
+      &(lhs->partial_path_y), &(rhs->partial_path_y)))
   {
     return false;
   }
@@ -564,9 +598,15 @@ user_action_interfaces__action__StartGoalAction_Feedback__copy(
   if (!input || !output) {
     return false;
   }
-  // partial_path
+  // partial_path_x
   if (!rosidl_runtime_c__float__Sequence__copy(
-      &(input->partial_path), &(output->partial_path)))
+      &(input->partial_path_x), &(output->partial_path_x)))
+  {
+    return false;
+  }
+  // partial_path_y
+  if (!rosidl_runtime_c__float__Sequence__copy(
+      &(input->partial_path_y), &(output->partial_path_y)))
   {
     return false;
   }

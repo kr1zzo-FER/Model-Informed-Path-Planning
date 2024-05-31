@@ -80,6 +80,7 @@ rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_ac
 rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__rosidl_typesupport_fastrtps_c.h: rosidl_adapter/user_action_interfaces/action/StartGoalAction.idl
 rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__rosidl_typesupport_fastrtps_c.h: rosidl_adapter/user_action_interfaces/msg/StartGoalMsg.idl
 rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__rosidl_typesupport_fastrtps_c.h: rosidl_adapter/user_action_interfaces/msg/CoastMsg.idl
+rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__rosidl_typesupport_fastrtps_c.h: rosidl_adapter/user_action_interfaces/msg/PathMsg.idl
 rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__rosidl_typesupport_fastrtps_c.h: /opt/ros/iron/share/builtin_interfaces/msg/Duration.idl
 rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__rosidl_typesupport_fastrtps_c.h: /opt/ros/iron/share/builtin_interfaces/msg/Time.idl
 rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__rosidl_typesupport_fastrtps_c.h: /opt/ros/iron/share/std_msgs/msg/Bool.idl
@@ -194,6 +195,12 @@ rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__rosid
 rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__type_support_c.cpp: rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__rosidl_typesupport_fastrtps_c.h
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__type_support_c.cpp
 
+rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__rosidl_typesupport_fastrtps_c.h: rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__rosidl_typesupport_fastrtps_c.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__rosidl_typesupport_fastrtps_c.h
+
+rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp: rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__rosidl_typesupport_fastrtps_c.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp
+
 CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__type_support_c.cpp.o: CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/flags.make
 CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__type_support_c.cpp.o: rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__type_support_c.cpp
 CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__type_support_c.cpp.o: CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/compiler_depend.ts
@@ -236,11 +243,26 @@ CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_type
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__type_support_c.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__type_support_c.cpp -o CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__type_support_c.cpp.s
 
+CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.o: CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/flags.make
+CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.o: rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp
+CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.o: CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.o -MF CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.o.d -o CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.o -c /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp
+
+CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp > CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.i
+
+CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp -o CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.s
+
 # Object files for target user_action_interfaces__rosidl_typesupport_fastrtps_c
 user_action_interfaces__rosidl_typesupport_fastrtps_c_OBJECTS = \
 "CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__type_support_c.cpp.o" \
 "CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/start_goal_msg__type_support_c.cpp.o" \
-"CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__type_support_c.cpp.o"
+"CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__type_support_c.cpp.o" \
+"CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.o"
 
 # External object files for target user_action_interfaces__rosidl_typesupport_fastrtps_c
 user_action_interfaces__rosidl_typesupport_fastrtps_c_EXTERNAL_OBJECTS =
@@ -248,6 +270,7 @@ user_action_interfaces__rosidl_typesupport_fastrtps_c_EXTERNAL_OBJECTS =
 libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so: CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__type_support_c.cpp.o
 libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so: CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/start_goal_msg__type_support_c.cpp.o
 libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so: CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__type_support_c.cpp.o
+libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so: CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp.o
 libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so: CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/build.make
 libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so: libuser_action_interfaces__rosidl_generator_c.so
 libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so: /opt/ros/iron/lib/libsensor_msgs__rosidl_typesupport_fastrtps_c.so
@@ -272,7 +295,7 @@ libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so: /opt/ros/iron/lib/l
 libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so: /opt/ros/iron/lib/librosidl_runtime_c.so
 libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so: /opt/ros/iron/lib/librcutils.so
 libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so: CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX shared library libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX shared library libuser_action_interfaces__rosidl_typesupport_fastrtps_c.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -287,6 +310,8 @@ CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: ros
 CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/user_action_interfaces/action/detail/start_goal_action__type_support_c.cpp
 CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__rosidl_typesupport_fastrtps_c.h
 CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/coast_msg__type_support_c.cpp
+CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__rosidl_typesupport_fastrtps_c.h
+CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/path_msg__type_support_c.cpp
 CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/start_goal_msg__rosidl_typesupport_fastrtps_c.h
 CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/depend: rosidl_typesupport_fastrtps_c/user_action_interfaces/msg/detail/start_goal_msg__type_support_c.cpp
 	cd /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/user_action_interfaces/CMakeFiles/user_action_interfaces__rosidl_typesupport_fastrtps_c.dir/DependInfo.cmake --color=$(COLOR)

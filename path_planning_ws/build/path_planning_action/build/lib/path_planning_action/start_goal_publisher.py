@@ -47,12 +47,10 @@ class PathPlanningPublisher(Node):
 
 
     def start_goal_callback(self, msg):
-        self.get_logger().info('Received start and goal')
         self.start = msg.start
         self.goal = msg.goal
         
     def timer_callback(self):
-        print("Timer callback")
         start_goal_msg = StartGoalMsg()
         start_goal_msg.header.stamp = self.get_clock().now().to_msg()
         start_goal_msg.header.frame_id = 'map'

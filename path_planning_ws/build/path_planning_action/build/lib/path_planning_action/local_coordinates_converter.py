@@ -28,6 +28,7 @@ class LocalCoordinatesConverter():
         self.size = (self.size_x, self.size_y)
         self.zones_m_plot, self.zones_m = self.set_zones_m()
 
+
     def gps_to_meters(self,lat1, lon1, lat2, lon2):
         # Convert gps cordinates to meters from (lat1,lon1) to (lat2,lon2)
         R = 6378.137 # Radius of earth in KM
@@ -46,6 +47,12 @@ class LocalCoordinatesConverter():
         x_pixel = round(x_pixel/self.grid_size)*self.grid_size
         y_pixel = round(y_pixel/self.grid_size)*self.grid_size
         
+        return x_pixel, y_pixel
+
+    def gps_to_pixel_m(self,latitude, longitude):
+        # Convert gps coordinates to pixel coordinates
+        x_pixel = int(round((longitude - self.coordinates[0]) * self.size_x / (self.coordinates[2] - self.coordinates[0])))
+        y_pixel = int(round((latitude - self.coordinates[1]) * self.size_y / (self.coordinates[3] - self.coordinates[1])))
         return x_pixel, y_pixel
     
     def pixel_to_gps(self,x_pixel, y_pixel):
@@ -83,7 +90,6 @@ class LocalCoordinatesConverter():
     
     def set_height(self):
         return round(self.gps_to_meters(self.coordinates[1], self.coordinates[0], self.coordinates[3], self.coordinates[0]))
-
     
     def get_points_m(self):
         coast_points_m = []
@@ -107,11 +113,21 @@ class LocalCoordinatesConverter():
         self.start_m, self.start_m_resized = self.set_start_m()
         self.goal_m, self.goal_m_resized = self.set_goal_m()
     
+    
     def get_start_m(self):
         return self.start_m_resized
     
     def get_goal_m(self):
         return self.goal_m_resized
+    
+    def get_path_m(self,path): 
+        print(f"Path: {path}") 
+        path_m = []
+        for point in path:
+            path_cord = self.gps_to_pixel_m(point[0],point[1])
+            path_m.append(path_cord)
+        path_m = [(x/self.grid_size,y/self.grid_size) for x,y in path_m]
+        return path_m
 
     def set_zones_m(self):
         gps_dictionary, gps_dictionary_resized = {}, {}

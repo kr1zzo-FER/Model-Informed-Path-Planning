@@ -42,14 +42,16 @@ typedef struct user_action_interfaces__action__StartGoalAction_Goal__Sequence
 // Constants defined in the message
 
 // Include directives for member types
-// Member 'path'
+// Member 'path_x'
+// Member 'path_y'
 // already included above
 // #include "rosidl_runtime_c/primitives_sequence.h"
 
 /// Struct defined in action/StartGoalAction in the package user_action_interfaces.
 typedef struct user_action_interfaces__action__StartGoalAction_Result
 {
-  rosidl_runtime_c__float__Sequence path;
+  rosidl_runtime_c__float__Sequence path_x;
+  rosidl_runtime_c__float__Sequence path_y;
 } user_action_interfaces__action__StartGoalAction_Result;
 
 // Struct for a sequence of user_action_interfaces__action__StartGoalAction_Result.
@@ -65,14 +67,16 @@ typedef struct user_action_interfaces__action__StartGoalAction_Result__Sequence
 // Constants defined in the message
 
 // Include directives for member types
-// Member 'partial_path'
+// Member 'partial_path_x'
+// Member 'partial_path_y'
 // already included above
 // #include "rosidl_runtime_c/primitives_sequence.h"
 
 /// Struct defined in action/StartGoalAction in the package user_action_interfaces.
 typedef struct user_action_interfaces__action__StartGoalAction_Feedback
 {
-  rosidl_runtime_c__float__Sequence partial_path;
+  rosidl_runtime_c__float__Sequence partial_path_x;
+  rosidl_runtime_c__float__Sequence partial_path_y;
 } user_action_interfaces__action__StartGoalAction_Feedback;
 
 // Struct for a sequence of user_action_interfaces__action__StartGoalAction_Feedback.

@@ -176,14 +176,32 @@ inline void to_flow_style_yaml(
   std::ostream & out)
 {
   out << "{";
-  // member: path
+  // member: path_x
   {
-    if (msg.path.size() == 0) {
-      out << "path: []";
+    if (msg.path_x.size() == 0) {
+      out << "path_x: []";
     } else {
-      out << "path: [";
-      size_t pending_items = msg.path.size();
-      for (auto item : msg.path) {
+      out << "path_x: [";
+      size_t pending_items = msg.path_x.size();
+      for (auto item : msg.path_x) {
+        rosidl_generator_traits::value_to_yaml(item, out);
+        if (--pending_items > 0) {
+          out << ", ";
+        }
+      }
+      out << "]";
+    }
+    out << ", ";
+  }
+
+  // member: path_y
+  {
+    if (msg.path_y.size() == 0) {
+      out << "path_y: []";
+    } else {
+      out << "path_y: [";
+      size_t pending_items = msg.path_y.size();
+      for (auto item : msg.path_y) {
         rosidl_generator_traits::value_to_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -199,16 +217,36 @@ inline void to_block_style_yaml(
   const StartGoalAction_Result & msg,
   std::ostream & out, size_t indentation = 0)
 {
-  // member: path
+  // member: path_x
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    if (msg.path.size() == 0) {
-      out << "path: []\n";
+    if (msg.path_x.size() == 0) {
+      out << "path_x: []\n";
     } else {
-      out << "path:\n";
-      for (auto item : msg.path) {
+      out << "path_x:\n";
+      for (auto item : msg.path_x) {
+        if (indentation > 0) {
+          out << std::string(indentation, ' ');
+        }
+        out << "- ";
+        rosidl_generator_traits::value_to_yaml(item, out);
+        out << "\n";
+      }
+    }
+  }
+
+  // member: path_y
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    if (msg.path_y.size() == 0) {
+      out << "path_y: []\n";
+    } else {
+      out << "path_y:\n";
+      for (auto item : msg.path_y) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }
@@ -289,14 +327,32 @@ inline void to_flow_style_yaml(
   std::ostream & out)
 {
   out << "{";
-  // member: partial_path
+  // member: partial_path_x
   {
-    if (msg.partial_path.size() == 0) {
-      out << "partial_path: []";
+    if (msg.partial_path_x.size() == 0) {
+      out << "partial_path_x: []";
     } else {
-      out << "partial_path: [";
-      size_t pending_items = msg.partial_path.size();
-      for (auto item : msg.partial_path) {
+      out << "partial_path_x: [";
+      size_t pending_items = msg.partial_path_x.size();
+      for (auto item : msg.partial_path_x) {
+        rosidl_generator_traits::value_to_yaml(item, out);
+        if (--pending_items > 0) {
+          out << ", ";
+        }
+      }
+      out << "]";
+    }
+    out << ", ";
+  }
+
+  // member: partial_path_y
+  {
+    if (msg.partial_path_y.size() == 0) {
+      out << "partial_path_y: []";
+    } else {
+      out << "partial_path_y: [";
+      size_t pending_items = msg.partial_path_y.size();
+      for (auto item : msg.partial_path_y) {
         rosidl_generator_traits::value_to_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -312,16 +368,36 @@ inline void to_block_style_yaml(
   const StartGoalAction_Feedback & msg,
   std::ostream & out, size_t indentation = 0)
 {
-  // member: partial_path
+  // member: partial_path_x
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    if (msg.partial_path.size() == 0) {
-      out << "partial_path: []\n";
+    if (msg.partial_path_x.size() == 0) {
+      out << "partial_path_x: []\n";
     } else {
-      out << "partial_path:\n";
-      for (auto item : msg.partial_path) {
+      out << "partial_path_x:\n";
+      for (auto item : msg.partial_path_x) {
+        if (indentation > 0) {
+          out << std::string(indentation, ' ');
+        }
+        out << "- ";
+        rosidl_generator_traits::value_to_yaml(item, out);
+        out << "\n";
+      }
+    }
+  }
+
+  // member: partial_path_y
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    if (msg.partial_path_y.size() == 0) {
+      out << "partial_path_y: []\n";
+    } else {
+      out << "partial_path_y:\n";
+      for (auto item : msg.partial_path_y) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }

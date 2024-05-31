@@ -1,6 +1,8 @@
 float32[] start
 float32[] goal
 ---
-float32[] path
+float32[] path_x
+float32[] path_y
 ---
-float32[] partial_path
+float32[] partial_path_x
+float32[] partial_path_y

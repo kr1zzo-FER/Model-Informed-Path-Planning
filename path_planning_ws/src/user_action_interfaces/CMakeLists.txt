@@ -17,6 +17,7 @@ rosidl_generate_interfaces (${PROJECT_NAME}
   "action/StartGoalAction.action"
   "msg/StartGoalMsg.msg"
   "msg/CoastMsg.msg"
+  "msg/PathMsg.msg"
   DEPENDENCIES builtin_interfaces std_msgs
   DEPENDENCIES builtin_interfaces sensor_msgs
 )

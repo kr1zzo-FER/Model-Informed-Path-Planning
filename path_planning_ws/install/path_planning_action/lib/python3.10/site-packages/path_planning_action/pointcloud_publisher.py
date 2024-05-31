@@ -9,6 +9,7 @@ import os
 from .local_coordinates_converter import LocalCoordinatesConverter
 from user_action_interfaces.msg import CoastMsg
 from user_action_interfaces.msg import StartGoalMsg
+from user_action_interfaces.msg import PathMsg
 
 from matplotlib import pyplot as plt
 import rclpy 
@@ -49,15 +50,18 @@ class CoastToPointCloud(Node):
         self.save_file = self.get_parameter('save_file').get_parameter_value().string_value
 
         self.start_goal_subscriber = self.create_subscription(StartGoalMsg, 'start_goal_msg', self.start_goal_callback, 10)
+        self.path_subscriber = self.create_subscription(PathMsg, 'path', self.path_callback, 10)
 
         self.start = [0.0,0.0]
         self.goal = [0.0,0.0]
         self.start_pose = PoseStamped()
         self.goal_pose = PoseStamped()
+        self.path_pcd = sensor_msgs.PointCloud2()
+
+        
 
         self.zones_dictionary, self.coast_points, self.red_points, self.yellow_points, self.green_points, grid_size = self.get_zones_dictionary()
 
-        print(self.coast_points)
         self.coast_points_x = [point[0] for point in self.coast_points]
         self.coast_points_y = [point[1] for point in self.coast_points]
         self.red_points_x = [point[0] for point in self.red_points]
@@ -66,6 +70,9 @@ class CoastToPointCloud(Node):
         self.yellow_points_y = [point[1] for point in self.yellow_points]
         self.green_points_x = [point[0] for point in self.green_points]
         self.green_points_y = [point[1] for point in self.green_points]
+
+
+        self._logger.info(f"coast_points: {self.coast_points}")
 
         self.lcc = LocalCoordinatesConverter(self.zones_dictionary, grid_size)
 
@@ -87,6 +94,8 @@ class CoastToPointCloud(Node):
         self.yellow_pcd_publisher = self.create_publisher(sensor_msgs.PointCloud2, 'yellow_pcd_points', 10)
         #green points
         self.green_pcd_publisher = self.create_publisher(sensor_msgs.PointCloud2, 'green_pcd_points', 10)
+        #path points
+        self.path_pcd_publisher = self.create_publisher(sensor_msgs.PointCloud2, 'path_pcd_points', 10)
         #start point
         self.start_publisher = self.create_publisher(PoseStamped, 'start_pose_costume', 10)
         #goal point
@@ -102,13 +111,13 @@ class CoastToPointCloud(Node):
         self.zones_publisher = self.create_publisher(CoastMsg, 'coast_points_gps', 10)
 
     def timer_callback(self):
-        self.get_logger().info('Publishing coast points')
         self.start_publisher.publish(self.start_pose)
         self.goal_publisher.publish(self.goal_pose)
         self.coast_pcd_publisher.publish(self.coast_pcd_points)
         self.red_pcd_publisher.publish(self.red_pcd_points)
         self.yellow_pcd_publisher.publish(self.yellow_pcd_points)
         self.green_pcd_publisher.publish(self.green_pcd_points)
+        self.path_pcd_publisher.publish(self.path_pcd)
 
 
         coast_msg = CoastMsg()
@@ -125,26 +134,33 @@ class CoastToPointCloud(Node):
         self.zones_publisher.publish(coast_msg)
 
     def start_update_callback(self, msg):
-        print("Start update")
         self.start = [msg.pose.pose.position.x*self.grid_size, msg.pose.pose.position.y*self.grid_size]
         start_gps = self.lcc.pixel_to_gps(self.start[0], self.start[1])
         self.start_goal_update_publisher.publish(StartGoalMsg(start=[start_gps[0], start_gps[1]], goal=self.goal))
 
     def goal_update_callback(self, msg):
-        print("Goal update")
         self.goal = [msg.pose.position.x*self.grid_size, msg.pose.position.y*self.grid_size]
         goal_gps = self.lcc.pixel_to_gps(self.goal[0], self.goal[1])
         self.start_goal_update_publisher.publish(StartGoalMsg(start=self.start, goal=[goal_gps[0], goal_gps[1]]))
     
     def start_goal_callback(self, msg):
         self.update = True
-        self.get_logger().info('Received start and goal')
         self.start = msg.start
         self.goal = msg.goal
         self.lcc.set_start_goal(self.start, self.goal)
         start_m, goal_m = self.lcc.get_start_m(), self.lcc.get_goal_m()
         self.start_pose = self.get_pose(start_m)
         self.goal_pose = self.get_pose(goal_m)
+    
+    def path_callback(self, msg):
+        if len(msg.path_x) > 0:
+            path = []
+            for i in range(len(msg.path_x)):
+                path.append((msg.path_x[i], msg.path_y[i])) 
+            path_m = self.lcc.get_path_m(path)
+            self._logger.info(f"Path: {path_m}")  
+            self.path_pcd = self.convert_to_pcd(path_m, 0)
+        
 
     def get_zones_dictionary(self):
         path = ws_root / f"src/path_planning_action/input_data/processed_maps/processed_map_{self.save_file}"

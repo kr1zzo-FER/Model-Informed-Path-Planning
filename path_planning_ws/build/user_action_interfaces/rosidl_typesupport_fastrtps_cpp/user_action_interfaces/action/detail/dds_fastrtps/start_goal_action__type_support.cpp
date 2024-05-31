@@ -292,9 +292,13 @@ cdr_serialize(
   const user_action_interfaces::action::StartGoalAction_Result & ros_message,
   eprosima::fastcdr::Cdr & cdr)
 {
-  // Member: path
+  // Member: path_x
   {
-    cdr << ros_message.path;
+    cdr << ros_message.path_x;
+  }
+  // Member: path_y
+  {
+    cdr << ros_message.path_y;
   }
   return true;
 }
@@ -305,9 +309,14 @@ cdr_deserialize(
   eprosima::fastcdr::Cdr & cdr,
   user_action_interfaces::action::StartGoalAction_Result & ros_message)
 {
-  // Member: path
+  // Member: path_x
   {
-    cdr >> ros_message.path;
+    cdr >> ros_message.path_x;
+  }
+
+  // Member: path_y
+  {
+    cdr >> ros_message.path_y;
   }
 
   return true;
@@ -326,13 +335,23 @@ get_serialized_size(
   (void)padding;
   (void)wchar_size;
 
-  // Member: path
+  // Member: path_x
   {
-    size_t array_size = ros_message.path.size();
+    size_t array_size = ros_message.path_x.size();
 
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-    size_t item_size = sizeof(ros_message.path[0]);
+    size_t item_size = sizeof(ros_message.path_x[0]);
+    current_alignment += array_size * item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // Member: path_y
+  {
+    size_t array_size = ros_message.path_y.size();
+
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+    size_t item_size = sizeof(ros_message.path_y[0]);
     current_alignment += array_size * item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
@@ -360,7 +379,20 @@ max_serialized_size_StartGoalAction_Result(
   is_plain = true;
 
 
-  // Member: path
+  // Member: path_x
+  {
+    size_t array_size = 0;
+    full_bounded = false;
+    is_plain = false;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+    last_member_size = array_size * sizeof(uint32_t);
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
+
+  // Member: path_y
   {
     size_t array_size = 0;
     full_bounded = false;
@@ -381,7 +413,7 @@ max_serialized_size_StartGoalAction_Result(
     using DataType = user_action_interfaces::action::StartGoalAction_Result;
     is_plain =
       (
-      offsetof(DataType, path) +
+      offsetof(DataType, path_y) +
       last_member_size
       ) == ret_val;
   }
@@ -519,9 +551,13 @@ cdr_serialize(
   const user_action_interfaces::action::StartGoalAction_Feedback & ros_message,
   eprosima::fastcdr::Cdr & cdr)
 {
-  // Member: partial_path
+  // Member: partial_path_x
   {
-    cdr << ros_message.partial_path;
+    cdr << ros_message.partial_path_x;
+  }
+  // Member: partial_path_y
+  {
+    cdr << ros_message.partial_path_y;
   }
   return true;
 }
@@ -532,9 +568,14 @@ cdr_deserialize(
   eprosima::fastcdr::Cdr & cdr,
   user_action_interfaces::action::StartGoalAction_Feedback & ros_message)
 {
-  // Member: partial_path
+  // Member: partial_path_x
   {
-    cdr >> ros_message.partial_path;
+    cdr >> ros_message.partial_path_x;
+  }
+
+  // Member: partial_path_y
+  {
+    cdr >> ros_message.partial_path_y;
   }
 
   return true;
@@ -553,13 +594,23 @@ get_serialized_size(
   (void)padding;
   (void)wchar_size;
 
-  // Member: partial_path
+  // Member: partial_path_x
   {
-    size_t array_size = ros_message.partial_path.size();
+    size_t array_size = ros_message.partial_path_x.size();
 
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-    size_t item_size = sizeof(ros_message.partial_path[0]);
+    size_t item_size = sizeof(ros_message.partial_path_x[0]);
+    current_alignment += array_size * item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // Member: partial_path_y
+  {
+    size_t array_size = ros_message.partial_path_y.size();
+
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+    size_t item_size = sizeof(ros_message.partial_path_y[0]);
     current_alignment += array_size * item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
@@ -587,7 +638,20 @@ max_serialized_size_StartGoalAction_Feedback(
   is_plain = true;
 
 
-  // Member: partial_path
+  // Member: partial_path_x
+  {
+    size_t array_size = 0;
+    full_bounded = false;
+    is_plain = false;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+    last_member_size = array_size * sizeof(uint32_t);
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
+
+  // Member: partial_path_y
   {
     size_t array_size = 0;
     full_bounded = false;
@@ -608,7 +672,7 @@ max_serialized_size_StartGoalAction_Feedback(
     using DataType = user_action_interfaces::action::StartGoalAction_Feedback;
     is_plain =
       (
-      offsetof(DataType, partial_path) +
+      offsetof(DataType, partial_path_y) +
       last_member_size
       ) == ret_val;
   }

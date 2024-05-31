@@ -63,6 +63,8 @@ class DStarLite:
         self.zones = zones
         self.x_min_world, self.y_min_world, self.x_max_world, self.y_max_world= self.get_minmax_world()
         self.x_min_global, self.y_min_global , self.x_max_global, self.y_max_global = self.get_minmax_global()
+        start = (int(start[0]/self.n)*self.n, int(start[1]/self.n)*self.n)
+        goal = (int(goal[0]/self.n)*self.n, int(goal[1]/self.n)*self.n)
         self.start = Node(start, 's')
         self.goal = Node(goal, 'g')
         self.U = list()  # Would normally be a priority queue

@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/user_action_interfaces/action/detail/start_goal_action__type_support.c.o.d"
   "CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/coast_msg__type_support.c.o"
   "CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/coast_msg__type_support.c.o.d"
+  "CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/path_msg__type_support.c.o"
+  "CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/path_msg__type_support.c.o.d"
   "CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/start_goal_msg__type_support.c.o"
   "CMakeFiles/user_action_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/start_goal_msg__type_support.c.o.d"
   "libuser_action_interfaces__rosidl_typesupport_introspection_c.pdb"
@@ -11,6 +13,8 @@ file(REMOVE_RECURSE
   "rosidl_typesupport_introspection_c/user_action_interfaces/action/detail/start_goal_action__type_support.c"
   "rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/coast_msg__rosidl_typesupport_introspection_c.h"
   "rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/coast_msg__type_support.c"
+  "rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/path_msg__rosidl_typesupport_introspection_c.h"
+  "rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/path_msg__type_support.c"
   "rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/start_goal_msg__rosidl_typesupport_introspection_c.h"
   "rosidl_typesupport_introspection_c/user_action_interfaces/msg/detail/start_goal_msg__type_support.c"
 )

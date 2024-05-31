@@ -11,10 +11,10 @@ user_action_interfaces__action__StartGoalAction__get_type_hash(
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0xb6, 0xbb, 0xcf, 0x6e, 0x6c, 0x1d, 0x52, 0x35,
-      0x1f, 0x04, 0x2b, 0x42, 0x35, 0xfc, 0x7e, 0x84,
-      0x58, 0xee, 0x21, 0x89, 0x7e, 0x8f, 0xe4, 0x8d,
-      0x6f, 0xcd, 0x9a, 0xc0, 0x4c, 0xf5, 0x41, 0x27,
+      0xbe, 0x99, 0x7a, 0x80, 0x9d, 0x20, 0x28, 0xd6,
+      0x79, 0xb2, 0x0f, 0x11, 0x48, 0x6d, 0x79, 0x06,
+      0xd2, 0x6d, 0x6f, 0x57, 0x21, 0x25, 0x75, 0xaf,
+      0x5b, 0x86, 0x0a, 0x7f, 0xc1, 0xee, 0x52, 0xde,
     }};
   return &hash;
 }
@@ -41,10 +41,10 @@ user_action_interfaces__action__StartGoalAction_Result__get_type_hash(
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0x84, 0x59, 0xed, 0xca, 0x47, 0xb5, 0xb0, 0x03,
-      0xae, 0x9c, 0x78, 0x7d, 0x51, 0x24, 0x55, 0x4f,
-      0xbf, 0x3b, 0x92, 0x8c, 0x0c, 0xfb, 0xfe, 0x7c,
-      0xba, 0xe1, 0x0d, 0xfd, 0x2c, 0xfd, 0x8d, 0x9e,
+      0x20, 0x41, 0x9b, 0xb7, 0x05, 0x26, 0x13, 0xac,
+      0x79, 0x59, 0x52, 0xdf, 0x85, 0xf1, 0x8a, 0x52,
+      0xd3, 0xf6, 0xd8, 0x35, 0x64, 0xc3, 0x64, 0xea,
+      0xdd, 0xc7, 0x08, 0x72, 0xc2, 0x6e, 0xf5, 0xa0,
     }};
   return &hash;
 }
@@ -56,10 +56,10 @@ user_action_interfaces__action__StartGoalAction_Feedback__get_type_hash(
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0x55, 0xe8, 0xf8, 0xd7, 0x25, 0x93, 0xb2, 0x28,
-      0x8b, 0x7d, 0x14, 0xd0, 0x6a, 0x9f, 0xce, 0x26,
-      0x2a, 0x19, 0x7e, 0xe8, 0x1b, 0x80, 0x41, 0xcc,
-      0xd0, 0x9e, 0xec, 0x14, 0x32, 0x1b, 0x93, 0x32,
+      0x8a, 0xec, 0xc6, 0x5c, 0x44, 0x55, 0x93, 0x0c,
+      0xc2, 0xce, 0x0b, 0xd9, 0x88, 0xb2, 0xc9, 0x3c,
+      0x21, 0x42, 0x76, 0xe9, 0x89, 0x9d, 0x2a, 0x44,
+      0xde, 0xbb, 0x9d, 0x01, 0x6b, 0x7b, 0xb9, 0xf2,
     }};
   return &hash;
 }
@@ -131,10 +131,10 @@ user_action_interfaces__action__StartGoalAction_GetResult__get_type_hash(
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0x7d, 0xfd, 0x65, 0x0a, 0xb5, 0x7a, 0x53, 0x5a,
-      0xf8, 0xa3, 0xee, 0xba, 0xb8, 0x66, 0x18, 0x22,
-      0xff, 0x77, 0x55, 0xda, 0x83, 0xcb, 0xba, 0xc6,
-      0xaa, 0xab, 0x9b, 0x42, 0x68, 0x7f, 0x18, 0x5f,
+      0x22, 0xed, 0x2f, 0xc5, 0xa9, 0x71, 0x8f, 0x86,
+      0x4a, 0xc2, 0x3e, 0x2a, 0x5d, 0xe1, 0x5b, 0x92,
+      0x1c, 0xe7, 0x48, 0x53, 0xa9, 0x97, 0x66, 0x93,
+      0x29, 0xc1, 0x8c, 0xa5, 0xeb, 0x0e, 0xcb, 0x21,
     }};
   return &hash;
 }
@@ -161,10 +161,10 @@ user_action_interfaces__action__StartGoalAction_GetResult_Response__get_type_has
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0x63, 0xdb, 0xd9, 0xfb, 0xd7, 0x84, 0xed, 0x83,
-      0x30, 0xc0, 0x80, 0x5a, 0x7f, 0xaa, 0xef, 0xa2,
-      0x34, 0x4e, 0x87, 0xbc, 0x75, 0x43, 0x33, 0xae,
-      0x3f, 0x7e, 0xdc, 0x7e, 0x59, 0x0a, 0x67, 0x96,
+      0xe3, 0x55, 0xfb, 0x91, 0x04, 0x6e, 0x9c, 0xf8,
+      0xee, 0x91, 0xa6, 0x99, 0xe5, 0xef, 0x85, 0x2d,
+      0xc2, 0x60, 0xbf, 0x31, 0x8d, 0xe6, 0x84, 0xaa,
+      0xc7, 0x9c, 0xde, 0x7a, 0x55, 0x67, 0x1f, 0x5e,
     }};
   return &hash;
 }
@@ -176,10 +176,10 @@ user_action_interfaces__action__StartGoalAction_GetResult_Event__get_type_hash(
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0x52, 0x52, 0x55, 0xe8, 0xc5, 0x76, 0x96, 0x89,
-      0x76, 0x65, 0x11, 0xfe, 0x23, 0x82, 0xc4, 0xb4,
-      0xa3, 0xbe, 0xc0, 0xd6, 0xf8, 0x33, 0x36, 0x5e,
-      0x0c, 0xcc, 0xc2, 0x2a, 0x5b, 0xea, 0x75, 0x4a,
+      0xf0, 0xba, 0x1d, 0xb4, 0x76, 0xb9, 0x43, 0x5c,
+      0x9a, 0x37, 0x96, 0x39, 0x35, 0x6c, 0xe5, 0xd8,
+      0x2a, 0x9c, 0xd0, 0x0b, 0x7f, 0x93, 0xb1, 0x26,
+      0x94, 0x35, 0x76, 0x60, 0xf0, 0xd0, 0x5d, 0xd7,
     }};
   return &hash;
 }
@@ -191,10 +191,10 @@ user_action_interfaces__action__StartGoalAction_FeedbackMessage__get_type_hash(
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0x52, 0x80, 0x12, 0xb0, 0xda, 0x16, 0xd7, 0xa3,
-      0x5f, 0x1b, 0x35, 0x9d, 0x3c, 0x2b, 0xe9, 0x3f,
-      0x3b, 0x28, 0x29, 0x66, 0x39, 0xf1, 0x8e, 0x3d,
-      0x1d, 0x11, 0x8a, 0x5a, 0x81, 0xde, 0xf6, 0xf6,
+      0x06, 0xd9, 0xeb, 0xd1, 0xdd, 0xb9, 0x2e, 0x90,
+      0x37, 0x16, 0x7f, 0x51, 0x0d, 0xb3, 0xd9, 0x2f,
+      0x46, 0x6c, 0x07, 0xe9, 0x4d, 0x87, 0x9a, 0xe4,
+      0xb8, 0x9c, 0x6d, 0x10, 0xc2, 0x7e, 0x19, 0x48,
     }};
   return &hash;
 }
@@ -204,8 +204,8 @@ user_action_interfaces__action__StartGoalAction_FeedbackMessage__get_type_hash(
 
 // Include directives for referenced types
 #include "unique_identifier_msgs/msg/detail/uuid__functions.h"
-#include "builtin_interfaces/msg/detail/time__functions.h"
 #include "service_msgs/msg/detail/service_event_info__functions.h"
+#include "builtin_interfaces/msg/detail/time__functions.h"
 
 // Hashes for external referenced types
 #ifndef NDEBUG
@@ -462,11 +462,22 @@ user_action_interfaces__action__StartGoalAction_Goal__get_type_description(
   return &description;
 }
 // Define type names, field names, and default values
-static char user_action_interfaces__action__StartGoalAction_Result__FIELD_NAME__path[] = "path";
+static char user_action_interfaces__action__StartGoalAction_Result__FIELD_NAME__path_x[] = "path_x";
+static char user_action_interfaces__action__StartGoalAction_Result__FIELD_NAME__path_y[] = "path_y";
 
 static rosidl_runtime_c__type_description__Field user_action_interfaces__action__StartGoalAction_Result__FIELDS[] = {
   {
-    {user_action_interfaces__action__StartGoalAction_Result__FIELD_NAME__path, 4, 4},
+    {user_action_interfaces__action__StartGoalAction_Result__FIELD_NAME__path_x, 6, 6},
+    {
+      rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE,
+      0,
+      0,
+      {NULL, 0, 0},
+    },
+    {NULL, 0, 0},
+  },
+  {
+    {user_action_interfaces__action__StartGoalAction_Result__FIELD_NAME__path_y, 6, 6},
     {
       rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE,
       0,
@@ -486,7 +497,7 @@ user_action_interfaces__action__StartGoalAction_Result__get_type_description(
   static const rosidl_runtime_c__type_description__TypeDescription description = {
     {
       {user_action_interfaces__action__StartGoalAction_Result__TYPE_NAME, 52, 52},
-      {user_action_interfaces__action__StartGoalAction_Result__FIELDS, 1, 1},
+      {user_action_interfaces__action__StartGoalAction_Result__FIELDS, 2, 2},
     },
     {NULL, 0, 0},
   };
@@ -496,11 +507,22 @@ user_action_interfaces__action__StartGoalAction_Result__get_type_description(
   return &description;
 }
 // Define type names, field names, and default values
-static char user_action_interfaces__action__StartGoalAction_Feedback__FIELD_NAME__partial_path[] = "partial_path";
+static char user_action_interfaces__action__StartGoalAction_Feedback__FIELD_NAME__partial_path_x[] = "partial_path_x";
+static char user_action_interfaces__action__StartGoalAction_Feedback__FIELD_NAME__partial_path_y[] = "partial_path_y";
 
 static rosidl_runtime_c__type_description__Field user_action_interfaces__action__StartGoalAction_Feedback__FIELDS[] = {
   {
-    {user_action_interfaces__action__StartGoalAction_Feedback__FIELD_NAME__partial_path, 12, 12},
+    {user_action_interfaces__action__StartGoalAction_Feedback__FIELD_NAME__partial_path_x, 14, 14},
+    {
+      rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE,
+      0,
+      0,
+      {NULL, 0, 0},
+    },
+    {NULL, 0, 0},
+  },
+  {
+    {user_action_interfaces__action__StartGoalAction_Feedback__FIELD_NAME__partial_path_y, 14, 14},
     {
       rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT_UNBOUNDED_SEQUENCE,
       0,
@@ -520,7 +542,7 @@ user_action_interfaces__action__StartGoalAction_Feedback__get_type_description(
   static const rosidl_runtime_c__type_description__TypeDescription description = {
     {
       {user_action_interfaces__action__StartGoalAction_Feedback__TYPE_NAME, 54, 54},
-      {user_action_interfaces__action__StartGoalAction_Feedback__FIELDS, 1, 1},
+      {user_action_interfaces__action__StartGoalAction_Feedback__FIELDS, 2, 2},
     },
     {NULL, 0, 0},
   };
@@ -1180,9 +1202,11 @@ static char toplevel_type_raw_source[] =
   "float32[] start\n"
   "float32[] goal\n"
   "---\n"
-  "float32[] path\n"
+  "float32[] path_x\n"
+  "float32[] path_y\n"
   "---\n"
-  "float32[] partial_path";
+  "float32[] partial_path_x\n"
+  "float32[] partial_path_y";
 
 static char action_encoding[] = "action";
 static char implicit_encoding[] = "implicit";
@@ -1197,7 +1221,7 @@ user_action_interfaces__action__StartGoalAction__get_individual_type_description
   static const rosidl_runtime_c__type_description__TypeSource source = {
     {user_action_interfaces__action__StartGoalAction__TYPE_NAME, 45, 45},
     {action_encoding, 6, 6},
-    {toplevel_type_raw_source, 77, 77},
+    {toplevel_type_raw_source, 123, 123},
   };
   return &source;
 }

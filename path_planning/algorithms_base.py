@@ -13,7 +13,7 @@ import numpy as np
 from numpy import uint8
 import matplotlib.pyplot as plt
 
-costmap_visualization = False
+costmap_visualization = True
 
 class AlgorithmBase():
 
@@ -108,8 +108,8 @@ class AlgorithmBase():
     
     def costmap_visualization(self):
         fig,ax = plt.subplots()
-        ax.plot(self.start_m[0],self.start_m[1],'cx')
-        ax.plot(self.goal_m[0],self.goal_m[1],'co')
+        ax.plot(self.start_m[0],self.start_m[1],'bx', markersize=10)
+        ax.plot(self.goal_m[0],self.goal_m[1],'bo', markersize=10)
         for key, value in self.zones_m.items():
             if value == 'c':
                 ax.plot(key[0],key[1],'bo', markersize=0.1)
@@ -120,6 +120,7 @@ class AlgorithmBase():
             elif value == 'y':
                 ax.plot(key[0],key[1],'yo', markersize=0.1)
         plt.show()
+        print(self.zones_m)
         return
             
 

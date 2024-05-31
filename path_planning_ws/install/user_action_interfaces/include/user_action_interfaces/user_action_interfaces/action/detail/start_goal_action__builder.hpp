@@ -79,16 +79,32 @@ namespace action
 namespace builder
 {
 
-class Init_StartGoalAction_Result_path
+class Init_StartGoalAction_Result_path_y
 {
 public:
-  Init_StartGoalAction_Result_path()
+  explicit Init_StartGoalAction_Result_path_y(::user_action_interfaces::action::StartGoalAction_Result & msg)
+  : msg_(msg)
+  {}
+  ::user_action_interfaces::action::StartGoalAction_Result path_y(::user_action_interfaces::action::StartGoalAction_Result::_path_y_type arg)
+  {
+    msg_.path_y = std::move(arg);
+    return std::move(msg_);
+  }
+
+private:
+  ::user_action_interfaces::action::StartGoalAction_Result msg_;
+};
+
+class Init_StartGoalAction_Result_path_x
+{
+public:
+  Init_StartGoalAction_Result_path_x()
   : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
   {}
-  ::user_action_interfaces::action::StartGoalAction_Result path(::user_action_interfaces::action::StartGoalAction_Result::_path_type arg)
+  Init_StartGoalAction_Result_path_y path_x(::user_action_interfaces::action::StartGoalAction_Result::_path_x_type arg)
   {
-    msg_.path = std::move(arg);
-    return std::move(msg_);
+    msg_.path_x = std::move(arg);
+    return Init_StartGoalAction_Result_path_y(msg_);
   }
 
 private:
@@ -106,7 +122,7 @@ template<>
 inline
 auto build<::user_action_interfaces::action::StartGoalAction_Result>()
 {
-  return user_action_interfaces::action::builder::Init_StartGoalAction_Result_path();
+  return user_action_interfaces::action::builder::Init_StartGoalAction_Result_path_x();
 }
 
 }  // namespace user_action_interfaces
@@ -121,16 +137,32 @@ namespace action
 namespace builder
 {
 
-class Init_StartGoalAction_Feedback_partial_path
+class Init_StartGoalAction_Feedback_partial_path_y
 {
 public:
-  Init_StartGoalAction_Feedback_partial_path()
+  explicit Init_StartGoalAction_Feedback_partial_path_y(::user_action_interfaces::action::StartGoalAction_Feedback & msg)
+  : msg_(msg)
+  {}
+  ::user_action_interfaces::action::StartGoalAction_Feedback partial_path_y(::user_action_interfaces::action::StartGoalAction_Feedback::_partial_path_y_type arg)
+  {
+    msg_.partial_path_y = std::move(arg);
+    return std::move(msg_);
+  }
+
+private:
+  ::user_action_interfaces::action::StartGoalAction_Feedback msg_;
+};
+
+class Init_StartGoalAction_Feedback_partial_path_x
+{
+public:
+  Init_StartGoalAction_Feedback_partial_path_x()
   : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
   {}
-  ::user_action_interfaces::action::StartGoalAction_Feedback partial_path(::user_action_interfaces::action::StartGoalAction_Feedback::_partial_path_type arg)
+  Init_StartGoalAction_Feedback_partial_path_y partial_path_x(::user_action_interfaces::action::StartGoalAction_Feedback::_partial_path_x_type arg)
   {
-    msg_.partial_path = std::move(arg);
-    return std::move(msg_);
+    msg_.partial_path_x = std::move(arg);
+    return Init_StartGoalAction_Feedback_partial_path_y(msg_);
   }
 
 private:
@@ -148,7 +180,7 @@ template<>
 inline
 auto build<::user_action_interfaces::action::StartGoalAction_Feedback>()
 {
-  return user_action_interfaces::action::builder::Init_StartGoalAction_Feedback_partial_path();
+  return user_action_interfaces::action::builder::Init_StartGoalAction_Feedback_partial_path_x();
 }
 
 }  // namespace user_action_interfaces

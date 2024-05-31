@@ -4,7 +4,7 @@ from rclpy.node import Node
 
 from user_action_interfaces.action import StartGoalAction
 from user_action_interfaces.msg import StartGoalMsg
-from nav_msgs.msg import Path as PathMsg
+from user_action_interfaces.msg import PathMsg
 from pathlib import Path
 import sys
 import pickle 
@@ -43,9 +43,11 @@ class PathPlanningActionClient(Node):
         self.path = PathMsg()
 
         self.timer = self.create_timer(0.1, self.timer_callback)
+
+        self.path_recived = False
     
     def timer_callback(self):
-        if self.path.poses:
+        if self.path_recived:
             self.send_path_publisher.publish(self.path)
 
     def start_goal_callback(self, msg):
@@ -56,6 +58,8 @@ class PathPlanningActionClient(Node):
             self.send_goal()
 
     def send_goal(self):
+
+        self.path_recived = False   
         self.get_logger().info('Sending goal request')
         goal_msg = StartGoalAction.Goal()
         goal_msg.start = self.start
@@ -80,17 +84,20 @@ class PathPlanningActionClient(Node):
 
     def get_result_callback(self, future):
         result = future.result().result
-        self.get_logger().info('Result: {0}'.format(result.path))
+
+        self.get_logger().info("Result received!")
 
         path = PathMsg()
-        path.poses = result.path
+        path.header.stamp = self.get_clock().now().to_msg()
+        path.header.frame_id = 'map'
+        path.path_x = result.path_x
+        path.path_y = result.path_y
 
         self.path = path
+
+        self.path_recived = True
     
         
-
-
-
     def feedback_callback(self, feedback_msg):
         feedback = feedback_msg.feedback
         self.get_logger().info('Received feedback: {0}'.format(feedback.partial_path))

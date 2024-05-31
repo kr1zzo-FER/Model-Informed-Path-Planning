@@ -58,14 +58,14 @@ class PathPlanningActionServer(Node):
         
     def make_zones_dictionary(self):
         dictionary = {}
-        for point in self.coast_points:
-            dictionary[point] = "c"
         for point in self.red_zone:
             dictionary[point] = "r"
-        for point in self.green_zone:
-            dictionary[point] = "g"
         for point in self.yellow_zone:
             dictionary[point] = "y"
+        for point in self.green_zone:
+            dictionary[point] = "g"
+        for point in self.coast_points:
+            dictionary[point] = "c"
         return dictionary
     
 
@@ -78,24 +78,25 @@ class PathPlanningActionServer(Node):
         self._logger.info(f'Start: {self.start}')
         self._logger.info(f'Goal: {self.goal}')
 
+
         test_algorithms = TestAlgorithms(self.start, self.goal, self.zones_dictionary, self.grid_size, ["d_star_lite"], self.thread_enable)
 
         #zones_m, start_m, goal_m = test_algorithms.costmap_visualization()
-
-        #self._logger.info(f"Start: {start_m}, Goal: {goal_m}")
+        
         #self._logger.info(f"Zones: {zones_m}")
+        #self._logger.info(f"Start: {start_m}, Goal: {goal_m}")
+        
 
         test_algorithms.test_algorithms_path()
 
-        sequence = test_algorithms.optimize_path()
+        path = test_algorithms.optimize_path()
 
-        self._logger.info(f"Path: {sequence}")
-
-        #test_algorithms.path_visualization()
-
+        path_x = [point[0] for point in path]   
+        path_y = [point[1] for point in path]
 
         result = StartGoalAction.Result()
-        result.path = sequence
+        result.path_x = path_x  
+        result.path_y = path_y
 
         return result
 

@@ -269,75 +269,137 @@ void StartGoalAction_Result_fini_function(void * message_memory)
   typed_message->~StartGoalAction_Result();
 }
 
-size_t size_function__StartGoalAction_Result__path(const void * untyped_member)
+size_t size_function__StartGoalAction_Result__path_x(const void * untyped_member)
 {
   const auto * member = reinterpret_cast<const std::vector<float> *>(untyped_member);
   return member->size();
 }
 
-const void * get_const_function__StartGoalAction_Result__path(const void * untyped_member, size_t index)
+const void * get_const_function__StartGoalAction_Result__path_x(const void * untyped_member, size_t index)
 {
   const auto & member =
     *reinterpret_cast<const std::vector<float> *>(untyped_member);
   return &member[index];
 }
 
-void * get_function__StartGoalAction_Result__path(void * untyped_member, size_t index)
+void * get_function__StartGoalAction_Result__path_x(void * untyped_member, size_t index)
 {
   auto & member =
     *reinterpret_cast<std::vector<float> *>(untyped_member);
   return &member[index];
 }
 
-void fetch_function__StartGoalAction_Result__path(
+void fetch_function__StartGoalAction_Result__path_x(
   const void * untyped_member, size_t index, void * untyped_value)
 {
   const auto & item = *reinterpret_cast<const float *>(
-    get_const_function__StartGoalAction_Result__path(untyped_member, index));
+    get_const_function__StartGoalAction_Result__path_x(untyped_member, index));
   auto & value = *reinterpret_cast<float *>(untyped_value);
   value = item;
 }
 
-void assign_function__StartGoalAction_Result__path(
+void assign_function__StartGoalAction_Result__path_x(
   void * untyped_member, size_t index, const void * untyped_value)
 {
   auto & item = *reinterpret_cast<float *>(
-    get_function__StartGoalAction_Result__path(untyped_member, index));
+    get_function__StartGoalAction_Result__path_x(untyped_member, index));
   const auto & value = *reinterpret_cast<const float *>(untyped_value);
   item = value;
 }
 
-void resize_function__StartGoalAction_Result__path(void * untyped_member, size_t size)
+void resize_function__StartGoalAction_Result__path_x(void * untyped_member, size_t size)
 {
   auto * member =
     reinterpret_cast<std::vector<float> *>(untyped_member);
   member->resize(size);
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember StartGoalAction_Result_message_member_array[1] = {
+size_t size_function__StartGoalAction_Result__path_y(const void * untyped_member)
+{
+  const auto * member = reinterpret_cast<const std::vector<float> *>(untyped_member);
+  return member->size();
+}
+
+const void * get_const_function__StartGoalAction_Result__path_y(const void * untyped_member, size_t index)
+{
+  const auto & member =
+    *reinterpret_cast<const std::vector<float> *>(untyped_member);
+  return &member[index];
+}
+
+void * get_function__StartGoalAction_Result__path_y(void * untyped_member, size_t index)
+{
+  auto & member =
+    *reinterpret_cast<std::vector<float> *>(untyped_member);
+  return &member[index];
+}
+
+void fetch_function__StartGoalAction_Result__path_y(
+  const void * untyped_member, size_t index, void * untyped_value)
+{
+  const auto & item = *reinterpret_cast<const float *>(
+    get_const_function__StartGoalAction_Result__path_y(untyped_member, index));
+  auto & value = *reinterpret_cast<float *>(untyped_value);
+  value = item;
+}
+
+void assign_function__StartGoalAction_Result__path_y(
+  void * untyped_member, size_t index, const void * untyped_value)
+{
+  auto & item = *reinterpret_cast<float *>(
+    get_function__StartGoalAction_Result__path_y(untyped_member, index));
+  const auto & value = *reinterpret_cast<const float *>(untyped_value);
+  item = value;
+}
+
+void resize_function__StartGoalAction_Result__path_y(void * untyped_member, size_t size)
+{
+  auto * member =
+    reinterpret_cast<std::vector<float> *>(untyped_member);
+  member->resize(size);
+}
+
+static const ::rosidl_typesupport_introspection_cpp::MessageMember StartGoalAction_Result_message_member_array[2] = {
   {
-    "path",  // name
+    "path_x",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_FLOAT,  // type
     0,  // upper bound of string
     nullptr,  // members of sub message
     true,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces::action::StartGoalAction_Result, path),  // bytes offset in struct
+    offsetof(user_action_interfaces::action::StartGoalAction_Result, path_x),  // bytes offset in struct
     nullptr,  // default value
-    size_function__StartGoalAction_Result__path,  // size() function pointer
-    get_const_function__StartGoalAction_Result__path,  // get_const(index) function pointer
-    get_function__StartGoalAction_Result__path,  // get(index) function pointer
-    fetch_function__StartGoalAction_Result__path,  // fetch(index, &value) function pointer
-    assign_function__StartGoalAction_Result__path,  // assign(index, value) function pointer
-    resize_function__StartGoalAction_Result__path  // resize(index) function pointer
+    size_function__StartGoalAction_Result__path_x,  // size() function pointer
+    get_const_function__StartGoalAction_Result__path_x,  // get_const(index) function pointer
+    get_function__StartGoalAction_Result__path_x,  // get(index) function pointer
+    fetch_function__StartGoalAction_Result__path_x,  // fetch(index, &value) function pointer
+    assign_function__StartGoalAction_Result__path_x,  // assign(index, value) function pointer
+    resize_function__StartGoalAction_Result__path_x  // resize(index) function pointer
+  },
+  {
+    "path_y",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_FLOAT,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    true,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces::action::StartGoalAction_Result, path_y),  // bytes offset in struct
+    nullptr,  // default value
+    size_function__StartGoalAction_Result__path_y,  // size() function pointer
+    get_const_function__StartGoalAction_Result__path_y,  // get_const(index) function pointer
+    get_function__StartGoalAction_Result__path_y,  // get(index) function pointer
+    fetch_function__StartGoalAction_Result__path_y,  // fetch(index, &value) function pointer
+    assign_function__StartGoalAction_Result__path_y,  // assign(index, value) function pointer
+    resize_function__StartGoalAction_Result__path_y  // resize(index) function pointer
   }
 };
 
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers StartGoalAction_Result_message_members = {
   "user_action_interfaces::action",  // message namespace
   "StartGoalAction_Result",  // message name
-  1,  // number of fields
+  2,  // number of fields
   sizeof(user_action_interfaces::action::StartGoalAction_Result),
   StartGoalAction_Result_message_member_array,  // message members
   StartGoalAction_Result_init_function,  // function to initialize message memory (memory has to be allocated)
@@ -438,75 +500,137 @@ void StartGoalAction_Feedback_fini_function(void * message_memory)
   typed_message->~StartGoalAction_Feedback();
 }
 
-size_t size_function__StartGoalAction_Feedback__partial_path(const void * untyped_member)
+size_t size_function__StartGoalAction_Feedback__partial_path_x(const void * untyped_member)
 {
   const auto * member = reinterpret_cast<const std::vector<float> *>(untyped_member);
   return member->size();
 }
 
-const void * get_const_function__StartGoalAction_Feedback__partial_path(const void * untyped_member, size_t index)
+const void * get_const_function__StartGoalAction_Feedback__partial_path_x(const void * untyped_member, size_t index)
 {
   const auto & member =
     *reinterpret_cast<const std::vector<float> *>(untyped_member);
   return &member[index];
 }
 
-void * get_function__StartGoalAction_Feedback__partial_path(void * untyped_member, size_t index)
+void * get_function__StartGoalAction_Feedback__partial_path_x(void * untyped_member, size_t index)
 {
   auto & member =
     *reinterpret_cast<std::vector<float> *>(untyped_member);
   return &member[index];
 }
 
-void fetch_function__StartGoalAction_Feedback__partial_path(
+void fetch_function__StartGoalAction_Feedback__partial_path_x(
   const void * untyped_member, size_t index, void * untyped_value)
 {
   const auto & item = *reinterpret_cast<const float *>(
-    get_const_function__StartGoalAction_Feedback__partial_path(untyped_member, index));
+    get_const_function__StartGoalAction_Feedback__partial_path_x(untyped_member, index));
   auto & value = *reinterpret_cast<float *>(untyped_value);
   value = item;
 }
 
-void assign_function__StartGoalAction_Feedback__partial_path(
+void assign_function__StartGoalAction_Feedback__partial_path_x(
   void * untyped_member, size_t index, const void * untyped_value)
 {
   auto & item = *reinterpret_cast<float *>(
-    get_function__StartGoalAction_Feedback__partial_path(untyped_member, index));
+    get_function__StartGoalAction_Feedback__partial_path_x(untyped_member, index));
   const auto & value = *reinterpret_cast<const float *>(untyped_value);
   item = value;
 }
 
-void resize_function__StartGoalAction_Feedback__partial_path(void * untyped_member, size_t size)
+void resize_function__StartGoalAction_Feedback__partial_path_x(void * untyped_member, size_t size)
 {
   auto * member =
     reinterpret_cast<std::vector<float> *>(untyped_member);
   member->resize(size);
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember StartGoalAction_Feedback_message_member_array[1] = {
+size_t size_function__StartGoalAction_Feedback__partial_path_y(const void * untyped_member)
+{
+  const auto * member = reinterpret_cast<const std::vector<float> *>(untyped_member);
+  return member->size();
+}
+
+const void * get_const_function__StartGoalAction_Feedback__partial_path_y(const void * untyped_member, size_t index)
+{
+  const auto & member =
+    *reinterpret_cast<const std::vector<float> *>(untyped_member);
+  return &member[index];
+}
+
+void * get_function__StartGoalAction_Feedback__partial_path_y(void * untyped_member, size_t index)
+{
+  auto & member =
+    *reinterpret_cast<std::vector<float> *>(untyped_member);
+  return &member[index];
+}
+
+void fetch_function__StartGoalAction_Feedback__partial_path_y(
+  const void * untyped_member, size_t index, void * untyped_value)
+{
+  const auto & item = *reinterpret_cast<const float *>(
+    get_const_function__StartGoalAction_Feedback__partial_path_y(untyped_member, index));
+  auto & value = *reinterpret_cast<float *>(untyped_value);
+  value = item;
+}
+
+void assign_function__StartGoalAction_Feedback__partial_path_y(
+  void * untyped_member, size_t index, const void * untyped_value)
+{
+  auto & item = *reinterpret_cast<float *>(
+    get_function__StartGoalAction_Feedback__partial_path_y(untyped_member, index));
+  const auto & value = *reinterpret_cast<const float *>(untyped_value);
+  item = value;
+}
+
+void resize_function__StartGoalAction_Feedback__partial_path_y(void * untyped_member, size_t size)
+{
+  auto * member =
+    reinterpret_cast<std::vector<float> *>(untyped_member);
+  member->resize(size);
+}
+
+static const ::rosidl_typesupport_introspection_cpp::MessageMember StartGoalAction_Feedback_message_member_array[2] = {
   {
-    "partial_path",  // name
+    "partial_path_x",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_FLOAT,  // type
     0,  // upper bound of string
     nullptr,  // members of sub message
     true,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(user_action_interfaces::action::StartGoalAction_Feedback, partial_path),  // bytes offset in struct
+    offsetof(user_action_interfaces::action::StartGoalAction_Feedback, partial_path_x),  // bytes offset in struct
     nullptr,  // default value
-    size_function__StartGoalAction_Feedback__partial_path,  // size() function pointer
-    get_const_function__StartGoalAction_Feedback__partial_path,  // get_const(index) function pointer
-    get_function__StartGoalAction_Feedback__partial_path,  // get(index) function pointer
-    fetch_function__StartGoalAction_Feedback__partial_path,  // fetch(index, &value) function pointer
-    assign_function__StartGoalAction_Feedback__partial_path,  // assign(index, value) function pointer
-    resize_function__StartGoalAction_Feedback__partial_path  // resize(index) function pointer
+    size_function__StartGoalAction_Feedback__partial_path_x,  // size() function pointer
+    get_const_function__StartGoalAction_Feedback__partial_path_x,  // get_const(index) function pointer
+    get_function__StartGoalAction_Feedback__partial_path_x,  // get(index) function pointer
+    fetch_function__StartGoalAction_Feedback__partial_path_x,  // fetch(index, &value) function pointer
+    assign_function__StartGoalAction_Feedback__partial_path_x,  // assign(index, value) function pointer
+    resize_function__StartGoalAction_Feedback__partial_path_x  // resize(index) function pointer
+  },
+  {
+    "partial_path_y",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_FLOAT,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    true,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(user_action_interfaces::action::StartGoalAction_Feedback, partial_path_y),  // bytes offset in struct
+    nullptr,  // default value
+    size_function__StartGoalAction_Feedback__partial_path_y,  // size() function pointer
+    get_const_function__StartGoalAction_Feedback__partial_path_y,  // get_const(index) function pointer
+    get_function__StartGoalAction_Feedback__partial_path_y,  // get(index) function pointer
+    fetch_function__StartGoalAction_Feedback__partial_path_y,  // fetch(index, &value) function pointer
+    assign_function__StartGoalAction_Feedback__partial_path_y,  // assign(index, value) function pointer
+    resize_function__StartGoalAction_Feedback__partial_path_y  // resize(index) function pointer
   }
 };
 
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers StartGoalAction_Feedback_message_members = {
   "user_action_interfaces::action",  // message namespace
   "StartGoalAction_Feedback",  // message name
-  1,  // number of fields
+  2,  // number of fields
   sizeof(user_action_interfaces::action::StartGoalAction_Feedback),
   StartGoalAction_Feedback_message_member_array,  // message members
   StartGoalAction_Feedback_init_function,  // function to initialize message memory (memory has to be allocated)

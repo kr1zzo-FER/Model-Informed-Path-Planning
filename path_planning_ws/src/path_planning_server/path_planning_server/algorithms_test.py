@@ -12,8 +12,7 @@ Copyright: © Faculty of Electrical Engineering and Computing, University of Zag
 import math
 from pathlib import Path
 import time
-from algorithms.hybrid_dstar import Dstar, Map, Dstar 
-from algorithms.hybrid_d_star_lite import DStarLite, Node
+from .algorithms.hybrid_d_star_lite import DStarLite, Node
 import multiprocessing as mp
 import datetime
 from .algorithms_base import AlgorithmBase
@@ -23,10 +22,6 @@ from matplotlib.lines import Line2D
 import numpy as np
 import os
 from curve_generation.path_optimization import PathOptimization
-import rclpy
-from rclpy.action import ActionServer
-from rclpy.node import Node
-import time
 
 root = Path(__file__).resolve().parents[1]
 
@@ -34,7 +29,7 @@ root = Path(__file__).resolve().parents[1]
 
 class TestAlgorithms(AlgorithmBase):
     
-    def __init__(self,start,goal,results_dictionary,grid_size, test_algorithms, thread_enable):
+    def __init__(self, start,goal,results_dictionary,grid_size, test_algorithms, thread_enable):
         super().__init__(start,goal,results_dictionary,grid_size)
         self.sx, self.sy = self.start_m[0], self.start_m[1]
         self.gx, self.gy = self.goal_m[0], self.goal_m[1]
@@ -62,7 +57,6 @@ class TestAlgorithms(AlgorithmBase):
         return self.publish_path_results
     
     def test_algorithms_path(self):
-        
         mp.set_start_method('spawn')
         queue = mp.Queue()
     
@@ -82,7 +76,7 @@ class TestAlgorithms(AlgorithmBase):
                     thread4 = mp.Process(target = self.d_star, args=(queue,))
                     threads.append(thread4)
                 else:
-                    result, internal_result, path_points = self.d_star()
+                    result, internal_result = self.d_star()
 
                     tested.append(result)
                     internal_tested.append(internal_result)
@@ -127,31 +121,6 @@ class TestAlgorithms(AlgorithmBase):
         self.internal_optimized_points = optimized_path
         optimized_path_gps = [self.pixel_to_gps(point[0],point[1]) for point in optimized_path]
         return optimized_path_gps
-
-        
-    def d_star(self,q : mp.Queue = []):
-        print("\nD* calculation started")
-        m = Map(round(self.size_x/self.grid_size), round(self.size_y/self.grid_size))
-        m.set_obstacle(self.zones_m)
-        start = m.map[self.start_m[0]][self.start_m[1]]
-        end = m.map[self.goal_m[0]][self.goal_m[1]]
-        start_time = time.time()
-        dstar = Dstar(m)
-        rx, ry = dstar.run(start, end)
-        rx, ry = [rx[i]*self.grid_size for i in range(len(rx))], [ry[i]*self.grid_size for i in range(len(ry))]
-        end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
-        print("D* calculation finished : ")
-        print(f"Function time: {function_time} Distance: {distance}\n")
-        path_points = [(rx[i],ry[i]) for i in range(len(rx))]
-        path_points_gps = [self.pixel_to_gps(point[0],point[1]) for point in path_points]
-        result = PathResults("D*",self.start,self.goal,path_points_gps,distance,function_time)
-        internal_result = PathResultsInternal("D*",self.start_m,self.goal_m,path_points,distance,0.0,function_time)
-        if q:
-            q.put([result, internal_result])
-        else:
-            return result, internal_result
 
 
     def d_star_lite(self,q : mp.Queue = []):

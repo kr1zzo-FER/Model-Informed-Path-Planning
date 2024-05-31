@@ -163,15 +163,24 @@ struct StartGoalAction_Result_
   }
 
   // field types and members
-  using _path_type =
+  using _path_x_type =
     std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>>;
-  _path_type path;
+  _path_x_type path_x;
+  using _path_y_type =
+    std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>>;
+  _path_y_type path_y;
 
   // setters for named parameter idiom
-  Type & set__path(
+  Type & set__path_x(
     const std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>> & _arg)
   {
-    this->path = _arg;
+    this->path_x = _arg;
+    return *this;
+  }
+  Type & set__path_y(
+    const std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>> & _arg)
+  {
+    this->path_y = _arg;
     return *this;
   }
 
@@ -217,7 +226,10 @@ struct StartGoalAction_Result_
   // comparison operators
   bool operator==(const StartGoalAction_Result_ & other) const
   {
-    if (this->path != other.path) {
+    if (this->path_x != other.path_x) {
+      return false;
+    }
+    if (this->path_y != other.path_y) {
       return false;
     }
     return true;
@@ -269,15 +281,24 @@ struct StartGoalAction_Feedback_
   }
 
   // field types and members
-  using _partial_path_type =
+  using _partial_path_x_type =
     std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>>;
-  _partial_path_type partial_path;
+  _partial_path_x_type partial_path_x;
+  using _partial_path_y_type =
+    std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>>;
+  _partial_path_y_type partial_path_y;
 
   // setters for named parameter idiom
-  Type & set__partial_path(
+  Type & set__partial_path_x(
     const std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>> & _arg)
   {
-    this->partial_path = _arg;
+    this->partial_path_x = _arg;
+    return *this;
+  }
+  Type & set__partial_path_y(
+    const std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>> & _arg)
+  {
+    this->partial_path_y = _arg;
     return *this;
   }
 
@@ -323,7 +344,10 @@ struct StartGoalAction_Feedback_
   // comparison operators
   bool operator==(const StartGoalAction_Feedback_ & other) const
   {
-    if (this->partial_path != other.partial_path) {
+    if (this->partial_path_x != other.partial_path_x) {
+      return false;
+    }
+    if (this->partial_path_y != other.partial_path_y) {
       return false;
     }
     return true;

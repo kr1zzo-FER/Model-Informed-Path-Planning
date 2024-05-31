@@ -304,9 +304,9 @@ extern "C"
 #endif
 
 // already included above
-// #include "rosidl_runtime_c/primitives_sequence.h"  // path
+// #include "rosidl_runtime_c/primitives_sequence.h"  // path_x, path_y
 // already included above
-// #include "rosidl_runtime_c/primitives_sequence_functions.h"  // path
+// #include "rosidl_runtime_c/primitives_sequence_functions.h"  // path_x, path_y
 
 // forward declare type support functions
 
@@ -322,10 +322,18 @@ static bool _StartGoalAction_Result__cdr_serialize(
     return false;
   }
   const _StartGoalAction_Result__ros_msg_type * ros_message = static_cast<const _StartGoalAction_Result__ros_msg_type *>(untyped_ros_message);
-  // Field name: path
+  // Field name: path_x
   {
-    size_t size = ros_message->path.size;
-    auto array_ptr = ros_message->path.data;
+    size_t size = ros_message->path_x.size;
+    auto array_ptr = ros_message->path_x.data;
+    cdr << static_cast<uint32_t>(size);
+    cdr.serializeArray(array_ptr, size);
+  }
+
+  // Field name: path_y
+  {
+    size_t size = ros_message->path_y.size;
+    auto array_ptr = ros_message->path_y.data;
     cdr << static_cast<uint32_t>(size);
     cdr.serializeArray(array_ptr, size);
   }
@@ -342,19 +350,35 @@ static bool _StartGoalAction_Result__cdr_deserialize(
     return false;
   }
   _StartGoalAction_Result__ros_msg_type * ros_message = static_cast<_StartGoalAction_Result__ros_msg_type *>(untyped_ros_message);
-  // Field name: path
+  // Field name: path_x
   {
     uint32_t cdrSize;
     cdr >> cdrSize;
     size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->path.data) {
-      rosidl_runtime_c__float__Sequence__fini(&ros_message->path);
+    if (ros_message->path_x.data) {
+      rosidl_runtime_c__float__Sequence__fini(&ros_message->path_x);
     }
-    if (!rosidl_runtime_c__float__Sequence__init(&ros_message->path, size)) {
-      fprintf(stderr, "failed to create array for field 'path'");
+    if (!rosidl_runtime_c__float__Sequence__init(&ros_message->path_x, size)) {
+      fprintf(stderr, "failed to create array for field 'path_x'");
       return false;
     }
-    auto array_ptr = ros_message->path.data;
+    auto array_ptr = ros_message->path_x.data;
+    cdr.deserializeArray(array_ptr, size);
+  }
+
+  // Field name: path_y
+  {
+    uint32_t cdrSize;
+    cdr >> cdrSize;
+    size_t size = static_cast<size_t>(cdrSize);
+    if (ros_message->path_y.data) {
+      rosidl_runtime_c__float__Sequence__fini(&ros_message->path_y);
+    }
+    if (!rosidl_runtime_c__float__Sequence__init(&ros_message->path_y, size)) {
+      fprintf(stderr, "failed to create array for field 'path_y'");
+      return false;
+    }
+    auto array_ptr = ros_message->path_y.data;
     cdr.deserializeArray(array_ptr, size);
   }
 
@@ -375,10 +399,21 @@ size_t get_serialized_size_user_action_interfaces__action__StartGoalAction_Resul
   (void)padding;
   (void)wchar_size;
 
-  // field.name path
+  // field.name path_x
   {
-    size_t array_size = ros_message->path.size;
-    auto array_ptr = ros_message->path.data;
+    size_t array_size = ros_message->path_x.size;
+    auto array_ptr = ros_message->path_x.data;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+    (void)array_ptr;
+    size_t item_size = sizeof(array_ptr[0]);
+    current_alignment += array_size * item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name path_y
+  {
+    size_t array_size = ros_message->path_y.size;
+    auto array_ptr = ros_message->path_y.data;
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
     (void)array_ptr;
@@ -415,7 +450,19 @@ size_t max_serialized_size_user_action_interfaces__action__StartGoalAction_Resul
   full_bounded = true;
   is_plain = true;
 
-  // member: path
+  // member: path_x
+  {
+    size_t array_size = 0;
+    full_bounded = false;
+    is_plain = false;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+    last_member_size = array_size * sizeof(uint32_t);
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
+  // member: path_y
   {
     size_t array_size = 0;
     full_bounded = false;
@@ -436,7 +483,7 @@ size_t max_serialized_size_user_action_interfaces__action__StartGoalAction_Resul
     using DataType = user_action_interfaces__action__StartGoalAction_Result;
     is_plain =
       (
-      offsetof(DataType, path) +
+      offsetof(DataType, path_y) +
       last_member_size
       ) == ret_val;
   }
@@ -528,9 +575,9 @@ extern "C"
 #endif
 
 // already included above
-// #include "rosidl_runtime_c/primitives_sequence.h"  // partial_path
+// #include "rosidl_runtime_c/primitives_sequence.h"  // partial_path_x, partial_path_y
 // already included above
-// #include "rosidl_runtime_c/primitives_sequence_functions.h"  // partial_path
+// #include "rosidl_runtime_c/primitives_sequence_functions.h"  // partial_path_x, partial_path_y
 
 // forward declare type support functions
 
@@ -546,10 +593,18 @@ static bool _StartGoalAction_Feedback__cdr_serialize(
     return false;
   }
   const _StartGoalAction_Feedback__ros_msg_type * ros_message = static_cast<const _StartGoalAction_Feedback__ros_msg_type *>(untyped_ros_message);
-  // Field name: partial_path
+  // Field name: partial_path_x
   {
-    size_t size = ros_message->partial_path.size;
-    auto array_ptr = ros_message->partial_path.data;
+    size_t size = ros_message->partial_path_x.size;
+    auto array_ptr = ros_message->partial_path_x.data;
+    cdr << static_cast<uint32_t>(size);
+    cdr.serializeArray(array_ptr, size);
+  }
+
+  // Field name: partial_path_y
+  {
+    size_t size = ros_message->partial_path_y.size;
+    auto array_ptr = ros_message->partial_path_y.data;
     cdr << static_cast<uint32_t>(size);
     cdr.serializeArray(array_ptr, size);
   }
@@ -566,19 +621,35 @@ static bool _StartGoalAction_Feedback__cdr_deserialize(
     return false;
   }
   _StartGoalAction_Feedback__ros_msg_type * ros_message = static_cast<_StartGoalAction_Feedback__ros_msg_type *>(untyped_ros_message);
-  // Field name: partial_path
+  // Field name: partial_path_x
   {
     uint32_t cdrSize;
     cdr >> cdrSize;
     size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->partial_path.data) {
-      rosidl_runtime_c__float__Sequence__fini(&ros_message->partial_path);
+    if (ros_message->partial_path_x.data) {
+      rosidl_runtime_c__float__Sequence__fini(&ros_message->partial_path_x);
     }
-    if (!rosidl_runtime_c__float__Sequence__init(&ros_message->partial_path, size)) {
-      fprintf(stderr, "failed to create array for field 'partial_path'");
+    if (!rosidl_runtime_c__float__Sequence__init(&ros_message->partial_path_x, size)) {
+      fprintf(stderr, "failed to create array for field 'partial_path_x'");
       return false;
     }
-    auto array_ptr = ros_message->partial_path.data;
+    auto array_ptr = ros_message->partial_path_x.data;
+    cdr.deserializeArray(array_ptr, size);
+  }
+
+  // Field name: partial_path_y
+  {
+    uint32_t cdrSize;
+    cdr >> cdrSize;
+    size_t size = static_cast<size_t>(cdrSize);
+    if (ros_message->partial_path_y.data) {
+      rosidl_runtime_c__float__Sequence__fini(&ros_message->partial_path_y);
+    }
+    if (!rosidl_runtime_c__float__Sequence__init(&ros_message->partial_path_y, size)) {
+      fprintf(stderr, "failed to create array for field 'partial_path_y'");
+      return false;
+    }
+    auto array_ptr = ros_message->partial_path_y.data;
     cdr.deserializeArray(array_ptr, size);
   }
 
@@ -599,10 +670,21 @@ size_t get_serialized_size_user_action_interfaces__action__StartGoalAction_Feedb
   (void)padding;
   (void)wchar_size;
 
-  // field.name partial_path
+  // field.name partial_path_x
   {
-    size_t array_size = ros_message->partial_path.size;
-    auto array_ptr = ros_message->partial_path.data;
+    size_t array_size = ros_message->partial_path_x.size;
+    auto array_ptr = ros_message->partial_path_x.data;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+    (void)array_ptr;
+    size_t item_size = sizeof(array_ptr[0]);
+    current_alignment += array_size * item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name partial_path_y
+  {
+    size_t array_size = ros_message->partial_path_y.size;
+    auto array_ptr = ros_message->partial_path_y.data;
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
     (void)array_ptr;
@@ -639,7 +721,19 @@ size_t max_serialized_size_user_action_interfaces__action__StartGoalAction_Feedb
   full_bounded = true;
   is_plain = true;
 
-  // member: partial_path
+  // member: partial_path_x
+  {
+    size_t array_size = 0;
+    full_bounded = false;
+    is_plain = false;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+    last_member_size = array_size * sizeof(uint32_t);
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
+  // member: partial_path_y
   {
     size_t array_size = 0;
     full_bounded = false;
@@ -660,7 +754,7 @@ size_t max_serialized_size_user_action_interfaces__action__StartGoalAction_Feedb
     using DataType = user_action_interfaces__action__StartGoalAction_Feedback;
     is_plain =
       (
-      offsetof(DataType, partial_path) +
+      offsetof(DataType, partial_path_y) +
       last_member_size
       ) == ret_val;
   }
