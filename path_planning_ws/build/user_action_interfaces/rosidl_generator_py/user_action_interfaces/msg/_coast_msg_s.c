@@ -208,8 +208,8 @@ bool user_action_interfaces__msg__coast_msg__convert_from_py(PyObject * _pymsg, 
     if (!field) {
       return false;
     }
-    assert(PyLong_Check(field));
-    ros_message->grid_size = (int32_t)PyLong_AsLong(field);
+    assert(PyFloat_Check(field));
+    ros_message->grid_size = (float)PyFloat_AS_DOUBLE(field);
     Py_DECREF(field);
   }
 
@@ -379,7 +379,7 @@ PyObject * user_action_interfaces__msg__coast_msg__convert_to_py(void * raw_ros_
   }
   {  // grid_size
     PyObject * field = NULL;
-    field = PyLong_FromLong(ros_message->grid_size);
+    field = PyFloat_FromDouble(ros_message->grid_size);
     {
       int rc = PyObject_SetAttrString(_pymessage, "grid_size", field);
       Py_DECREF(field);

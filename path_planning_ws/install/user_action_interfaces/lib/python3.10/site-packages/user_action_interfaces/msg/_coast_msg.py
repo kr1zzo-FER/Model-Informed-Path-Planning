@@ -14,6 +14,8 @@ ros_python_check_fields = getenv('ROS_PYTHON_CHECK_FIELDS', default='')
 
 import builtins  # noqa: E402, I100
 
+import math  # noqa: E402, I100
+
 import rosidl_parser.definition  # noqa: E402, I100
 
 
@@ -95,7 +97,7 @@ class CoastMsg(metaclass=Metaclass_CoastMsg):
         'green_points_y': 'std_msgs/Float32MultiArray',
         'red_points_y': 'std_msgs/Float32MultiArray',
         'yellow_points_y': 'std_msgs/Float32MultiArray',
-        'grid_size': 'int32',
+        'grid_size': 'float',
     }
 
     # This attribute is used to store an rosidl_parser.definition variable
@@ -111,7 +113,7 @@ class CoastMsg(metaclass=Metaclass_CoastMsg):
         rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Float32MultiArray'),  # noqa: E501
         rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Float32MultiArray'),  # noqa: E501
         rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Float32MultiArray'),  # noqa: E501
-        rosidl_parser.definition.BasicType('int32'),  # noqa: E501
+        rosidl_parser.definition.BasicType('float'),  # noqa: E501
     )
 
     def __init__(self, **kwargs):
@@ -142,7 +144,7 @@ class CoastMsg(metaclass=Metaclass_CoastMsg):
         self.red_points_y = kwargs.get('red_points_y', Float32MultiArray())
         from std_msgs.msg import Float32MultiArray
         self.yellow_points_y = kwargs.get('yellow_points_y', Float32MultiArray())
-        self.grid_size = kwargs.get('grid_size', int())
+        self.grid_size = kwargs.get('grid_size', float())
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -351,8 +353,8 @@ class CoastMsg(metaclass=Metaclass_CoastMsg):
     def grid_size(self, value):
         if self._check_fields:
             assert \
-                isinstance(value, int), \
-                "The 'grid_size' field must be of type 'int'"
-            assert value >= -2147483648 and value < 2147483648, \
-                "The 'grid_size' field must be an integer in [-2147483648, 2147483647]"
+                isinstance(value, float), \
+                "The 'grid_size' field must be of type 'float'"
+            assert not (value < -3.402823466e+38 or value > 3.402823466e+38) or math.isinf(value), \
+                "The 'grid_size' field must be a float in [-3.402823466e+38, 3.402823466e+38]"
         self._grid_size = value

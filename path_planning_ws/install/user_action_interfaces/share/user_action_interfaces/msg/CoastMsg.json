@@ -106,7 +106,7 @@
         {
           "name": "grid_size",
           "type": {
-            "type_id": 6,
+            "type_id": 10,
             "capacity": 0,
             "string_capacity": 0,
             "nested_type_name": ""
@@ -256,7 +256,7 @@
   "type_hashes": [
     {
       "type_name": "user_action_interfaces/msg/CoastMsg",
-      "hash_string": "RIHS01_d36b8bb9e3de9441ecc2ab928588a1bca135b7a0b8035d6a05d6771bdb86ce66"
+      "hash_string": "RIHS01_4ba01fee5652b812d8aa9d1666ad1d40398c85eb5a525361af4cb5d9dcb181c1"
     },
     {
       "type_name": "builtin_interfaces/msg/Time",

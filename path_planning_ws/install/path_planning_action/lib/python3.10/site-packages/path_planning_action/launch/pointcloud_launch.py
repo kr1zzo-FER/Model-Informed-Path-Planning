@@ -4,8 +4,6 @@ from launch import LaunchDescription
 from launch_ros.actions import Node
 import os
 
-save_file = 'jadranovo_map'
-
 pkg_name = 'path_planning_action'
 
 pkg_dir = os.popen('/bin/bash -c "source /usr/share/colcon_cd/function/colcon_cd.sh && \
@@ -20,7 +18,7 @@ def generate_launch_description():
             output='screen',
             emulate_tty=True,
             name='coast_pointcloud',
-            parameters=[{'save_file' : save_file }]
+            parameters=[{}]
         ),
 
   

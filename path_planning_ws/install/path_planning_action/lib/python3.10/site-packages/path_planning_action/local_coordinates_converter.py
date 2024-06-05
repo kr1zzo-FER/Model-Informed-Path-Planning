@@ -15,7 +15,12 @@ import matplotlib.pyplot as plt
 
 class LocalCoordinatesConverter():
 
-    def __init__(self, zones_dictionary,grid_size):
+    def __init__(self, zones_dictionary = {}, grid_size = 0.0):
+
+        if not zones_dictionary:
+            print("Zones dictionary is empty")
+            return
+        
         self.zones = zones_dictionary
         self.start = [0.0,0.0]
         self.goal = [0.0,0.0]

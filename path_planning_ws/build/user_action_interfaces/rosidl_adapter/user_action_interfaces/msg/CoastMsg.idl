@@ -28,7 +28,7 @@ module user_action_interfaces {
 
       std_msgs::msg::Float32MultiArray yellow_points_y;
 
-      int32 grid_size;
+      float grid_size;
     };
   };
 };

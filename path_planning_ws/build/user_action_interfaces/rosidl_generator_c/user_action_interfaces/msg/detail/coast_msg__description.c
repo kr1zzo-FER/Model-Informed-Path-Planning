@@ -11,10 +11,10 @@ user_action_interfaces__msg__CoastMsg__get_type_hash(
 {
   (void)type_support;
   static rosidl_type_hash_t hash = {1, {
-      0xd3, 0x6b, 0x8b, 0xb9, 0xe3, 0xde, 0x94, 0x41,
-      0xec, 0xc2, 0xab, 0x92, 0x85, 0x88, 0xa1, 0xbc,
-      0xa1, 0x35, 0xb7, 0xa0, 0xb8, 0x03, 0x5d, 0x6a,
-      0x05, 0xd6, 0x77, 0x1b, 0xdb, 0x86, 0xce, 0x66,
+      0x4b, 0xa0, 0x1f, 0xee, 0x56, 0x52, 0xb8, 0x12,
+      0xd8, 0xaa, 0x9d, 0x16, 0x66, 0xad, 0x1d, 0x40,
+      0x39, 0x8c, 0x85, 0xeb, 0x5a, 0x52, 0x53, 0x61,
+      0xaf, 0x4c, 0xb5, 0xd9, 0xdc, 0xb1, 0x81, 0xc1,
     }};
   return &hash;
 }
@@ -23,11 +23,11 @@ user_action_interfaces__msg__CoastMsg__get_type_hash(
 #include <string.h>
 
 // Include directives for referenced types
-#include "std_msgs/msg/detail/multi_array_dimension__functions.h"
+#include "std_msgs/msg/detail/float32_multi_array__functions.h"
 #include "std_msgs/msg/detail/multi_array_layout__functions.h"
 #include "std_msgs/msg/detail/header__functions.h"
+#include "std_msgs/msg/detail/multi_array_dimension__functions.h"
 #include "builtin_interfaces/msg/detail/time__functions.h"
-#include "std_msgs/msg/detail/float32_multi_array__functions.h"
 
 // Hashes for external referenced types
 #ifndef NDEBUG
@@ -187,7 +187,7 @@ static rosidl_runtime_c__type_description__Field user_action_interfaces__msg__Co
   {
     {user_action_interfaces__msg__CoastMsg__FIELD_NAME__grid_size, 9, 9},
     {
-      rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_INT32,
+      rosidl_runtime_c__type_description__FieldType__FIELD_TYPE_FLOAT,
       0,
       0,
       {NULL, 0, 0},
@@ -259,7 +259,7 @@ static char toplevel_type_raw_source[] =
   "std_msgs/Float32MultiArray green_points_y\n"
   "std_msgs/Float32MultiArray red_points_y\n"
   "std_msgs/Float32MultiArray yellow_points_y\n"
-  "int32 grid_size";
+  "float32 grid_size";
 
 static char msg_encoding[] = "msg";
 
@@ -273,7 +273,7 @@ user_action_interfaces__msg__CoastMsg__get_individual_type_description_source(
   static const rosidl_runtime_c__type_description__TypeSource source = {
     {user_action_interfaces__msg__CoastMsg__TYPE_NAME, 35, 35},
     {msg_encoding, 3, 3},
-    {toplevel_type_raw_source, 391, 391},
+    {toplevel_type_raw_source, 393, 393},
   };
   return &source;
 }

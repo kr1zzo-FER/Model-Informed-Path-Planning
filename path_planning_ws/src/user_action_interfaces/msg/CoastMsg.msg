@@ -8,4 +8,4 @@ std_msgs/Float32MultiArray coast_points_y
 std_msgs/Float32MultiArray green_points_y
 std_msgs/Float32MultiArray red_points_y
 std_msgs/Float32MultiArray yellow_points_y
-int32 grid_size
+float32 grid_size

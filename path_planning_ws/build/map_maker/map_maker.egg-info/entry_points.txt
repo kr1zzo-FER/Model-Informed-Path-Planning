@@ -1,0 +1,7 @@
+[console_scripts]
+detect_coast = map_maker.detect_coast:CoastProcessing
+map_process = map_maker.map_process:main
+map_publisher = map_maker.map_publisher:main
+post_processing = map_maker.post_processing
+process_osm_data = map_maker.process_osm_data
+

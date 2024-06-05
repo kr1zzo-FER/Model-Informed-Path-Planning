@@ -211,7 +211,7 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember CoastMsg_mess
   },
   {
     "grid_size",  // name
-    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_INT32,  // type
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_FLOAT,  // type
     0,  // upper bound of string
     nullptr,  // members of sub message
     false,  // is array

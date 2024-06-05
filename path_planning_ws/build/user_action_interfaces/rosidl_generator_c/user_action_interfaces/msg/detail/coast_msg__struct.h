@@ -44,7 +44,7 @@ typedef struct user_action_interfaces__msg__CoastMsg
   std_msgs__msg__Float32MultiArray green_points_y;
   std_msgs__msg__Float32MultiArray red_points_y;
   std_msgs__msg__Float32MultiArray yellow_points_y;
-  int32_t grid_size;
+  float grid_size;
 } user_action_interfaces__msg__CoastMsg;
 
 // Struct for a sequence of user_action_interfaces__msg__CoastMsg.

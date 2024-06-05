@@ -61,7 +61,7 @@ struct CoastMsg_
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
       this->frame_id = "";
-      this->grid_size = 0l;
+      this->grid_size = 0.0f;
     }
   }
 
@@ -81,7 +81,7 @@ struct CoastMsg_
       rosidl_runtime_cpp::MessageInitialization::ZERO == _init)
     {
       this->frame_id = "";
-      this->grid_size = 0l;
+      this->grid_size = 0.0f;
     }
   }
 
@@ -117,7 +117,7 @@ struct CoastMsg_
     std_msgs::msg::Float32MultiArray_<ContainerAllocator>;
   _yellow_points_y_type yellow_points_y;
   using _grid_size_type =
-    int32_t;
+    float;
   _grid_size_type grid_size;
 
   // setters for named parameter idiom
@@ -182,7 +182,7 @@ struct CoastMsg_
     return *this;
   }
   Type & set__grid_size(
-    const int32_t & _arg)
+    const float & _arg)
   {
     this->grid_size = _arg;
     return *this;
