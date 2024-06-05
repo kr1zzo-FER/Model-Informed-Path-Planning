@@ -21,6 +21,7 @@ copying map_maker/post_processing.py -> /home/enio/develop_fer/Model-Informed-Pa
 copying map_maker/__init__.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
 copying map_maker/local_coordinates_converter.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
 copying map_maker/map_publisher.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
+copying map_maker/map_visualization.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
 running install
 running install_lib
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
@@ -31,6 +32,7 @@ copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/bui
 copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker/__init__.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
 copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker/local_coordinates_converter.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
 copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker/map_publisher.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
+copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker/map_visualization.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
 byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/detect_coast.py to detect_coast.cpython-310.pyc
 byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/map_process.py to map_process.cpython-310.pyc
 byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/process_osm_data.py to process_osm_data.cpython-310.pyc
@@ -38,6 +40,7 @@ byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning
 byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/__init__.py to __init__.cpython-310.pyc
 byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/local_coordinates_converter.py to local_coordinates_converter.cpython-310.pyc
 byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/map_publisher.py to map_publisher.cpython-310.pyc
+byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/map_visualization.py to map_visualization.cpython-310.pyc
 running install_data
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/ament_index
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/ament_index/resource_index
@@ -113,7 +116,9 @@ copying input_data/crikvenica/crikvenica_resized.png -> /home/enio/develop_fer/M
 copying input_data/crikvenica/crikvenica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/crikvenica
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch
 copying launch/publish_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch/
+copying launch/publish_map_launch_2.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch/
 copying launch/make_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch/
+copying launch/map_visualization_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch/
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/jadranovo
@@ -184,7 +189,9 @@ copying input_data/crikvenica/crikvenica_resized.png -> /home/enio/develop_fer/M
 copying input_data/crikvenica/crikvenica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/crikvenica
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch
 copying launch/publish_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch/
+copying launch/publish_map_launch_2.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch/
 copying launch/make_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch/
+copying launch/map_visualization_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch/
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/jadranovo
 copying input_data/jadranovo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/jadranovo
@@ -254,7 +261,9 @@ copying input_data/crikvenica/crikvenica_resized.png -> /home/enio/develop_fer/M
 copying input_data/crikvenica/crikvenica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/crikvenica
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch
 copying launch/publish_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch/
+copying launch/publish_map_launch_2.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch/
 copying launch/make_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch/
+copying launch/map_visualization_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch/
 running install_egg_info
 Copying ../../build/map_maker/map_maker.egg-info to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker-0.0.0-py3.10.egg-info
 running install_scripts

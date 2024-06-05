@@ -10,7 +10,7 @@ from launch.substitutions import LaunchConfiguration, PythonExpression
 
 # Default name : procesed_map_{save_file_name} 
 # in map_data folder
-save_file_name = 'jadranovo'
+save_file_name = 'omisalj'
 
 ###############################
 
