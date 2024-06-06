@@ -40,8 +40,6 @@ def generate_launch_description():
         launch_ros.actions.Node(
             package='path_planning_action',
             executable='start_goal_publisher',
-            name='start_goal_publisher',
-            parameters=[{ 'start' : start,
-                          'goal' : goal}]),
+            name='start_goal_publisher',),
   
   ])

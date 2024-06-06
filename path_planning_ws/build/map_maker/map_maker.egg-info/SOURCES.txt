@@ -61,7 +61,6 @@ input_data/vrbnik/vrbnik_resized.png
 launch/make_map_launch.py
 launch/map_visualization_launch.py
 launch/publish_map_launch.py
-launch/publish_map_launch_2.py
 map_maker/__init__.py
 map_maker/detect_coast.py
 map_maker/local_coordinates_converter.py

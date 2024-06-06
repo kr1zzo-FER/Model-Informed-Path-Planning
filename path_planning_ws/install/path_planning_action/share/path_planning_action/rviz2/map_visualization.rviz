@@ -243,7 +243,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /goal_pose_costume
+        Value: /goal_pose_custom
       Value: true
     - Alpha: 1
       Axes Length: 2
@@ -263,7 +263,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /start_pose_costume
+        Value: /start_pose_custom
       Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
@@ -345,25 +345,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/XYOrbit
-      Distance: 105.17102813720703
+      Distance: 146.73385620117188
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 196.23538208007812
-        Y: 502.6651916503906
+        X: 231.83453369140625
+        Y: 323.9592590332031
         Z: 0.00031589673017151654
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9797967672348022
+      Pitch: 1.2847965955734253
       Target Frame: <Fixed Frame>
       Value: XYOrbit (rviz_default_plugins)
-      Yaw: 2.5323503017425537
+      Yaw: 4.122380256652832
     Saved:
       - Angle: 0.14000001549720764
         Class: rviz_default_plugins/TopDownOrtho

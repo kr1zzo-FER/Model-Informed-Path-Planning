@@ -42,13 +42,32 @@ class PathPlanningPublisher(Node):
 
         self.start_goal_publisher = self.create_publisher(StartGoalMsg, 'start_goal_msg', 10)
         self.start_goal_subscriber = self.create_subscription(StartGoalMsg, 'start_goal_msg_update', self.start_goal_callback, 10)
+        self.start_goal_subscriber_manual = self.create_subscription(StartGoalMsg, 'start_goal_msg_update_manual', self.start_goal_callback, 10)
 
         self.timer = self.create_timer(0.1, self.timer_callback)
 
+        self.rviz2_start = [0.0,0.0]
+        self.rviz2_goal = [0.0,0.0]
+
+        self.manual_start = [0.0,0.0]
+        self.manual_goal = [0.0,0.0]
 
     def start_goal_callback(self, msg):
-        self.start = msg.start
-        self.goal = msg.goal
+        if self.rviz2_start != msg.start and self.goal != [0.0,0.0]:
+            self.rviz2_start = msg.start
+            self.start = msg.start
+        if self.rviz2_goal != msg.goal and self.goal != [0.0,0.0]:
+            self.rviz2_goal = msg.goal
+            self.goal = msg.goal
+        
+    
+    def start_goal_callback_manual(self, msg):
+        if self.manual_start != msg.start or self.start != msg.start:
+            self.manual_start = msg.start
+            self.start = msg.start
+        if self.manual_goal != msg.goal or self.goal != msg.goal:
+            self.manual_goal = msg.goal
+            self.goal = msg.goal
         
     def timer_callback(self):
         start_goal_msg = StartGoalMsg()

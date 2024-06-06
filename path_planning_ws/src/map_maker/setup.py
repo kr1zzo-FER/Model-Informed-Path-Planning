@@ -57,8 +57,8 @@ setup(
            'detect_coast = map_maker.detect_coast:CoastProcessing',
            'process_osm_data = map_maker.process_osm_data',
            'post_processing = map_maker.post_processing',
-           'map_publisher = map_maker.map_publisher:main'
-           
+           'map_publisher = map_maker.map_publisher:main',
+           'map_visualization = map_maker.map_visualization:main'
         ],
     },
 )

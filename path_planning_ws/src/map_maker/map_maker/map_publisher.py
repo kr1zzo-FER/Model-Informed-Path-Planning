@@ -60,6 +60,7 @@ class MapPublisher(Node):
 
         coast_msg = CoastMsg()
         coast_msg.header.stamp = self.get_clock().now().to_msg()
+        coast_msg.header.frame_id = 'gps_coordinates'
         coast_msg.coast_points_x.data = self.coast_points_x
         coast_msg.coast_points_y.data = self.coast_points_y
         coast_msg.red_points_x.data = self.red_points_x

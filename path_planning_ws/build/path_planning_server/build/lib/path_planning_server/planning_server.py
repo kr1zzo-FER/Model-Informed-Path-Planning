@@ -25,9 +25,10 @@ class PathPlanningActionServer(Node):
         self.zones_dictionary = {}
 
         self.thread_enable = True
+
         self.grid_size = 10.0
 
-        self.coast_points_subscriber = self.create_subscription(CoastMsg, 'coast_points_gps', self.coast_points_callback, 10)
+        self.coast_points_subscriber = self.create_subscription(CoastMsg, 'gps_coordinates_coast', self.coast_points_callback, 10)
 
         self._action_server = ActionServer(
             self,
@@ -55,6 +56,8 @@ class PathPlanningActionServer(Node):
 
             self.zones_dictionary = self.make_zones_dictionary()
 
+            #self.get_logger().info(f"Coast points: {self.coast_points}")
+
         
     def make_zones_dictionary(self):
         dictionary = {}
@@ -75,6 +78,7 @@ class PathPlanningActionServer(Node):
         self.goal = goal_handle.request.goal
 
         self._logger.info('Executing goal...')
+        print(self.zones_dictionary)
         self._logger.info(f'Start: {self.start}')
         self._logger.info(f'Goal: {self.goal}')
 

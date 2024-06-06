@@ -42,6 +42,7 @@ def load_binary_data(file_name):
 
 class CoastToPointCloud(Node):
 
+
     def __init__(self):
         super().__init__('pcd_rviz2_publisher')
         self.get_logger().info("Publishing PointCloud2 Rviz2 local coordinates started")
@@ -83,9 +84,9 @@ class CoastToPointCloud(Node):
         #path points
         self.path_pcd_publisher = self.create_publisher(sensor_msgs.PointCloud2, 'path_pcd_points', 10)
         #start point
-        self.start_publisher = self.create_publisher(PoseStamped, 'start_pose_costume', 10)
+        self.start_publisher = self.create_publisher(PoseStamped, 'start_pose_custom', 10)
         #goal point
-        self.goal_publisher = self.create_publisher(PoseStamped, 'goal_pose_costume', 10)
+        self.goal_publisher = self.create_publisher(PoseStamped, 'goal_pose_custom', 10)
         
         self.timer = self.create_timer(0.1, self.timer_callback)
 
@@ -94,7 +95,6 @@ class CoastToPointCloud(Node):
 
         self.start_goal_update_publisher = self.create_publisher(StartGoalMsg, 'start_goal_msg_update', 10)
 
-        self.zones_publisher = self.create_publisher(CoastMsg, 'coast_points_gps', 10)
     
     def gps_coordinates_callback(self, msg):
 
@@ -146,13 +146,24 @@ class CoastToPointCloud(Node):
         if not self.first_gps_msg:
             self.start = [msg.pose.pose.position.x*self.grid_size, msg.pose.pose.position.y*self.grid_size]
             start_gps = self.lcc.pixel_to_gps(self.start[0], self.start[1])
-            self.start_goal_update_publisher.publish(StartGoalMsg(start=[start_gps[0], start_gps[1]], goal=self.goal))
+            start_msg = StartGoalMsg()
+            start_msg.header.stamp = self.get_clock().now().to_msg()
+            start_msg.header.frame_id = 'map'
+            start_msg.start = [start_gps[0], start_gps[1]]
+            start_msg.goal = self.goal
+            self.start_goal_update_publisher.publish(start_msg)
+            self.start_goal_update_publisher.publish(start_msg)
 
     def goal_update_callback(self, msg):
         if not self.first_gps_msg:
             self.goal = [msg.pose.position.x*self.grid_size, msg.pose.position.y*self.grid_size]
             goal_gps = self.lcc.pixel_to_gps(self.goal[0], self.goal[1])
-            self.start_goal_update_publisher.publish(StartGoalMsg(start=self.start, goal=[goal_gps[0], goal_gps[1]]))
+            goal_msg = StartGoalMsg()
+            goal_msg.header.stamp = self.get_clock().now().to_msg()
+            goal_msg.header.frame_id = 'map'
+            goal_msg.start = self.start
+            goal_msg.goal = [goal_gps[0], goal_gps[1]]
+            self.start_goal_update_publisher.publish(goal_msg)
     
     def start_goal_callback(self, msg):
         if not self.first_gps_msg:
@@ -161,9 +172,10 @@ class CoastToPointCloud(Node):
             self.goal = msg.goal
             self.lcc.set_start_goal(self.start, self.goal)
             start_m, goal_m = self.lcc.get_start_m(), self.lcc.get_goal_m()
+
             self.start_pose = self.get_pose(start_m)
             self.goal_pose = self.get_pose(goal_m)
-    
+
     def path_callback(self, msg):
         if len(msg.path_x) > 0:
             path = []
@@ -208,6 +220,7 @@ class CoastToPointCloud(Node):
     def get_pose(self,point):
         pose = PoseStamped()
         pose.header.frame_id = "map"
+        pose.header.stamp = self.get_clock().now().to_msg()
         pose.pose.position.x = float(point[0])
         pose.pose.position.y = float(point[1])
         pose.pose.position.z = 0.0

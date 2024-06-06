@@ -15,7 +15,7 @@ creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/bu
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action
 copying path_planning_action/__init__.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action
-copying path_planning_action/pyplot_visualization.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action
+copying path_planning_action/start_goal_update.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action
 copying path_planning_action/pointcloud_publisher.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action
 copying path_planning_action/local_coordinates_converter.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action
 copying path_planning_action/start_goal_publisher.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action
@@ -26,7 +26,7 @@ running install
 running install_lib
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action
 copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action/__init__.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action
-copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action/pyplot_visualization.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action
+copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action/start_goal_update.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action
 copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action/pointcloud_publisher.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action
 copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action/local_coordinates_converter.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action
 copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action/start_goal_publisher.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action
@@ -34,7 +34,7 @@ copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/bui
 copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action/set_start_goal.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action
 copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/build/lib/path_planning_action/rviz2_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action
 byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/__init__.py to __init__.cpython-310.pyc
-byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/pyplot_visualization.py to pyplot_visualization.cpython-310.pyc
+byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/start_goal_update.py to start_goal_update.cpython-310.pyc
 byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/pointcloud_publisher.py to pointcloud_publisher.cpython-310.pyc
 byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/local_coordinates_converter.py to local_coordinates_converter.cpython-310.pyc
 byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/start_goal_publisher.py to start_goal_publisher.cpython-310.pyc
@@ -49,21 +49,27 @@ copying resource/path_planning_action -> /home/enio/develop_fer/Model-Informed-P
 copying package.xml -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch
 copying launch/start_goal_action_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
-copying launch/pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
+copying launch/update_goal_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
+copying launch/update_start_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
 copying launch/rviz2_pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
+copying launch/update_start_goal_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/launch/
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/rviz2
 copying rviz2/map_visualization.rviz -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/share/path_planning_action/rviz2/
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch
 copying launch/start_goal_action_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
-copying launch/pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
+copying launch/update_goal_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
+copying launch/update_start_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
 copying launch/rviz2_pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
+copying launch/update_start_goal_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/launch/
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/rviz2
 copying rviz2/map_visualization.rviz -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action/rviz2/
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch
 copying launch/start_goal_action_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
-copying launch/pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
+copying launch/update_goal_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
+copying launch/update_start_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
 copying launch/rviz2_pointcloud_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
+copying launch/update_start_goal_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/launch/
 creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/rviz2
 copying rviz2/map_visualization.rviz -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/python3.10/site-packages/path_planning_action/rviz2/
 running install_egg_info
@@ -73,4 +79,5 @@ Installing pointcloud_publisher script to /home/enio/develop_fer/Model-Informed-
 Installing rviz2_launch script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action
 Installing start_goal_action script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action
 Installing start_goal_publisher script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action
+Installing start_goal_update_ script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_action/lib/path_planning_action
 writing list of installed files to '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/path_planning_action/install.log'

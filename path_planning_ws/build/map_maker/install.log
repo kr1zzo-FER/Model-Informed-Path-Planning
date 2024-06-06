@@ -66,7 +66,6 @@
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/crikvenica/crikvenica_resized.png
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/crikvenica/crikvenica.png
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch/publish_map_launch.py
-/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch/publish_map_launch_2.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch/make_map_launch.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch/map_visualization_launch.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/jadranovo/osm_info.txt
@@ -119,7 +118,6 @@
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/crikvenica/crikvenica_resized.png
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/crikvenica/crikvenica.png
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch/publish_map_launch.py
-/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch/publish_map_launch_2.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch/make_map_launch.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch/map_visualization_launch.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/jadranovo/osm_info.txt
@@ -172,7 +170,6 @@
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/crikvenica/crikvenica_resized.png
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/crikvenica/crikvenica.png
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch/publish_map_launch.py
-/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch/publish_map_launch_2.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch/make_map_launch.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch/map_visualization_launch.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker-0.0.0-py3.10.egg-info/requires.txt
@@ -185,5 +182,6 @@
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/detect_coast
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/map_process
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/map_publisher
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/map_visualization
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/post_processing
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/process_osm_data

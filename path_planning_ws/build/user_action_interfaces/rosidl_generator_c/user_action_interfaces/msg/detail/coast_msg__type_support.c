@@ -4,10 +4,10 @@
 
 #include <string.h>
 
-#include "user_action_interfaces/msg/detail/coast_msg__functions.h"
-#include "rosidl_typesupport_interface/macros.h"
 #include "user_action_interfaces/msg/detail/coast_msg__type_support.h"
 #include "user_action_interfaces/msg/detail/coast_msg__struct.h"
+#include "rosidl_typesupport_interface/macros.h"
+#include "user_action_interfaces/msg/detail/coast_msg__functions.h"
 
 #ifdef __cplusplus
 extern "C"

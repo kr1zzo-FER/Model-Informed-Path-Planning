@@ -56,6 +56,7 @@ setup(
            'start_goal_publisher = path_planning_action.start_goal_publisher:main',
            'pointcloud_publisher = path_planning_action.pointcloud_publisher:main',
            'rviz2_launch = path_planning_action.rviz2_launch:main',
+           'start_goal_update_= path_planning_action.start_goal_update:main',
            
         ],
     },

@@ -30,35 +30,36 @@ def load_binary_data(file_name):
         data = None
     return data
 
-class MapPublisher(Node):
+class MapVisualization(Node):
 
     def __init__(self):
         super().__init__('pcd_coast')
         #ros log
-        self.get_logger().info("Publishing coast points node started")
+        self.get_logger().info("Map visualization node started")
         self.declare_parameter('save_file', 'test')
         self.save_file = self.get_parameter('save_file').get_parameter_value().string_value
 
-
+        print(self.save_file)
         self.zones_dictionary, self.coast_points, self.red_points, self.yellow_points, self.green_points, grid_size = self.get_zones_dictionary()
 
         self.grid_size = grid_size
 
         self.map_visualization()
     
-    def map_visualization(self):    
-        fig, ax = plt.subplots()
-        ax.plot(self.coast_points, 'b.', markersize=1)
-        ax.plot(self.red_points, 'r.', markersize=0.1)
-        ax.plot(self.yellow_points, 'y.', markersize=0.1)
-        ax.plot(self.green_points, 'g.', markersize=0.1)
-        plt.show()
+    def map_visualization(self):   
+            coast_points_gps = self.coast_points
+            red_zone_gps = self.red_points
+            yellow_zone_gps = self.yellow_points
+            green_zone_gps = self.green_points 
+            fig, ax = plt.subplots()
+            ax.plot([x[1] for x in coast_points_gps], [x[0] for x in coast_points_gps], 'bo', markersize=0.1)
+            ax.plot([x[1] for x in red_zone_gps], [x[0] for x in red_zone_gps], 'ro', markersize=0.1)
+            ax.plot([x[1] for x in yellow_zone_gps], [x[0] for x in yellow_zone_gps], 'yo', markersize=0.1)
+            ax.plot([x[1] for x in green_zone_gps], [x[0] for x in green_zone_gps], 'go', markersize=0.1)
+            plt.show()
 
-        rclpy.shutdown()
-        
 
-
-
+            rclpy.shutdown()
 
     def get_zones_dictionary(self):
         path = ws_root / f"src/map_maker/map_data/processed_map_{self.save_file}"
@@ -91,7 +92,7 @@ class MapPublisher(Node):
 
 def main():
     rclpy.init(args=None)
-    node = MapPublisher()
+    node = MapVisualization()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
