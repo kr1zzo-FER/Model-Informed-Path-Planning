@@ -47,15 +47,16 @@ class DStarLite:
     # Please adjust the heuristic function (h) if you change the list of
     # possible motions
     n = 1
+    m = 10
     motions = [
-        Node((n, 0),'m' , 1),
-        Node((0, n),'m', 1),
-        Node((-n, 0),'m', 1),
-        Node((0, -n),'m', 1),
-        Node((n, n),'m', math.sqrt(2)),
-        Node((n, -n),'m',math.sqrt(2)),
-        Node((-n, n),'m',math.sqrt(2)),
-        Node((-n, -n),'m',math.sqrt(2))
+        Node((n, 0),'m' , m),
+        Node((0, n),'m', m),
+        Node((-n, 0),'m', m),
+        Node((0, -n),'m', m),
+        Node((n, n),'m', m*math.sqrt(2)),
+        Node((n, -n),'m',m*math.sqrt(2)),
+        Node((-n, n),'m',m*math.sqrt(2)),
+        Node((-n, -n),'m',m*math.sqrt(2))
     ]
 
     def __init__(self, zones, start, goal):

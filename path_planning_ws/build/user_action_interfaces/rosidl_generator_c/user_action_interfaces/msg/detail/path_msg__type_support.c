@@ -5,9 +5,9 @@
 #include <string.h>
 
 #include "user_action_interfaces/msg/detail/path_msg__functions.h"
-#include "user_action_interfaces/msg/detail/path_msg__struct.h"
-#include "user_action_interfaces/msg/detail/path_msg__type_support.h"
 #include "rosidl_typesupport_interface/macros.h"
+#include "user_action_interfaces/msg/detail/path_msg__type_support.h"
+#include "user_action_interfaces/msg/detail/path_msg__struct.h"
 
 #ifdef __cplusplus
 extern "C"
