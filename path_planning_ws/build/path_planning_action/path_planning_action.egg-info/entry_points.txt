@@ -1,0 +1,7 @@
+[console_scripts]
+pointcloud_publisher = path_planning_action.pointcloud_publisher:main
+rviz2_launch = path_planning_action.rviz2_launch:main
+start_goal_action = path_planning_action.start_goal_action:main
+start_goal_publisher = path_planning_action.start_goal_publisher:main
+start_goal_update_ = path_planning_action.start_goal_update:main
+
