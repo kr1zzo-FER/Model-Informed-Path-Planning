@@ -1,0 +1,24 @@
+// generated from rosidl_adapter/resource/action.idl.em
+// with input from user_action_interfaces/action/StartGoalAction.action
+// generated code does not contain a copyright notice
+
+
+module user_action_interfaces {
+  module action {
+    struct StartGoalAction_Goal {
+      sequence<float> start;
+
+      sequence<float> goal;
+    };
+    struct StartGoalAction_Result {
+      sequence<float> path_x;
+
+      sequence<float> path_y;
+    };
+    struct StartGoalAction_Feedback {
+      sequence<float> partial_path_x;
+
+      sequence<float> partial_path_y;
+    };
+  };
+};

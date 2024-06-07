@@ -1,0 +1,273 @@
+running egg_info
+creating ../../build/map_maker/map_maker.egg-info
+writing ../../build/map_maker/map_maker.egg-info/PKG-INFO
+writing dependency_links to ../../build/map_maker/map_maker.egg-info/dependency_links.txt
+writing entry points to ../../build/map_maker/map_maker.egg-info/entry_points.txt
+writing requirements to ../../build/map_maker/map_maker.egg-info/requires.txt
+writing top-level names to ../../build/map_maker/map_maker.egg-info/top_level.txt
+writing manifest file '../../build/map_maker/map_maker.egg-info/SOURCES.txt'
+reading manifest file '../../build/map_maker/map_maker.egg-info/SOURCES.txt'
+adding license file 'LICENSE'
+writing manifest file '../../build/map_maker/map_maker.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
+copying map_maker/detect_coast.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
+copying map_maker/map_process.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
+copying map_maker/process_osm_data.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
+copying map_maker/post_processing.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
+copying map_maker/__init__.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
+copying map_maker/local_coordinates_converter.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
+copying map_maker/map_publisher.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
+copying map_maker/map_visualization.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker
+running install
+running install_lib
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
+copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker/detect_coast.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
+copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker/map_process.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
+copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker/process_osm_data.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
+copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker/post_processing.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
+copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker/__init__.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
+copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker/local_coordinates_converter.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
+copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker/map_publisher.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
+copying /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/build/lib/map_maker/map_visualization.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker
+byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/detect_coast.py to detect_coast.cpython-310.pyc
+byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/map_process.py to map_process.cpython-310.pyc
+byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/process_osm_data.py to process_osm_data.cpython-310.pyc
+byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/post_processing.py to post_processing.cpython-310.pyc
+byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/local_coordinates_converter.py to local_coordinates_converter.cpython-310.pyc
+byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/map_publisher.py to map_publisher.cpython-310.pyc
+byte-compiling /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/map_visualization.py to map_visualization.cpython-310.pyc
+running install_data
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/ament_index
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/ament_index/resource_index
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/ament_index/resource_index/packages
+copying resource/map_maker -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/ament_index/resource_index/packages
+copying package.xml -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/jadranovo
+copying input_data/jadranovo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/jadranovo
+copying input_data/jadranovo/jadranovo.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/jadranovo
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/petrina
+copying input_data/petrina/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/petrina
+copying input_data/petrina/petrina_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/petrina
+copying input_data/petrina/petrina.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/petrina
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/vrbnik
+copying input_data/vrbnik/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/vrbnik
+copying input_data/vrbnik/vrbnik.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/vrbnik
+copying input_data/vrbnik/vrbnik_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/vrbnik
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/novi
+copying input_data/novi/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/novi
+copying input_data/novi/novi.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/novi
+copying input_data/novi/novi_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/novi
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/selehovica
+copying input_data/selehovica/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/selehovica
+copying input_data/selehovica/selehovica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/selehovica
+copying input_data/selehovica/selehovica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/selehovica
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/voz
+copying input_data/voz/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/voz
+copying input_data/voz/voz_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/voz
+copying input_data/voz/voz.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/voz
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/sv_marko
+copying input_data/sv_marko/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/sv_marko
+copying input_data/sv_marko/sv_marko.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/sv_marko
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/melska
+copying input_data/melska/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/melska
+copying input_data/melska/melska.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/melska
+copying input_data/melska/melska_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/melska
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/selce
+copying input_data/selce/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/selce
+copying input_data/selce/selce_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/selce
+copying input_data/selce/selce.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/selce
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/klimno
+copying input_data/klimno/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/klimno
+copying input_data/klimno/klimno.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/klimno
+copying input_data/klimno/klimno_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/klimno
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/rudine
+copying input_data/rudine/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/rudine
+copying input_data/rudine/rudine.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/rudine
+copying input_data/rudine/rudine_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/rudine
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/silo
+copying input_data/silo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/silo
+copying input_data/silo/silo.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/silo
+copying input_data/silo/silo_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/silo
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/lokvisce
+copying input_data/lokvisce/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/lokvisce
+copying input_data/lokvisce/lokvisce.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/lokvisce
+copying input_data/lokvisce/lokvisce_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/lokvisce
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/omisalj
+copying input_data/omisalj/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/omisalj
+copying input_data/omisalj/omisalj.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/omisalj
+copying input_data/omisalj/omisalj_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/omisalj
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/povile
+copying input_data/povile/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/povile
+copying input_data/povile/povile.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/povile
+copying input_data/povile/povile_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/povile
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/dramalj
+copying input_data/dramalj/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/dramalj
+copying input_data/dramalj/dramalj_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/dramalj
+copying input_data/dramalj/dramalj.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/dramalj
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/crikvenica
+copying input_data/crikvenica/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/crikvenica
+copying input_data/crikvenica/crikvenica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/crikvenica
+copying input_data/crikvenica/crikvenica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/input_data/crikvenica
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch
+copying launch/publish_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch/
+copying launch/make_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch/
+copying launch/map_visualization_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/share/map_maker/launch/
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/jadranovo
+copying input_data/jadranovo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/jadranovo
+copying input_data/jadranovo/jadranovo.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/jadranovo
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/petrina
+copying input_data/petrina/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/petrina
+copying input_data/petrina/petrina_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/petrina
+copying input_data/petrina/petrina.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/petrina
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/vrbnik
+copying input_data/vrbnik/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/vrbnik
+copying input_data/vrbnik/vrbnik.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/vrbnik
+copying input_data/vrbnik/vrbnik_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/vrbnik
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/novi
+copying input_data/novi/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/novi
+copying input_data/novi/novi.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/novi
+copying input_data/novi/novi_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/novi
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/selehovica
+copying input_data/selehovica/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/selehovica
+copying input_data/selehovica/selehovica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/selehovica
+copying input_data/selehovica/selehovica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/selehovica
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/voz
+copying input_data/voz/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/voz
+copying input_data/voz/voz_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/voz
+copying input_data/voz/voz.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/voz
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/sv_marko
+copying input_data/sv_marko/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/sv_marko
+copying input_data/sv_marko/sv_marko.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/sv_marko
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/melska
+copying input_data/melska/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/melska
+copying input_data/melska/melska.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/melska
+copying input_data/melska/melska_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/melska
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/selce
+copying input_data/selce/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/selce
+copying input_data/selce/selce_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/selce
+copying input_data/selce/selce.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/selce
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/klimno
+copying input_data/klimno/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/klimno
+copying input_data/klimno/klimno.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/klimno
+copying input_data/klimno/klimno_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/klimno
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/rudine
+copying input_data/rudine/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/rudine
+copying input_data/rudine/rudine.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/rudine
+copying input_data/rudine/rudine_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/rudine
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/silo
+copying input_data/silo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/silo
+copying input_data/silo/silo.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/silo
+copying input_data/silo/silo_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/silo
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/lokvisce
+copying input_data/lokvisce/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/lokvisce
+copying input_data/lokvisce/lokvisce.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/lokvisce
+copying input_data/lokvisce/lokvisce_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/lokvisce
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/omisalj
+copying input_data/omisalj/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/omisalj
+copying input_data/omisalj/omisalj.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/omisalj
+copying input_data/omisalj/omisalj_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/omisalj
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/povile
+copying input_data/povile/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/povile
+copying input_data/povile/povile.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/povile
+copying input_data/povile/povile_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/povile
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/dramalj
+copying input_data/dramalj/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/dramalj
+copying input_data/dramalj/dramalj_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/dramalj
+copying input_data/dramalj/dramalj.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/dramalj
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/crikvenica
+copying input_data/crikvenica/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/crikvenica
+copying input_data/crikvenica/crikvenica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/crikvenica
+copying input_data/crikvenica/crikvenica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/input_data/crikvenica
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch
+copying launch/publish_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch/
+copying launch/make_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch/
+copying launch/map_visualization_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker/launch/
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/jadranovo
+copying input_data/jadranovo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/jadranovo
+copying input_data/jadranovo/jadranovo.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/jadranovo
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/petrina
+copying input_data/petrina/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/petrina
+copying input_data/petrina/petrina_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/petrina
+copying input_data/petrina/petrina.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/petrina
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/vrbnik
+copying input_data/vrbnik/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/vrbnik
+copying input_data/vrbnik/vrbnik.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/vrbnik
+copying input_data/vrbnik/vrbnik_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/vrbnik
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/novi
+copying input_data/novi/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/novi
+copying input_data/novi/novi.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/novi
+copying input_data/novi/novi_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/novi
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/selehovica
+copying input_data/selehovica/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/selehovica
+copying input_data/selehovica/selehovica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/selehovica
+copying input_data/selehovica/selehovica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/selehovica
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/voz
+copying input_data/voz/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/voz
+copying input_data/voz/voz_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/voz
+copying input_data/voz/voz.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/voz
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/sv_marko
+copying input_data/sv_marko/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/sv_marko
+copying input_data/sv_marko/sv_marko.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/sv_marko
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/melska
+copying input_data/melska/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/melska
+copying input_data/melska/melska.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/melska
+copying input_data/melska/melska_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/melska
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/selce
+copying input_data/selce/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/selce
+copying input_data/selce/selce_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/selce
+copying input_data/selce/selce.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/selce
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/klimno
+copying input_data/klimno/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/klimno
+copying input_data/klimno/klimno.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/klimno
+copying input_data/klimno/klimno_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/klimno
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/rudine
+copying input_data/rudine/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/rudine
+copying input_data/rudine/rudine.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/rudine
+copying input_data/rudine/rudine_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/rudine
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/silo
+copying input_data/silo/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/silo
+copying input_data/silo/silo.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/silo
+copying input_data/silo/silo_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/silo
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/lokvisce
+copying input_data/lokvisce/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/lokvisce
+copying input_data/lokvisce/lokvisce.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/lokvisce
+copying input_data/lokvisce/lokvisce_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/lokvisce
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/omisalj
+copying input_data/omisalj/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/omisalj
+copying input_data/omisalj/omisalj.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/omisalj
+copying input_data/omisalj/omisalj_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/omisalj
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/povile
+copying input_data/povile/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/povile
+copying input_data/povile/povile.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/povile
+copying input_data/povile/povile_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/povile
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/dramalj
+copying input_data/dramalj/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/dramalj
+copying input_data/dramalj/dramalj_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/dramalj
+copying input_data/dramalj/dramalj.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/dramalj
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/crikvenica
+copying input_data/crikvenica/osm_info.txt -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/crikvenica
+copying input_data/crikvenica/crikvenica_resized.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/crikvenica
+copying input_data/crikvenica/crikvenica.png -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/input_data/crikvenica
+creating /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch
+copying launch/publish_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch/
+copying launch/make_map_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch/
+copying launch/map_visualization_launch.py -> /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker/launch/
+running install_egg_info
+Copying ../../build/map_maker/map_maker.egg-info to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/python3.10/site-packages/map_maker-0.0.0-py3.10.egg-info
+running install_scripts
+Installing detect_coast script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker
+Installing map_process script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker
+Installing map_publisher script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker
+Installing map_visualization script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker
+Installing post_processing script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker
+Installing process_osm_data script to /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/map_maker/lib/map_maker
+writing list of installed files to '/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/build/map_maker/install.log'

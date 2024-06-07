@@ -1,0 +1,9 @@
+{
+  "package_name": "user_action_interfaces",
+  "non_idl_tuples": [
+    "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces:action/StartGoalAction.action",
+    "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces:msg/StartGoalMsg.msg",
+    "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces:msg/CoastMsg.msg",
+    "/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/src/user_action_interfaces:msg/PathMsg.msg"
+  ]
+}

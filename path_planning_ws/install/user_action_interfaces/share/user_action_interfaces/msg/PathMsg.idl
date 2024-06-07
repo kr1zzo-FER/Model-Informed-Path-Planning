@@ -1,0 +1,19 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from user_action_interfaces/msg/PathMsg.msg
+// generated code does not contain a copyright notice
+
+#include "std_msgs/msg/Header.idl"
+
+module user_action_interfaces {
+  module msg {
+    struct PathMsg {
+      std_msgs::msg::Header header;
+
+      string frame_id;
+
+      sequence<float> path_x;
+
+      sequence<float> path_y;
+    };
+  };
+};
