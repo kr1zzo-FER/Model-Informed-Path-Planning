@@ -12,7 +12,7 @@ Copyright: © Faculty of Electrical Engineering and Computing, University of Zag
 import math
 from pathlib import Path
 import time
-from .algorithms.hybrid_d_star_lite import DStarLite, Node
+from .Node import Node
 import multiprocessing as mp
 import datetime
 from .algorithms_base import AlgorithmBase

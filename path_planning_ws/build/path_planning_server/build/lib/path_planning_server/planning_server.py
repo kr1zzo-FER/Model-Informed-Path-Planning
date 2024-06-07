@@ -7,6 +7,7 @@ import sensor_msgs.msg as sensor_msgs
 from user_action_interfaces.msg import StartGoalMsg
 from .algorithms_test import TestAlgorithms
 from user_action_interfaces.msg import CoastMsg
+from matplotlib import pyplot as plt
 
 class PathPlanningActionServer(Node):
 
@@ -69,6 +70,19 @@ class PathPlanningActionServer(Node):
             dictionary[point] = "g"
         for point in self.coast_points:
             dictionary[point] = "c"
+
+        fig,ax = plt.subplots()
+        for key, value in dictionary.items():
+            if value == 'c':
+                ax.plot(key[0],key[1],'bo', markersize=0.1)
+            elif value == 'r':
+                ax.plot(key[0],key[1],'ro', markersize=0.1)
+            elif value == 'g':
+                ax.plot(key[0],key[1],'go', markersize=0.1)
+            elif value == 'y':
+                ax.plot(key[0],key[1],'yo', markersize=0.1)
+        plt.show()
+
         return dictionary
     
 

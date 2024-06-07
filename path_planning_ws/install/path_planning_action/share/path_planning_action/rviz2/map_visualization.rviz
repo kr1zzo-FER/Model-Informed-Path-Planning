@@ -235,7 +235,7 @@ Visualization Manager:
       Head Radius: 1
       Name: Pose
       Shaft Length: 1
-      Shaft Radius: 0.5
+      Shaft Radius: 2.5
       Shape: Arrow
       Topic:
         Depth: 5
@@ -345,25 +345,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/XYOrbit
-      Distance: 146.73385620117188
+      Distance: 69.13846588134766
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 231.83453369140625
-        Y: 323.9592590332031
-        Z: 0.00031589673017151654
+        X: 233.8900604248047
+        Y: 441.5733642578125
+        Z: 0.0017622451996430755
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.2847965955734253
+      Pitch: 0.419797420501709
       Target Frame: <Fixed Frame>
       Value: XYOrbit (rviz_default_plugins)
-      Yaw: 4.122380256652832
+      Yaw: 4.542404651641846
     Saved:
       - Angle: 0.14000001549720764
         Class: rviz_default_plugins/TopDownOrtho

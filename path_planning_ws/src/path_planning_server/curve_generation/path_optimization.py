@@ -143,7 +143,7 @@ class PathOptimization:
 		points_new_plot1 = self.points_new.copy()
 
 		for i, point in enumerate(self.points_new):
-			self.points_new[i] = (point[0], point[1], get_angle(self.points_new[i-1][0], self.points_new[i-1][1], point[0], point[1])) if i != 0 else (point[0], point[1], 0)
+			self.points_new[i] = (point[0], point[1], get_angle(self.points_new[i-1][0], self.points_new[i-1][1], point[0], point[1])) if i != 0 else (point[0], point[1], get_angle(point[0], point[1],self.points_new[i+1][0], self.points_new[i+1][1]))
 		
 
 		curve_factory = CurveFactory()

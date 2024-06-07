@@ -52,7 +52,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-           'planning_server = path_planning_server.planning_server:main'
+           'planning_server = path_planning_server.planning_server:main',
+           'path_planning_server = path_planning_server.path_planning_server:main'
         ],
     },
 )

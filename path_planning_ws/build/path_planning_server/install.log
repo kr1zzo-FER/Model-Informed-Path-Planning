@@ -1,11 +1,15 @@
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/path_planning_server.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/__init__.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/algorithms_base.py
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/Node.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/algorithms_test.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/path_results.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/plot.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/planning_server.py
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/__pycache__/path_planning_server.cpython-310.pyc
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/__pycache__/__init__.cpython-310.pyc
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/__pycache__/algorithms_base.cpython-310.pyc
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/__pycache__/Node.cpython-310.pyc
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/__pycache__/algorithms_test.cpython-310.pyc
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/__pycache__/path_results.cpython-310.pyc
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/__pycache__/plot.cpython-310.pyc
@@ -13,6 +17,7 @@
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/share/ament_index/resource_index/packages/path_planning_server
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/share/path_planning_server/package.xml
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/share/path_planning_server/algorithms/hybrid_d_star_lite.py
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/share/path_planning_server/launch/path_planning_server_launch.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/share/path_planning_server/launch/init_launch.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/share/path_planning_server/curve_generation/fem_pos_smooth.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/share/path_planning_server/curve_generation/cubic_spline.py
@@ -71,6 +76,7 @@
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/share/path_planning_server/curve_generation/utils/planner/global_planner/sample_search/informed_rrt.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/share/path_planning_server/curve_generation/utils/planner/global_planner/sample_search/rrt_star.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/path_planning_server/algorithms/hybrid_d_star_lite.py
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/path_planning_server/launch/path_planning_server_launch.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/path_planning_server/launch/init_launch.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/path_planning_server/curve_generation/fem_pos_smooth.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/path_planning_server/curve_generation/cubic_spline.py
@@ -129,6 +135,7 @@
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/path_planning_server/curve_generation/utils/planner/global_planner/sample_search/informed_rrt.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/path_planning_server/curve_generation/utils/planner/global_planner/sample_search/rrt_star.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/algorithms/hybrid_d_star_lite.py
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/launch/path_planning_server_launch.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/launch/init_launch.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/curve_generation/fem_pos_smooth.py
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server/curve_generation/cubic_spline.py
@@ -193,4 +200,5 @@
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server-0.0.0-py3.10.egg-info/entry_points.txt
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server-0.0.0-py3.10.egg-info/SOURCES.txt
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/python3.10/site-packages/path_planning_server-0.0.0-py3.10.egg-info/zip-safe
+/home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/path_planning_server/path_planning_server
 /home/enio/develop_fer/Model-Informed-Path-Planning/path_planning_ws/install/path_planning_server/lib/path_planning_server/planning_server

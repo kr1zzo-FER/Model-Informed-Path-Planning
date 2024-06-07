@@ -67,9 +67,12 @@ curve_generation/utils/planner/global_planner/sample_search/sample_search.py
 curve_generation/utils/plot/__init__.py
 curve_generation/utils/plot/plot.py
 launch/init_launch.py
+launch/path_planning_server_launch.py
+path_planning_server/Node.py
 path_planning_server/__init__.py
 path_planning_server/algorithms_base.py
 path_planning_server/algorithms_test.py
+path_planning_server/path_planning_server.py
 path_planning_server/path_results.py
 path_planning_server/planning_server.py
 path_planning_server/plot.py

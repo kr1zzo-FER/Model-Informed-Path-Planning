@@ -13,7 +13,7 @@ import numpy as np
 from numpy import uint8
 import matplotlib.pyplot as plt
 
-costmap_visualization = False
+costmap_visualization = True
 
 class AlgorithmBase():
 

@@ -1,3 +1,4 @@
 [console_scripts]
+path_planning_server = path_planning_server.path_planning_server:main
 planning_server = path_planning_server.planning_server:main
 

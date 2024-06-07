@@ -204,6 +204,7 @@ class PathPlanningServer(rclpy_Node):
         self.zones_dictionary_gps = zones_dictionary_gps  
         self.cost_dictionary = cost_dictionary
 
+        self.get_logger().info(f"Zones dictionary: {self.zones_dictionary}")
     
     def get_minmax_global(self, zones_dictionary):
         # 1.2./1.4. Get the min and max coordinates of the all gps coordinates
