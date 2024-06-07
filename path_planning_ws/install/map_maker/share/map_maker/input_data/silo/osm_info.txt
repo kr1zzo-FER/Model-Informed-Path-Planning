@@ -1,1 +1,0 @@
-<iframe width="425" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=14.630055427551271%2C45.13743210803379%2C14.698719978332521%2C45.163975221307204&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=15/45.1507/14.6644">Prikaži veću kartu</a></small>

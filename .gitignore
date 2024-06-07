@@ -1,6 +1,6 @@
 __pycache__/
-path_plalning_ws/install/
-path_plalning_ws/build/
-path_plalning_ws/log/
-path_plalning_ws/.dist/
-path_plalning_ws/src/.dist/
+path_planning_ws/install/
+path_planning_ws/build/
+path_planning_ws/log/
+path_planning_ws/.dist/
+path_planning_ws/src/.dist/
