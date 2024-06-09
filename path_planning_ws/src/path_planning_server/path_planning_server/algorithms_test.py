@@ -15,6 +15,7 @@ import time
 from .Node import Node
 import multiprocessing as mp
 import datetime
+from .hybrid_d_star_lite import DStarLite
 from .algorithms_base import AlgorithmBase
 from .path_results import PathResults,PathResultsInternal
 from matplotlib import pyplot as plt
@@ -129,6 +130,7 @@ class TestAlgorithms(AlgorithmBase):
         start_time = time.time()
         dstarlite = DStarLite(self.zones_m, self.start_m, self.goal_m)
         dstarlite.set_cost(10.0,2.0,1.5)
+
         dstarlite.test()
 
         rx, ry = dstarlite.get_path()

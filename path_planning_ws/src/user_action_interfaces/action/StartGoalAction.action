@@ -6,3 +6,5 @@ float32[] path_y
 ---
 float32[] partial_path_x
 float32[] partial_path_y
+float32[] search_area_x
+float32[] search_area_y

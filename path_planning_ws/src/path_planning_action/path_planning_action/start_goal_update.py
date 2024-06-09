@@ -50,7 +50,7 @@ class PathPlanningPublisher(Node):
         start_goal_msg.header.frame_id = 'map'
         start_goal_msg.start = self.start
         start_goal_msg.goal = self.goal
-
+        self.get_logger().info(f'Publishing start: {self.start} goal: {self.goal}')
         self.start_goal_publisher.publish(start_goal_msg)
     
 def main(args=None):

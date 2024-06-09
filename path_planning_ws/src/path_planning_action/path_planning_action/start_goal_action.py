@@ -39,8 +39,12 @@ class PathPlanningActionClient(Node):
         self.first_time = True
 
         self.send_path_publisher = self.create_publisher(PathMsg, 'path', 10)
+        self.raw_path_publisher = self.create_publisher(PathMsg, 'raw_path', 10)
+        self.searched_area_publisher = self.create_publisher(PathMsg, 'searched_area', 10)
 
         self.path = PathMsg()
+        self.raw_path = PathMsg()
+        self.searched_area = PathMsg()
 
         self.timer = self.create_timer(0.1, self.timer_callback)
 
@@ -49,6 +53,8 @@ class PathPlanningActionClient(Node):
     def timer_callback(self):
         if self.path_recived:
             self.send_path_publisher.publish(self.path)
+        self.raw_path_publisher.publish(self.raw_path)
+        self.searched_area_publisher.publish(self.searched_area)
 
     def start_goal_callback(self, msg):
         self.start = msg.start
@@ -100,7 +106,20 @@ class PathPlanningActionClient(Node):
         
     def feedback_callback(self, feedback_msg):
         feedback = feedback_msg.feedback
-        self.get_logger().info('Received feedback: {0}'.format(feedback.partial_path))
+        self.get_logger().info(f"Feedback received: {len(feedback.partial_path_x)} points")
+        path = PathMsg()
+        path.header.stamp = self.get_clock().now().to_msg()
+        path.header.frame_id = 'map'
+        path.path_x = feedback.partial_path_x
+        path.path_y = feedback.partial_path_y
+        area = PathMsg()
+        area.header.stamp = self.get_clock().now().to_msg()
+        area.header.frame_id = 'map'
+        area.path_x = feedback.search_area_x
+        area.path_y = feedback.search_area_y
+
+        self.raw_path = path
+        self.searched_area = area
 
         
 def main(args=None):

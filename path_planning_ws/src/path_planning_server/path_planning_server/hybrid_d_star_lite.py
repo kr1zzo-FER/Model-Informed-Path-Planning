@@ -46,7 +46,18 @@ class DStarLite:
 
     # Please adjust the heuristic function (h) if you change the list of
     # possible motions
-    
+    n,m = 1,1
+
+    motions = [
+        Node((n, 0),m),
+        Node((0, n),m),
+        Node((-n, 0),m),
+        Node((0, -n),m),
+        Node((n, n), m*math.sqrt(2)),
+        Node((n, -n),m*math.sqrt(2)),
+        Node((-n, n),m*math.sqrt(2)),
+        Node((-n, -n),m*math.sqrt(2))
+        ]
    
     def __init__(self, zones, start, goal):
         #if value == c, find min value key
@@ -68,6 +79,12 @@ class DStarLite:
         self.green_cost = 0.0
         self.cost_dictionary = {}
         self.init_print()
+    
+    def min_max_world(self):
+        return self.x_min_world, self.y_min_world, self.x_max_world, self.y_max_world
+
+    def min_max_global(self):
+        return self.x_min_global, self.y_min_global, self.x_max_global, self.y_max_global
     
     def init_print(self):
         print("Start: ", self.start.x, self.start.y)

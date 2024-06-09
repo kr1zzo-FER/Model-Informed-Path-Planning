@@ -51,6 +51,8 @@ class CoastToPointCloud(Node):
 
         self.start_goal_subscriber = self.create_subscription(StartGoalMsg, 'start_goal_msg', self.start_goal_callback, 10)
         self.path_subscriber = self.create_subscription(PathMsg, 'path', self.path_callback, 10)
+        self.partial_path_subscriber = self.create_subscription(PathMsg, 'raw_path', self.raw_path_callback, 10)
+        self.searched_area_pcd_subscriber = self.create_subscription(PathMsg, 'searched_area', self.searched_area_callback, 10)
 
         self.start = [0.0,0.0]
         self.goal = [0.0,0.0]
@@ -72,7 +74,9 @@ class CoastToPointCloud(Node):
         self.yellow_pcd_points = sensor_msgs.PointCloud2()
         self.green_pcd_points = sensor_msgs.PointCloud2()
         self.path_pcd = sensor_msgs.PointCloud2()
-
+        self.raw_path_pcd = sensor_msgs.PointCloud2()
+        self.searched_area_pcd = sensor_msgs.PointCloud2()
+        
         #coast points
         self.coast_pcd_publisher = self.create_publisher(sensor_msgs.PointCloud2, 'coast_pcd_points', 10)
         #red points
@@ -83,6 +87,10 @@ class CoastToPointCloud(Node):
         self.green_pcd_publisher = self.create_publisher(sensor_msgs.PointCloud2, 'green_pcd_points', 10)
         #path points
         self.path_pcd_publisher = self.create_publisher(sensor_msgs.PointCloud2, 'path_pcd_points', 10)
+        #raw path points
+        self.raw_path_pcd_publisher = self.create_publisher(sensor_msgs.PointCloud2, 'raw_path_pcd_points', 10)
+        # searched area points
+        self.searched_area_pcd_publisher = self.create_publisher(sensor_msgs.PointCloud2, 'searched_area_pcd_points', 10)
         #start point
         self.start_publisher = self.create_publisher(PoseStamped, 'start_pose_custom', 10)
         #goal point
@@ -140,6 +148,8 @@ class CoastToPointCloud(Node):
         self.yellow_pcd_publisher.publish(self.yellow_pcd_points)
         self.green_pcd_publisher.publish(self.green_pcd_points)
         self.path_pcd_publisher.publish(self.path_pcd)
+        self.raw_path_pcd_publisher.publish(self.raw_path_pcd)
+        self.searched_area_pcd_publisher.publish(self.searched_area_pcd)
 
 
     def start_update_callback(self, msg):
@@ -182,9 +192,23 @@ class CoastToPointCloud(Node):
             for i in range(len(msg.path_x)):
                 path.append((msg.path_x[i], msg.path_y[i])) 
             path_m = self.lcc.get_path_m(path)
-            self._logger.info(f"Path: {path_m}")  
             self.path_pcd = self.convert_to_pcd(path_m, 0)
 
+    def raw_path_callback(self, msg):
+        if len(msg.path_x) > 0:
+            path = []
+            for i in range(len(msg.path_x)):
+                path.append((msg.path_x[i], msg.path_y[i])) 
+            path_m = self.lcc.get_path_m(path) 
+            self.raw_path_pcd = self.convert_to_pcd(path_m, 0)
+    
+    def searched_area_callback(self, msg):
+        if len(msg.path_x) > 0:
+            path = []
+            for i in range(len(msg.path_x)):
+                path.append((msg.path_x[i], msg.path_y[i])) 
+            path_m = self.lcc.get_path_m(path) 
+            self.searched_area_pcd = self.convert_to_pcd(path_m, 0)
     
     def convert_to_pcd(self, points, height, parent_frame_id="map"):
 

@@ -70,13 +70,13 @@ class PathPlanningPublisher(Node):
             self.goal = msg.goal
         
     def timer_callback(self):
-        start_goal_msg = StartGoalMsg()
-        start_goal_msg.header.stamp = self.get_clock().now().to_msg()
-        start_goal_msg.header.frame_id = 'map'
-        start_goal_msg.start = self.start
-        start_goal_msg.goal = self.goal
-
-        self.start_goal_publisher.publish(start_goal_msg)
+        if self.start != [0.0,0.0] and self.goal != [0.0,0.0]:
+            start_goal_msg = StartGoalMsg()
+            start_goal_msg.header.stamp = self.get_clock().now().to_msg()
+            start_goal_msg.header.frame_id = 'map'
+            start_goal_msg.start = self.start
+            start_goal_msg.goal = self.goal
+            self.start_goal_publisher.publish(start_goal_msg)
     
 def main(args=None):
     rclpy.init(args=args)

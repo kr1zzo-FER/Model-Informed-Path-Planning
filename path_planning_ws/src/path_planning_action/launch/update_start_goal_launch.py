@@ -9,7 +9,7 @@ from launch.substitutions import LaunchConfiguration, PythonExpression
 
 start = [45.236663, 14.575893]
 
-goal = [45.229050, 14.584951]
+goal = [45.240001, 14.589096]
 
 def generate_launch_description():
 
@@ -30,7 +30,7 @@ def generate_launch_description():
 
     pp_node = Node(
         package='path_planning_action',
-        executable='start_goal_publisher',
+        executable='start_goal_update',
         output='screen',
         name='manual_start_goal_publisher',
         parameters=[{'start': start_value,

@@ -17,8 +17,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-show_debug = True
-show_results = True
+show_debug = False
+show_results = False
 
 class PathPlanningServer(rclpy_Node):
 
@@ -45,6 +45,7 @@ class PathPlanningServer(rclpy_Node):
         self.x_min_global, self.y_min_global , self.x_max_global, self.y_max_global = 0.0,0.0,0.0,0.0
         
         # action server
+        self.goal_handle = None
         self.start_gps, self.goal_gps = (0.0,0.0), (0.0,0.0)
         self.start_m, self.goal_m = (0,0), (0,0)
         self.start, self.goal = Node(), Node()
@@ -110,6 +111,8 @@ class PathPlanningServer(rclpy_Node):
 
     def execute_callback(self, goal_handle):
 
+        self.goal_handle = goal_handle
+
         self.get_logger().info('Executing path planning server started')
         
         self.start_gps = goal_handle.request.start
@@ -124,6 +127,8 @@ class PathPlanningServer(rclpy_Node):
         
         self.start = Node(self.start_m)
         self.goal = Node(self.goal_m)
+        self.partial_start = Node(self.start_m)
+        self.partial_goal = Node(self.goal_m)
 
         if show_debug:
             self.visualization(True,self.zones_dictionary_gps,self.start_gps,self.goal_gps)
@@ -143,7 +148,7 @@ class PathPlanningServer(rclpy_Node):
 
         self.path_optimized = self.optimize_path()
 
-        self.optimized_path_gps = [self.pixel_to_gps(point[0],point[1]) for point in self.path_optimized]
+        self.optimized_path_gps = [self.adapt_coordinates_reverse(point) for point in self.path_optimized]
 
         path_x = [point[0] for point in self.optimized_path_gps]   
         path_y = [point[1] for point in self.optimized_path_gps]
@@ -179,7 +184,7 @@ class PathPlanningServer(rclpy_Node):
             zones_dictionary_gps[point] = "c"
         
         # 1.2. min and max coordinates - all gps coordinates (zones+coast)
-        self.coordinates = self.get_minmax_global(zones_dictionary_gps)
+        self.coordinates = self.get_coordinates(zones_dictionary_gps)
         # 1.2.1. Set the width and height of the grid in meters
         self.size_x = self.set_width()
         self.size_y = self.set_height()
@@ -199,10 +204,28 @@ class PathPlanningServer(rclpy_Node):
                 cost_dictionary[key] = self.green_cost
             elif value == "c":
                 cost_dictionary[key] = math.inf
+            else:
+                cost_dictionary[key] = 1
 
         self.zones_dictionary = zones_dictionary  
         self.zones_dictionary_gps = zones_dictionary_gps  
         self.cost_dictionary = cost_dictionary
+    
+    def get_coordinates(self, zones_dictionary_gps):
+
+        coordinates_list = zones_dictionary_gps.keys()
+        
+        #min of the point[0] and point[1] for x and y
+        min_x = min(coordinates_list, key = lambda x: x[0])[0]
+        min_y = min(coordinates_list, key = lambda x: x[1])[1]
+
+        #max of the point[0] and point[1] for x and y
+        max_x = max(coordinates_list, key = lambda x: x[0])[0]
+        max_y = max(coordinates_list, key = lambda x: x[1])[1]
+
+        result = [min_y, min_x, max_y, max_x]
+        print(f"Coordinates: {result}")
+        return result
 
     
     def get_minmax_global(self, zones_dictionary):
@@ -215,36 +238,36 @@ class PathPlanningServer(rclpy_Node):
         max_y = max(coordinates_list, key = lambda x: x[1])[1]
 
         result = [min_x, min_y, max_x, max_y]
-
+        self.get_logger().info(f"Minmax_global:")
+        self.get_logger().info(f"min_x: {min_x}, min_y: {min_y}, max_x: {max_x}, max_y: {max_y}")
         return result
 
     def get_minmax_world(self, zones_dictionary):
         # 1.4. min and max coordinates - only coast gps coordinates
-        obstacle_list = []
+        coordinates_list = []
         for key, value in zones_dictionary.items():
             if value == "c":
-                obstacle_list.append(key)
+                coordinates_list.append(key)
 
-        x_min = min(obstacle_list, key=lambda x: x[0])[0]
-        y_min = min(obstacle_list, key=lambda x: x[1])[1]
-        x_max = max(obstacle_list, key=lambda x: x[0])[0]
-        y_max = max(obstacle_list, key=lambda x: x[1])[1]
+        #min of the point[0] and point[1] for x and y
+        min_x = min(coordinates_list, key = lambda x: x[0])[0]
+        min_y = min(coordinates_list, key = lambda x: x[1])[1]
 
-        result = [x_min, y_min, x_max, y_max]
+        #max of the point[0] and point[1] for x and y
+        max_x = max(coordinates_list, key = lambda x: x[0])[0]
+        max_y = max(coordinates_list, key = lambda x: x[1])[1]
 
+        result = [min_y, min_x, max_y, max_x]
+        self.get_logger().info(f"Minmax_world:")
+        self.get_logger().info(f"min_x: {min_x}, min_y: {min_y}, max_x: {max_x}, max_y: {max_y}")
         return result
             
     def set_width(self):
-        # 1.2.1. Set the width of the grid in meters
         return round(self.gps_to_meters(self.coordinates[1], self.coordinates[0], self.coordinates[1], self.coordinates[2]))
     
     def set_height(self):
-        # 1.2.1. Set the height of the grid in meters
         return round(self.gps_to_meters(self.coordinates[1], self.coordinates[0], self.coordinates[3], self.coordinates[0]))
-        
-    def create_grid(self, val: float):
-        # 1.5. Create a grid
-        return np.full((self.x_max_world, self.y_max_world), val)
+
     
     def set_start_m(self, start = [0.0,0.0]):   
         start_m = self.gps_to_pixel(start[0],start[1])
@@ -272,8 +295,8 @@ class PathPlanningServer(rclpy_Node):
     def gps_to_pixel(self,latitude, longitude):
         # Convert gps coordinates to pixel coordinates
         #print(f"Coordinates gps_to_pixel: {self.coordinates}")
-        x_pixel = round((longitude - self.coordinates[1]) * self.size_x / (self.coordinates[3] - self.coordinates[1]))
-        y_pixel = round((latitude - self.coordinates[0]) * self.size_y / (self.coordinates[2] - self.coordinates[0]))
+        x_pixel = int(round((longitude - self.coordinates[0]) * self.size_x / (self.coordinates[2] - self.coordinates[0])))
+        y_pixel = int(round((latitude - self.coordinates[1]) * self.size_y / (self.coordinates[3] - self.coordinates[1])))
         x_pixel = round(x_pixel/self.grid_size)*self.grid_size
         y_pixel = round(y_pixel/self.grid_size)*self.grid_size
         
@@ -281,8 +304,8 @@ class PathPlanningServer(rclpy_Node):
     
     def pixel_to_gps(self,x_pixel, y_pixel):
         # Convert pixel coordinates to gps coordinates
-        latitude = self.coordinates[0] + y_pixel * (self.coordinates[2] - self.coordinates[0]) / self.size_y
-        longitude = self.coordinates[1] + x_pixel * (self.coordinates[3] - self.coordinates[1]) / self.size_x
+        latitude = self.coordinates[1] + y_pixel * (self.coordinates[3] - self.coordinates[1]) / self.size_y
+        longitude = self.coordinates[0] + x_pixel * (self.coordinates[2] - self.coordinates[0]) / self.size_x
         return latitude, longitude
 
     def adapt_coordinates(self,coord):
@@ -300,23 +323,27 @@ class PathPlanningServer(rclpy_Node):
     
     ### D* Lite algorithm functions ###
 
+    motions = [
+    Node((1, 0),1),
+    Node((0, 1),1),
+    Node((-1, 0),1),
+    Node((0, -1),1),
+    Node((1, 1),math.sqrt(2)),
+    Node((-1, 1),math.sqrt(2)),
+    Node((1, -1),math.sqrt(2)),
+    Node((-1, -1),math.sqrt(2))
+    ]
 
-    def get_motions(self, n, m):
-        motions = [
-        Node((n, 0),m),
-        Node((0, n),m),
-        Node((-n, 0),m),
-        Node((0, -n),m),
-        Node((n, n), m*math.sqrt(2)),
-        Node((n, -n),m*math.sqrt(2)),
-        Node((-n, n),m*math.sqrt(2)),
-        Node((-n, -n),m*math.sqrt(2))
-        ]
-        return motions
-    
+    def create_grid(self, val: float):
+        # 1.5. Create a grid
+        return np.full((self.x_max_world, self.y_max_world), val)
+
     def c(self, node1: Node, node2: Node):
         try:
             factor = self.cost_dictionary[(node2.x, node2.y)]
+            if factor == math.inf:
+                #self.get_logger().info(f"Obastacle detected at {node2.x, node2.y}")
+                return math.inf
         except KeyError:
             factor = 1
 
@@ -324,8 +351,9 @@ class PathPlanningServer(rclpy_Node):
         new_node = Node((node1.x-node2.x, node1.y-node2.y))
         detected_motion = list(filter(lambda motion:
                                       compare_coordinates(motion, new_node),
-                                      self.get_motions(1,1)))
-        return detected_motion[0].cost * factor
+                                      self.motions))
+        motion = detected_motion[0].cost * factor
+        return motion
 
     def h(self, s: Node):
         # Cannot use the 2nd euclidean norm as this might sometimes generate
@@ -351,7 +379,7 @@ class PathPlanningServer(rclpy_Node):
         return False
 
     def get_neighbours(self, u: Node):
-        return [add_coordinates(u, motion) for motion in self.get_motions(1,1)
+        return [add_coordinates(u, motion) for motion in self.motions
                 if self.is_valid(add_coordinates(u, motion))]
 
     def pred(self, u: Node):
@@ -386,6 +414,7 @@ class PathPlanningServer(rclpy_Node):
             
 
     def compute_shortest_path(self):
+        self.get_logger().info('Computing shortest path')
         self.U.sort(key=lambda x: x[1])
         has_elements = len(self.U) > 0
         start_key_not_updated = self.compare_keys(
@@ -393,6 +422,8 @@ class PathPlanningServer(rclpy_Node):
         )
         rhs_not_equal_to_g = self.rhs[self.start.x][self.start.y] != \
             self.g[self.start.x][self.start.y]
+        
+        area_x, area_y = [], []
         while has_elements and start_key_not_updated or rhs_not_equal_to_g:
             self.kold = self.U[0][1]
             u = self.U[0][0]
@@ -414,18 +445,28 @@ class PathPlanningServer(rclpy_Node):
             )
             rhs_not_equal_to_g = self.rhs[self.start.x][self.start.y] != \
                 self.g[self.start.x][self.start.y]
+            
+            area_x.append(u.x)
+            area_y.append(u.y)
 
-    def compute_current_path(self):
-        path = list()
-        current_point = Node(self.start.x, self.start.y)
-        while not compare_coordinates(current_point, self.goal):
-            path.append(current_point)
-            current_point = min(self.succ(current_point),
-                                key=lambda sprime:
-                                self.c(current_point, sprime) +
-                                self.g[sprime.x][sprime.y])
-        path.append(self.goal)
-        return path
+            area_gps = [self.adapt_coordinates_reverse(u) for u in zip(area_x,area_y)]
+
+            area_x_gps = [point[0] for point in area_gps]
+            area_y_gps = [point[1] for point in area_gps]
+
+            feedback = StartGoalAction.Feedback()
+            feedback.search_area_x = area_x_gps
+            feedback.search_area_y = area_y_gps
+            feedback.partial_path_x = []
+            feedback.partial_path_y = []
+
+            self.goal_handle.publish_feedback(feedback)
+
+
+
+    
+   
+        
 
     def compare_paths(self, path1: list, path2: list):
         if len(path1) != len(path2):
@@ -440,10 +481,18 @@ class PathPlanningServer(rclpy_Node):
     
     def test_dstar_lite(self):
         self.get_logger().info('D* Lite algorithm started')
+        self.get_logger().info('Start: ' + str(self.start.x) + ' ' + str(self.start.y))
+        self.get_logger().info('Goal: ' + str(self.goal.x) + ' ' + str(self.goal.y))
+        self.get_logger().info('min_world: ' + str(self.x_min_world) + ' ' + str(self.y_min_world))
+        self.get_logger().info('max_world: ' + str(self.x_max_world) + ' ' + str(self.y_max_world))
+        self.get_logger().info('cost_dictionary: ' + str(self.cost_dictionary)) 
+        
         start_time = time.time() 
-        pathx = []
-        pathy = []
+        pathx, pathy = [], []
+        rx, ry = [], []
         self.compute_shortest_path()
+        self.start = self.partial_start
+        self.goal = self.partial_goal
         pathx.append(self.start.x + self.x_min_global)
         pathy.append(self.start.y + self.y_min_global)
 
@@ -456,7 +505,6 @@ class PathPlanningServer(rclpy_Node):
                              key=lambda sprime:
                              self.c(self.start, sprime) +
                              self.g[sprime.x][sprime.y])
-            print(self.start.x + self.x_min_global, self.start.y + self.y_min_global)
             pathx.append(self.start.x + self.x_min_global)
             pathy.append(self.start.y + self.y_min_global)
 
@@ -464,6 +512,7 @@ class PathPlanningServer(rclpy_Node):
         ry = pathy
 
         rx, ry = [rx[i] for i in range(len(rx))], [ry[i] for i in range(len(ry))]
+        
         self.path = [(rx[i],ry[i]) for i in range(len(rx))]
         
         end_time = time.time()
@@ -479,6 +528,7 @@ class PathPlanningServer(rclpy_Node):
 
     def visualization(self, gps = True, zones_dictionary = dict, start = [0.0,0.0], goal = [0.0,0.0], path = [], path_optimized = []):
         fig, ax = plt.subplots()
+        ax.grid(True)
         if gps:
             i,j = 1,0
             legend_elements = []
