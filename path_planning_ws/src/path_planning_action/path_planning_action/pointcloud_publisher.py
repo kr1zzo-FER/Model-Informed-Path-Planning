@@ -68,7 +68,6 @@ class CoastToPointCloud(Node):
 
         self.first_gps_msg = True
 
-        self.lcc = LocalCoordinatesConverter(self.zones_dictionary, self.grid_size)
         self.coast_pcd_points = sensor_msgs.PointCloud2()
         self.red_pcd_points = sensor_msgs.PointCloud2()
         self.yellow_pcd_points = sensor_msgs.PointCloud2()
@@ -103,7 +102,6 @@ class CoastToPointCloud(Node):
 
         self.start_goal_update_publisher = self.create_publisher(StartGoalMsg, 'start_goal_msg_update', 10)
 
-    
     def gps_coordinates_callback(self, msg):
 
         if len(msg.coast_points_x.data) == 0:
@@ -148,6 +146,7 @@ class CoastToPointCloud(Node):
         self.yellow_pcd_publisher.publish(self.yellow_pcd_points)
         self.green_pcd_publisher.publish(self.green_pcd_points)
         self.path_pcd_publisher.publish(self.path_pcd)
+
         self.raw_path_pcd_publisher.publish(self.raw_path_pcd)
         self.searched_area_pcd_publisher.publish(self.searched_area_pcd)
 
@@ -203,12 +202,13 @@ class CoastToPointCloud(Node):
             self.raw_path_pcd = self.convert_to_pcd(path_m, 0)
     
     def searched_area_callback(self, msg):
-        if len(msg.path_x) > 0:
-            path = []
-            for i in range(len(msg.path_x)):
-                path.append((msg.path_x[i], msg.path_y[i])) 
-            path_m = self.lcc.get_path_m(path) 
-            self.searched_area_pcd = self.convert_to_pcd(path_m, 0)
+        self.get_logger().info("searched_area received")
+
+        path = []
+        for i in range(len(msg.path_x)):
+            path.append((msg.path_x[i], msg.path_y[i])) 
+        path_m = self.lcc.get_path_m(path) 
+        self.searched_area_pcd = self.convert_to_pcd(path_m, 0)
     
     def convert_to_pcd(self, points, height, parent_frame_id="map"):
 

@@ -64,6 +64,8 @@ class PathOptimization:
 		for i, point in enumerate(self.points):
 			if i%5 == 0:
 				self.points_new.append(point)
+		
+		self.points_new.append(self.points[-1])
 	
 		points_new_plot = self.points_new.copy()
 
@@ -134,11 +136,22 @@ class PathOptimization:
 	
 
 				for element in new_points:
-					print("element: ", element)
 					i = element[1]
 					new_point = element[0]
 					self.points_new.insert(i, new_point)
 				new_points = []
+		
+		for i, point in enumerate(self.points_new):
+			if i == 0:
+					continue
+			if i == len(self.points_new)-1:
+					continue
+			angle = triangle_angle(self.points_new[i-1], self.points_new[i+1], point)
+			if angle > 150 or angle <180:
+				new_x = (self.points_new[i-1][0]+self.points_new[i+1][0])/2
+				new_y = (self.points_new[i-1][1]+self.points_new[i+1][1])/2
+				self.points_new[i] = (new_x, new_y)
+
 
 		points_new_plot1 = self.points_new.copy()
 

@@ -17,9 +17,6 @@ class LocalCoordinatesConverter():
 
     def __init__(self, zones_dictionary = {}, grid_size = 0.0):
 
-        if not zones_dictionary:
-            print("Zones dictionary is empty")
-            return
         
         self.zones = zones_dictionary
         self.start = [0.0,0.0]
@@ -46,7 +43,6 @@ class LocalCoordinatesConverter():
     
     def gps_to_pixel(self,latitude, longitude):
         # Convert gps coordinates to pixel coordinates
-        #print(f"Coordinates gps_to_pixel: {self.coordinates}")
         x_pixel = int(round((longitude - self.coordinates[0]) * self.size_x / (self.coordinates[2] - self.coordinates[0])))
         y_pixel = int(round((latitude - self.coordinates[1]) * self.size_y / (self.coordinates[3] - self.coordinates[1])))
         x_pixel = round(x_pixel/self.grid_size)*self.grid_size
@@ -81,7 +77,6 @@ class LocalCoordinatesConverter():
         max_y = max(coordinates_list, key = lambda x: x[1])[1]
 
         result = [min_y, min_x, max_y, max_x]
-        print(f"Coordinates: {result}")
         return result
 
     def adapt_coordinates(self,coord):
@@ -126,7 +121,6 @@ class LocalCoordinatesConverter():
         return self.goal_m_resized
     
     def get_path_m(self,path): 
-        print(f"Path: {path}") 
         path_m = []
         for point in path:
             path_cord = self.gps_to_pixel_m(point[0],point[1])

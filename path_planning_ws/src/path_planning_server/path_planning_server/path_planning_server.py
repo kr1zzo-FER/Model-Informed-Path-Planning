@@ -17,8 +17,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-show_debug = False
-show_results = False
 
 class PathPlanningServer(rclpy_Node):
 
@@ -27,6 +25,9 @@ class PathPlanningServer(rclpy_Node):
         
         # enable fetching subscription once
         self.first_run = True
+        self.show_debug = False
+        self.show_results = False
+        self.show_feedback = False
 
         
         # gps_coordinates_coast
@@ -130,7 +131,7 @@ class PathPlanningServer(rclpy_Node):
         self.partial_start = Node(self.start_m)
         self.partial_goal = Node(self.goal_m)
 
-        if show_debug:
+        if self.show_debug:
             self.visualization(True,self.zones_dictionary_gps,self.start_gps,self.goal_gps)
             self.visualization(False,self.zones_dictionary,self.start_m,self.goal_m)
 
@@ -157,7 +158,7 @@ class PathPlanningServer(rclpy_Node):
         result.path_x = path_x  
         result.path_y = path_y
 
-        if show_results:
+        if self.show_results:
             self.visualization(False,self.zones_dictionary,self.start_m,self.goal_m,self.path,self.path_optimized)
             self.visualization(True,self.zones_dictionary_gps,self.start_gps,self.goal_gps,self.path_gps,self.optimized_path_gps)
 
@@ -323,35 +324,33 @@ class PathPlanningServer(rclpy_Node):
     
     ### D* Lite algorithm functions ###
 
-    motions = [
-    Node((1, 0),1),
-    Node((0, 1),1),
-    Node((-1, 0),1),
-    Node((0, -1),1),
-    Node((1, 1),math.sqrt(2)),
-    Node((-1, 1),math.sqrt(2)),
-    Node((1, -1),math.sqrt(2)),
-    Node((-1, -1),math.sqrt(2))
-    ]
+    def get_motions(self,n,m):
+        motions = [
+            Node((n,0),m),
+            Node((0,n),m),
+            Node((-n,0),m),
+            Node((0,-n),m),
+            Node((n,n),m*math.sqrt(2)),
+            Node((-n,n),m*math.sqrt(2)),
+            Node((n,-n),m*math.sqrt(2)),
+            Node((-n,-n),m*math.sqrt(2))
+        ]
+        return motions
 
     def create_grid(self, val: float):
         # 1.5. Create a grid
         return np.full((self.x_max_world, self.y_max_world), val)
 
     def c(self, node1: Node, node2: Node):
-        try:
-            factor = self.cost_dictionary[(node2.x, node2.y)]
-            if factor == math.inf:
-                #self.get_logger().info(f"Obastacle detected at {node2.x, node2.y}")
-                return math.inf
-        except KeyError:
-            factor = 1
+        factor = self.cost_dictionary.get((node2.x, node2.y), 1)
+
+        n, m = 1, 10 if factor != 1 else 1
 
         #self.get_logger().info(f"Factor: {factor}")
         new_node = Node((node1.x-node2.x, node1.y-node2.y))
         detected_motion = list(filter(lambda motion:
                                       compare_coordinates(motion, new_node),
-                                      self.motions))
+                                      self.get_motions(n,m)))
         motion = detected_motion[0].cost * factor
         return motion
 
@@ -379,7 +378,7 @@ class PathPlanningServer(rclpy_Node):
         return False
 
     def get_neighbours(self, u: Node):
-        return [add_coordinates(u, motion) for motion in self.motions
+        return [add_coordinates(u, motion) for motion in self.get_motions(1,1)
                 if self.is_valid(add_coordinates(u, motion))]
 
     def pred(self, u: Node):
@@ -446,21 +445,23 @@ class PathPlanningServer(rclpy_Node):
             rhs_not_equal_to_g = self.rhs[self.start.x][self.start.y] != \
                 self.g[self.start.x][self.start.y]
             
-            area_x.append(u.x)
-            area_y.append(u.y)
+            if self.show_feedback:
+            
+                area_x.append(u.x)
+                area_y.append(u.y)
 
-            area_gps = [self.adapt_coordinates_reverse(u) for u in zip(area_x,area_y)]
+                area_gps = [self.adapt_coordinates_reverse(u) for u in zip(area_x,area_y)]
 
-            area_x_gps = [point[0] for point in area_gps]
-            area_y_gps = [point[1] for point in area_gps]
+                area_x_gps = [point[0] for point in area_gps]
+                area_y_gps = [point[1] for point in area_gps]
 
-            feedback = StartGoalAction.Feedback()
-            feedback.search_area_x = area_x_gps
-            feedback.search_area_y = area_y_gps
-            feedback.partial_path_x = []
-            feedback.partial_path_y = []
+                feedback = StartGoalAction.Feedback()
+                feedback.search_area_x = area_x_gps
+                feedback.search_area_y = area_y_gps
+                feedback.partial_path_x = []
+                feedback.partial_path_y = []
 
-            self.goal_handle.publish_feedback(feedback)
+                self.goal_handle.publish_feedback(feedback)
 
 
 
@@ -485,8 +486,7 @@ class PathPlanningServer(rclpy_Node):
         self.get_logger().info('Goal: ' + str(self.goal.x) + ' ' + str(self.goal.y))
         self.get_logger().info('min_world: ' + str(self.x_min_world) + ' ' + str(self.y_min_world))
         self.get_logger().info('max_world: ' + str(self.x_max_world) + ' ' + str(self.y_max_world))
-        self.get_logger().info('cost_dictionary: ' + str(self.cost_dictionary)) 
-        
+    
         start_time = time.time() 
         pathx, pathy = [], []
         rx, ry = [], []
