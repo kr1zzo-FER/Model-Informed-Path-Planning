@@ -27,7 +27,7 @@ class PathPlanningServer(rclpy_Node):
         self.first_run = True
         self.show_debug = False
         self.show_results = False
-        self.show_feedback = False
+        self.show_feedback = True
 
         
         # gps_coordinates_coast
@@ -52,9 +52,13 @@ class PathPlanningServer(rclpy_Node):
         self.start, self.goal = Node(), Node()
 
         # D* lite
-        self.red_cost = 10.0
-        self.yellow_cost = 2.0
-        self.green_cost = 1.5
+        self.red_cost = 20.0
+        self.yellow_cost = 10.0
+        self.green_cost = 5.0
+        self.red_step = 1.0
+        self.yellow_step = 10.0
+        self.green_step = 50.0
+        self.open_sea_step = 100.0
 
         self.cost_dictionary = {}   
         self.U = list()  # Would normally be a priority queue
@@ -198,15 +202,15 @@ class PathPlanningServer(rclpy_Node):
         for key, value in zones_dictionary.items():
                 
             if value == "r":
-                cost_dictionary[key] = self.red_cost
+                cost_dictionary[key] = [self.red_cost, self.red_step]
             elif value == "y":
-                cost_dictionary[key] = self.yellow_cost
+                cost_dictionary[key] = [self.yellow_cost, self.yellow_step]
             elif value == "g":
-                cost_dictionary[key] = self.green_cost
+                cost_dictionary[key] = [self.green_cost, self.green_step]
             elif value == "c":
-                cost_dictionary[key] = math.inf
+                cost_dictionary[key] = [math.inf, 1]
             else:
-                cost_dictionary[key] = 1
+                cost_dictionary[key] = [1, self.open_sea_step]
 
         self.zones_dictionary = zones_dictionary  
         self.zones_dictionary_gps = zones_dictionary_gps  
@@ -342,16 +346,19 @@ class PathPlanningServer(rclpy_Node):
         return np.full((self.x_max_world, self.y_max_world), val)
 
     def c(self, node1: Node, node2: Node):
-        factor = self.cost_dictionary.get((node2.x, node2.y), 1)
 
-        n, m = 1, 10 if factor != 1 else 1
+        factor = self.cost_dictionary.get((node2.x, node2.y), [1,self.open_sea_step])
 
-        #self.get_logger().info(f"Factor: {factor}")
-        new_node = Node((node1.x-node2.x, node1.y-node2.y))
+        m,n = factor[0],factor[1]
+
+        new_node = Node((n*(node1.x-node2.x),n*(node1.y-node2.y)))
+
         detected_motion = list(filter(lambda motion:
                                       compare_coordinates(motion, new_node),
                                       self.get_motions(n,m)))
-        motion = detected_motion[0].cost * factor
+        
+        #self.get_logger().info(f"Detected motion: {detected_motion}")
+        motion = detected_motion[0].cost * m
         return motion
 
     def h(self, s: Node):
@@ -463,11 +470,6 @@ class PathPlanningServer(rclpy_Node):
 
                 self.goal_handle.publish_feedback(feedback)
 
-
-
-    
-   
-        
 
     def compare_paths(self, path1: list, path2: list):
         if len(path1) != len(path2):

@@ -202,13 +202,13 @@ class CoastToPointCloud(Node):
             self.raw_path_pcd = self.convert_to_pcd(path_m, 0)
     
     def searched_area_callback(self, msg):
-        self.get_logger().info("searched_area received")
-
-        path = []
-        for i in range(len(msg.path_x)):
-            path.append((msg.path_x[i], msg.path_y[i])) 
-        path_m = self.lcc.get_path_m(path) 
-        self.searched_area_pcd = self.convert_to_pcd(path_m, 0)
+        if len(msg.path_x) > 0:
+            self.get_logger().info("searched_area received")
+            path = []
+            for i in range(len(msg.path_x)):
+                path.append((msg.path_x[i], msg.path_y[i])) 
+            path_m = self.lcc.get_path_m(path) 
+            self.searched_area_pcd = self.convert_to_pcd(path_m, 0)
     
     def convert_to_pcd(self, points, height, parent_frame_id="map"):
 
