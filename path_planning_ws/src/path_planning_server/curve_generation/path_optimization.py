@@ -15,7 +15,7 @@ from curve_generation.curve_factory import CurveFactory
 
 root = Path(__file__).resolve().parents[2]
 
-show_plot = False
+show_plot = True
 
 def load_binary_data(file_name):
     binary_path = root / "binary_dump"

@@ -4,8 +4,10 @@ std_msgs/Float32MultiArray coast_points_x
 std_msgs/Float32MultiArray green_points_x
 std_msgs/Float32MultiArray red_points_x
 std_msgs/Float32MultiArray yellow_points_x
+std_msgs/Float32MultiArray safe_points_x
 std_msgs/Float32MultiArray coast_points_y
 std_msgs/Float32MultiArray green_points_y
 std_msgs/Float32MultiArray red_points_y
 std_msgs/Float32MultiArray yellow_points_y
+std_msgs/Float32MultiArray safe_points_y
 float32 grid_size

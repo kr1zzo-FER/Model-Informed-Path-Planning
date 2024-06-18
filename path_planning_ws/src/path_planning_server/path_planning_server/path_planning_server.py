@@ -22,13 +22,32 @@ class PathPlanningServer(rclpy_Node):
 
     def __init__(self):
         super().__init__('path_planning_server')
+
+        self.get_logger().info('Path planning server started')
+        self.declare_parameter('cost_values', [20.0,1.5,1.2,1.1])
+        self.declare_parameter('step_values', [1.0,50.0,50.0,100.0])
+        self.declare_parameter('show_feedback', False)
+        self.declare_parameter('show_results', False)
+        self.declare_parameter('show_debug', False)
+        self.cost_values = self.get_parameter('cost_values').get_parameter_value().double_array_value
+        self.step_values = self.get_parameter('step_values').get_parameter_value().double_array_value
+        self.show_feedback = self.get_parameter('show_feedback').get_parameter_value().bool_value
+        self.show_results = self.get_parameter('show_results').get_parameter_value().bool_value
+        self.show_debug = self.get_parameter('show_debug').get_parameter_value().bool_value
+
+        self.red_cost = self.cost_values[0]
+        self.yellow_cost = self.cost_values[1]
+        self.green_cost = self.cost_values[2]
+        self.safe_cost = self.cost_values[3]
+
+        self.red_step = self.step_values[0]
+        self.yellow_step = self.step_values[1]
+        self.green_step = self.step_values[2]
+        self.safe_step = self.step_values[3]
+        self.open_sea_step = 100.0
         
         # enable fetching subscription once
         self.first_run = True
-        self.show_debug = False
-        self.show_results = False
-        self.show_feedback = True
-
         
         # gps_coordinates_coast
         self.coast_points_subscriber = self.create_subscription(CoastMsg, 'gps_coordinates_coast', self.coast_points_callback, 10)
@@ -50,15 +69,6 @@ class PathPlanningServer(rclpy_Node):
         self.start_gps, self.goal_gps = (0.0,0.0), (0.0,0.0)
         self.start_m, self.goal_m = (0,0), (0,0)
         self.start, self.goal = Node(), Node()
-
-        # D* lite
-        self.red_cost = 20.0
-        self.yellow_cost = 10.0
-        self.green_cost = 5.0
-        self.red_step = 1.0
-        self.yellow_step = 10.0
-        self.green_step = 50.0
-        self.open_sea_step = 100.0
 
         self.cost_dictionary = {}   
         self.U = list()  # Would normally be a priority queue
@@ -88,9 +98,10 @@ class PathPlanningServer(rclpy_Node):
             red_zone_gps = [(msg.red_points_x.data[i], msg.red_points_y.data[i]) for i in range(len(msg.red_points_x.data))]
             yellow_zone_gps = [(msg.yellow_points_x.data[i], msg.yellow_points_y.data[i]) for i in range(len(msg.yellow_points_x.data))]
             green_zone_gps = [(msg.green_points_x.data[i], msg.green_points_y.data[i]) for i in range(len(msg.green_points_x.data))]
+            safe_zone_gps = [(msg.safe_points_x.data[i], msg.safe_points_y.data[i]) for i in range(len(msg.safe_points_x.data))]
 
             # 1.1. Create a dictionary : key = gps coordinates, value = zone
-            self.make_zones_dictionary(coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps)
+            self.make_zones_dictionary(coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, safe_zone_gps)
 
             # 1.4. min and max coordinates - all gps coordinates (zones+coast)
             minmax_global = self.get_minmax_global(self.zones_dictionary)
@@ -157,14 +168,19 @@ class PathPlanningServer(rclpy_Node):
 
         path_x = [point[0] for point in self.optimized_path_gps]   
         path_y = [point[1] for point in self.optimized_path_gps]
+        raw_path_x = [point[0] for point in self.path_gps]
+        raw_path_y = [point[1] for point in self.path_gps]
 
         result = StartGoalAction.Result()
         result.path_x = path_x  
         result.path_y = path_y
+        result.raw_path_x = raw_path_x
+        result.raw_path_y = raw_path_y
 
         if self.show_results:
             self.visualization(False,self.zones_dictionary,self.start_m,self.goal_m,self.path,self.path_optimized)
             self.visualization(True,self.zones_dictionary_gps,self.start_gps,self.goal_gps,self.path_gps,self.optimized_path_gps)
+            plt.show()
 
         return result
     
@@ -175,16 +191,20 @@ class PathPlanningServer(rclpy_Node):
         return optimized_path
 
         
-    def make_zones_dictionary(self, coast_points, red_zone, yellow_zone, green_zone):
+    def make_zones_dictionary(self, coast_points, red_zone, yellow_zone, green_zone, safe_zone):
         # 1.1. Create a dictionary : key = gps coordinates, value = zone
         zones_dictionary_gps, zones_dictionary, cost_dictionary = {}, {}, {}
 
-        for point in red_zone:
-            zones_dictionary_gps[point] = "r"
+        for point in safe_zone:
+            zones_dictionary_gps[point] = "s"
+        for point in green_zone:
+            zones_dictionary_gps[point] = "g"
         for point in yellow_zone:
             zones_dictionary_gps[point] = "y"
         for point in green_zone:
             zones_dictionary_gps[point] = "g"
+        for point in red_zone:
+            zones_dictionary_gps[point] = "r"
         for point in coast_points:
             zones_dictionary_gps[point] = "c"
         
@@ -207,10 +227,12 @@ class PathPlanningServer(rclpy_Node):
                 cost_dictionary[key] = [self.yellow_cost, self.yellow_step]
             elif value == "g":
                 cost_dictionary[key] = [self.green_cost, self.green_step]
+            elif value == "s":
+                cost_dictionary[key] = [self.safe_cost, self.safe_step]
             elif value == "c":
                 cost_dictionary[key] = [math.inf, 1]
             else:
-                cost_dictionary[key] = [1, self.open_sea_step]
+                cost_dictionary[key] = 1
 
         self.zones_dictionary = zones_dictionary  
         self.zones_dictionary_gps = zones_dictionary_gps  
@@ -362,18 +384,12 @@ class PathPlanningServer(rclpy_Node):
         return motion
 
     def h(self, s: Node):
-        # Cannot use the 2nd euclidean norm as this might sometimes generate
-        # heuristics that overestimate the cost, making them inadmissible,
-        # due to rounding errors etc (when combined with calculate_key)
-        # To be admissible heuristic should
-        # never overestimate the cost of a move
-        # hence not using the line below
-        # return math.hypot(self.start.x - s.x, self.start.y - s.y)
-
-        # Below is the same as 1; modify if you modify the cost of each move in
-        # motion
-        # return max(abs(self.start.x - s.x), abs(self.start.y - s.y))
-        return 1
+        dx = abs(s.x - self.goal.x)
+        dy = abs(s.y - self.goal.y)
+        D = 1
+        D2 = math.sqrt(2)
+        return D * max(dx, dy) + (D2 - D) * min(dx, dy)
+ 
 
     def calculate_key(self, s: Node):
         return (min(self.g[s.x][s.y], self.rhs[s.x][s.y]) + self.h(s)
@@ -531,7 +547,12 @@ class PathPlanningServer(rclpy_Node):
     def visualization(self, gps = True, zones_dictionary = dict, start = [0.0,0.0], goal = [0.0,0.0], path = [], path_optimized = []):
         fig, ax = plt.subplots()
         ax.grid(True)
+
         if gps:
+            show_box = self.pixel_to_gps(50,50)
+            show_box = show_box[0]
+
+            set_title = "Planned path in global coordinate system"
             i,j = 1,0
             legend_elements = []
             legend_elements.append(Line2D([0], [0], color='black', lw=4, label=f"min_global = {self.coordinates[0]}, {self.coordinates[1]}"))
@@ -539,8 +560,14 @@ class PathPlanningServer(rclpy_Node):
             legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f"start = {self.start_gps[0]}, {self.start_gps[1]}"))
             legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f"goal = {self.goal_gps[0]}, {self.goal_gps[1]}"))
             ax.legend(handles=legend_elements, loc='upper right')
-
+            ax.set_xlabel("Longitude")
+            ax.set_ylabel("Latitude")
+            ax.set_xticklabels(np.arange(self.coordinates[1], self.coordinates[3], 0.00001), rotation = 0)
+            ax.set_yticklabels(np.arange(self.coordinates[0], self.coordinates[2], 0.00001))
         else:
+            show_box = 50
+
+            set_title = "Planned path in local coordinate system"
             i,j = 0,1
             legend_elements = []
             legend_elements.append(Line2D([0], [0], color='black', lw=4, label=f"min_global = {self.x_min_global}, {self.y_min_global}"))
@@ -550,26 +577,40 @@ class PathPlanningServer(rclpy_Node):
             legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f"start = {self.start.x}, {self.start.y}"))
             legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f"goal = {self.goal.x}, {self.goal.y}"))
             ax.legend(handles=legend_elements, loc='upper right')
+        
+            ax.set_title(set_title)
 
+            min_path_x = min([point[i] for point in path])
+            max_path_x = max([point[i] for point in path])
+            min_path_y = min([point[j] for point in path])
+            max_path_y = max([point[j] for point in path])
+
+            ax.set_xlim(min_path_x-show_box, max_path_x+show_box)
+            ax.set_ylim(min_path_y-show_box, max_path_y+show_box)
+        
         for key, value in zones_dictionary.items():
             if value == 'c':
-                ax.plot(key[i],key[j],'bo', markersize=0.1)
+                ax.plot(key[i],key[j],'bo', markersize=0.25)
             elif value == 'r':
-                ax.plot(key[i],key[j],'ro', markersize=0.1)
+                ax.plot(key[i],key[j],'ro', markersize=0.25)
             elif value == 'g':
-                ax.plot(key[i],key[j],'go', markersize=0.1)
+                ax.plot(key[i],key[j],'go', markersize=0.25)
             elif value == 'y':
-                ax.plot(key[i],key[j],'yo', markersize=0.1)
+                ax.plot(key[i],key[j],'yo', markersize=0.25)
+            elif value == 's':
+                ax.plot(key[i],key[j],color='lawngreen', markersize=0.25)
         
         ax.plot(start[i],start[j],'bx', markersize=10)
         ax.plot(goal[i],goal[j],'bo', markersize=10)
 
-        for point in path:
-                ax.plot(point[i],point[j],'co', markersize=2)
-        for point in path_optimized:
-                ax.plot(point[i],point[j],'mo', markersize=2)
+        ax.grid(True)
 
-        plt.show()
+        for point in path:
+                ax.plot(point[i],point[j],'mo', markersize=1)
+        for point in path_optimized:
+                ax.plot(point[i],point[j],'co', markersize=1)
+
+        plt.show(block=True)
 
 
 def main(args=None):

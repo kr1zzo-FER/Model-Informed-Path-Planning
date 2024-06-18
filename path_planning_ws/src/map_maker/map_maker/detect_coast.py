@@ -18,20 +18,24 @@ from scipy import ndimage as nd
 from math import sqrt, cos, sin, pi
 import time
 
+show_results = False
 show_mask = False
+show_image = False
+shoe_image_gps = False
 
 class CoastProcessing:
 
-    def __init__(self, image_path, grid_size):
+    def __init__(self, image_path, grid_size, osm_object):
         self.image_path = image_path
         self.grid_size = int(grid_size)
         self.image, self.image1 = self.set_image(image_path)
         self.mask = self.set_mask()
-        self.sea_coordinates = self.set_sea_coordinates()
+        self.osm_object = osm_object    
         self.coast_points = []
         self.red_zone = []
         self.yellow_zone = []
         self.green_zone = []
+        self.safe_zone = []
         self.zones_dictionary = {}
 
     def set_image(self, image_path):
@@ -49,54 +53,13 @@ class CoastProcessing:
         mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
         # apply morphological operations to mask
-        mask = nd.binary_closing(mask, structure=np.ones((12,12)))
+        mask0 = nd.binary_closing(mask, structure=np.ones((12,12)))
 
-        if show_mask:
-            plt.imshow(mask)
-            plt.show()
+        return mask0
 
-        return mask
-    
-    def set_sea_coordinates(self):
-
-        mask = self.mask
-
-        h,w = mask.shape
-
-        x_width = int(w/self.grid_size)
-        y_width = int(h/self.grid_size)
-        
-    
-
-        sea_points = []
-        for i in range(0, x_width-1):
-            for j in range(0, y_width-1):
-
-                pixel_i = i*self.grid_size
-                pixel_j = j*self.grid_size
-
-                try:
-                    if mask[pixel_j, pixel_i] == 1:
-                        sea_points.append([pixel_i, h-pixel_j])
-                except:
-                    pass
-        
-        if show_mask:
-            fig, ax = plt.subplots()
-
-            im = ax.imshow(self.image, extent=[0, self.image1.size[0], 0, self.image1.size[1]])
-            for point in sea_points:
-                ax.plot(point[0], point[1], 'o', color='blue')
-            plt.show()
-        
-        return sea_points
 
     def get_zones(self):
         return self.coast_points,self.red_zone, self.yellow_zone, self.green_zone
-
-    def get_sea_coordinates(self):  
-        return self.sea_coordinates
-   
 
     def detect_coast_points(self,x,y):
         # detect coast or sea at given point (x,y) on image
@@ -123,15 +86,15 @@ class CoastProcessing:
 
         h,w = mask.shape
 
-        x_width = int(w/self.grid_size)
-        y_width = int(h/self.grid_size)
+        x_width = round(w/self.grid_size)
+        y_width = round(h/self.grid_size)
         
         directions = [(0,1), (1,0), (0,-1), (-1,0), (1,1), (-1,-1), (1,-1), (-1,1)]
 
         coast_points = []
 
-        for i in range(10, x_width-10):
-            for j in range(10, y_width-10):
+        for i in range(5, x_width-5):
+            for j in range(5, y_width-5):
 
                 pixel_i = i*self.grid_size
                 pixel_j = j*self.grid_size
@@ -225,21 +188,103 @@ class CoastProcessing:
                     if [x,y] not in green_zone and not self.mask[h-y,x] == 0 and [x,y] not in red_zone and [x,y] not in yellow_zone:
                         green_zone.append([x,y])
         print(f"Detected {len(green_zone)} green zone points")
+    
+        #detect safe zone
+        print("Detecting safe zone points")
+        for point in coast_points:
+            for i in range(26,31):
+                safe_distance = i*self.grid_size
+                safe_directions = [(round(direction[0]/self.grid_size*safe_distance)*self.grid_size,round(direction[1]/self.grid_size*safe_distance)*self.grid_size) for direction in directions]
+                safe_directions.append((1,0))
+                safe_directions.append((-1,0))
+                for direction in safe_directions:
+                    try:
+                        x = point[0] + direction[0]
+                        y = point[1] + direction[1]
+                    except:
+                        print(point[0],point[1])
+                        print(direction[0],direction[1])
+
+                    if x < 0 or x >= self.image1.size[0] or y < 0 or y >= self.image1.size[1] and h-y < 0 or h-y >= h:
+                        continue
+                    if [x,y] not in self.safe_zone and not self.mask[h-y,x] == 0 and [x,y] not in red_zone and [x,y] not in yellow_zone and [x,y] not in green_zone:
+                        self.safe_zone.append([x,y])
+        print(f"Detected {len(self.safe_zone)} safe zone points")
+
         
         end_time = time.time()
         print(f"Zones generated in {round(end_time-start_time,4)} seconds")
 
-        #make dictionary: cordinates are keys
-        zones_dictionary = {}
-        for point in red_zone:
-            zones_dictionary[tuple(point)] = "r"
-        for point in yellow_zone:
-            zones_dictionary[tuple(point)] = "y"
-        for point in green_zone:
-            zones_dictionary[tuple(point)] = "g"
-        for point in coast_points:
-            zones_dictionary[tuple(point)] = "c"
-        
-        self.zones_dictionary = zones_dictionary
+        self.osm_object.set_coast_points(coast_points)
 
-        return coast_points, red_zone, yellow_zone, green_zone
+        # remove duplicates and points greather od lower than min max values
+        n = 50
+        coast_points = [point for point in coast_points if point[0] > n and point[0] < self.image1.size[0]-n and point[1] > n and point[1] < self.image1.size[1]-n]
+        red_zone = [point for point in red_zone if point[0] > n and point[0] < self.image1.size[0]-n and point[1] > n and point[1] < self.image1.size[1]-n]
+        yellow_zone = [point for point in yellow_zone if point[0] > n and point[0] < self.image1.size[0]-n and point[1] > n and point[1] < self.image1.size[1]-n]
+        green_zone = [point for point in green_zone if point[0] > n and point[0] < self.image1.size[0]-n and point[1] > n and point[1] < self.image1.size[1]-n]
+        safe_zone = [point for point in self.safe_zone if point[0] > n and point[0] < self.image1.size[0]-n and point[1] > n and point[1] < self.image1.size[1]-n]
+
+        coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, safe_zone_gps = [], [], [], [], []
+
+        for point in coast_points:
+            p = self.osm_object.pixel_to_gps(point[0],point[1])
+            if p not in coast_points_gps:
+                coast_points_gps.append(p)
+        for point in red_zone:
+            p = self.osm_object.pixel_to_gps(point[0],point[1])
+            if p not in red_zone_gps:
+                red_zone_gps.append(p)
+        for point in yellow_zone:
+            p = self.osm_object.pixel_to_gps(point[0],point[1])
+            if p not in yellow_zone_gps:
+                yellow_zone_gps.append(p)
+        for point in green_zone:
+            p = self.osm_object.pixel_to_gps(point[0],point[1])
+            if p not in green_zone_gps:
+                green_zone_gps.append(p)
+        for point in safe_zone:
+            p = self.osm_object.pixel_to_gps(point[0],point[1])
+            if p not in safe_zone_gps:
+                safe_zone_gps.append(p)
+        
+
+        if show_results:
+            
+            if show_mask:
+                plt.imshow(self.mask)
+                plt.show()
+            
+            if show_image:
+                fig,ax = plt.subplots()
+                for point in coast_points:
+                    ax.plot(point[0], point[1], 'o', color='blue', markersize=1)
+                for point in red_zone:
+                    ax.plot(point[0], point[1], 'o', color='red', markersize=0.1)
+                for point in yellow_zone:
+                    ax.plot(point[0], point[1], 'o', color='yellow', markersize=0.1)
+                for point in green_zone:
+                    ax.plot(point[0], point[1], 'o', color='green', markersize=0.1)
+                for point in self.safe_zone:
+                    ax.plot(point[0], point[1], 'o', color='black', markersize=0.1)
+                ax.grid(True)
+                plt.show()
+
+            if shoe_image_gps:
+                fig,ax = plt.subplots()
+                for point in coast_points_gps:
+                    ax.plot(point[1], point[0], 'o', color='blue', markersize=1)
+                for point in red_zone_gps:
+                    ax.plot(point[1], point[0], 'o', color='red', markersize=0.1)
+                for point in yellow_zone_gps:
+                    ax.plot(point[1], point[0], 'o', color='yellow', markersize=0.1)
+                for point in green_zone_gps:
+                    ax.plot(point[1], point[0], 'o', color='green', markersize=0.1)
+                for point in safe_zone_gps:
+                    ax.plot(point[1], point[0], 'o', color='black', markersize=0.1)
+                ax.grid(True)
+                ax.set_xlabel("Longitude")
+                ax.set_ylabel("Latitude")
+                plt.show()
+
+        return coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, safe_zone_gps

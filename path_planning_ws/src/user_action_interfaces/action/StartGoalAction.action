@@ -3,6 +3,8 @@ float32[] goal
 ---
 float32[] path_x
 float32[] path_y
+float32[] raw_path_x
+float32[] raw_path_y
 ---
 float32[] partial_path_x
 float32[] partial_path_y

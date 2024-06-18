@@ -40,7 +40,7 @@ class MapPublisher(Node):
         self.save_file = self.get_parameter('save_file').get_parameter_value().string_value
 
 
-        self.zones_dictionary, self.coast_points, self.red_points, self.yellow_points, self.green_points, grid_size = self.get_zones_dictionary()
+        self.zones_dictionary, self.coast_points, self.red_points, self.yellow_points, self.green_points, self.safe_points, grid_size = self.get_zones_dictionary()
 
         self.coast_points_x = [point[0] for point in self.coast_points]
         self.coast_points_y = [point[1] for point in self.coast_points]
@@ -50,6 +50,9 @@ class MapPublisher(Node):
         self.yellow_points_y = [point[1] for point in self.yellow_points]
         self.green_points_x = [point[0] for point in self.green_points]
         self.green_points_y = [point[1] for point in self.green_points]
+        self.safe_points_x = [point[0] for point in self.safe_points]
+        self.safe_points_y = [point[1] for point in self.safe_points]
+
         self.grid_size = grid_size
 
         self.timer = self.create_timer(1, self.timer_callback)
@@ -69,6 +72,8 @@ class MapPublisher(Node):
         coast_msg.yellow_points_y.data = self.yellow_points_y
         coast_msg.green_points_x.data = self.green_points_x
         coast_msg.green_points_y.data = self.green_points_y
+        coast_msg.safe_points_x.data = self.safe_points_x
+        coast_msg.safe_points_y.data = self.safe_points_y
         coast_msg.grid_size = self.grid_size
 
         self.zones_publisher.publish(coast_msg)
@@ -84,6 +89,7 @@ class MapPublisher(Node):
         red_zone_gps = data["red_zone_gps"]
         yellow_zone_gps = data["yellow_zone_gps"]
         green_zone_gps = data["green_zone_gps"]
+        safe_zone_gps = data["safe_zone_gps"]
         grid_size = data["grid_size"]
 
         grid_size = float(grid_size)
@@ -97,8 +103,10 @@ class MapPublisher(Node):
             zones_dictionary[tuple(point)] = "g"
         for point in coast_points_gps:
             zones_dictionary[tuple(point)] = "c"
+        for point in safe_zone_gps:
+            zones_dictionary[tuple(point)] = "s"
         
-        return zones_dictionary, coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, grid_size
+        return zones_dictionary, coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, safe_zone_gps, grid_size
     
 
 

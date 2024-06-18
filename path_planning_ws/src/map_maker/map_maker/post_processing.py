@@ -15,12 +15,13 @@ import math
 
 class PostProcessing:
 
-    def __init__(self, coast_points, red_zone, yellow_zone, green_zone, grid_size):
+    def __init__(self, coast_points, red_zone, yellow_zone, green_zone,safe_zone, grid_size):
         self.coast_points = coast_points
         self.red_zone = red_zone
         self.yellow_zone = yellow_zone
         self.green_zone = green_zone
         self.grid_size = grid_size
+        self.safe_zone = safe_zone
         self.coordinates = self.set_coordinates()
         self.size_x = self.set_width()
         self.size_y = self.set_height()
@@ -29,13 +30,34 @@ class PostProcessing:
         self.internal_red = self.allign_coordinates(red_zone)
         self.internal_yellow = self.allign_coordinates(yellow_zone)
         self.internal_green = self.allign_coordinates(green_zone)
+        self.internal_safe = self.allign_coordinates(safe_zone)
 
     def get_coordinates(self):
-        return self.internal_coast, self.internal_red, self.internal_yellow, self.internal_green
+        internal_coast = self.internal_coast
+        internal_red = []
+        internal_yellow = []
+        internal_green = []
+        internal_safe = []
+
+        for point in self.internal_red:
+            if point not in internal_coast:
+                internal_red.append(point)
+        for point in self.internal_yellow:
+            if point not in internal_coast and point not in internal_red:
+                internal_yellow.append(point)
+        for point in self.internal_green:
+            if point not in internal_coast and point not in internal_red and point not in internal_yellow:
+                internal_green.append(point)
+        for point in self.internal_safe:
+            if point not in internal_coast and point not in internal_red and point not in internal_yellow and point not in internal_green:
+                internal_safe.append(point)
+        
+        return internal_coast, internal_red, internal_yellow, internal_green, internal_safe
+        
     
     def set_coordinates(self):
 
-        coordinates_list = self.coast_points + self.red_zone + self.yellow_zone + self.green_zone
+        coordinates_list = self.coast_points + self.red_zone + self.yellow_zone + self.green_zone + self.safe_zone
         
         #min of the point[0] and point[1] for x and y
         min_x = min(coordinates_list, key = lambda x: x[0])[0]

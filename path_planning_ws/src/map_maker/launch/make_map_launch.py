@@ -5,10 +5,10 @@ import launch_ros.actions
 
 # Default name : procesed_map_{save_file_name} 
 # in map_data folder
-save_file_name = 'omisalj'
+save_file_name = 'jadranovo'
 
 # Input data folders names
-locations = ["omisalj", "selehovica", "sv_marko"]
+locations = ["sv_marko", "voz","jadranovo","lokvisce", "kacjak"]
 
 # Grid size : take coordinate every {grid_size} meters
 grid_size = 10

@@ -73,6 +73,7 @@ class MapProcess(Node):
             red_zone_gps = []
             yellow_zone_gps = []
             green_zone_gps = []
+            safe_zone_gps = []
         else:
             processed = test_dictionary["processed_areas"]
             for area in processed:
@@ -83,6 +84,7 @@ class MapProcess(Node):
             red_zone_gps = test_dictionary["data"]["red_zone_gps"]
             yellow_zone_gps = test_dictionary["data"]["yellow_zone_gps"]
             green_zone_gps = test_dictionary["data"]["green_zone_gps"]
+            safe_zone_gps = test_dictionary["data"]["safe_zone_gps"]
 
         self.get_logger().info(f"Locations to process: {self.locations_folder}\nsave file: {self.save_file}")
 
@@ -105,37 +107,27 @@ class MapProcess(Node):
 
             ## CoastProcessing object
 
-            coast_object = CoastProcessing(input_data/image_save, self.grid_size)
+            coast_object = CoastProcessing(input_data/image_save, self.grid_size, osm_object)
             
-            coast_points, red_zone, yellow_zone, green_zone = coast_object.zones_from_coast(12)
+            coast_points, red_zone, yellow_zone, green_zone, safe_zone = coast_object.zones_from_coast(36)
             # save coast points to binary file
-            osm_object.set_coast_points(coast_points)
-            
             for point in coast_points:
-                p = osm_object.pixel_to_gps(point[0],point[1])
-                if p not in coast_points_gps:
-                    coast_points_gps.append(p)
-            self.get_logger().info(f"Coast points: {len(coast_points)}")
+                coast_points_gps.append(point)
             for point in red_zone:
-                p = osm_object.pixel_to_gps(point[0],point[1])
-                if p not in red_zone_gps:
-                    red_zone_gps.append(p)
-            self.get_logger().info(f"Red zone: {len(red_zone)}")
+                if point not in coast_points:
+                    red_zone_gps.append(point)
             for point in yellow_zone:
-                p = osm_object.pixel_to_gps(point[0],point[1])
-                if p not in yellow_zone_gps:
-                    yellow_zone_gps.append(p)
-            self.get_logger().info(f"Yellow zone: {len(yellow_zone)}")
+                if point not in red_zone:
+                    yellow_zone_gps.append(point)
             for point in green_zone:
-                p = osm_object.pixel_to_gps(point[0],point[1])
-                if p not in green_zone_gps:
-                    green_zone_gps.append(p)
-            self.get_logger().info(f"Green zone: {len(green_zone)}")
-            
-        
-        self.get_logger().info("Post processing")
-        post_processing = PostProcessing(coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps,self.grid_size)
-        coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps = post_processing.get_coordinates()
+                if point not in yellow_zone and point not in red_zone:
+                    green_zone_gps.append(point)
+            for point in safe_zone:
+                if point not in green_zone and point not in yellow_zone and point not in red_zone:
+                    safe_zone_gps.append(point)
+
+        post_processing = PostProcessing(coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps,safe_zone_gps,self.grid_size)
+        coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, safe_zone_gps = post_processing.get_coordinates()
         self.get_logger().info("Post processing done!")
 
         # Save data to binary file
@@ -149,6 +141,7 @@ class MapProcess(Node):
         test_dictionary["data"]["red_zone_gps"] = red_zone_gps
         test_dictionary["data"]["yellow_zone_gps"] = yellow_zone_gps
         test_dictionary["data"]["green_zone_gps"] = green_zone_gps
+        test_dictionary["data"]["safe_zone_gps"] = safe_zone_gps
 
         save_to_binary_file(test_dictionary, map_data_folder/f'processed_map_{self.save_file}')
         
@@ -160,6 +153,7 @@ class MapProcess(Node):
             ax.plot([x[1] for x in red_zone_gps], [x[0] for x in red_zone_gps], 'ro', markersize=0.1)
             ax.plot([x[1] for x in yellow_zone_gps], [x[0] for x in yellow_zone_gps], 'yo', markersize=0.1)
             ax.plot([x[1] for x in green_zone_gps], [x[0] for x in green_zone_gps], 'go', markersize=0.1)
+            ax.plot([x[1] for x in safe_zone_gps], [x[0] for x in safe_zone_gps], 'co', markersize=0.1)
             plt.show()
 
         sys.exit(0)
