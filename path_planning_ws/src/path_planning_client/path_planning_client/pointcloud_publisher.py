@@ -98,10 +98,12 @@ class CoastToPointCloud(Node):
         self.start_publisher = self.create_publisher(PoseStamped, 'start_pose_custom', 10)
         #goal point
         self.goal_publisher = self.create_publisher(PoseStamped, 'goal_pose_custom', 10)
+        
+        self.timer = self.create_timer(0.1, self.timer_callback)
+
+        
 
         self.start_goal_update_publisher = self.create_publisher(StartGoalMsg, 'start_goal_msg_update', 10)
-
-        self.timer = self.create_timer(0.1, self.timer_callback)
 
     def gps_coordinates_callback(self, msg):
 
@@ -181,6 +183,7 @@ class CoastToPointCloud(Node):
             self.start_goal_update_publisher.publish(goal_msg)
     
     def start_goal_callback(self, msg):
+        self.get_logger().info(f"start: {msg.start}, goal: {msg.goal} received")
         if not self.first_gps_msg:
             self.update = True
             self.start = msg.start

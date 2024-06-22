@@ -5,6 +5,7 @@ from rclpy.node import Node
 from user_action_interfaces.action import StartGoalAction
 from user_action_interfaces.msg import StartGoalMsg
 from user_action_interfaces.msg import PathMsg
+from user_action_interfaces.msg import PathInfoMsg
 from pathlib import Path
 import sys
 import pickle 
@@ -34,17 +35,19 @@ class PathPlanningActionClient(Node):
 
         self.start_subscriber = self.create_subscription(StartGoalMsg, 'start_goal_msg', self.start_goal_callback, 10)
 
-        self._action_client = ActionClient(self, StartGoalAction, 'start_goal_action')
+        self._action_client = ActionClient(self, StartGoalAction, 'start_goal_client')
 
         self.first_time = True
 
         self.send_path_publisher = self.create_publisher(PathMsg, 'path', 10)
         self.raw_path_publisher = self.create_publisher(PathMsg, 'raw_path', 10)
         self.searched_area_publisher = self.create_publisher(PathMsg, 'searched_area', 10)
+        self.path_info_publisher = self.create_publisher(PathInfoMsg, 'path_info', 10)
 
         self.path = PathMsg()
         self.raw_path = PathMsg()
         self.searched_area = PathMsg()
+        self.path_info = PathInfoMsg()
 
         self.timer = self.create_timer(0.1, self.timer_callback)
 
@@ -54,6 +57,7 @@ class PathPlanningActionClient(Node):
         if self.path_recived:
             self.send_path_publisher.publish(self.path)
         self.raw_path_publisher.publish(self.raw_path)
+        self.path_info_publisher.publish(self.path_info)
         self.searched_area_publisher.publish(self.searched_area)
 
     def start_goal_callback(self, msg):
@@ -107,6 +111,16 @@ class PathPlanningActionClient(Node):
 
         self.path = path
         self.raw_path = raw_path
+
+        path_info = PathInfoMsg()
+        path_info.header.stamp = self.get_clock().now().to_msg()
+        path_info.header.frame_id = 'map'
+        path_info.path_distance = result.path_distance
+        path_info.estimated_path_time = result.estimated_path_time
+        path_info.raw_path_distance = result.raw_path_distance
+        path_info.estimated_raw_path_time = result.estimated_raw_path_time
+
+        self.path_info = path_info
 
         self.path_recived = True
     

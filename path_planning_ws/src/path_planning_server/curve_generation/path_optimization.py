@@ -28,41 +28,52 @@ def save_binary_data(data, file_name):
     with open(binary_path/file_name, "wb") as f:
         pickle.dump(data, f)
 
-def get_angle(x1, y1, x2, y2):
-	return math.degrees(math.atan2(y2-y1, x2-x1))
-
-def euclidean_distance(x1, y1, x2, y2):
-	return math.sqrt((x1-x2)**2 + (y1-y2)**2)
-
-def triangle_angle(previous_point, next_point, point):
-	a = euclidean_distance(previous_point[0], previous_point[1], point[0], point[1])
-	b = euclidean_distance(point[0], point[1], next_point[0], next_point[1])
-	c = euclidean_distance(previous_point[0], previous_point[1], next_point[0], next_point[1])
-
-	try:
-		angle = math.acos((a**2 + b**2 - c**2) / (2*a*b))
-	except:
-		angle = 180
-
-	return math.degrees(angle)
 
 
 class PathOptimization:
 
-	def __init__(self, points, method="dubins"):
+	def __init__(self, points, method="dubins", show_results=False, sampling_rate=5.0):
 		self.points = points
 		self.points_new = []
 		self.points_new1 = []
 		self.method = method
 		self.path_points = []
-	
+		self.show_results = show_results
+		self.sampling_rate = sampling_rate
+
+
 	def get_path(self):
 		return self.path_points	
+	
+	def get_angle(self,x1, y1, x2, y2):
+		return math.degrees(math.atan2(y2-y1, x2-x1))
+
+	def euclidean_distance(self,x1, y1, x2, y2):
+		return math.sqrt((x1-x2)**2 + (y1-y2)**2)
+
+	def triangle_angle(self,previous_point, next_point, point):
+		a = self.euclidean_distance(previous_point[0], previous_point[1], point[0], point[1])
+		b = self.euclidean_distance(point[0], point[1], next_point[0], next_point[1])
+		c = self.euclidean_distance(previous_point[0], previous_point[1], next_point[0], next_point[1])
+
+		try:
+			angle = math.acos((a**2 + b**2 - c**2) / (2*a*b))
+		except:
+			angle = 180
+		
+		return math.degrees(angle)
 	
 	def optimize_path(self):
 
 		for i, point in enumerate(self.points):
-			if i%5 == 0:
+			if i == 0:
+				self.points_new.append(point)
+				continue
+			if i == len(self.points)-self.sampling_rate:
+				break
+				
+			angle = self.triangle_angle(self.points[i-1], self.points[i+1], point)
+			if angle < 150 or i%self.sampling_rate == 0:
 				self.points_new.append(point)
 		
 		self.points_new.append(self.points[-1])
@@ -83,7 +94,7 @@ class PathOptimization:
 					continue
 				if i == len(self.points_new)-1:
 					continue
-				angle = triangle_angle(self.points_new[i-1], self.points_new[i+1], point)
+				angle = self.triangle_angle(self.points_new[i-1], self.points_new[i+1], point)
 				if angle ==180 or angle == 0:
 					continue
 				elif angle < 150:
@@ -104,9 +115,9 @@ class PathOptimization:
 						x1 = self.points_new[i-1][0]
 						x2 = self.points_new[i+1][0]
 						#print(x1, y1, x2, y2)
-						quadrant_angle = get_angle(x1, y1, x2, y2)
+						quadrant_angle = self.get_angle(x1, y1, x2, y2)
 						print("quadrant_angle: ", quadrant_angle)
-						c = euclidean_distance(x1, y1, x2, y2)
+						c = self.euclidean_distance(x1, y1, x2, y2)
 						a = math.sqrt(c**2/(2*(1-math.cos(math.radians(135)))))
 						print("a: ", a)
 						if quadrant_angle >= 0 and quadrant_angle < 90:
@@ -146,7 +157,7 @@ class PathOptimization:
 					continue
 			if i == len(self.points_new)-1:
 					continue
-			angle = triangle_angle(self.points_new[i-1], self.points_new[i+1], point)
+			angle = self.triangle_angle(self.points_new[i-1], self.points_new[i+1], point)
 			if angle > 150 or angle <180:
 				new_x = (self.points_new[i-1][0]+self.points_new[i+1][0])/2
 				new_y = (self.points_new[i-1][1]+self.points_new[i+1][1])/2
@@ -156,7 +167,7 @@ class PathOptimization:
 		points_new_plot1 = self.points_new.copy()
 
 		for i, point in enumerate(self.points_new):
-			self.points_new[i] = (point[0], point[1], get_angle(self.points_new[i-1][0], self.points_new[i-1][1], point[0], point[1])) if i != 0 else (point[0], point[1], get_angle(point[0], point[1],self.points_new[i+1][0], self.points_new[i+1][1]))
+			self.points_new[i] = (point[0], point[1], self.get_angle(self.points_new[i-1][0], self.points_new[i-1][1], point[0], point[1])) if i != 0 else (point[0], point[1], self.get_angle(point[0], point[1],self.points_new[i+1][0], self.points_new[i+1][1]))
 		
 
 		curve_factory = CurveFactory()
@@ -179,9 +190,12 @@ class PathOptimization:
 		path_x,path_y,return_list = generator.run(self.points_new)
 
 		# animation
-		if show_plot:
+		if self.show_results:
 
 			fig, ax = plt.subplots()
+			input_points_x = [point[0] for point in self.points]
+			input_points_y = [point[1] for point in self.points]
+			ax.plot(input_points_x, input_points_y, "xm", linewidth=0.2)
 			# plot points
 			point_x = [point[0] for point in points_new_plot]
 			point_y = [point[1] for point in points_new_plot]
@@ -195,6 +209,7 @@ class PathOptimization:
 			
 			ax.plot(path_x, path_y, linewidth=2, c="#1f77b4")
 			
+			ax.grid(True)
 			#for x, y, theta in points:
 			#	Plot.plotArrow(x, y, np.deg2rad(theta), 2, 'blueviolet')
 			plt.show()

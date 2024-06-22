@@ -6,10 +6,6 @@ import os
 
 save_file = 'jadranovo_map'
 
-start = [45.237468, 14.575984]
-
-goal = [45.228553, 14.585168]
-
 pkg_name = 'path_planning_client'
 
 pkg_dir = os.popen('/bin/bash -c "source /usr/share/colcon_cd/function/colcon_cd.sh && \
@@ -23,9 +19,7 @@ def generate_launch_description():
             executable='pointcloud_publisher',
             output='screen',
             emulate_tty=True,
-            name='coast_pointcloud',
-            parameters=[{'save_file' : save_file
-                         }]
+            name='coast_pointcloud'
         ),
 
         launch_ros.actions.Node(
@@ -33,13 +27,13 @@ def generate_launch_description():
             executable='rviz2_launch',
             output='screen',
             emulate_tty=True,
-            name=f'map_visualization',
-            parameters=[{'save_file' : save_file }]
+            name=f'map_visualization'
         ),
 
         launch_ros.actions.Node(
             package='path_planning_client',
             executable='start_goal_publisher',
-            name='start_goal_publisher',),
+            name='start_goal_publisher'
+        ),
   
   ])

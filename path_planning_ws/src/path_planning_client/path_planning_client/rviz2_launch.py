@@ -26,10 +26,6 @@ class RunRviz2(Node):
 
     def __init__(self):
         super().__init__('pcd_coast')
-        #ros log
-        self.get_logger().info("Publishing coast points node started")
-        self.declare_parameter('save_file', 'test')
-        self.save_file = self.get_parameter('save_file').get_parameter_value().string_value
 
         os.system(f"cd {ws_root}/src/path_planning_client/rviz2 && rviz2 -d {rviz_file} ")
 

@@ -30,7 +30,7 @@ def load_binary_data(file_name):
 
 
 
-class PathPlanningPublisher(Node):
+class StartGoalUpdate(Node):
 
     def __init__(self):
         super().__init__('path_planning_action_client')
@@ -43,22 +43,34 @@ class PathPlanningPublisher(Node):
         self.start_goal_publisher = self.create_publisher(StartGoalMsg, 'start_goal_msg_update_manual', 10)
 
         self.timer = self.create_timer(0.1, self.timer_callback)
+
+        self.i = 0
         
     def timer_callback(self):
+        self.i += 1
         start_goal_msg = StartGoalMsg()
         start_goal_msg.header.stamp = self.get_clock().now().to_msg()
         start_goal_msg.header.frame_id = 'map'
         start_goal_msg.start = self.start
         start_goal_msg.goal = self.goal
-        self.get_logger().info(f'Publishing start: {self.start} goal: {self.goal}')
         self.start_goal_publisher.publish(start_goal_msg)
+        if self.i == 10:
+            self.get_logger().info(f"Messaging start: {start_goal_msg.start} goal: {start_goal_msg.goal}")
+            self.destroy_node()
+            sys.exit(0)
     
 def main(args=None):
     rclpy.init(args=args)
 
-    action_client = PathPlanningPublisher()
+    action_client = StartGoalUpdate()
 
-    rclpy.spin(action_client)
+    try:
+        rclpy.spin(action_client)
+    except SystemExit:                 # <--- process the exception 
+        rclpy.logging.get_logger("Quitting").info('Done')
+
+    action_client.destroy_node()
+    rclpy.shutdown()
 
 
 if __name__ == '__main__':

@@ -12,9 +12,12 @@ def generate_launch_description():
 
     cost_values =  LaunchConfiguration('cost_values')
     step_sizes =  LaunchConfiguration('step_sizes')
+    speed_limits =  LaunchConfiguration('speed_limits')
     show_feedback =  LaunchConfiguration('show_feedback')
     show_results =  LaunchConfiguration('show_results')
     show_debug =  LaunchConfiguration('show_debug')
+    optimization_method =  LaunchConfiguration('optimization_method')
+    sampling_rate =  LaunchConfiguration('sampling_rate')   
 
     cost_values_arg = DeclareLaunchArgument(
         'cost_values',
@@ -24,6 +27,11 @@ def generate_launch_description():
     step_sizes_arg = DeclareLaunchArgument(
         'step_sizes',
         default_value= '[50.0,50.0,100.0,100.0]',
+    )
+
+    speed_limits_arg = DeclareLaunchArgument(
+        'speed_limits',
+        default_value= '[2.0,5.0,8.0,25.0]',
     )
 
     show_feedback_arg = DeclareLaunchArgument(
@@ -44,6 +52,18 @@ def generate_launch_description():
         description='Whether to show the results of the path planning server',
     )
 
+    optimization_method_arg = DeclareLaunchArgument(
+        'optimization_method',
+        default_value='dubins',
+        description='The optimization method to use',
+    )
+
+    sampling_rate_arg = DeclareLaunchArgument(
+        'sampling_rate',
+        default_value='5.0',
+        description='The sampling rate to use',
+    )
+
     map_maker_node = Node(
         package='path_planning_server',
         executable='path_planning_server',
@@ -53,14 +73,22 @@ def generate_launch_description():
                      'step_sizes': step_sizes,
                      'show_feedback': show_feedback,
                      'show_results': show_results,
-                     'show_debug': show_debug}]
+                     'show_debug': show_debug,
+                     'optimization_method': optimization_method,
+                     'speed_limits': speed_limits,
+                     'sampling_rate': sampling_rate}]
     )
+
+
     
     return LaunchDescription([
         cost_values_arg,
         step_sizes_arg,
+        speed_limits_arg,
         show_feedback_arg,
         show_results_arg,
         show_debug_arg,
+        optimization_method_arg,
+        sampling_rate_arg,
         map_maker_node
     ])

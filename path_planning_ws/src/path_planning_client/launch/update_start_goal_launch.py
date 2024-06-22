@@ -7,9 +7,9 @@ from launch.actions import DeclareLaunchArgument, ExecuteProcess, TimerAction
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration, PythonExpression
 
-start = [45.236663, 14.575893]
+start = [0.0,0.0]   
 
-goal = [45.240001, 14.589096]
+goal = [0.0,0.0]
 
 def generate_launch_description():
 
@@ -36,8 +36,6 @@ def generate_launch_description():
         parameters=[{'start': start_value,
                      'goal': goal_value}]
     )
-
-
     
     return LaunchDescription([
         start_arg,

@@ -26,14 +26,20 @@ class PathPlanningServer(rclpy_Node):
         self.get_logger().info('Path planning server started')
         self.declare_parameter('cost_values', [20.0,1.5,1.2,1.1])
         self.declare_parameter('step_values', [1.0,50.0,50.0,100.0])
+        self.declare_parameter('speed_limits', [2.0,5.0,8.0,20.0])
         self.declare_parameter('show_feedback', False)
         self.declare_parameter('show_results', False)
         self.declare_parameter('show_debug', False)
+        self.declare_parameter('optimization_method', 'spline')
+        self.declare_parameter('sampling_rate', 5.0)
         self.cost_values = self.get_parameter('cost_values').get_parameter_value().double_array_value
         self.step_values = self.get_parameter('step_values').get_parameter_value().double_array_value
+        self.speed_limits = self.get_parameter('speed_limits').get_parameter_value().double_array_value
         self.show_feedback = self.get_parameter('show_feedback').get_parameter_value().bool_value
         self.show_results = self.get_parameter('show_results').get_parameter_value().bool_value
         self.show_debug = self.get_parameter('show_debug').get_parameter_value().bool_value
+        self.optimization_method = self.get_parameter('optimization_method').get_parameter_value().string_value
+        self.sampling_rate = self.get_parameter('sampling_rate').get_parameter_value().double_value
 
         self.red_cost = self.cost_values[0]
         self.yellow_cost = self.cost_values[1]
@@ -121,7 +127,7 @@ class PathPlanningServer(rclpy_Node):
             self._action_server = ActionServer(
                 self,
                 StartGoalAction,
-                'start_goal_action',
+                'start_goal_client',
                 self.execute_callback)
     
 
@@ -164,18 +170,35 @@ class PathPlanningServer(rclpy_Node):
 
         self.path_optimized = self.optimize_path()
 
+        #self.test_optimization()
+
         self.optimized_path_gps = [self.adapt_coordinates_reverse(point) for point in self.path_optimized]
+
+        raw_path_information = self.path_information(self.path)
+        optimized_path_information = self.path_information(self.path_optimized)
+
+        self.get_logger().info(f"Raw path distance: {raw_path_information[0]}, time: {raw_path_information[1]}")
+        self.get_logger().info(f"Optimized path distance: {optimized_path_information[0]}, time: {optimized_path_information[1]}")
 
         path_x = [point[0] for point in self.optimized_path_gps]   
         path_y = [point[1] for point in self.optimized_path_gps]
+        path_distance = optimized_path_information[0]
+        path_time = optimized_path_information[1]
         raw_path_x = [point[0] for point in self.path_gps]
         raw_path_y = [point[1] for point in self.path_gps]
+        raw_path_distance = raw_path_information[0]
+        raw_path_time = raw_path_information[1]
+
 
         result = StartGoalAction.Result()
         result.path_x = path_x  
         result.path_y = path_y
         result.raw_path_x = raw_path_x
         result.raw_path_y = raw_path_y
+        result.path_distance = path_distance
+        result.estimated_path_time = path_time
+        result.raw_path_distance = raw_path_distance
+        result.estimated_raw_path_time = raw_path_time
 
         if self.show_results:
             self.visualization(False,self.zones_dictionary,self.start_m,self.goal_m,self.path,self.path_optimized)
@@ -184,8 +207,39 @@ class PathPlanningServer(rclpy_Node):
 
         return result
     
+    def path_information(self, path):
+
+        distance = self.calculate_list_distance(path)
+
+        speed_dictionary = {}
+        for key,value in self.zones_dictionary.items():
+            if value == "r":
+                speed_dictionary[key] = self.speed_limits[0] * 0.514444444 # knots to m/s
+            elif value == "y":
+                speed_dictionary[key] = self.speed_limits[1] * 0.514444444
+            elif value == "g":
+                speed_dictionary[key] = self.speed_limits[2] * 0.514444444
+            elif value == "s":
+                speed_dictionary[key] = self.speed_limits[3] * 0.514444444
+            else:
+                speed_dictionary[key] = self.speed_limits[3] * 0.514444444
+
+        time_sum = 0
+        for i, value in enumerate(path):
+            if i == len(path)-1:
+                break
+            coord = (round(value[0]/self.grid_size)*self.grid_size, round(value[1]/self.grid_size)*self.grid_size)
+            next_coord = (round(path[i+1][0]/self.grid_size)*self.grid_size, round(path[i+1][1]/self.grid_size)*self.grid_size)
+            speed_limit = speed_dictionary.get(coord, self.speed_limits[3])
+            euc_distance = self.euclidean_distance(coord[0], coord[1], next_coord[0], next_coord[1])   
+            time = euc_distance/speed_limit
+            time_sum += time
+        
+        return distance, time_sum
+    
     def optimize_path(self):
-        path_optimization = PathOptimization(self.path)
+        self.get_logger().info(f'Optimization method: {self.optimization_method} [path points : {len(self.path)}]')
+        path_optimization = PathOptimization(self.path, self.optimization_method, self.show_results, self.sampling_rate)
         path_optimization.optimize_path()
         optimized_path = path_optimization.get_path()
         return optimized_path
@@ -496,7 +550,14 @@ class PathPlanningServer(rclpy_Node):
         return True
     
     def euclidean_distance(self,x1,y1,x2,y2):
-        return math.sqrt((x1-x2)**2 + (y1-y2)**2)
+        return math.sqrt((x1-x2)**2 + (y1-y2)**2) * self.grid_size
+    
+    def calculate_list_distance(self, path: list):
+        distance = 0
+        for i in range(len(path)-1):
+            distance_i = self.euclidean_distance(path[i][0], path[i][1], path[i+1][0], path[i+1][1])
+            distance += distance_i
+        return round(distance, 5)
     
     def test_dstar_lite(self):
         self.get_logger().info('D* Lite algorithm started')
@@ -612,6 +673,70 @@ class PathPlanningServer(rclpy_Node):
 
         plt.show(block=True)
 
+    def test_optimization(self):
+        fig,ax = plt.subplots()
+        path_optimization_2 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 2.0)
+        path_optimization_2.optimize_path()
+        path_2 = path_optimization_2.get_path()
+        path_optimization_3 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 3.0)
+        path_optimization_3.optimize_path()
+        path_3 = path_optimization_3.get_path()
+        path_optimization_4 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 4.0)
+        path_optimization_4.optimize_path()
+        path_4 = path_optimization_4.get_path()
+        path_optimization_5 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 5.0)
+        path_optimization_5.optimize_path()
+        path_5 = path_optimization_5.get_path()
+        path_optimization_6 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 10.0)
+        path_optimization_6.optimize_path()
+        path_6 = path_optimization_6.get_path()
+        path_optimization_7 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 15.0)
+        path_optimization_7.optimize_path()
+        path_7 = path_optimization_7.get_path()
+
+        distance_2 = self.calculate_list_distance(path_2)
+        distance_3 = self.calculate_list_distance(path_3)
+        distance_4 = self.calculate_list_distance(path_4)
+        distance_5 = self.calculate_list_distance(path_5)
+        distance_6 = self.calculate_list_distance(path_6)
+        distance_7 = self.calculate_list_distance(path_7)
+
+        show_box = 20
+        min_path_x = min([point[0] for point in self.path])
+        max_path_x = max([point[0] for point in self.path])
+        min_path_y = min([point[1] for point in self.path])
+        max_path_y = max([point[1] for point in self.path])
+
+        ax.set_xlim(min_path_x-show_box, max_path_x+show_box)
+        ax.set_ylim(min_path_y-show_box, max_path_y+show_box)
+
+        legend_elements = []
+        ax.plot([point[0] for point in path_2],[point[1] for point in path_2], 'go', markersize=1)
+        ax.plot([point[0] for point in path_3],[point[1] for point in path_3], 'yo', markersize=1)
+        ax.plot([point[0] for point in path_4],[point[1] for point in path_4], 'ro', markersize=1)
+        ax.plot([point[0] for point in path_5],[point[1] for point in path_5], 'co', markersize=1)
+        ax.plot([point[0] for point in path_6],[point[1] for point in path_6], 'ko', markersize=1)
+        ax.plot([point[0] for point in path_7],[point[1] for point in path_7], 'bo', markersize=1)
+        ax.plot([point[0] for point in self.path],[point[1] for point in self.path], 'mo', markersize=1)
+        legend_elements.append(Line2D([0], [0], color='magenta', lw=4, label=f"Raw path"))
+        legend_elements.append(Line2D([0], [0], color='green', lw=4, label=f"sampling rate = 2.0 [distance: {distance_2} m]"))
+        legend_elements.append(Line2D([0], [0], color='yellow', lw=4, label=f"sampling rate = 3.0 [distance: {distance_3} m]"))
+        legend_elements.append(Line2D([0], [0], color='red', lw=4, label=f"sampling rate = 4.0 [distance: {distance_4} m]"))
+        legend_elements.append(Line2D([0], [0], color='cyan', lw=4, label=f"sampling rate = 5.0 [distance: {distance_5} m]"))
+        legend_elements.append(Line2D([0], [0], color='black', lw=4, label=f"sampling rate = 10.0 [distance: {distance_6} m]"))
+        legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f"sampling rate = 15.0 [distance: {distance_7} m]"))
+
+        ax.legend(handles=legend_elements, loc='upper right')
+
+        #plot green zone
+        for key, value in self.zones_dictionary.items():
+            if value == 'g':
+                ax.plot(key[0],key[1],'go', markersize=0.4)
+            if value == 's':
+                ax.plot(key[0],key[1],'yo', markersize=0.4)
+        ax.grid(True)
+        
+        plt.show()
 
 def main(args=None):
 
