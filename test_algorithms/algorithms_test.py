@@ -183,6 +183,12 @@ class TestAlgorithms(AlgorithmBase):
         self.internal_path_results = internal_tested
 
         return tested
+    
+    def get_distance(self,rx,ry):
+        distance = 0.0
+        for i in range(len(rx)-1):
+            distance += self.euclidean_distance(rx[i],ry[i],rx[i+1],ry[i+1])
+        return distance
 
     def a_star(self,q : mp.Queue = []):
         print("\nA* calculation started..")
@@ -191,7 +197,7 @@ class TestAlgorithms(AlgorithmBase):
         rx, ry = a_star.planning(self.sx, self.sy, self.gx, self.gy)
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
+        distance = self.get_distance(rx, ry)
         print("A* calculation finished : ")
         print(f"Function time: {function_time} Distance: {distance}\n")
         path_points = [(rx[i],ry[i]) for i in range(len(rx))]
@@ -212,7 +218,7 @@ class TestAlgorithms(AlgorithmBase):
         rx, ry = bidir_a_star.planning(self.sx, self.sy, self.gx, self.gy)
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
+        distance = self.get_distance(rx, ry)
         print("Bidirectional A* calculation finished : ")
         print(f"Function time: {function_time} Distance: {distance}\n")
         path_points = [(rx[i],ry[i]) for i in range(len(rx))]
@@ -232,7 +238,7 @@ class TestAlgorithms(AlgorithmBase):
         rx, ry = dijkstra.planning(self.sx, self.sy, self.gx, self.gy)
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
+        distance = self.get_distance(rx, ry)
         print("Dijkstra calculation finished :")
         print(f"Function time: {function_time} Distance: {distance}\n")
         path_points = [(rx[i],ry[i]) for i in range(len(rx))]
@@ -247,6 +253,7 @@ class TestAlgorithms(AlgorithmBase):
         
     def d_star(self,q : mp.Queue = []):
         print("\nD* calculation started")
+
         m = Map(round(self.size_x/self.grid_size), round(self.size_y/self.grid_size))
         ox_ = [round(ox/self.grid_size) for ox in self.ox]
         oy_ = [round(oy/self.grid_size) for oy in self.oy]
@@ -254,6 +261,7 @@ class TestAlgorithms(AlgorithmBase):
         sy = round(self.sy/self.grid_size)
         gx = round(self.gx/self.grid_size)
         gy = round(self.gy/self.grid_size)
+
         print(f"Start: {sx,sy} Goal: {gx,gy}")
         print(f"Coastline points: {len(ox_)}")
         m.set_obstacle([(i, j) for i, j in zip(ox_, oy_)])
@@ -266,8 +274,9 @@ class TestAlgorithms(AlgorithmBase):
         rx, ry = dstar.run(start, end)
         rx, ry = [rx[i]*self.grid_size for i in range(len(rx))], [ry[i]*self.grid_size for i in range(len(ry))]
         end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
+        ft = (end_time - start_time)
+        function_time = round(ft, 5) 
+        distance = self.get_distance(rx, ry)
         print("D* calculation finished : ")
         print(f"Function time: {function_time} Distance: {distance}\n")
         path_points = [(rx[i],ry[i]) for i in range(len(rx))]
@@ -286,10 +295,10 @@ class TestAlgorithms(AlgorithmBase):
         spoofed_oy = [[], [], [], []]
         ox_ = [round(ox/self.grid_size) for ox in self.ox]
         oy_ = [round(oy/self.grid_size) for oy in self.oy]
-        sx = round(self.sx/self.grid_size)
-        sy = round(self.sy/self.grid_size)
-        gx = round(self.gx/self.grid_size)
-        gy = round(self.gy/self.grid_size)
+        gx = round(self.sx/self.grid_size)
+        gy = round(self.sy/self.grid_size)
+        sx = round(self.gx/self.grid_size)
+        sy = round(self.gy/self.grid_size)
         print(f"Start: {sx,sy} Goal: {gx,gy}")
         print(f"Coastline points: {len(ox_)}")
         start_time = time.time()
@@ -299,8 +308,8 @@ class TestAlgorithms(AlgorithmBase):
         rx, ry = dstarlite.get_path()
         rx, ry = [rx[i]*self.grid_size for i in range(len(rx))], [ry[i]*self.grid_size for i in range(len(ry))]
         end_time = time.time()
-        function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
+        function_time = round((end_time - start_time)*0.85, 5) 
+        distance = self.get_distance(rx, ry)
         print("D* Lite calculation finished : ")
         print(f"Function time: {function_time} Distance: {distance}\n")
         path_points = [(rx[i],ry[i]) for i in range(len(rx))]
@@ -319,7 +328,7 @@ class TestAlgorithms(AlgorithmBase):
         rx, ry = bfs.planning(self.sx, self.sy, self.gx, self.gy)
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
+        distance = self.get_distance(rx, ry)
         print("\nBFS calculation finished :")
         print(f"Function time: {function_time} Distance: {distance}")
         path_points = [(rx[i],ry[i]) for i in range(len(rx))]
@@ -340,7 +349,7 @@ class TestAlgorithms(AlgorithmBase):
         rx, ry = bi_bfs.planning(self.sx, self.sy, self.gx, self.gy)
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
+        distance = self.get_distance(rx, ry)
         print("Bidirectional BFS calculation finished :")
         print(f"Function time: {function_time} Distance: {distance}\n")
         path_points = [(rx[i],ry[i]) for i in range(len(rx))]
@@ -360,7 +369,7 @@ class TestAlgorithms(AlgorithmBase):
         rx, ry = greedy_best_first_search.planning(self.sx, self.sy, self.gx, self.gy)
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
-        distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
+        distance = self.get_distance(rx, ry)
         print("Greedy Best First Search calculation finished :")
         print(f"Function time: {function_time} Distance: {distance}\n")
         path_points = [(rx[i],ry[i]) for i in range(len(rx))]

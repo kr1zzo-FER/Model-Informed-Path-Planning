@@ -1,7 +1,7 @@
 ## Step 1.1: Download data from OpenStreetMap (optional)
 
 # Process OSM data
-location_folder : "voz"
+location_folder : "klimno"
 
 
 ## Step 1.2. : Data extraction and processing from OpenStreetMap 
