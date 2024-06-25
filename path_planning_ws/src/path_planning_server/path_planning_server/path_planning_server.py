@@ -438,11 +438,7 @@ class PathPlanningServer(rclpy_Node):
         return motion
 
     def h(self, s: Node):
-        dx = abs(s.x - self.goal.x)
-        dy = abs(s.y - self.goal.y)
-        D = 1
-        D2 = math.sqrt(2)
-        return D * max(dx, dy) + (D2 - D) * min(dx, dy)
+        return max(abs(self.start.x - s.x), abs(self.start.y - s.y))
  
 
     def calculate_key(self, s: Node):
