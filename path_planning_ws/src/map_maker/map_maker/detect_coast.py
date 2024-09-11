@@ -17,11 +17,13 @@ from skimage import io
 from scipy import ndimage as nd
 from math import sqrt, cos, sin, pi
 import time
+from matplotlib.lines import Line2D
 
 show_results = False
 show_mask = False
 show_image = False
 shoe_image_gps = False
+grid_size_influence = True
 
 class CoastProcessing:
 
@@ -120,7 +122,25 @@ class CoastProcessing:
         print("Generating zones from coast, it may take a while")
 
         coast_points = self.detect_coastline()
-        
+
+        if grid_size_influence:
+
+            fig, ax = self.osm_object.prepare_image_to_plot()
+
+            for point in coast_points:
+                ax.plot(point[0], point[1], 'o', color='blue', markersize=0.8)
+            
+            
+            legend_labels = ['Coastline']
+            legend_colors = ['blue']
+
+            custom_lines = [Line2D([0], [0], marker='o', color=color, markersize=10, linestyle='None') for color in legend_colors]
+
+            ax.legend(custom_lines, legend_labels, loc='best', fontsize=10)
+
+            plt.show()
+
+            
         start_time = time.time()
         red_zone = []
         yellow_zone = []

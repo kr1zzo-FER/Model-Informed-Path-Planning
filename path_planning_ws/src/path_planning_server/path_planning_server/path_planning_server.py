@@ -86,6 +86,7 @@ class PathPlanningServer(rclpy_Node):
         self.path = []
         self.path_gps = []
         self.path_optimized = []
+        self.optimization_results = []
         self.path_optimied_gps = []
         
     def coast_points_callback(self, msg):
@@ -168,7 +169,7 @@ class PathPlanningServer(rclpy_Node):
 
         self.path_gps = [self.adapt_coordinates_reverse(point) for point in self.path]
 
-        self.path_optimized = self.optimize_path()
+        self.path_optimized, self.optimization_results = self.optimize_path()
 
         #self.test_optimization()
 
@@ -201,6 +202,7 @@ class PathPlanningServer(rclpy_Node):
         result.estimated_raw_path_time = raw_path_time
 
         if self.show_results:
+            self.plot_interpolation(self.optimization_results)
             self.visualization(False,self.zones_dictionary,self.start_m,self.goal_m,self.path,self.path_optimized)
             self.visualization(True,self.zones_dictionary_gps,self.start_gps,self.goal_gps,self.path_gps,self.optimized_path_gps)
             plt.show()
@@ -242,7 +244,8 @@ class PathPlanningServer(rclpy_Node):
         path_optimization = PathOptimization(self.path, self.optimization_method, self.show_results, self.sampling_rate)
         path_optimization.optimize_path()
         optimized_path = path_optimization.get_path()
-        return optimized_path
+        inetrpolation_results = path_optimization.get_interpolation()
+        return optimized_path, inetrpolation_results
 
         
     def make_zones_dictionary(self, coast_points, red_zone, yellow_zone, green_zone, safe_zone):
@@ -691,8 +694,6 @@ class PathPlanningServer(rclpy_Node):
         path_7 = path_optimization_7.get_path()
 
         distance_2 = self.calculate_list_distance(path_2)
-        distance_3 = self.calculate_list_distance(path_3)
-        distance_4 = self.calculate_list_distance(path_4)
         distance_5 = self.calculate_list_distance(path_5)
         distance_6 = self.calculate_list_distance(path_6)
         distance_7 = self.calculate_list_distance(path_7)
@@ -731,6 +732,77 @@ class PathPlanningServer(rclpy_Node):
             if value == 's':
                 ax.plot(key[0],key[1],'yo', markersize=0.4)
         ax.grid(True)
+        
+        plt.show()
+    
+    def plot_interpolation(self, optimization_results):
+
+        points, points_new_plot, points_new_plot1, path = optimization_results
+
+        len_points = len(points)
+        len_points_new_plot = len(points_new_plot)
+        len_points_new_plot1 = len(points_new_plot1)
+        len_path = len(path)
+
+        self.get_logger().info(f"Points: {len_points}, New points: {len_points_new_plot}, New points 1: {len_points_new_plot1}, Path: {len_path}")
+
+        # to gps
+        points = [self.adapt_coordinates_reverse(point) for point in points]
+        points_new_plot = [self.adapt_coordinates_reverse(point) for point in points_new_plot]
+        points_new_plot1 = [self.adapt_coordinates_reverse(point) for point in points_new_plot1]
+        path = [self.adapt_coordinates_reverse(point) for point in path]
+
+        for i in range(len(points_new_plot)):
+            self.get_logger().info(f"Point {i}: {points_new_plot[i]}")
+
+        path_x = [point[1] for point in path]
+        path_y = [point[0] for point in path]
+
+        fig, ax = plt.subplots()
+        input_points_x = [point[1] for point in points]
+        input_points_y = [point[0] for point in points]
+        # ax.plot(input_points_x, input_points_y, "xm", linewidth=0.2)
+        # plot points
+        point_x = [point[1] for point in points_new_plot]
+        point_y = [point[0] for point in points_new_plot]
+
+        ax.plot(point_x, point_y, "xb", linewidth=2)
+
+        point_x = [point[1] for point in points_new_plot1]
+        point_y = [point[0] for point in points_new_plot1]
+
+        ax.plot(point_x, point_y, "xr", linewidth=2)
+        
+        ax.plot(path_x, path_y, linewidth=2, c="#1f77b4")
+
+        max_x = max(path_x)
+        min_x = min(path_x)
+        max_y = max(path_y)
+        min_y = min(path_y)
+
+        self.get_logger().info(f"max_x: {max_x}, min_x: {min_x}, max_y: {max_y}, min_y: {min_y}")
+
+        for key, value in self.zones_dictionary_gps.items():
+            if value == 'c':       
+                # print just coast points near the path
+                if min_x < key[1] < max_x and min_y < key[0] < max_y:
+                    ax.plot(key[1], key[0], 'ko', markersize=0.2)
+        
+        
+        ax.grid(True)
+        #for x, y, theta in points:
+        #	Plot.plotArrow(x, y, np.deg2rad(theta), 2, 'blueviolet')
+        
+        legend_labels = ['D* Lite coordinates', 'Sampled coordinates', 'Resampled coordinates', 'Optimized path', 'Coastline']
+        legend_colors = ['m', 'b', 'r', '#1f77b4', 'k']
+
+        # Create custom lines for the legend
+        custom_lines = [
+            Line2D([0], [0], color=legend_colors[i], marker='x', lw=0, markersize=10) for i in range(3)] + [Line2D([0], [0], color=legend_colors[3], lw=4)]  # Last one is a solid line
+        custom_lines.append(Line2D([0], [0], color=legend_colors[4], marker='o', lw=0, markersize=10))
+
+        # Create legend with custom lines and labels
+        ax.legend(custom_lines, legend_labels, loc='upper right', fontsize=15)
         
         plt.show()
 

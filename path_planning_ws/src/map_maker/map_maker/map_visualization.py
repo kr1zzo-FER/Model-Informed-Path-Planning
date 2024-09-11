@@ -12,6 +12,8 @@ import rclpy
 from rclpy.node import Node
 import numpy as np
 import math
+# Create legend with markers matching plot colors
+from matplotlib.lines import Line2D
 
 show_plot = True
 shoe_safe_zone = True
@@ -99,6 +101,15 @@ class MapVisualization(Node):
             ax.plot([x[1] for x in yellow_zone_gps], [x[0] for x in yellow_zone_gps], 'yo', markersize=0.1)
             ax.plot([x[1] for x in green_zone_gps], [x[0] for x in green_zone_gps], 'go', markersize=0.1)
             ax.plot([x[1] for x in self.safe_points], [x[0] for x in self.safe_points], 'co', markersize=0.1)
+
+            legend_labels = ['Coastline', 'Red Zone', 'Yellow Zone', 'Green Zone', 'Safe zone']
+            legend_colors = ['blue', 'red', 'yellow', 'green', 'cyan']
+
+            
+
+            custom_lines = [Line2D([0], [0], marker='o', color=color, markersize=10, linestyle='None') for color in legend_colors]
+
+            ax.legend(custom_lines, legend_labels, loc='best', fontsize=20)
             
             ax.grid(True)
 
@@ -108,7 +119,7 @@ class MapVisualization(Node):
             ax.set_xlabel("Longitude")
             ax.set_ylabel("Latitude")
 
-            ax.set_title("Processed geographical map")
+           
             
             plt.show()
 

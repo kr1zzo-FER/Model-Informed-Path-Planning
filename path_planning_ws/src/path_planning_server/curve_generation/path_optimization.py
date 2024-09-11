@@ -12,8 +12,10 @@ import yaml
 import math
 import matplotlib.pyplot as plt
 from curve_generation.curve_factory import CurveFactory
+from matplotlib.lines import Line2D
 
 root = Path(__file__).resolve().parents[2]
+
 
 show_plot = True
 
@@ -40,10 +42,14 @@ class PathOptimization:
 		self.path_points = []
 		self.show_results = show_results
 		self.sampling_rate = sampling_rate
+		self.plot_interpolation = []
 
 
 	def get_path(self):
 		return self.path_points	
+	
+	def get_interpolation(self):
+		return self.plot_interpolation
 	
 	def get_angle(self,x1, y1, x2, y2):
 		return math.degrees(math.atan2(y2-y1, x2-x1))
@@ -189,34 +195,18 @@ class PathOptimization:
 
 		path_x,path_y,return_list = generator.run(self.points_new)
 
-		# animation
-		if self.show_results:
-
-			fig, ax = plt.subplots()
-			input_points_x = [point[0] for point in self.points]
-			input_points_y = [point[1] for point in self.points]
-			ax.plot(input_points_x, input_points_y, "xm", linewidth=0.2)
-			# plot points
-			point_x = [point[0] for point in points_new_plot]
-			point_y = [point[1] for point in points_new_plot]
-
-			ax.plot(point_x, point_y, "xb", linewidth=2)
-
-			point_x = [point[0] for point in points_new_plot1]
-			point_y = [point[1] for point in points_new_plot1]
-
-			ax.plot(point_x, point_y, "xr", linewidth=2)
-			
-			ax.plot(path_x, path_y, linewidth=2, c="#1f77b4")
-			
-			ax.grid(True)
-			#for x, y, theta in points:
-			#	Plot.plotArrow(x, y, np.deg2rad(theta), 2, 'blueviolet')
-			plt.show()
-
 		path_points = [(path_x[i], path_y[i]) for i in range(len(path_x))]
 
+		points = [(self.points[i][0], self.points[i][1]) for i in range(len(self.points))]
+		points_new_plot = [(self.points_new[i][0], self.points_new[i][1]) for i in range(len(points_new_plot))]
+		points_new_plot1 = [(self.points_new[i][0], self.points_new[i][1]) for i in range(len(points_new_plot1))]
+
+
 		self.path_points = path_points
+
+
+
+		self.plot_interpolation = [points, points_new_plot, points_new_plot1, path_points]
 
 		return
 	

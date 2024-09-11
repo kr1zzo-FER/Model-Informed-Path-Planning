@@ -97,7 +97,6 @@ class MapProcess(Node):
             image_name = f"{location}.png"
             image_save = f"{location}_resized.png"
 
-
             osm_object = OSMProcessing(input_data/'osm_info.txt', self.grid_size, input_data/image_name)
 
             # Resize image to 1 m^2 = 1 pixel
@@ -125,6 +124,11 @@ class MapProcess(Node):
             for point in safe_zone:
                 if point not in green_zone and point not in yellow_zone and point not in red_zone:
                     safe_zone_gps.append(point)
+
+            plt.show()
+
+            
+            
 
         post_processing = PostProcessing(coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps,safe_zone_gps,self.grid_size)
         coast_points_gps, red_zone_gps, yellow_zone_gps, green_zone_gps, safe_zone_gps = post_processing.get_coordinates()
