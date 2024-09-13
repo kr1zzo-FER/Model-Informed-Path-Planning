@@ -23,7 +23,7 @@ show_results = False
 show_mask = False
 show_image = False
 shoe_image_gps = False
-grid_size_influence = True
+grid_size_influence = False
 
 class CoastProcessing:
 

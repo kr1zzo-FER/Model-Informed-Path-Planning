@@ -18,6 +18,8 @@ def generate_launch_description():
     show_debug =  LaunchConfiguration('show_debug')
     optimization_method =  LaunchConfiguration('optimization_method')
     sampling_rate =  LaunchConfiguration('sampling_rate')   
+    show_downsampling =  LaunchConfiguration('show_downsampling')
+    show_interpolation =  LaunchConfiguration('show_interpolation')
 
     cost_values_arg = DeclareLaunchArgument(
         'cost_values',
@@ -54,7 +56,7 @@ def generate_launch_description():
 
     optimization_method_arg = DeclareLaunchArgument(
         'optimization_method',
-        default_value='dubins',
+        default_value='polynomial',
         description='The optimization method to use',
     )
 
@@ -62,6 +64,18 @@ def generate_launch_description():
         'sampling_rate',
         default_value='5.0',
         description='The sampling rate to use',
+    )
+
+    show_downsampling_arg = DeclareLaunchArgument(
+        'show_downsampling',
+        default_value='False',
+        description='Whether to show the downsampling of the path planning server',
+    )
+
+    show_interpolation_arg = DeclareLaunchArgument(
+        'show_interpolation',
+        default_value='False',
+        description='Whether to show the interpolation of the path planning server',
     )
 
     map_maker_node = Node(
@@ -76,7 +90,9 @@ def generate_launch_description():
                      'show_debug': show_debug,
                      'optimization_method': optimization_method,
                      'speed_limits': speed_limits,
-                     'sampling_rate': sampling_rate}]
+                     'sampling_rate': sampling_rate,
+                     'show_downsampling': show_downsampling,
+                     'show_interpolation': show_interpolation,}]
     )
 
 
@@ -88,6 +104,8 @@ def generate_launch_description():
         show_feedback_arg,
         show_results_arg,
         show_debug_arg,
+        show_downsampling_arg,
+        show_interpolation_arg,
         optimization_method_arg,
         sampling_rate_arg,
         map_maker_node

@@ -3,35 +3,59 @@
 ![GitHub_Action_Linux_CI](https://github.com/AtsushiSakai/PythonRobotics/workflows/Linux_CI/badge.svg)
 
 ## Project description
-This repository is a part of the diploma thesis at the Faculty of [Electrical Engineering and Computing, University of Zagreb](https://www.fer.unizg.hr/), [Laboratory for Underwater Systems and Technologies](https://labust.fer.hr/). The main goal of the thesis is to develop a _model-informed path planning and control for autonomous vessels (Croatian: Modelski informirano globalno planiranje putanje i upravljanje autonomnoga plovila)_.  The project is based on the PythonRobotics repository and it is used for educational purposes only.
- Model-informed path planning consists of the following steps:
-1. Data extraction and processing from OpenStreetMap
-3. Testing of the path planning algorithms from the PythonRobotics repository on the extracted OpenStreetMap data 
-4. Cost map generation
-5. Testing of the path planning algorithms on the generated cost map
-6. Path interpolation and optimization
-7. Publishing data to the ROS2 environment and testing the path planning algorithms on the real vessel or in the simulation environment
-
+This repository is a part of the diploma thesis at the Faculty of [Electrical Engineering and Computing, University of Zagreb](https://www.fer.unizg.hr/), [Laboratory for Underwater Systems and Technologies](https://labust.fer.hr/) in the acamedic year 2023./2024. The main goal of the thesis is to develop a _model-informed path planning and control for autonomous vessels (Croatian: Modelski informirano globalno planiranje putanje i upravljanje autonomnoga plovila)_.
 # TODO : DETAILED DESCRIPTION OF THE PROJECT
 
 ## ROS2 commands
 
-```bash
-ros2 launch map_maker publish_map_launch.py save_file:="jadranovo"
+# map_maker package
+
+## Introduction
+
+## Introduction
+
+To develop a global path planning system for vessels, the first step is creating a geographic map with hydrographic features. Nautical charts are typically used for this purpose, as they include essential details such as seafloor morphology, coastline coordinates, and navigation hazards. Due to the unavailability of digital nautical charts and other digital maps, custom programs were created to process data from OpenStreetMap, focusing on coastline coordinates and distances. Future project stages will incorporate additional hydrographic details, such as seafloor morphology and navigation hazards. This chapter outlines the map creation process, including data conversion and integration with the ROS2 framework.
+
+![Alt text](assets/map_maker_process_1.png)
+
+## Running the map_maker Package
+
+```sh
+ros2 launch map_maker make_map_launch
 ```
 
-```bash
-ros2 launch path_planning_action rviz2_pointcloud_launch.py
+Default values:
+```sh
+save_file_name:="jadranovo"
+
+locations:='["sv_marko","voz","jadranovo", "kacjak", "rudine"]'
+
+grid_size:="10"
+
+show_plot:="False"
 ```
 
-Set the goal in the RViz2 environment and start the path planning action server
+Example values:
+```sh
+save_file_name:="klimno"
 
-```bash
-ros2 launch path_planning_action path_planning_action_launch.py
+locations:='["dramalj", "crikvenica", "selce", "rudine", "klimno", "silo", "petrina", "vodica" "melska"]'
+
+grid_size:="10"
+
+show_plot:="True"
 ```
-```bash
-ros2 launch path_planning_server path_planning_server_launch.py
-```
+## Running the path_planning_client Package
+
+## Intraduction
+
+
+
+## Running the path_planning_server Package
+
+## Introduction
+
+# 
 
 ## Credits
 

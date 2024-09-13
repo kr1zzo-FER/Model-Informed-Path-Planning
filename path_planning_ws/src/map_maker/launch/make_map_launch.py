@@ -16,13 +16,13 @@ def generate_launch_description():
     # Declare launch arguments
     save_file_name_arg = DeclareLaunchArgument(
         'save_file_name',
-        default_value='jadranovo_ieee',
+        default_value='jadranovo',
         description='Name of the processed map file to save'
     )
 
     locations_arg = DeclareLaunchArgument(
         'locations',
-        default_value='["voz"]',
+        default_value='["sv_marko","voz","jadranovo", "kacjak", "rudine"]',
         description='List of input data folder names'
     )
 
