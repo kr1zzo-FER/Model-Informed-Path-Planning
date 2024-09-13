@@ -171,7 +171,7 @@ class PathPlanningServer(rclpy_Node):
 
         self.path_optimized, self.optimization_results = self.optimize_path()
 
-        #self.test_optimization()
+        self.test_optimization()
 
         self.optimized_path_gps = [self.adapt_coordinates_reverse(point) for point in self.path_optimized]
 
@@ -674,26 +674,28 @@ class PathPlanningServer(rclpy_Node):
 
     def test_optimization(self):
         fig,ax = plt.subplots()
-        path_optimization_2 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 2.0)
+        path_optimization_2 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 4.0)
         path_optimization_2.optimize_path()
         path_2 = path_optimization_2.get_path()
-        path_optimization_3 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 3.0)
+        path_optimization_3 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 4.0)
         path_optimization_3.optimize_path()
         path_3 = path_optimization_3.get_path()
-        path_optimization_4 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 4.0)
+        path_optimization_4 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 6.0)
         path_optimization_4.optimize_path()
         path_4 = path_optimization_4.get_path()
-        path_optimization_5 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 5.0)
+        path_optimization_5 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 8.0)
         path_optimization_5.optimize_path()
         path_5 = path_optimization_5.get_path()
         path_optimization_6 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 10.0)
         path_optimization_6.optimize_path()
         path_6 = path_optimization_6.get_path()
-        path_optimization_7 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 15.0)
+        path_optimization_7 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate = 16.0)
         path_optimization_7.optimize_path()
         path_7 = path_optimization_7.get_path()
 
         distance_2 = self.calculate_list_distance(path_2)
+        distance_3 = self.calculate_list_distance(path_3)
+        distance_4 = self.calculate_list_distance(path_4)
         distance_5 = self.calculate_list_distance(path_5)
         distance_6 = self.calculate_list_distance(path_6)
         distance_7 = self.calculate_list_distance(path_7)
@@ -715,22 +717,29 @@ class PathPlanningServer(rclpy_Node):
         ax.plot([point[0] for point in path_6],[point[1] for point in path_6], 'ko', markersize=1)
         ax.plot([point[0] for point in path_7],[point[1] for point in path_7], 'bo', markersize=1)
         ax.plot([point[0] for point in self.path],[point[1] for point in self.path], 'mo', markersize=1)
-        legend_elements.append(Line2D([0], [0], color='magenta', lw=4, label=f"Raw path"))
-        legend_elements.append(Line2D([0], [0], color='green', lw=4, label=f"sampling rate = 2.0 [distance: {distance_2} m]"))
-        legend_elements.append(Line2D([0], [0], color='yellow', lw=4, label=f"sampling rate = 3.0 [distance: {distance_3} m]"))
-        legend_elements.append(Line2D([0], [0], color='red', lw=4, label=f"sampling rate = 4.0 [distance: {distance_4} m]"))
-        legend_elements.append(Line2D([0], [0], color='cyan', lw=4, label=f"sampling rate = 5.0 [distance: {distance_5} m]"))
-        legend_elements.append(Line2D([0], [0], color='black', lw=4, label=f"sampling rate = 10.0 [distance: {distance_6} m]"))
-        legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f"sampling rate = 15.0 [distance: {distance_7} m]"))
+        legend_elements.append(Line2D([0], [0], color='magenta', lw=4, label=f"D* Lite path"))
+        legend_elements.append(Line2D([0], [0], color='green', lw=4, label=f"sampling rate = 2.0 "))
+        legend_elements.append(Line2D([0], [0], color='yellow', lw=4, label=f"sampling rate = 4.0"))
+        legend_elements.append(Line2D([0], [0], color='red', lw=4, label=f"sampling rate = 6.0"))
+        legend_elements.append(Line2D([0], [0], color='cyan', lw=4, label=f"sampling rate = 8.0"))
+        legend_elements.append(Line2D([0], [0], color='black', lw=4, label=f"sampling rate = 10.0"))
+        legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f"sampling rate = 16.0"))
 
-        ax.legend(handles=legend_elements, loc='upper right')
+        ax.legend(handles=legend_elements, loc='best', fontsize=15)
 
         #plot green zone
         for key, value in self.zones_dictionary.items():
             if value == 'g':
                 ax.plot(key[0],key[1],'go', markersize=0.4)
             if value == 's':
+                ax.plot(key[0],key[1],'co', markersize=0.4)
+            if value == 'r':
+                ax.plot(key[0],key[1],'ro', markersize=0.4)
+            if value == 'y':
                 ax.plot(key[0],key[1],'yo', markersize=0.4)
+            if value == 'c':
+                ax.plot(key[0],key[1],'ko', markersize=0.4)
+
         ax.grid(True)
         
         plt.show()
@@ -752,8 +761,6 @@ class PathPlanningServer(rclpy_Node):
         points_new_plot1 = [self.adapt_coordinates_reverse(point) for point in points_new_plot1]
         path = [self.adapt_coordinates_reverse(point) for point in path]
 
-        for i in range(len(points_new_plot)):
-            self.get_logger().info(f"Point {i}: {points_new_plot[i]}")
 
         path_x = [point[1] for point in path]
         path_y = [point[0] for point in path]
@@ -761,7 +768,7 @@ class PathPlanningServer(rclpy_Node):
         fig, ax = plt.subplots()
         input_points_x = [point[1] for point in points]
         input_points_y = [point[0] for point in points]
-        # ax.plot(input_points_x, input_points_y, "xm", linewidth=0.2)
+        #ax.plot(input_points_x, input_points_y, "xm", linewidth=0.2)
         # plot points
         point_x = [point[1] for point in points_new_plot]
         point_y = [point[0] for point in points_new_plot]
@@ -773,7 +780,7 @@ class PathPlanningServer(rclpy_Node):
 
         ax.plot(point_x, point_y, "xr", linewidth=2)
         
-        ax.plot(path_x, path_y, linewidth=2, c="#1f77b4")
+        #ax.plot(path_x, path_y, linewidth=2, c="#1f77b4")
 
         max_x = max(path_x)
         min_x = min(path_x)
@@ -781,26 +788,18 @@ class PathPlanningServer(rclpy_Node):
         min_y = min(path_y)
 
         self.get_logger().info(f"max_x: {max_x}, min_x: {min_x}, max_y: {max_y}, min_y: {min_y}")
-
-        for key, value in self.zones_dictionary_gps.items():
-            if value == 'c':       
-                # print just coast points near the path
-                if min_x < key[1] < max_x and min_y < key[0] < max_y:
-                    ax.plot(key[1], key[0], 'ko', markersize=0.2)
-        
         
         ax.grid(True)
         #for x, y, theta in points:
         #	Plot.plotArrow(x, y, np.deg2rad(theta), 2, 'blueviolet')
         
-        legend_labels = ['D* Lite coordinates', 'Sampled coordinates', 'Resampled coordinates', 'Optimized path', 'Coastline']
-        legend_colors = ['m', 'b', 'r', '#1f77b4', 'k']
+        legend_labels = ['Sampled coordinates', 'Resampled coordinates']
+        legend_colors = ['b', 'r']
 
         # Create custom lines for the legend
         custom_lines = [
-            Line2D([0], [0], color=legend_colors[i], marker='x', lw=0, markersize=10) for i in range(3)] + [Line2D([0], [0], color=legend_colors[3], lw=4)]  # Last one is a solid line
-        custom_lines.append(Line2D([0], [0], color=legend_colors[4], marker='o', lw=0, markersize=10))
-
+            Line2D([0], [0], color=legend_colors[i], marker='x', lw=0, markersize=10) for i in range(2)] #+ [Line2D([0], [0], color=legend_colors[3], lw=4)]  # Last one is a solid line
+   
         # Create legend with custom lines and labels
         ax.legend(custom_lines, legend_labels, loc='upper right', fontsize=15)
         

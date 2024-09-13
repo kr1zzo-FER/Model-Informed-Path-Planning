@@ -175,7 +175,6 @@ class PathOptimization:
 		for i, point in enumerate(self.points_new):
 			self.points_new[i] = (point[0], point[1], self.get_angle(self.points_new[i-1][0], self.points_new[i-1][1], point[0], point[1])) if i != 0 else (point[0], point[1], self.get_angle(point[0], point[1],self.points_new[i+1][0], self.points_new[i+1][1]))
 		
-
 		curve_factory = CurveFactory()
 		# create generator
 		if self.method == "dubins":
@@ -198,9 +197,6 @@ class PathOptimization:
 		path_points = [(path_x[i], path_y[i]) for i in range(len(path_x))]
 
 		points = [(self.points[i][0], self.points[i][1]) for i in range(len(self.points))]
-		points_new_plot = [(self.points_new[i][0], self.points_new[i][1]) for i in range(len(points_new_plot))]
-		points_new_plot1 = [(self.points_new[i][0], self.points_new[i][1]) for i in range(len(points_new_plot1))]
-
 
 		self.path_points = path_points
 
