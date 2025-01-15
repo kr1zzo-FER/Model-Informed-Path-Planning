@@ -4,9 +4,9 @@
 
 ![GitHub_Action_Linux_CI](https://github.com/AtsushiSakai/PythonRobotics/workflows/Linux_CI/badge.svg)
 
-<div style="text-align: center;">
-    <img src="assets/map_intro.png" alt="drawing" width="500"/>
-</div>
+<p align="center">
+<img src="assets/map_intro.png" alt="drawing" width="400"/>
+</p>
 
 ## 📚 Table of Contents
 
@@ -28,14 +28,6 @@
 - [Running the path_planning_client Package](#running-the-path_planning_client-package)
 - [Running the path_planning_server Package](#running-the-path_planning_server-package)
 
-## 💡 Project Information
-
-**This repository is a part of the diploma thesis at the Faculty of [Electrical Engineering and Computing, University of Zagreb](https://www.fer.unizg.hr/), [Laboratory for Underwater Systems and Technologies](https://labust.fer.hr/) in the academic year 2023./2024. The main goal of the thesis is to develop a _model-informed path planning and control for autonomous vessels (Croatian: Modelski informirano globalno planiranje putanje i upravljanje autonomnoga plovila)_.**
-
-**The `documentation` directory contains the final thesis and IEEE conference paper submissions, offering an in-depth description of the project.**
-
-&NewLine;
-
 ## ⚙️ Installing
 ```terminal
 git clone https://github.com/kr1zzo-FER/Model-Informed-Path-Planning.git
@@ -46,6 +38,14 @@ git clone https://github.com/kr1zzo-FER/Model-Informed-Path-Planning.git
 ```terminal
 pip install -r requirements/requirements.txt
 ```
+
+## 💡 Project Information
+
+**This repository is a part of the diploma thesis at the Faculty of [Electrical Engineering and Computing, University of Zagreb](https://www.fer.unizg.hr/), [Laboratory for Underwater Systems and Technologies](https://labust.fer.hr/) in the academic year 2023./2024. The main goal of the thesis is to develop a _model-informed path planning and control for autonomous vessels (Croatian: Modelski informirano globalno planiranje putanje i upravljanje autonomnoga plovila)_.**
+
+**The `documentation` directory contains the final thesis and IEEE conference paper submissions, offering an in-depth description of the project.**
+
+&NewLine;
 
 ## 🤖 ROS2 Software Architecture for Vessel Path Planning
 
@@ -122,21 +122,43 @@ Figure 1: Block diagram of the ROS2 system architecture.
    - Ensures compatibility and modularity by exchanging data in global geographic coordinates, allowing seamless integration and upgrades.
    - This modular design supports real-world applications, enabling interoperability with external systems for visualization, navigation, and control.
 
+&NewLine;
 
-## 🗺️ map_maker Package
+# 🗺️ map_maker Package
 
-### 🌍 Step 1 : map_maker Package - Download data from OpenStreetMap (optional) 
+The **map_maker** ROS2 package is designed for creating and integrating geographical maps into the ROS2 framework. It shares the typical structure of ROS2 packages and is part of the `path_planning_ws` ROS2 workspace. This package processes data to generate maps and publishes them using a ROS2 publisher. The workflow and associated directories, such as `map_maker` and `launch`, are illustrated in Figures 2.2, 2.3, and 2.4.
 
-### Folder name : `map_maker\input_data`
+### Primary Objectives
 
-This guide outlines the steps for working with OpenStreetMap (OSM) data, focusing on using the Pseudo-Mercator projection and scaling maps for ROS2 applications.
+1. **[Map Creation](#-step-1--map-creation)** 
+   - The package generates geographical maps by processing images and HTML data from OpenStreetMap stored in the `input_data` directory. 
+   - The main script, `map_process.py`, coordinates this process by:
+     - Initializing parameters from the `make_map_launch.py` file.
+     - Iterating over `locations` directories in `input_data` to process map data.
 
+2. **[Map Publishing](#-step-2--map-publishing)**
+   - The processed maps are saved in the `map_data` directory and published as ROS2 messages.
+   - The `map_publisher.py` node converts processed map data into `CoastMsg.msg` format and broadcasts it via the `gps_coordinates_coast` topic.
 
-### 1️⃣ Create Geographic Area Folders
+## 🌍 Step 1 : Map Creation
+
+<p align="center">
+<img src="assets/map_maker_process.png" alt="drawing" width="300"/>
+</p>
+<p align="center">
+<em>
+Figure 1: Map Creation Process
+</p>
+
+### Step 1.1. : Download data from OpenStreetMap (optional) 
+
+Folder name : `map_maker\input_data`
+
+1️⃣ *Create Geographic Area Folders*
 - Navigate to the `input_data` folder in the ROS2 package `map_maker`.
 - Create subfolders named after the geographic areas of interest (e.g., `jadranovo`).
 
-### 2️⃣ Download Map Data
+2️⃣ *Download Map Data*
 - Visit the [OpenStreetMap](https://www.openstreetmap.org/#map=15/45.2359/14.5844) website.
 - Select the desired region and set the zoom level to **300 meters**.
 - Download:
@@ -164,7 +186,7 @@ Figure 2: Copy HTML string from OpenStreetMap
 </p>
 
 
-### 3️⃣ Repeat the Process
+3️⃣ *Repeat the Process*
    - Repeat the process until you are satisified with selected region consisting of few **300 meters** zoom level images
 
 ### 📋 Notes
@@ -172,46 +194,7 @@ Figure 2: Copy HTML string from OpenStreetMap
 - Ensure all folders in `input_data` contain both the `.png` image and the `osm_info.txt` file.
 - Coordinate transformations are essential for linking image pixels to geographic locations.
 
-
-
-
-📍 `path_planning_ws/src/map_maker`
-
-## map_maker ROS2 Package Overview
-
-The **map_maker** ROS2 package is designed for creating and integrating geographical maps into the ROS2 framework. It shares the typical structure of ROS2 packages and is part of the `path_planning_ws` ROS2 workspace. This package processes data to generate maps and publishes them using a ROS2 publisher. The workflow and associated directories, such as `map_maker` and `launch`, are illustrated in Figures 2.2, 2.3, and 2.4.
-
-## Primary Objectives
-
-1. **Map Creation**: 
-   - The package generates geographical maps by processing images and HTML data from OpenStreetMap stored in the `input_data` directory. 
-   - The main script, `map_process.py`, coordinates this process by:
-     - Initializing parameters from the `make_map_launch.py` file.
-     - Iterating over `locations` directories in `input_data` to process map data.
-
-2. **Map Publishing**:
-   - The processed maps are saved in the `map_data` directory and published as ROS2 messages.
-   - The `map_publisher.py` node converts processed map data into `CoastMsg.msg` format and broadcasts it via the `gps_coordinates_coast` topic.
-
-## Workflow Details
-
-- The **map creation process** begins with `process_osm_data.py`, which:
-  - Processes OpenStreetMap data.
-  - Creates a local coordinate system.
-  - Scales the input image to one pixel per square meter of geographical space.
-- Next, `detect_coast.py` detects coastal coordinates and zones based on the processed map, converting them from local to global coordinates.
-- After processing, `post_processing.py` aligns and refines the data, preparing the final map saved as a binary file named according to the `save_file_name` parameter.
-
-- The **map publishing process** uses the `map_publisher.py` node to:
-  - Load binary map data.
-  - Publish the data in ROS2-compatible message formats for use in ROS2 applications.
-
-For a detailed process flow, including visualization, refer to the respective sections in the documentation and the logical diagram in Figure 2.5.
-
-
-## 🚀 Running the map_maker Package
-
-### **1. Map Creation**
+### 🚀 Step 1.2. : Map Creation
 
 ```sh
 ros2 launch map_maker make_map_launch.py
@@ -221,14 +204,16 @@ Default parameters:
 ```sh
 save_file_name:="jadranovo"
 
-locations:='["sv_marko","voz","jadranovo", "kacjak", "rudine"]'
+locations:='["sv_marko","voz","jadranovo", "kacjak", "rudine"]' 
 
 grid_size:="10"
 
 show_plot:="False"
 ```
 
-To run the command with changed parameters, you can define parameters like this:
+
+
+If you fecthed data from OSM in [Step 1.1.](#step-11--download-data-from-openstreetmap-optional), run the command with changed parameters:
 
 ```sh
 ros2 launch map_maker make_map_launch.py parameter1_name:="parameter1_value" parameter2_name:="parameter2_value" ...
@@ -239,18 +224,32 @@ Available parameter change example:
 ```sh
 save_file_name:="klimno"
 
-locations:='["dramalj", "crikvenica", "selce", "rudine", "klimno", "silo", "petrina", "vodica", "melska"]'
+locations:='["dramalj", "crikvenica", "selce", "rudine", "klimno", "silo", "petrina", "vodica", "melska"]' -> example of fetched data from OSM
 
 grid_size:="10"
 
 show_plot:="True"
 ```
 
-✅ Testing
+### ✅ Step 1.3. : Test the Created Map 
 
 If everything is did correctly, under directory `map_maker/map_data` processed map should be visible as binary file named `processed_map_*save_file_name*`
 
-You can test map
+You can Visualize the map with command:
+```sh
+ros2 launch map_maker make_visualization_launch.py
+save_file:=’save_file_name’
+```
+
+<p align="center">
+<img src="assets/map_visualization.png" alt="drawing" width="400"/>
+</p>
+<p align="center">
+<em>
+Figure 1: Visualized Map
+</p>
+
+## 🧭 Step 2 : Map Publishing
 
 ## path_planning_client Package
 
@@ -262,7 +261,7 @@ You can test map
 ## 🚀 Running the path_planning_server Package
 
 
-## Credits
+## 📧 Credits
 
 
 &NewLine;
