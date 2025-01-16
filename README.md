@@ -10,12 +10,13 @@
 
 ## 📚 Table of Contents
 
+🔗 Links to ROS2 Commands
    * [Project Information](#-project-information)
    * [Installing](#installing)
    * [Requirements](#requirements)
    * [ROS2 Software Architecture for Vessel Path Planning](#-ros2-software-architecture-for-vessel-path-planning)
    * [`map_maker` Package](#️-map_maker-package)
-      * [Step 1 : Download data from OpenStreetMap](#step-1--download-data-from-openstreetmap)
+      * [
       * [Step 2 : ]
   * [`path_planning_client` Package](#path_planning_client-package)
   * [`path_planning_server` Package](#path_planning_server-package)
@@ -23,10 +24,6 @@
   * [Acknowledgments](#acknowledgments)
 
 ### 🔗 Direct Link to the ROS2 Commands
-
-- [Running the map_maker Package](#running-the-map_maker-package)
-- [Running the path_planning_client Package](#running-the-path_planning_client-package)
-- [Running the path_planning_server Package](#running-the-path_planning_server-package)
 
 ## ⚙️ Installing
 ```terminal
@@ -126,7 +123,18 @@ Figure 1: Block diagram of the ROS2 system architecture.
 
 # 🗺️ map_maker Package
 
-The **map_maker** ROS2 package is designed for creating and integrating geographical maps into the ROS2 framework. It shares the typical structure of ROS2 packages and is part of the `path_planning_ws` ROS2 workspace. This package processes data to generate maps and publishes them using a ROS2 publisher. The workflow and associated directories, such as `map_maker` and `launch`, are illustrated in Figures 2.2, 2.3, and 2.4.
+The **map_maker** ROS2 package is designed for creating and integrating geographical maps into the ROS2 framework. 
+It shares the typical structure of ROS2 packages and is part of the `path_planning_ws` ROS2 workspace. 
+This package processes data to generate maps and publishes them using a ROS2 publisher. 
+The workflow and associated programs are outlined below.
+
+<p align="center">
+<img src="assets/map_maker_arh.png" alt="drawing" width="500"/>
+</p>
+<p align="center">
+<em>
+Figure 1: map_maker Package Architecture
+</p>
 
 ### Primary Objectives
 
@@ -140,7 +148,13 @@ The **map_maker** ROS2 package is designed for creating and integrating geograph
    - The processed maps are saved in the `map_data` directory and published as ROS2 messages.
    - The `map_publisher.py` node converts processed map data into `CoastMsg.msg` format and broadcasts it via the `gps_coordinates_coast` topic.
 
-## 🌍 Step 1 : Map Creation
+## 🌍 Map Creation (Optional)
+
+#### Directories : `input_data` → `map_maker` → `map_data`
+
+- Map Creation involves extracting geographical data from OpenStreetMap provided in `input_data` directory and converting it into a cost map for path planning using programs from `map_maker` directory 
+- Processed maps are saved in the `map_data` directory as binary files and published as ROS2 messages
+- The process is outlined below:
 
 <p align="center">
 <img src="assets/map_maker_process.png" alt="drawing" width="300"/>
@@ -150,9 +164,10 @@ The **map_maker** ROS2 package is designed for creating and integrating geograph
 Figure 1: Map Creation Process
 </p>
 
-### Step 1.1. : Download data from OpenStreetMap (optional) 
+### 1. Download data from OpenStreetMap
+---
 
-Folder name : `map_maker\input_data`
+**Folder name : `map_maker\input_data`**
 
 1️⃣ *Create Geographic Area Folders*
 - Navigate to the `input_data` folder in the ROS2 package `map_maker`.
@@ -192,26 +207,18 @@ Figure 2: Copy HTML string from OpenStreetMap
 ### 📋 Notes
 - For best results, use a zoom level of **300 meters**, as it preserves topographic details while maintaining manageable file sizes.
 - Ensure all folders in `input_data` contain both the `.png` image and the `osm_info.txt` file.
-- Coordinate transformations are essential for linking image pixels to geographic locations.
 
-### 🚀 Step 1.2. : Map Creation
+<br>
+
+
+### 🚀 ROS2 Commands for Map Creation
+---
+
+The following commands are used to create binary map files consisting of cost maps for path planning with geographical coordinates:
 
 ```sh
 ros2 launch map_maker make_map_launch.py
 ```
-
-Default parameters:
-```sh
-save_file_name:="jadranovo"
-
-locations:='["sv_marko","voz","jadranovo", "kacjak", "rudine"]' 
-
-grid_size:="10"
-
-show_plot:="False"
-```
-
-
 
 If you fecthed data from OSM in [Step 1.1.](#step-11--download-data-from-openstreetmap-optional), run the command with changed parameters:
 
@@ -231,14 +238,13 @@ grid_size:="10"
 show_plot:="True"
 ```
 
-### ✅ Step 1.3. : Test the Created Map 
-
 If everything is did correctly, under directory `map_maker/map_data` processed map should be visible as binary file named `processed_map_*save_file_name*`
 
-You can Visualize the map with command:
+### 👁️ Visualization
+*You can test out the created map with the following command:*
+
 ```sh
-ros2 launch map_maker make_visualization_launch.py
-save_file:=’save_file_name’
+ros2 launch map_maker make_visualization_launch.py save_file:=’save_file_name’
 ```
 
 <p align="center">
@@ -249,18 +255,17 @@ save_file:=’save_file_name’
 Figure 1: Visualized Map
 </p>
 
-## 🧭 Step 2 : Map Publishing
+## 🧭 Map Publishing
 
-## path_planning_client Package
+# path_planning_client Package
 
 ## 🚀 Running the path_planning_client Package
 
-## path_planning_server Package
-
+# path_planning_server Package
 
 ## 🚀 Running the path_planning_server Package
 
-
+# Example
 ## 📧 Credits
 
 
