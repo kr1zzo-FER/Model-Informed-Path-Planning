@@ -31,7 +31,7 @@
 
   * [`path_planning_server` Package](#path_planning_server-package)
      * 🔗 [ROS2 Command for Running Path Planning](#-ros2-command-for-running-path-planning)
-   * [Example](#example)
+  * [Example](#example)
   * [Credits](#credits)
   * [Acknowledgments](#acknowledgments)
 
@@ -378,7 +378,7 @@ Figure : path_planning_client Package Architecture
 ### 2. Setting Start and Goal Points via Terminal
 
 
-### 🚀  ROS2 Commands for Setting Start and Goal Points
+### 🚀 ROS2 Commands for Setting Start and Goal Points
 
 To set start and goal points manually via the terminal, execute the following command in the Linux terminal:
 
