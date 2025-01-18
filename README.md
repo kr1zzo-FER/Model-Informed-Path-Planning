@@ -16,7 +16,7 @@
    * [Requirements](#-requirements)
    * [ROS2 Software Architecture for Vessel Path Planning](#-ros2-software-architecture-for-vessel-path-planning)
    * [`map_maker` Package](#️-map_maker-package)
-      * [Map Creation](#-map-creation-(optional))
+      * [Map Creation](#-map-creation---optional)
          * [Download data from OpenStreetMap](#1-download-data-from-openstreetmap)
          * 🔗 [ROS2 Commands for Map Creation](#-ros2-commands-for-map-creation)
       * [Map Publishing](#-map-publishing)
@@ -167,7 +167,9 @@ Figure : map_maker Package Architecture
 
 &nbsp;
 
-## 1️⃣ Map Creation (Optional)
+## 1️⃣ Map Creation - Optional
+
+
 
 #### Directories : `input_data` → `map_maker` → `map_data`
 
