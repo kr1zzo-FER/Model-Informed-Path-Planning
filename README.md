@@ -12,11 +12,11 @@
 
 🔗 Links to ROS2 Commands
    * [Project Information](#-project-information)
-   * [Installing](#installing)
-   * [Requirements](#requirements)
+   * [Installing](#-installing)
+   * [Requirements](#-requirements)
    * [ROS2 Software Architecture for Vessel Path Planning](#-ros2-software-architecture-for-vessel-path-planning)
    * [`map_maker` Package](#️-map_maker-package)
-      * [Map Creation](#-map-creation-optional)
+      * [Map Creation](#map-creation-optional)
          * [Download data from OpenStreetMap](#step-11--download-data-from-openstreetmap-optional)
          * 🔗 [ROS2 Commands for Map Creation](#-ros2-commands-for-map-creation)
       * [Map Publishing](#-map-publishing)
@@ -58,9 +58,9 @@ pip install -r requirements/requirements.txt
 
 ## 💡 Project Information
 
-**This repository is a part of the diploma thesis at the Faculty of [Electrical Engineering and Computing, University of Zagreb](https://www.fer.unizg.hr/), [Laboratory for Underwater Systems and Technologies](https://labust.fer.hr/) in the academic year 2023./2024. The main goal of the thesis is to develop a _model-informed path planning and control for autonomous vessels (Croatian: Modelski informirano globalno planiranje putanje i upravljanje autonomnoga plovila)_.**
+**This repository is a part of the diploma thesis at the Faculty of [Electrical Engineering and Computing, University of Zagreb](https://www.fer.unizg.hr/), [Laboratory for Underwater Systems and Technologies](https://labust.fer.hr/) in the academic year 2023./2024. The main goal of the thesis is to develop a [_model-informed path planning and control for autonomous vessels (Croatian: Modelski informirano globalno planiranje putanje i upravljanje autonomnoga plovila)_](https://repozitorij.fer.unizg.hr/islandora/object/fer:12451). The goal of the project was to develop a modular software system architecture for global vessel path planning using the Robot Operating System 2 (ROS2) framework. The system is designed to be flexible and scalable, integrating OpenStreetMap data, RViz2 visualization tools, and advanced path planning algorithms. The architecture consists of three main stages: map creation, start-goal management, and path planning. Requirement of the project was to develop general path planning algorithm that can be used for any type of vessel. Thus, dynamic vessel model is not implemented in this project.**
 
-**The `documentation` directory contains the final thesis and IEEE conference paper submissions, offering an in-depth description of the project.**
+**The `documentation` directory contains the final thesis and IEEE conference paper submissions, offering an in-depth description of the project. The paper is writen in English so it can be used as a reference for the project, while the thesis is written in Croatian and it is yet to be translated.**
 
 &nbsp;
 
