@@ -15,7 +15,7 @@
    * [Requirements](#-requirements)
    * [ROS2 Software Architecture for Vessel Path Planning](#-ros2-software-architecture-for-vessel-path-planning)
    * [`map_maker` Package](#️-map_maker-package)
-      * [Map Creation](#-map-creation---optional)
+      * [Map Creation](#-1️⃣-map-creation---optional)
          * [Download data from OpenStreetMap](#1-download-data-from-openstreetmap)
          * 🔗 [ROS2 Commands for Map Creation](#-ros2-commands-for-map-creation)
          * 🔗 [ROS2 Commands for Cost Map Visualization](#-ros2-commands-for-cost-map-visualization)
@@ -23,7 +23,7 @@
          * 🔗 [ROS2 Commands for Map Publishing](#-ros2-commands-for-map-publishing)
   * [`path_planning_client` Package](#path_planning_client-package)
       * [Cost Map Visualization](#cost-map-visualization)
-         * 🔗 [ROS2 Commands for Cost Map Visualization](#-ros2-commands-for-cost-map-visualization)
+         * 🔗 [ROS2 Commands for Cost Map Visualization in RViz2](#-ros2-commands-for-cost-map-visualization-in-rviz2)
       * [Setting Start and Goal Points](#setting-start-and-goal-points)
          * [Setting Start and Goal Points via Rviz2](#1-setting-start-and-goal-points-via-rviz2)
          * [Setting Start and Goal Points via Terminal](#2-setting-start-and-goal-points-via-terminal)
@@ -177,7 +177,7 @@ Figure : map_maker Package Architecture
 - Map Creation involves extracting geographical data from OpenStreetMap provided in `input_data` directory and converting it into a cost map for path planning using programs from `map_maker` directory 
 - Processed maps are saved in the `map_data` directory as binary files and published as ROS2 messages
 - The process is outlined below and its consits of two steps:
-   - **[Download data from OpenStreetMap](#step-11--download-data-from-openstreetmap-optional)**
+   - **[Download data from OpenStreetMap](#download-data-from-openstreetmap)**
    - **[ROS2 Commands for Map Creation](#-ros2-commands-for-map-creation)**
 
 <p align="center">
@@ -188,7 +188,7 @@ Figure : map_maker Package Architecture
 Figure : Map Creation Process
 </p>
 
-### 1. Download data from OpenStreetMap
+### [Download data from OpenStreetMap](https://www.openstreetmap.org/#map=15/45.2359/14.5844)
 ---
 
 #### Directories: `input_data`
@@ -203,15 +203,15 @@ Figure : Map Creation Process
 - Download:
   - A `.png` image of the map (e.g., `jadranovo.png`) and save it in the respective folder.
   - The HTML share information:
-  - Copy the "Share" HTML code.
-  - Create a file named `osm_info.txt` in the same folder and paste the HTML code inside.
+      - Copy the "Share" HTML code.
+      - Create a file named `osm_info.txt` in the same folder and paste the HTML code inside.
 
 <p align="center">
 <img src="assets/osm_download.png" alt="drawing" width="200"/>
 </p>
 <p align="center">
 <em>
-Figure : Download data from OpenStreetMap
+Figure : Download image from OpenStreetMap
 </em>
 </p>
 
@@ -268,7 +268,8 @@ If everything is did correctly, under directory `map_maker/map_data` processed m
 
 &nbsp;
 
-### 👁️ Visualization
+### 🚀 ROS2 Commands for Cost Map Visualization
+
 *You can test out the created map with the following command that runs `map_visualization.py` script:*
 
 ```sh
@@ -297,20 +298,28 @@ Figure : Visualized Map
 
 Geographic maps are stored as binary files (`processed_map_save_file_name`), defined in the launch file, and located in the `map_data` directory. These maps are published via the `map_publisher.py` node, which processes the data into `CoastMsg.msg` format for the ROS2 topic `gps_coordinates_coast`.
 
+&nbsp;
+
 ###  🚀 ROS2 Commands for Map Publishing
 
-To publish the generated map using the ROS2 publisher `gps_coordinates_coast`, execute the following command in the Linux terminal. The `save_file_name` parameter specifies the desired map file name for publishing from the launch file:
+To publish the generated map using the ROS2 publisher `gps_coordinates_coast`, execute the following command in the Linux terminal :
 
+```bash  
+ros2 launch map_maker publish_map_launch.py
+```
+
+If you want to publish a specific map, you can do so by running the following command with the desired map file name:
 ```bash
 ros2 launch map_maker publish_map_launch.py save_file:='save_file_name'
 ```
-The given map is visualized in RViz2, described in the next section.
+#### The given map is [visualized in RViz2](#1️⃣-cost-map-visualization), described in the next section.
 
 &nbsp;
 
 # 📡 path_planning_client Package
 
-The **path_planning_client** ROS2 package is responsible for visualizing data in the RViz2 tool, managing the process of setting the start and goal points for vessel path planning, and publishing these points within the ROS2 framework using the action client and server communication mechanism. This package integrates tools for setting coordinates, visualizing planned paths, and interpolating navigation routes.
+The **path_planning_client** ROS2 package is responsible for visualizing data in the RViz2 tool, managing the process of setting the start and goal points for vessel path planning, and publishing these points within the ROS2 framework using the action client and server communication mechanism. 
+This package integrates tools for setting coordinates, visualizing planned paths, and managing the path planning and visualization process.
 
 <p align="center">
 <img src="assets/pp_client_arh.png" alt="drawing" width="500"/>
@@ -322,15 +331,15 @@ Figure : path_planning_client Package Architecture
 
 ### Primary Objectives
 
-1. **[Cost Map Visualization](#cost-map-visualization)**  
+1. **[Cost Map Visualization](#1️⃣-cost-map-visualization)** 
    - The `poincloud_publisher.py` node visualizes cost maps, search areas, and safe zones in RViz2.
    - Data is converted into ROS2 message formats (`sensor_msgs.PointCloud2`, `geometry_msgs.PoseStamped`) for seamless visualization.
 
-1. **[Setting Start and Goal Points](#setting-start-and-goal-points)**  
+1. **[Setting Start and Goal Points](#2️⃣-setting-start-and-goal-points)** 
    - Start and goal points are defined through the `start_goal_publisher.py` node, which interacts with RViz2 for visualization and accepts manual updates via the terminal.
    - These points are published on the `start_goal_msg` topic and converted into global coordinates for path planning.
 
-2. **[Publishing Start and Goal Points to the ROS2 Framework](#-ros2-commands-for-setting-start-and-goal-points)**  
+2. **[Publishing Start and Goal Points to the ROS2 Framework](#3️⃣-publishing-start-and-goal-points)** 
    - The `start_goal_publisher.py` node publishes start and goal points on the `start_goal_msg` topic, enabling seamless communication between the client and server packages.
 
 **Note:** Dependencies include the `map_maker` package for geographic coordinate data published via the `gps_coordinates_coast` topic.
@@ -341,7 +350,7 @@ Figure : path_planning_client Package Architecture
 
 The RViz2 visualization tool is launched using the `rviz2_pointcloud_launch.py` launch file, which loads the prepared `map_visualization.rviz` configuration from the `rviz2` directory and initializes the `poincloud_publisher.py` node; it is executed with the command: `ros2 launch path_planning_client rviz2_pointcloud_launch.py`.
 
-### 🚀 ROS2 Commands for Cost Map Visualization
+### 🚀 ROS2 Commands for Cost Map Visualization in RViz2
 
 To visualize cost maps, search areas, and safe zones in RViz2, first launch [ROS2 Commands Map Publishing](#-ros2-commands-for-map-publishing) and then
 execute the following command in the Linux terminal:
