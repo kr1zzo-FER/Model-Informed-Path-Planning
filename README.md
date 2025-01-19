@@ -10,7 +10,6 @@
 
 ## 📚 Table of Contents
 
-🔗 Links to ROS2 Commands
    * [Project Information](#-project-information)
    * [Installing](#-installing)
    * [Requirements](#-requirements)
@@ -19,6 +18,7 @@
       * [Map Creation](#-map-creation---optional)
          * [Download data from OpenStreetMap](#1-download-data-from-openstreetmap)
          * 🔗 [ROS2 Commands for Map Creation](#-ros2-commands-for-map-creation)
+         * 🔗 [ROS2 Commands for Cost Map Visualization](#-ros2-commands-for-cost-map-visualization)
       * [Map Publishing](#-map-publishing)
          * 🔗 [ROS2 Commands for Map Publishing](#-ros2-commands-for-map-publishing)
   * [`path_planning_client` Package](#path_planning_client-package)
@@ -31,17 +31,19 @@
 
   * [`path_planning_server` Package](#path_planning_server-package)
      * 🔗 [ROS2 Command for Running Path Planning](#-ros2-command-for-running-path-planning)
-  * [Example](#example)
+  * 🔗 [Example](#example)
   * [Credits](#credits)
   * [Acknowledgments](#acknowledgments)
 
 ### 🔗 Direct Links to ROS2 Commands
 - [Map Creation](#-ros2-commands-for-map-creation)
-- [Map Publishing](#-ros2-commands-for-map-publishing)
 - [Cost Map Visualization](#-ros2-commands-for-cost-map-visualization)
+- [Map Publishing](#-ros2-commands-for-map-publishing)
 - [Setting Start and Goal Points](#-ros2-commands-for-setting-start-and-goal-points)
-- [Publishing Start and Goal Points to the ROS2 Framework](#-ros-commands-for-publishing-start-and-goal-points)
+- [Publishing Start and Goal Points](#-ros-commands-for-publishing-start-and-goal-points)
 - [Running Path Planning](#-ros2-command-for-running-path-planning)
+- [Example](#example)
+
 &nbsp;
 
 ## ⚙️ Installing
@@ -76,7 +78,7 @@ Project involves the development of a modular software system architecture for g
 </p>
 <p align="center">
 <em>
-Figure : Block diagram of the ROS2 system architecture.
+Figure : Block diagram of the ROS2 system architecture for global vessel path planning
 </em>
 </p>
 
@@ -97,14 +99,14 @@ Figure : Block diagram of the ROS2 system architecture.
       - Publishes cost maps via a ROS2 publisher.
    - **Output**: Cost maps for path planning.
 
- - 2️⃣ [Start-Goal Management Package `path_planning_client`](#path_planning_client-package)
+ - 2️⃣ [Start-Goal Management Package `path_planning_client`](#-path_planning_client-package)
    - **Purpose**: Define start and goal coordinates using RViz2 or geographic data.
    - **Implementation**:
       - Employs the ROS2 action client-server mechanism for communication.
       - Converts and visualizes data for coordinate setup.
    - **Output**: Start and goal coordinates published within the ROS2 framework.
 
- - 3️⃣ [Path-Planning Package `path_planning_server`](#path_planning_server-package)
+ - 3️⃣ [Path-Planning Package `path_planning_server`](#-path_planning_server-package)
    - **Purpose**: Generate a feasible and smooth path using the D* Lite algorithm.
    - **Implementation**:
       - Interpolates waypoints for enhanced path smoothness.
