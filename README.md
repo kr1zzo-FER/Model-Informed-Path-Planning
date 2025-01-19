@@ -100,7 +100,7 @@ Figure : Block diagram of the ROS2 system architecture for global vessel path pl
    - **Output**: Cost maps for path planning.
 
  - 2️⃣ [Start-Goal Management Package `path_planning_client`](#-path_planning_client-package)
-   - **Purpose**: Define start and goal coordinates using RViz2 or geographic data.
+   - **Purpose**: Define start and goal coordinates using RViz2 or geographic data and data visualization in RViz2.
    - **Implementation**:
       - Employs the ROS2 action client-server mechanism for communication.
       - Converts and visualizes data for coordinate setup.
@@ -143,7 +143,6 @@ Figure : Block diagram of the ROS2 system architecture for global vessel path pl
 # 🗺️ map_maker Package
 
 The **map_maker** ROS2 package is designed for creating and integrating geographical maps into the ROS2 framework. 
-It shares the typical structure of ROS2 packages and is part of the `path_planning_ws` ROS2 workspace. 
 This package processes data to generate maps and publishes them using a ROS2 publisher. 
 The workflow and associated programs are outlined below.
 
@@ -157,13 +156,13 @@ Figure : map_maker Package Architecture
 
 ### Primary Objectives
 
-1. **[Map Creation](#-step-1--map-creation)** 
+1. **[Map Creation](#️-map-creation---optional)**
    - The package generates geographical maps by processing images and HTML data from OpenStreetMap stored in the `input_data` directory. 
    - The main script, `map_process.py`, coordinates this process by:
      - Initializing parameters from the `make_map_launch.py` file.
      - Iterating over `locations` directories in `input_data` to process map data.
 
-2. **[Map Publishing](#-step-2--map-publishing)**
+2. **[Map Publishing](#-map-publishing)**
    - The processed maps are saved in the `map_data` directory and published as ROS2 messages.
    - The `map_publisher.py` node converts processed map data into `CoastMsg.msg` format and broadcasts it via the `gps_coordinates_coast` topic.
 
