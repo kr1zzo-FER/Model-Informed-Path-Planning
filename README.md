@@ -32,9 +32,9 @@
          * 🔗 [ROS Commands for Publishing Start and Goal Points](#-ros-commands-for-publishing-start-and-goal-points)
   * [`path_planning_server` Package](#-path_planning_server-package)
      * 🔗 [ROS2 Command for Running Path Planning](#-ros2-command-for-running-path-planning)
-  * 🔗 [Example](#example)
-  * [Credits](#credits)
-  * [Acknowledgments](#acknowledgments)
+  * 🔗 [Example](#-example)
+  * [Credits](#-credits)
+  * [Acknowledgments](#-acknowledgments)
 
 ### 🔗 Direct Links to ROS2 Commands
 - [Map Creation](#-ros2-commands-for-map-creation)
@@ -44,7 +44,7 @@
 - [Setting Start and Goal Points](#-ros2-commands-for-setting-start-and-goal-points)
 - [Publishing Start and Goal Points](#-ros-commands-for-publishing-start-and-goal-points)
 - [Running Path Planning](#-ros2-command-for-running-path-planning)
-- [Example](#example)
+- [Example](#-example)
 
 &nbsp;
 
@@ -690,12 +690,18 @@ If everything is done correctly, the final path planning results should be visib
 
 Author|GitHub | e-mail
 | :--- | :---: | :---:
-Enio Krizman  | [@kr1zzo](https://github.com/kr1zzo) | enio.krizman@fer.hr
+Enio Krizman  | [@kr1zzo](https://github.com/kr1zzo) | enio.krizman@fer.hr / krizman.enio@outlook.com
 
 Mentors | e-mail
 | :--- | :---: 
 Doc. Dr. Sc. Đula Nađ  | dula.nad@fer.hr
 Dr. Sc. Nadir Kapetanović  | nadir.kapetanovi@fer.hr
+
+Commitee Members | e-mail
+| :--- | :---: 
+Đula Nađ | dula.nad@fer.hr
+Nikola Mišković | nikola.miskovic@fer.hr
+Fausto Miguel Pascoal Ferreira | fausto.ferreira@fer.unizg.hr
 
 #### [&copy; Faculty of Electrical Engineering and Computing, University of Zagreb, 2024](https://www.fer.unizg.hr/)
 <img src="assets/FER_logo_3.png" alt="drawing" width="200"/>
@@ -704,8 +710,8 @@ Dr. Sc. Nadir Kapetanović  | nadir.kapetanovi@fer.hr
 <img src="assets/labust_logo.png" alt="drawing" width="50"/>
 
 
-## Acknowledgments
+## 🖋️ Acknowledgments
 
-This repository is built using the following resources and it is used only for educational purposes:
+Parts of this repository are based on the following resources and they are used for educational purposes:
 * [PythonRobotics repository](https://github.com/AtsushiSakai/PythonRobotics)
 * [PythonRobotics documentation](https://arxiv.org/abs/1808.10703)
