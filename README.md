@@ -158,13 +158,13 @@ Figure : map_maker Package Architecture
 
 ### Primary Objectives
 
-1. **[Map Creation](#️-map-creation---optional)**
+1. **[Map Creation](#1️⃣-map-creation---optional)**
    - The package generates geographical maps by processing images and HTML data from OpenStreetMap stored in the `input_data` directory. 
    - The main script, `map_process.py`, coordinates this process by:
      - Initializing parameters from the `make_map_launch.py` file.
      - Iterating over `locations` directories in `input_data` to process map data.
 
-2. **[Map Publishing](#-map-publishing)**
+2. **[Map Publishing](#2️⃣-map-publishing)**
    - The processed maps are saved in the `map_data` directory and published as ROS2 messages.
    - The `map_publisher.py` node converts processed map data into `CoastMsg.msg` format and broadcasts it via the `gps_coordinates_coast` topic.
 
