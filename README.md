@@ -16,7 +16,7 @@
    * [ROS2 Software Architecture for Vessel Path Planning](#-ros2-software-architecture-for-vessel-path-planning)
    * [`map_maker` Package](#️-map_maker-package)
       * [Map Creation](#1️⃣-map-creation---optional)
-         * [Download data from OpenStreetMap](#-download-data-from-openstreetmap)
+         * [Download data from OpenStreetMap](#download-data-from-openstreetmap)
          * 🔗 [ROS2 Commands for Map Creation](#-ros2-commands-for-map-creation)
          * 🔗 [ROS2 Commands for Cost Map Visualization](#-ros2-commands-for-cost-map-visualization)
       * [Map Publishing](#2️⃣-map-publishing)
