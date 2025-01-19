@@ -178,9 +178,10 @@ Figure : map_maker Package Architecture
 
 - Map Creation involves extracting geographical data from OpenStreetMap provided in `input_data` directory and converting it into a cost map for path planning using programs from `map_maker` directory 
 - Processed maps are saved in the `map_data` directory as binary files and published as ROS2 messages
-- The process is outlined below and its consits of two steps:
+- The process is outlined below and its consits of following steps:
    - **[Download data from OpenStreetMap](#download-data-from-openstreetmap)**
    - **[ROS2 Commands for Map Creation](#-ros2-commands-for-map-creation)**
+   - **[ROS2 Commands for Cost Map Visualization](#-ros2-commands-for-cost-map-visualization)**
 
 <p align="center">
 <img src="assets/map_maker_process.png" alt="drawing" width="300"/>
@@ -248,13 +249,13 @@ The following commands are used to create binary map files consisting of cost ma
 ros2 launch map_maker make_map_launch.py
 ```
 
-If you fecthed data from OSM in [Step 1.1.](#step-11--download-data-from-openstreetmap-optional), run the command with changed parameters:
+If data is fetched from OpenStreetMap, the following command should be used:
 
 ```sh
 ros2 launch map_maker make_map_launch.py parameter1_name:="parameter1_value" parameter2_name:="parameter2_value" ...
 ```
 
-Available parameter change example:
+Available `parameter*_name` and their default values are:
 
 ```sh
 save_file_name:="jadranovo"
@@ -265,6 +266,8 @@ grid_size:="10"
 
 show_plot:="True"
 ```
+
+Where locations are the names of the folders in the `input_data` directory containing the map data.
 
 If everything is did correctly, under directory `map_maker/map_data` processed map should be visible as binary file named `processed_map_*save_file_name*`
 
@@ -283,13 +286,13 @@ If you want to visualize a specific map, you can do so by running the following 
 ```sh
 ros2 launch map_maker visualization_map_launch.py save_file:="save_file_name"
 ```
-
+Previous command visualize the maps from the `map_data` directory. 
 <p align="center">
 <img src="assets/map_visualization.png" alt="drawing" width="400"/>
 </p>
 <p align="center">
 <em>
-Figure : Visualized Map
+Figure : Example of visualized map processed_map_jadranovo
 </p>
 
 &nbsp;
@@ -314,7 +317,7 @@ If you want to publish a specific map, you can do so by running the following co
 ```bash
 ros2 launch map_maker publish_map_launch.py save_file:='save_file_name'
 ```
-#### The given map is [visualized in RViz2](#1️⃣-cost-map-visualization), described in the next section.
+#### The given map is [visualized in RViz2](#1️⃣-cost-map-visualization), described in the next section. The different maps can be visualized by changing the `save_file` parameter and re-run the command without the need to re-run the RViz2 visualization command.
 
 &nbsp;
 
@@ -341,7 +344,7 @@ Figure : path_planning_client Package Architecture
    - Start and goal points are defined through the `start_goal_publisher.py` node, which interacts with RViz2 for visualization and accepts manual updates via the terminal.
    - These points are published on the `start_goal_msg` topic and converted into global coordinates for path planning.
 
-2. **[Publishing Start and Goal Points to the ROS2 Framework](#3️⃣-publishing-start-and-goal-points)** 
+2. **[Publishing Start and Goal Points to the ROS2 Framework](#3️⃣-publishing-start-and-goal-points-to-the-ros2-framework)**
    - The `start_goal_publisher.py` node publishes start and goal points on the `start_goal_msg` topic, enabling seamless communication between the client and server packages.
 
 **Note:** Dependencies include the `map_maker` package for geographic coordinate data published via the `gps_coordinates_coast` topic.
@@ -352,6 +355,7 @@ Figure : path_planning_client Package Architecture
 
 The RViz2 visualization tool is launched using the `rviz2_pointcloud_launch.py` launch file, which loads the prepared `map_visualization.rviz` configuration from the `rviz2` directory and initializes the `poincloud_publisher.py` node; it is executed with the command: `ros2 launch path_planning_client rviz2_pointcloud_launch.py`.
 
+&nbsp;
 ### 🚀 ROS2 Commands for Cost Map Visualization in RViz2
 
 To visualize cost maps, search areas, and safe zones in RViz2, first launch [ROS2 Commands Map Publishing](#-ros2-commands-for-map-publishing) and then
@@ -369,7 +373,10 @@ ros2 launch path_planning_client rviz2_pointcloud_launch.py
 Figure : RViz2 Visualization of Cost Map
 </p>
 
+&nbsp;
+
 ## 2️⃣ Setting Start and Goal Points
+
 
 #### Directories: `path_planning_client`
 
@@ -384,11 +391,12 @@ In Rviz2 you can use `2D Pose Estimate` and `2D Nav Goal` tools to set start and
 </p>
 <p align="center">
 <em>
-Figure : path_planning_client Package Architecture
+Figure : Setting Start and Goal Points in RViz2
 </p>
 
-### 2. Setting Start and Goal Points via Terminal
+&nbsp;
 
+### 2. Setting Start and Goal Points via Terminal
 
 ### 🚀 ROS2 Commands for Setting Start and Goal Points
 
@@ -423,7 +431,9 @@ When you are satisfied with the selected start and goal points, publish them to 
 ros2 launch path_planning_client start_goal_client_launch.py
 ```
 
-The action client-server communication mechanism ensures that the start and goal points are successfully published and available for path planning and the client (provided in thiis package) awaits for the path planning server to generate the path described in the next section.
+The action client-server communication mechanism ensures that the start and goal points are successfully 
+published and available for path planning and the client (provided in thiis package) awaits for the 
+path planning server to generate the path described in the [next section](#-ros2-command-for-running-path-planning).
 
 &nbsp;
 
@@ -450,13 +460,14 @@ Figure : path_planning_server Package Architecture
    - Interpolation techniques refine the raw path into a smooth and executable trajectory using programs in the `curve_generation` folder.
    - Parameters like `sampling_rate` and `optimization_method` determine point distribution and curve smoothing.
 
-2. **[Data Publishing and Visualization](#data-publishing-and-visualization)**  
-   - The `path_planning_server.py` node publishes both interpolated and non-interpolated paths along with their estimated travel time and distance.
-   - Visualization parameters such as `show_debug` and `show_results` control the display of inputs and results in RViz2 for debugging and validation.
+3. **[Feedback to the path_planning_client](#feedback-to-the-path_planning_client)**  
+   - The `path_planning_server.py` node provides feedback to the client with the planned path interpolated and non-interpolated path coordinates, as well as the intermediate results for debugging purposes.
+
+&nbsp;
 
 ### **📝  Note:** Compared to all other packages, the **path_planning_client** package achieves all its objectives using a single logical loop and requires only one command to execute its entire workflow, making it highly efficient and streamlined.
 
-
+&nbsp;
 
 ## 🚀 ROS2 Command for Running Path Planning
 
@@ -493,8 +504,8 @@ ros2 launch path_planning_server path_planning_server_launch.py \
 
 ### Visualization Options
    - `show_feedback` - Displays feedback messages for RViz2 real-time updates
-   - `show_results` - show results in PyPlot window
    - `show_debug` - show intermediate results in PyPlot window for debugging
+   - `show_results` - show results in PyPlot window
    <p align="center">
    <img src="assets/safe_cost_1.png" alt="drawing" width="300"/>
    </p>
@@ -538,16 +549,18 @@ ros2 launch path_planning_server path_planning_server_launch.py \
 
 - To visualize the path planning results in RViz2, ensure that **all the visualization windows are closed**, as it stops the RViz2 tool from updating the visualization data.
 
+&nbsp;
+
 ## 🏆 Final Path Planning Results in RViz2
 
-If everything is done correctly, the final path planning results should be visible in RViz2 as shown below:
+If everything is done correctly, the final path planning results should be visible in RViz2 as shown below, with both the D* Lite algorithm and path interpolation results visible:
 
 <p align="center">
    <img src="assets/rviz2_final_p.png" alt="drawing" width="600"/>
    </p>
    <p align="center">
    <em>
-   Figure : Downsampling effect on the path planning algorithm
+   Figure : RViz2 Visualization of the final path planning results
    </em>
 </p>
 
@@ -563,7 +576,7 @@ In the input_data directory there are provided few maps of Soline Bay, Croatia. 
 ros2 launch map_maker make_map_launch.py save_file_name:="klimno" locations:='["dramalj", "crikvenica", "selce", "rudine", "klimno", "silo", "petrina", "vodica", "melska"]' grid_size:="10" 
 ```
 
-Where dramalj, crikvenica, selce, rudine, klimno, silo, petrina, vodica, melska are the names of the folders in the input_data directory containing the map data.
+Where dramalj, crikvenica, selce, rudine, klimno, silo, petrina, vodica, melska are the names of the folders in the `input_data` directory containing the map data.
 
 If everything is done correctly, the processed map should be visible in the map_data directory as a binary file named `processed_map_klimno`.
 
@@ -624,7 +637,7 @@ ros2 launch path_planning_client update_start_goal_launch.py start:="[45.164342,
 ```
 The same can be done via RViz2 by using the `2D Pose Estimate` and `2D Nav Goal` tools, but direct terminal input is more precise.
 
-## 4. Path Planning
+## 4. Path-Planning
 
 Action client-server communication mechanism ensures that the start and goal points are successfully published and available for path planning. To start client mechanism, run the following command in the Linux terminal:
 
@@ -672,7 +685,7 @@ Note that the other parameters can be changed as well, as described before, but 
    </em>
 </p>
 
-## 5. Final Path Planning Results in RViz2
+## 5. Final Path-Planning Results in RViz2
 
 If everything is done correctly, the final path planning results should be visible in RViz2 as shown below where both D* Lite algorithm and path interpolation results are visible:
 
@@ -685,23 +698,48 @@ If everything is done correctly, the final path planning results should be visib
    </em>
 </p>
 
+## 📈 Future Work
+
+- Develop a user-friendly GUI for path planning and control
+- Implement dynamic vessel model for path planning based on vessel type 
+- Implement advanced path planning algorithms to improve path smoothness and efficiency
+- Optimize runtime calculations for path planning (C++ implementation) to reduce execution time
+- Replace the map_maker package with a more efficient and precise map creation tool
+- Implement path planning for multiple vessels
+- Implement path planning for multiple goals and start points
+- Risk assessment and safety analysis for path planning
+- Support for local (dynamic) real-time vessel path planning
+   - Dynamic cost map updates based on real-time data
+   - Dynamic risk assessment strategies
+   - Integration with external systems for navigation and control
+   - Environmental data integration 
+   - Collision, Grounding and obstacle avoidance algorithms
+   - COLREG rules implementation
+   - Simulation and real-world testing
+
+
 ## 📧 Credits
 &NewLine;
 
-Author|GitHub | e-mail
+The diploma thesis project was developed by the following authors and mentors:
+
+Academic Title | Author|GitHub | e-mail
+| :--- | :---: | :---: | :---:
+univ. mag. ing. inf. et comm. techn. | Enio Krizman  | [@kr1zzo](https://github.com/kr1zzo) | enio.krizman@fer.hr / krizman.enio@outlook.com
+
+Academic Title | Mentor Name | e-mail
 | :--- | :---: | :---:
-Enio Krizman  | [@kr1zzo](https://github.com/kr1zzo) | enio.krizman@fer.hr / krizman.enio@outlook.com
+Doc. Dr. Sc. | Đula Nađ  | dula.nad@fer.hr
+Dr. Sc. | Nadir Kapetanović  | nadir.kapetanovi@fer.hr
 
-Mentors | e-mail
-| :--- | :---: 
-Doc. Dr. Sc. Đula Nađ  | dula.nad@fer.hr
-Dr. Sc. Nadir Kapetanović  | nadir.kapetanovi@fer.hr
+The thesis was defended at the Faculty of Electrical Engineering and Computing, University of Zagreb, on the 9th of July 2024
+under the supervision of the following committee members:
 
-Commitee Members | e-mail
-| :--- | :---: 
-Đula Nađ | dula.nad@fer.hr
-Nikola Mišković | nikola.miskovic@fer.hr
-Fausto Miguel Pascoal Ferreira | fausto.ferreira@fer.unizg.hr
+Academic Title | Commitee Member | e-mail
+| :--- | :---: | :---:
+Doc. Dr. Sc. | Đula Nađ | dula.nad@fer.hr
+Prof. Dr. Sc. | Nikola Mišković | nikola.miskovic@fer.hr
+Doc. Dr. Sc. | Fausto Miguel Pascoal Ferreira | fausto.ferreira@fer.unizg.hr
 
 #### [&copy; Faculty of Electrical Engineering and Computing, University of Zagreb, 2024](https://www.fer.unizg.hr/)
 <img src="assets/FER_logo_3.png" alt="drawing" width="200"/>
