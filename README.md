@@ -1,6 +1,6 @@
 # [Model-informed Path-Planning and Control for Autonomous Vessels](https://repozitorij.fer.unizg.hr/islandora/object/fer:12451)
 
-*System Architecture and Implementation of Global Vessel Path Planning Based on ROS2 Framework*
+*System Architecture and Implementation of Global Vessel Path Planning Based on ROS2 Jazzy Framework*
 
 ![GitHub_Action_Linux_CI](https://github.com/AtsushiSakai/PythonRobotics/workflows/Linux_CI/badge.svg)
 
@@ -13,6 +13,8 @@
    * [Project Information](#-project-information)
    * [Installing](#-installing)
    * [Requirements](#-requirements)
+   * [Source Workspace](#-source-workspace)
+   * [Build Workspace](#-build-the-workspace)
    * [ROS2 Software Architecture for Vessel Path Planning](#-ros2-software-architecture-for-vessel-path-planning)
    * [`map_maker` Package](#️-map_maker-package)
       * [Map Creation](#1️⃣-map-creation---optional)
@@ -53,13 +55,50 @@
 git clone https://github.com/kr1zzo-FER/Model-Informed-Path-Planning.git
 ```
 
+&nbsp;
 ## 📋 Requirements
+
+Make sure venv is installed by running:
+
+```terminal
+sudo apt install python3-venv
+```
+
+To create a new virtual environment in a directory named .venv, run:
+
+```terminal
+python3 -m venv .venv
+```
+
+To activate this virtual environment (which modifies the PATH environment variable), run this:
+
+```terminal
+source .venv/bin/activate
+```
+
+Now you can install a requirements in this virtual environment:
 
 ```terminal
 pip install -r requirements/requirements.txt
 ```
 &nbsp;
 
+## 🔗 Source Workspace  
+At the end of the `.bashrc`, add the following line to source the ROS 2 workspace automatically. Alternatively, you can run it in the terminal every time before running the package:
+
+```sh
+source /home/*path_to_workspace*/Model-Informed-Path-Planning/path_planning_ws/install/setup.bash
+```
+&nbsp; 
+## 🏗 Build Workspace
+
+Navigate to `path_planning_ws` and build the workspace using the following `.sh` file:
+
+```terminal
+./colcon.sh
+```
+
+&nbsp; 
 ## 💡 Project Information
 
 **This repository is a part of the diploma thesis at the Faculty of [Electrical Engineering and Computing, University of Zagreb](https://www.fer.unizg.hr/), [Laboratory for Underwater Systems and Technologies](https://labust.fer.hr/) in the academic year 2023./2024. The main goal of the thesis is to develop a [_model-informed path planning and control for autonomous vessels (Croatian: Modelski informirano globalno planiranje putanje i upravljanje autonomnoga plovila)_](https://repozitorij.fer.unizg.hr/islandora/object/fer:12451). The goal of the project was to develop a modular software system architecture for global vessel path planning using the Robot Operating System 2 (ROS2) framework. The system is designed to be flexible and scalable, integrating OpenStreetMap data, RViz2 visualization tools, and advanced path planning algorithms. The architecture consists of three main stages: map creation, start-goal management, and path planning. Requirement of the project was to develop general path planning algorithm that can be used for any type of vessel. Thus, dynamic vessel model is not implemented in this project.**
@@ -70,7 +109,7 @@ pip install -r requirements/requirements.txt
 
 ## 🤖 ROS2 Software Architecture for Vessel Path Planning
 
-Project involves the development of a modular software system architecture for global vessel path planning using **[Robot Operating System 2 (ROS2), version : Iron](https://docs.ros.org/en/iron/index.html)**. The system is designed to be flexible and scalable, integrating OpenStreetMap data, RViz2 visualization tools, and advanced path planning algorithms. The architecture consists of three main stages, as outlined below.
+Project involves the development of a modular software system architecture for global vessel path planning using **[Robot Operating System 2 (ROS2), version : Jazzy](https://docs.ros.org/en/jazzy/index.html)**. The system is designed to be flexible and scalable, integrating OpenStreetMap data, RViz2 visualization tools, and advanced path planning algorithms. The architecture consists of three main stages, as outlined below.
 
 
 
