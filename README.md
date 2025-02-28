@@ -1,6 +1,6 @@
 # [Model-informed Path-Planning and Control for Autonomous Vessels](https://repozitorij.fer.unizg.hr/islandora/object/fer:12451)
 
-*System Architecture and Implementation of Global Vessel Path Planning Based on ROS2 Framework*
+*System Architecture and Implementation of Global Vessel Path Planning Based on Iron ROS2 Framework*
 
 ![GitHub_Action_Linux_CI](https://github.com/AtsushiSakai/PythonRobotics/workflows/Linux_CI/badge.svg)
 
@@ -13,6 +13,8 @@
    * [Project Information](#-project-information)
    * [Installing](#-installing)
    * [Requirements](#-requirements)
+   * [Source Workspace](#-source-workspace)
+   * [Build Workspace](#-build-the-workspace)
    * [ROS2 Software Architecture for Vessel Path Planning](#-ros2-software-architecture-for-vessel-path-planning)
    * [`map_maker` Package](#️-map_maker-package)
       * [Map Creation](#1️⃣-map-creation---optional)
@@ -55,8 +57,45 @@ git clone https://github.com/kr1zzo-FER/Model-Informed-Path-Planning.git
 
 ## 📋 Requirements
 
+Make sure venv is installed by running:
+
+```terminal
+sudo apt install python3-venv
+```
+
+To create a new virtual environment in a directory named .venv, run:
+
+```terminal
+python3 -m venv .venv
+```
+
+To activate this virtual environment (which modifies the PATH environment variable), run this:
+
+```terminal
+source .venv/bin/activate
+```
+
+Now you can install a requirements in this virtual environment:
+
 ```terminal
 pip install -r requirements/requirements.txt
+```
+&nbsp;
+
+## 🔗 Source Workspace  
+At the end of the `.bashrc`, add the following line to source the ROS 2 workspace automatically. Alternatively, you can run it in the terminal every time before running the package:
+
+```sh
+source /home/*path_to_workspace*/Model-Informed-Path-Planning/path_planning_ws/install/setup.bash
+```
+&nbsp; 
+
+## 🏗 Build Workspace
+
+Navigate to `path_planning_ws` and build the workspace using the following `.sh` file:
+
+```terminal
+./colcon.sh
 ```
 &nbsp;
 
