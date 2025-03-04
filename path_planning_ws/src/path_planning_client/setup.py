@@ -57,7 +57,7 @@ setup(
            'pointcloud_publisher = path_planning_client.pointcloud_publisher:main',
            'rviz2_launch = path_planning_client.rviz2_launch:main',
            'start_goal_update = path_planning_client.start_goal_update:main',
-           
+           'cpp_plot = path_planning_client.cpp_plot:main',
         ],
     },
 )

@@ -1,0 +1,31 @@
+<launch>
+    <!-- Declare launch arguments -->
+    <arg name="cost_values" default="[10.0,2.0,1.5,1.2]" />
+    <arg name="step_sizes" default="[50.0,50.0,100.0,100.0]" />
+    <arg name="speed_limits" default="[2.0,5.0,8.0,25.0]" />
+    <arg name="show_feedback" default="False" />
+    <arg name="show_results" default="False" />
+    <arg name="show_debug" default="False" />
+    <arg name="optimization_method" default="polynomial" />
+    <arg name="sampling_rate" default="5.0" />
+    <arg name="show_downsampling" default="False" />
+    <arg name="show_interpolation" default="False" />
+
+    <!-- Node definition -->
+    <node
+        pkg="path_planning_server_cpp"
+        exec="path_planning_server"
+        output="screen"
+        name="path_planning_server">
+        <param name="cost_values" value="$(var cost_values)" />
+        <param name="step_sizes" value="$(var step_sizes)" />
+        <param name="speed_limits" value="$(var speed_limits)" />
+        <param name="show_feedback" value="$(var show_feedback)" />
+        <param name="show_results" value="$(var show_results)" />
+        <param name="show_debug" value="$(var show_debug)" />
+        <param name="optimization_method" value="$(var optimization_method)" />
+        <param name="sampling_rate" value="$(var sampling_rate)" />
+        <param name="show_downsampling" value="$(var show_downsampling)" />
+        <param name="show_interpolation" value="$(var show_interpolation)" />
+    </node>
+</launch>
