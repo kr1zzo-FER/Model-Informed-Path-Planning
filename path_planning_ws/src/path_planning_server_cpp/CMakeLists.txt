@@ -14,19 +14,13 @@ find_package(rclcpp_components REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
-find_package(Eigen3 REQUIRED)
 
-# Include directories
-include_directories(
-  include
-  ${EIGEN3_INCLUDE_DIR}
-)
 
-add_executable(path_planning_server src/path_planning_server.cpp)
-ament_target_dependencies(path_planning_server rclcpp rclcpp_action std_msgs geometry_msgs nav_msgs user_action_interfaces rclcpp_components Eigen3) 
+add_executable(path_planning_server_cpp src/path_planning_server.cpp)
+ament_target_dependencies(path_planning_server_cpp rclcpp rclcpp_action std_msgs geometry_msgs nav_msgs user_action_interfaces rclcpp_components) 
 
 install(TARGETS
-  path_planning_server
+  path_planning_server_cpp
   DESTINATION lib/${PROJECT_NAME}
 )
 

@@ -43,7 +43,7 @@ setup(
     version='0.0.0',
     packages=[package_name],
     data_files=package_files(data_files, ['algorithms/', 'launch/', 'curve_generation/']),
-    install_requires=['setuptools'],
+    install_requires=['setuptools', 'numpy', 'scipy'],
     zip_safe=True,
     maintainer='enio',
     maintainer_email='enio.krizman@fer.hr',
@@ -53,7 +53,8 @@ setup(
     entry_points={
         'console_scripts': [
            'planning_server = path_planning_server.planning_server:main',
-           'path_planning_server = path_planning_server.path_planning_server:main'
+           'path_planning_server = path_planning_server.path_planning_server:main',
+           'path_planning_server_np = path_planning_server.path_planning_server_np:main',
         ],
     },
 )

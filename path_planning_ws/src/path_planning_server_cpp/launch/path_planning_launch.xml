@@ -14,9 +14,9 @@
     <!-- Node definition -->
     <node
         pkg="path_planning_server_cpp"
-        exec="path_planning_server"
+        exec="path_planning_server_cpp"
         output="screen"
-        name="path_planning_server">
+        name="path_planning_server_cpp">
         <param name="cost_values" value="$(var cost_values)" />
         <param name="step_sizes" value="$(var step_sizes)" />
         <param name="speed_limits" value="$(var speed_limits)" />
