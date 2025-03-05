@@ -34,8 +34,8 @@ class PathPlanningServer(rclpy_Node):
         self.declare_parameter('sampling_rate', 5.0)
         self.declare_parameter('show_interpolation', False)
         self.declare_parameter('show_downsampling', False)
-        self.cost_values = self.get_parameter('cost_values').get_parameter_value().double_array_value
-        self.step_values = self.get_parameter('step_values').get_parameter_value().double_array_value
+        self.cost_values = np.array(self.get_parameter('cost_values').get_parameter_value().double_array_value)
+        self.step_values = np.array(self.get_parameter('step_values').get_parameter_value().double_array_value)
         self.speed_limits = self.get_parameter('speed_limits').get_parameter_value().double_array_value
         self.show_feedback = self.get_parameter('show_feedback').get_parameter_value().bool_value
         self.show_results = self.get_parameter('show_results').get_parameter_value().bool_value
