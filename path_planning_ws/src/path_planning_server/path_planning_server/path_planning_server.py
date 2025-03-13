@@ -168,6 +168,9 @@ class PathPlanningServer(rclpy_Node):
         self.rhs[self.goal.x][self.goal.y] = 0
         self.U.append((self.goal, self.calculate_key(self.goal)))
 
+        goal_key = self.calculate_key(self.goal)
+
+        self.get_logger().info(f"#####################3Goal key: {goal_key}")
         
         self.test_dstar_lite()
 
@@ -315,7 +318,7 @@ class PathPlanningServer(rclpy_Node):
         max_y = max(coordinates_list, key = lambda x: x[1])[1]
 
         result = [min_y, min_x, max_y, max_x]
-        print(f"Coordinates: {result}")
+        self.get_logger().info(f"Coordinates: {result}")
         return result
 
     
