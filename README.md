@@ -1,4 +1,4 @@
-# [Path-Planning Module for Autonomous Vessel](https://repozitorij.fer.unizg.hr/islandora/object/fer:12451)
+# [Path-Planning Module for Autonomous Vessels](https://repozitorij.fer.unizg.hr/islandora/object/fer:12451)
 
 *System Architecture and Implementation of the Vessel Path-Planning Module Based on the Iron ROS2 Framework.*
 
