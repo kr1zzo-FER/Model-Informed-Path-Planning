@@ -446,8 +446,11 @@ class PathPlanningServer(rclpy_Node):
                                       compare_coordinates(motion, new_node),
                                       self.get_motions(n,m)))
         
+        self.get_logger().info(f"Detected motion: {detected_motion}")
         #self.get_logger().info(f"Detected motion: {detected_motion}")
         motion = detected_motion[0].cost * m
+
+        self.get_logger().info(f"Motion: {motion}")
         return motion
 
     def h(self, s: Node):

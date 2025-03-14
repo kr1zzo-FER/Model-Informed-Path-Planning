@@ -168,10 +168,10 @@ class PathPlanningServer(rclpy_Node):
     def meters_to_gps(self, point):
         x = point[0] * self.grid_size
         y = point[1] * self.grid_size
-        self.get_logger().info(f"X: {x}, Y: {y}")
+        #self.get_logger().info(f"X: {x}, Y: {y}")
         """ Converts meters to GPS coordinates (lat/lon) using Haversine formula. """
-        self.get_logger().info(f"Coordinates: {self.coordinates}")
-        self.get_logger().info(f"Size x: {self.size_x*self.grid_size}, Size y: {self.size_y*self.grid_size}")
+        #self.get_logger().info(f"Coordinates: {self.coordinates}")
+        #self.get_logger().info(f"Size x: {self.size_x*self.grid_size}, Size y: {self.size_y*self.grid_size}")
         latitude = self.coordinates[1] + y * (self.coordinates[3] - self.coordinates[1]) / (self.size_y*self.grid_size)
         longitude = self.coordinates[0] + x * (self.coordinates[2] - self.coordinates[0]) / (self.size_x*self.grid_size)
 
@@ -232,15 +232,13 @@ class PathPlanningServer(rclpy_Node):
 
     def get_motions(self):
 
-        n = m = 1
-
         motions = [(0,1), (1,0), (0,-1), (-1,0), (1,1), (-1,1), (1,-1), (-1,-1)]
 
         return motions
 
     def c(self, node1:np.array , node2: np.array ):
 
-        detected_motion = (node2[0] - node1[0], node2[1] - node1[1])
+        detected_motion = (node1[0] - node2[0], node1[1] - node2[1])
 
         detected_motion_cost = 1 if abs(detected_motion[0]) + abs(detected_motion[1]) == 1 else math.sqrt(2)
 
@@ -265,8 +263,8 @@ class PathPlanningServer(rclpy_Node):
         return motion_cost
 
     def h(self, s: np.array ):
-        return max(abs(self.start[0] - s[0]), abs(self.start[1] - s[1]))
- 
+        #return max(abs(self.start[0] - s[0]), abs(self.start[1] - s[1]))
+        return np.linalg.norm(self.start - s)  # Euclidean distance
 
     def calculate_key(self, s: np.array):
         s = tuple(map(int, s))  # Ensure integer indices
@@ -280,7 +278,7 @@ class PathPlanningServer(rclpy_Node):
         if np.all(node >= 0) and node[0] < self.size_x and node[1] < self.size_y:
             return True
         #self.get_logger().info(f"Node {node} is not valid because it is out of bounds")
-        return False
+        return True
 
     def get_neighbours(self, u: np.array ):
         neighb = [self.add_coordinates(u, motion) for motion in self.get_motions() if self.is_valid(self.add_coordinates(u, motion))]
@@ -306,6 +304,7 @@ class PathPlanningServer(rclpy_Node):
 
         # If u is not the goal, update its rhs value
         if not self.compare_coordinates(u, self.goal):
+            self.get_logger().info(f"Updating vertex {u}")
             self.rhs[u_tuple[0]][u_tuple[1]] = min([self.c(u, s) + self.g[s[0]][s[1]] for s in self.succ(u)])
         # If g[u] is not equal to rhs[u], push u back to the priority queue
         if any([self.compare_coordinates(u, node) for node, key in self.U]):
