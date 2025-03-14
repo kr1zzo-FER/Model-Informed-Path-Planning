@@ -2,7 +2,7 @@
 
 *System Architecture and Implementation of the Vessel Path-Planning Module Based on the Iron ROS2 Framework.*
 
-This project was originally developed as part of the master’s thesis *Model-Informed Global Path Planning and Control for Autonomous Vessels* at the Faculty of Electrical Engineering and Computing in Zagreb.
+This project was originally developed as part of the master’s thesis Model-Informed Global Path Planning and Control for Autonomous Vessels at the Faculty of Electrical Engineering and Computing, University of Zagreb. Earlier prototype versions of the project are available in the branches drop-down menu.
 
 Each component of the *Path Planning Module* architecture follows a distinct approach and can be developed as an independent module. The current implementation represents only a part of a larger planned framework, as presented in [Section](#-ros2-software-architecture-for-vessel-path-planning). The referenced ROS2 packages can be upgraded or replaced in the future without affecting the module’s functionality or other system components, provided that the described communication topology is followed.
 
