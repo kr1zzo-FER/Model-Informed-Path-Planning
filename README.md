@@ -1,8 +1,12 @@
-# [Model-informed Path-Planning and Control for Autonomous Vessels](https://repozitorij.fer.unizg.hr/islandora/object/fer:12451)
+# [Path-Planning Module for Autonomous Vessel](https://repozitorij.fer.unizg.hr/islandora/object/fer:12451)
 
-*System Architecture and Implementation of Global Vessel Path Planning Based on Iron ROS2 Framework*
+*System Architecture and Implementation of the Vessel Path-Planning Module Based on the Iron ROS2 Framework.*
 
-![GitHub_Action_Linux_CI](https://github.com/AtsushiSakai/PythonRobotics/workflows/Linux_CI/badge.svg)
+This project was originally developed as part of the master’s thesis *Model-Informed Global Path Planning and Control for Autonomous Vessels* at the Faculty of Electrical Engineering and Computing in Zagreb.
+
+Each component of the *Path Planning Module* architecture follows a distinct approach and can be developed as an independent module. The current implementation represents only a part of a larger planned framework, as presented in [Section](#-ros2-software-architecture-for-vessel-path-planning). The referenced ROS2 packages can be upgraded or replaced in the future without affecting the module’s functionality or other system components, provided that the described communication topology is followed.
+
+This flexibility in the implementation allows developers to experiment with implementing their custom packages. Contributions are welcome, feel free to explore and join the project!
 
 <p align="center">
 <img src="assets/map_intro.png" alt="drawing" width="400"/>
@@ -111,11 +115,8 @@ Navigate to `path_planning_ws` and build the workspace using the following `.sh`
 
 Project involves the development of a modular software system architecture for global vessel path planning using **[Robot Operating System 2 (ROS2), version : Iron](https://docs.ros.org/en/iron/index.html)**. The system is designed to be flexible and scalable, integrating OpenStreetMap data, RViz2 visualization tools, and advanced path planning algorithms. The architecture consists of three main stages, as outlined below.
 
-
-
-
 <p align="center">
-<img src="assets/system_arhitecture.png" alt="drawing" width="400"/>
+<img src="assets/ros2_arh_ieee.png" alt="drawing" width="400"/>
 </p>
 <p align="center">
 <em>
