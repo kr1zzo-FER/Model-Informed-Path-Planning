@@ -175,7 +175,7 @@ class PathPlanningServer(rclpy_Node):
         latitude = self.coordinates[1] + y * (self.coordinates[3] - self.coordinates[1]) / (self.size_y*self.grid_size)
         longitude = self.coordinates[0] + x * (self.coordinates[2] - self.coordinates[0]) / (self.size_x*self.grid_size)
 
-        self.get_logger().info(f"Latitude: {latitude}, Longitude: {longitude}")
+        #self.get_logger().info(f"Latitude: {latitude}, Longitude: {longitude}")
         return latitude, longitude
     
     def assign_zone(self, points, zone_type, cost):
@@ -231,16 +231,23 @@ class PathPlanningServer(rclpy_Node):
         return np.array([cord1[0] + cord2[0], cord1[1] + cord2[1]])
 
     def get_motions(self):
+        return [
+            ((0, 1), 1),    # Right
+            ((1, 0), 1),    # Down
+            ((0, -1), 1),   # Left
+            ((-1, 0), 1),   # Up
+            ((1, 1), math.sqrt(2)),   # Down-right
+            ((-1, 1), math.sqrt(2)),  # Up-right
+            ((1, -1), math.sqrt(2)),  # Down-left
+            ((-1, -1), math.sqrt(2))  # Up-left
+        ]
 
-        motions = [(0,1), (1,0), (0,-1), (-1,0), (1,1), (-1,1), (1,-1), (-1,-1)]
-
-        return motions
 
     def c(self, node1:np.array , node2: np.array ):
 
-        detected_motion = (node1[0] - node2[0], node1[1] - node2[1])
+        #detected_motion = (node1[0] - node2[0], node1[1] - node2[1])
 
-        detected_motion_cost = 1 if abs(detected_motion[0]) + abs(detected_motion[1]) == 1 else math.sqrt(2)
+        #detected_motion_cost = 1 if abs(detected_motion[0]) + abs(detected_motion[1]) == 1 else math.sqrt(2)
 
         #self.get_logger().info(f"Detected motion: {detected_motion}, cost: {detected_motion_cost}")
 
@@ -249,43 +256,44 @@ class PathPlanningServer(rclpy_Node):
         #self.get_logger().info(f"Grid cost: {grid_cost}")
 
         # direction cost (1 or sqrt(2)) * grid_cost
-        motion_cost = detected_motion_cost * grid_cost
+        motion_cost = grid_cost
 
         if motion_cost == math.inf:
             #self.get_logger().info(f"Motion cost is infinite")
             # check if coast detected - must be in the coast zone
             #if self.grid[node2[0]][node2[1]][0] == 1:
                 #self.get_logger().info(f"Coast detected for node {node2}")
-            return math.inf
+            return 1
 
         #self.get_logger().info(f"Motion cost: {motion_cost}")
 
-        return motion_cost
+        return 1
 
     def h(self, s: np.array ):
         #return max(abs(self.start[0] - s[0]), abs(self.start[1] - s[1]))
-        return np.linalg.norm(self.start - s)  # Euclidean distance
+        return 0 #np.linalg.norm(self.start - s)  # Euclidean distance
 
     def calculate_key(self, s: np.array):
         s = tuple(map(int, s))  # Ensure integer indices
-        key = (min(self.g[s[0], s[1]], self.rhs[s[0], s[1]]) + self.h(s)
+        key = (min(self.g[s[0], s[1]], self.rhs[s[0], s[1]]) #+ self.h(s)
                 + self.km, min(self.g[s[0], s[1]], self.rhs[s[0], s[1]]))
         #self.get_logger().info(f"Key: {key}")
         return key
 
 
-    def is_valid(self, node: np.array ):
+    def is_valid(self, node: np.array):
         if np.all(node >= 0) and node[0] < self.size_x and node[1] < self.size_y:
             return True
-        #self.get_logger().info(f"Node {node} is not valid because it is out of bounds")
-        return True
+        return False
 
-    def get_neighbours(self, u: np.array ):
-        neighb = [self.add_coordinates(u, motion) for motion in self.get_motions() if self.is_valid(self.add_coordinates(u, motion))]
+    def get_neighbours(self, u: np.array):
+        neighbours = []
+        for motion, cost in self.get_motions():
+            new_node = self.add_coordinates(u, motion)
+            if self.is_valid(new_node):
+                neighbours.append(new_node)
+        return neighbours
 
-        #self.get_logger().info(f"Neighbours: {neighb} of {u}")
-
-        return neighb
 
     def pred(self, u: np.array ):
         # Grid, so each vertex is connected to the ones around it
@@ -304,7 +312,7 @@ class PathPlanningServer(rclpy_Node):
 
         # If u is not the goal, update its rhs value
         if not self.compare_coordinates(u, self.goal):
-            self.get_logger().info(f"Updating vertex {u}")
+            #self.get_logger().info(f"Updating vertex {u}")
             self.rhs[u_tuple[0]][u_tuple[1]] = min([self.c(u, s) + self.g[s[0]][s[1]] for s in self.succ(u)])
         # If g[u] is not equal to rhs[u], push u back to the priority queue
         if any([self.compare_coordinates(u, node) for node, key in self.U]):
@@ -329,6 +337,10 @@ class PathPlanningServer(rclpy_Node):
     def compute_shortest_path(self):
 
         self.get_logger().info('Computing shortest path')
+        #display goal and start
+        self.get_logger().info(f"Start: {self.start}")
+        self.get_logger().info(f"Goal: {self.goal}")
+
         heapq.heapify(self.U)
 
         has_elements = bool(self.U)  # This is equivalent to checking if self.U has elements

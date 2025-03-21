@@ -16,7 +16,7 @@ from curve_generation.path_optimization import PathOptimization
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-
+from scipy.spatial import KDTree
 
 class PathPlanningServer(rclpy_Node):
 
@@ -34,6 +34,8 @@ class PathPlanningServer(rclpy_Node):
         self.declare_parameter('sampling_rate', 5.0)
         self.declare_parameter('show_interpolation', False)
         self.declare_parameter('show_downsampling', False)
+        self.declare_parameter('turn_radius', 20.0)
+        self.declare_parameter('distance_params', [1.0,0.001])
         self.cost_values = np.array(self.get_parameter('cost_values').get_parameter_value().double_array_value)
         self.step_values = np.array(self.get_parameter('step_values').get_parameter_value().double_array_value)
         self.speed_limits = self.get_parameter('speed_limits').get_parameter_value().double_array_value
@@ -44,6 +46,11 @@ class PathPlanningServer(rclpy_Node):
         self.sampling_rate = self.get_parameter('sampling_rate').get_parameter_value().double_value
         self.show_interpolation = self.get_parameter('show_interpolation').get_parameter_value().bool_value
         self.show_downsampling = self.get_parameter('show_downsampling').get_parameter_value().bool_value
+        self.turn_radius = self.get_parameter('turn_radius').get_parameter_value().double_value
+        self.distance_params = np.array(self.get_parameter('distance_params').get_parameter_value().double_array_value)
+
+        self.alpha = self.distance_params[0]
+        self.beta = self.distance_params[1]
 
         self.red_cost = self.cost_values[0]
         self.yellow_cost = self.cost_values[1]
@@ -55,6 +62,7 @@ class PathPlanningServer(rclpy_Node):
         self.green_step = self.step_values[2]
         self.safe_step = self.step_values[3]
         self.open_sea_step = 100.0
+        self.coast_points = []
         
         # enable fetching subscription once
         self.first_run = True
@@ -168,15 +176,17 @@ class PathPlanningServer(rclpy_Node):
         self.rhs[self.goal.x][self.goal.y] = 0
         self.U.append((self.goal, self.calculate_key(self.goal)))
 
-        goal_key = self.calculate_key(self.goal)
-
-        self.get_logger().info(f"#####################3Goal key: {goal_key}")
-        
         self.test_dstar_lite()
 
         self.path_gps = [self.adapt_coordinates_reverse(point) for point in self.path]
 
         self.path_optimized, self.optimization_results = self.optimize_path()
+
+        #ensure that there are no same points in the path
+        self.path_optimized = list(dict.fromkeys(self.path_optimized))
+
+        # smooth path w moving average
+        self.path_optimized = self.moving_average_path(self.path_optimized, window_size=3)
 
         self.optimized_path_gps = [self.adapt_coordinates_reverse(point) for point in self.path_optimized]
 
@@ -206,6 +216,10 @@ class PathPlanningServer(rclpy_Node):
         result.raw_path_distance = raw_path_distance
         result.estimated_raw_path_time = raw_path_time
 
+        self.get_logger().info('Path planning server finished')
+
+        #self.test_smoothness(self.path_optimized)
+
         if self.show_downsampling:
             self.test_optimization()
         
@@ -213,12 +227,42 @@ class PathPlanningServer(rclpy_Node):
             self.plot_interpolation(self.optimization_results)
 
         if self.show_results:
-            self.visualization(False,self.zones_dictionary,self.start_m,self.goal_m,self.path,self.path_optimized)
-            #self.visualization(True,self.zones_dictionary_gps,self.start_gps,self.goal_gps,self.path_gps,self.optimized_path_gps)
+            #self.visualization(False,self.zones_dictionary,self.start_m,self.goal_m,self.path,self.path_optimized)
+            self.visualization(True,self.zones_dictionary_gps,self.start_gps,self.goal_gps,self.path_gps,self.optimized_path_gps)
             plt.show()
 
         return result
     
+    import numpy as np
+
+    def moving_average_path(self, path, window_size=3):
+        """
+        Apply a moving average filter to smooth small zig-zags in a path.
+        This function processes x and y coordinates separately.
+        
+        :param path: List of (x, y) coordinates
+        :param window_size: Size of the moving average window
+        :return: Smoothed path as a list of (x, y) coordinates
+        """
+        if len(path) < window_size:
+            return path  # If the path is too short, return it unchanged
+
+        # Separate x and y coordinates
+        x_vals = np.array([p[0] for p in path])
+        y_vals = np.array([p[1] for p in path])
+
+        # Apply moving average using a convolution filter
+        smoothed_x = np.convolve(x_vals, np.ones(window_size) / window_size, mode='valid')
+        smoothed_y = np.convolve(y_vals, np.ones(window_size) / window_size, mode='valid')
+
+        # Pad the start and end to maintain original path length
+        smoothed_x = np.pad(smoothed_x, (window_size//2, window_size//2), mode='edge')
+        smoothed_y = np.pad(smoothed_y, (window_size//2, window_size//2), mode='edge')
+
+        # Combine back into list of (x, y) tuples
+        smoothed_path = list(zip(smoothed_x, smoothed_y))
+        return smoothed_path
+
     def path_information(self, path):
 
         distance = self.calculate_list_distance(path)
@@ -251,7 +295,7 @@ class PathPlanningServer(rclpy_Node):
     
     def optimize_path(self):
         self.get_logger().info(f'Optimization method: {self.optimization_method} [path points : {len(self.path)}]')
-        path_optimization = PathOptimization(self.path, self.optimization_method, self.show_results, self.sampling_rate)
+        path_optimization = PathOptimization(self.path, self.optimization_method, self.show_results, self.grid_size, self.turn_radius)
         path_optimization.optimize_path()
         optimized_path = path_optimization.get_path()
         inetrpolation_results = path_optimization.get_interpolation()
@@ -297,6 +341,7 @@ class PathPlanningServer(rclpy_Node):
             elif value == "s":
                 cost_dictionary[key] = [self.safe_cost, self.safe_step]
             elif value == "c":
+                self.coast_points.append(key)
                 cost_dictionary[key] = [math.inf, 1]
             else:
                 cost_dictionary[key] = 1
@@ -415,7 +460,7 @@ class PathPlanningServer(rclpy_Node):
         return new_coord
 
     
-    ### D* Lite algorithm functions ###
+  ### D* Lite algorithm functions ###
 
     def get_motions(self,n,m):
         motions = [
@@ -446,15 +491,15 @@ class PathPlanningServer(rclpy_Node):
                                       compare_coordinates(motion, new_node),
                                       self.get_motions(n,m)))
         
-        self.get_logger().info(f"Detected motion: {detected_motion}")
         #self.get_logger().info(f"Detected motion: {detected_motion}")
         motion = detected_motion[0].cost * m
-
-        self.get_logger().info(f"Motion: {motion}")
         return motion
 
     def h(self, s: Node):
-        return max(abs(self.start.x - s.x), abs(self.start.y - s.y))
+        dist_start_goal = math.dist((s.x, s.y), (self.goal.x, self.goal.y))
+
+        #greather penatly for greather distance then start_goal
+        return math.dist((s.x, s.y), (self.goal.x, self.goal.y)) 
  
 
     def calculate_key(self, s: Node):
@@ -571,6 +616,43 @@ class PathPlanningServer(rclpy_Node):
             distance += distance_i
         return round(distance, 5)
     
+    
+    def c1(self, node1: Node, node2: Node):
+        
+        # nearest coast point
+        tree = KDTree(list(self.coast_points))
+        _, idx = tree.query([node2.x*10, node2.y*10])
+        nearest_coast = self.coast_points[idx]
+
+        # euclidean distance from node2 to nearest coast point
+        #self.get_logger().info(f"Nearest coast: {nearest_coast}")
+        #self.get_logger().info(f"Node2: {node2.x, node2.y}")
+        distance = math.dist(nearest_coast, (node2.x, node2.y))
+
+        # exponentinaly decreasing from the coast
+        distance_cost = self.alpha * math.exp(-distance*self.beta)
+        #self.get_logger().info(f"Distance cost: {distance}, {distance_cost}")
+
+        factor = self.cost_dictionary.get((node2.x, node2.y), [1,self.open_sea_step])
+
+        m,n = factor[0],factor[1]
+
+        self.get_logger().info(f"Factor: {m,n}")
+
+        new_node = Node((n*(node1.x-node2.x),n*(node1.y-node2.y)))
+
+        detected_motion = list(filter(lambda motion:
+                                      compare_coordinates(motion, new_node),
+                                      self.get_motions(n,m)))
+
+        motion_cost = detected_motion[0].cost * m
+
+        cost = motion_cost +  distance_cost
+
+        self.get_logger().info(f" motion: {motion_cost}, distance: {distance_cost} = {cost}")
+
+        return cost
+
     def test_dstar_lite(self):
         self.get_logger().info('D* Lite algorithm started')
         self.get_logger().info('Start: ' + str(self.start.x) + ' ' + str(self.start.y))
@@ -589,13 +671,15 @@ class PathPlanningServer(rclpy_Node):
 
 
         while not compare_coordinates(self.goal, self.start):
+            self.get_logger().info(f"Start: {self.start.x, self.start.y}")
             if self.g[self.start.x][self.start.y] == math.inf:
                 print("No path possible")
                 return False, pathx, pathy
             self.start = min(self.succ(self.start),
-                             key=lambda sprime:
-                             self.c(self.start, sprime) +
-                             self.g[sprime.x][sprime.y])
+                 key=lambda sprime:
+                 self.c1(self.start, sprime) +
+                 self.g[sprime.x][sprime.y])
+
             pathx.append(self.start.x + self.x_min_global)
             pathy.append(self.start.y + self.y_min_global)
 
@@ -611,10 +695,109 @@ class PathPlanningServer(rclpy_Node):
         distance = round(sum([self.euclidean_distance(x1, y1, x2, y2) for x1, y1, x2, y2 in zip(rx, ry, rx[1:], ry[1:])]),5)
         self.get_logger().info(f"Distance: {distance}") 
         self.get_logger().info(f"Execution time: {function_time}")   
+    
+    def moving_average(sekf, data, window_size=3):
+        """
+        Apply a moving average filter to smooth out small oscillations.
+        """
+        return np.convolve(data, np.ones(window_size)/window_size, mode='valid')
 
        
-        
+    def compute_velocity(self,path):
+        """
+        Compute velocity vectors from a path.
+        """
+        velocity = []
+        for i in range(1, len(path)):
+            delta_pos = np.array(path[i]) - np.array(path[i - 1])
+            velocity.append(delta_pos)
+        return velocity
 
+    def compute_curvature(self, path):
+        """
+        Compute curvature using finite differences.
+        """
+        curvature = []
+        for i in range(1, len(path) - 1):
+            v1 = np.array(path[i]) - np.array(path[i - 1])
+            v2 = np.array(path[i + 1]) - np.array(path[i])
+            norm_v1 = np.linalg.norm(v1)
+            norm_v2 = np.linalg.norm(v2)
+
+            if norm_v1 == 0 or norm_v2 == 0:
+                curvature.append(0.0)
+            else:
+                angle = np.arccos(np.clip(np.dot(v1, v2) / (norm_v1 * norm_v2), -1.0, 1.0))
+                curvature.append(angle / norm_v1)
+
+        # Smooth out tiny oscillations in curvature
+        smoothed_curvature = self.moving_average(curvature, window_size=5)
+        return np.concatenate(([curvature[0]] * 2, smoothed_curvature, [curvature[-1]] * 2))
+
+
+    def check_G0_continuity(self,path):
+        """
+        Check if the path is connected (G0 continuity).
+        """
+        i = 0
+        for i in range(len(path) - 1): 
+            if np.array_equal(path[i], path[i + 1]):  # Ensuring no gaps
+                self.get_logger().info(f"Gap between {i} : {path[i]} and {path[i + 1]}")
+                return False
+            i += 1
+        return True
+
+    def check_G1_continuity(self,velocity):
+        """
+        Check if the path has continuous tangents (G1 continuity).
+        """
+        i = 0
+        for i in range(len(velocity) - 1):
+            norm_v1 = np.linalg.norm(velocity[i])
+            norm_v2 = np.linalg.norm(velocity[i + 1])
+            if norm_v1 > 0 and norm_v2 > 0:
+                tangent1 = velocity[i] / norm_v1
+                tangent2 = velocity[i + 1] / norm_v2
+                if not np.allclose(tangent1, tangent2, atol=1e-1):  # Relaxed tolerance
+                    self.get_logger().info(f"Discontinuity between {i} : {tangent1} and {tangent2}")
+                    return False
+                i += 1
+        return True
+
+    def check_G2_continuity(self,curvature):
+        """
+        Check if the path has continuous curvature (G2 continuity).
+        """
+        i = 0
+        self.get_logger().info(f"Curvature: {curvature}")
+        self.get_logger().info(f"Curvature length: {len(curvature)}")
+        for i in range(len(curvature) - 1):
+            if not np.allclose(curvature[i], curvature[i + 1], atol=1e-3):  # Relaxed tolerance
+                self.get_logger().info(f"G2 Discontinuity between {i} : {curvature[i]} and {curvature[i + 1]}")
+                return False
+            i += 1
+        return True
+
+    def test_smoothness(self, path):
+        """
+        Test the smoothness of a path.
+        """
+
+        waypoints = self.optimization_results[2]
+
+        velocity = self.compute_velocity(path)
+        curvature = self.compute_curvature(path)
+
+        G0_C0_continuity = self.check_G0_continuity(path)
+        G1_continuity = self.check_G1_continuity(velocity)
+        G2_continuity = self.check_G2_continuity(curvature)
+
+        self.get_logger().info(f"G0/C0 continuity: {G0_C0_continuity}")
+        self.get_logger().info(f"G1 continuity: {G1_continuity}")
+        self.get_logger().info(f"G2 continuity: {G2_continuity}")
+
+
+        return G0_C0_continuity, G1_continuity, G2_continuity
     ### Visualization functions ###
 
     def visualization(self, gps = True, zones_dictionary = dict, start = [0.0,0.0], goal = [0.0,0.0], path = [], path_optimized = []):
@@ -692,24 +875,24 @@ class PathPlanningServer(rclpy_Node):
     def test_optimization(self):
         fig,ax = plt.subplots()
 
-        sampling_rate = [2.0, 5.0, 10.0, 15.0, 20.0, 25.0]
+        turning_radius_list= [2.0, 5.0, 10.0, 15.0, 20.0, 25.0]
 
-        path_optimization_2 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate[0])
+        path_optimization_2 = PathOptimization(self.path, self.optimization_method, self.show_results, self.grid_size, turning_radius_list=[0])
         path_optimization_2.optimize_path()
         path_2 = path_optimization_2.get_path()
-        path_optimization_3 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate[1])
+        path_optimization_3 = PathOptimization(self.path, self.optimization_method, self.show_results, self.grid_size, turning_radius_list=[1])
         path_optimization_3.optimize_path()
         path_3 = path_optimization_3.get_path()
-        path_optimization_4 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate[2])
+        path_optimization_4 = PathOptimization(self.path, self.optimization_method, self.show_results, self.grid_size, turning_radius_list=[2])
         path_optimization_4.optimize_path()
         path_4 = path_optimization_4.get_path()
-        path_optimization_5 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate[3])
+        path_optimization_5 = PathOptimization(self.path, self.optimization_method, self.show_results, self.grid_size, turning_radius_list=[3])
         path_optimization_5.optimize_path()
         path_5 = path_optimization_5.get_path()
-        path_optimization_6 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate[4])
+        path_optimization_6 = PathOptimization(self.path, self.optimization_method, self.show_results, self.grid_size, turning_radius_list=[4])
         path_optimization_6.optimize_path()
         path_6 = path_optimization_6.get_path()
-        path_optimization_7 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate[5])
+        path_optimization_7 = PathOptimization(self.path, self.optimization_method, self.show_results, self.grid_size, turning_radius_list=[5])
         path_optimization_7.optimize_path()
         path_7 = path_optimization_7.get_path()
 
@@ -739,13 +922,13 @@ class PathPlanningServer(rclpy_Node):
         ax.plot([point[0] for point in self.path],[point[1] for point in self.path], 'mo', markersize=1)
         legend_elements.append(Line2D([0], [0], color='magenta', lw=4, label=f"D* Lite path"))
         #sampling rate comment"
-        legend_elements.append(Line2D([0], [0], color='none', lw=0, label="Downsampling rate:"))
-        legend_elements.append(Line2D([0], [0], color='green', lw=4, label=f"{sampling_rate[0]}"))
-        legend_elements.append(Line2D([0], [0], color='yellow', lw=4, label=f"{sampling_rate[1]}"))
-        legend_elements.append(Line2D([0], [0], color='red', lw=4, label=f"{sampling_rate[2]}"))
-        legend_elements.append(Line2D([0], [0], color='cyan', lw=4, label=f"{sampling_rate[3]}"))
-        legend_elements.append(Line2D([0], [0], color='black', lw=4, label=f"{sampling_rate[4]}"))
-        legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f"{sampling_rate[5]}"))
+        legend_elements.append(Line2D([0], [0], color='none', lw=0, label="Turning radius [m]:"))
+        legend_elements.append(Line2D([0], [0], color='green', lw=4, label=f"{turning_radius_list[0]}"))
+        legend_elements.append(Line2D([0], [0], color='yellow', lw=4, label=f"{turning_radius_list[1]}"))
+        legend_elements.append(Line2D([0], [0], color='red', lw=4, label=f"{turning_radius_list[2]}"))
+        legend_elements.append(Line2D([0], [0], color='cyan', lw=4, label=f"{turning_radius_list[3]}"))
+        legend_elements.append(Line2D([0], [0], color='black', lw=4, label=f"{turning_radius_list[4]}"))
+        legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f"{turning_radius_list[5]}"))
 
 
         ax.legend(handles=legend_elements, loc='best', fontsize=20)

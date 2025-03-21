@@ -20,10 +20,12 @@ def generate_launch_description():
     sampling_rate =  LaunchConfiguration('sampling_rate')   
     show_downsampling =  LaunchConfiguration('show_downsampling')
     show_interpolation =  LaunchConfiguration('show_interpolation')
+    turn_radius =  LaunchConfiguration('turn_radius')
+    distance_params =  LaunchConfiguration('distance_params')
 
     cost_values_arg = DeclareLaunchArgument(
         'cost_values',
-        default_value= '[10.0,2.0,1.5,1.2]',
+        default_value= '[20.0,2.0,1.5,1.2]',
     )
 
     step_sizes_arg = DeclareLaunchArgument(
@@ -78,6 +80,18 @@ def generate_launch_description():
         description='Whether to show the interpolation of the path planning server',
     )
 
+    turn_radius_arg = DeclareLaunchArgument(
+        'turn_radius',
+        default_value='20.0',
+        description='The turn radius to use',
+    )
+
+    distance_params_arg = DeclareLaunchArgument(
+        'distance_params',
+        default_value='[1.0, 0.001]',
+        description='The distance parameters to use',
+    )
+
     map_maker_node = Node(
         package='path_planning_server',
         executable='path_planning_server',
@@ -92,7 +106,10 @@ def generate_launch_description():
                      'speed_limits': speed_limits,
                      'sampling_rate': sampling_rate,
                      'show_downsampling': show_downsampling,
-                     'show_interpolation': show_interpolation,}]
+                     'show_interpolation': show_interpolation,
+                     'turn_radius': turn_radius,
+                     'distance_params': distance_params,
+                     }]
     )
 
 
@@ -108,5 +125,7 @@ def generate_launch_description():
         show_interpolation_arg,
         optimization_method_arg,
         sampling_rate_arg,
+        turn_radius_arg,
+        distance_params_arg,
         map_maker_node
     ])

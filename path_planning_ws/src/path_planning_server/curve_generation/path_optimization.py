@@ -34,16 +34,17 @@ def save_binary_data(data, file_name):
 
 class PathOptimization:
 
-	def __init__(self, points, method="dubins", show_results=False, sampling_rate=5.0):
+	def __init__(self, points,  method="dubins", show_results=False, grid_size=10, turn_radius=5.0):
 		self.points = points
 		self.points_new = []
 		self.points_new1 = []
 		self.method = method
 		self.path_points = []
 		self.show_results = show_results
-		self.sampling_rate = sampling_rate
 		self.plot_interpolation = []
-
+		self.grid_size = grid_size
+		self.turn_radius = turn_radius
+		self.sampling_rate = 0
 
 	def get_path(self):
 		return self.path_points	
@@ -70,6 +71,8 @@ class PathOptimization:
 		return math.degrees(angle)
 	
 	def optimize_path(self):
+
+		self.sampling_rate = round(self.turn_radius/self.grid_size)
 
 		for i, point in enumerate(self.points):
 			if i == 0:
@@ -172,13 +175,16 @@ class PathOptimization:
 
 		points_new_plot1 = self.points_new.copy()
 
+		#self.points_new = self.points
+		self.method = "bezier"
+
 		for i, point in enumerate(self.points_new):
 			self.points_new[i] = (point[0], point[1], self.get_angle(self.points_new[i-1][0], self.points_new[i-1][1], point[0], point[1])) if i != 0 else (point[0], point[1], self.get_angle(point[0], point[1],self.points_new[i+1][0], self.points_new[i+1][1]))
 		
 		curve_factory = CurveFactory()
 		# create generator
 		if self.method == "dubins":
-			generator = curve_factory("dubins", step= 0.1, max_curv=0.2)
+			generator = curve_factory("dubins", step= 0.1, max_curv=1.5)
 		elif self.method == "bezier":
 			generator = curve_factory("bezier", step=0.1, offset=3.0)
 		elif self.method == "polynomial":
@@ -195,6 +201,97 @@ class PathOptimization:
 		path_x,path_y,return_list = generator.run(self.points_new)
 
 		path_points = [(path_x[i], path_y[i]) for i in range(len(path_x))]
+
+
+		self.smoothed_points = []
+
+
+		has_acute_angle = True
+		j = 0
+		while has_acute_angle:
+			j += 1
+			print("iteration: ", j)
+			has_acute_angle = False
+			removed_points = []
+			new_points = []
+
+			for i, point in enumerate(self.smoothed_points):
+				if i == 0:
+					continue
+				if i == len(self.smoothed_points)-1:
+					continue
+				angle = self.triangle_angle(self.smoothed_points[i-1], self.smoothed_points[i+1], point)
+				if angle ==180 or angle == 0:
+					continue
+				elif angle < 150:
+					#removed_points.append(self.smoothed_points[i])
+					new_x = (self.smoothed_points[i-1][0]+self.smoothed_points[i+1][0])/2
+					new_y = (self.smoothed_points[i-1][1]+self.smoothed_points[i+1][1])/2
+					self.smoothed_points[i] = (new_x, new_y)
+					has_acute_angle = True
+				elif angle > 150 and angle <180:
+					new_x = (self.smoothed_points[i-1][0]+self.smoothed_points[i+1][0])/2
+					new_y = (self.smoothed_points[i-1][1]+self.smoothed_points[i+1][1])/2
+					self.smoothed_points[i] = (new_x, new_y)
+				elif angle > 180:
+					print("angle 150 ", angle)
+					try:
+						y1 = self.smoothed_points[i-1][1]
+						y2 = self.smoothed_points[i+1][1]
+						x1 = self.smoothed_points[i-1][0]
+						x2 = self.smoothed_points[i+1][0]
+						#print(x1, y1, x2, y2)
+						quadrant_angle = self.get_angle(x1, y1, x2, y2)
+						print("quadrant_angle: ", quadrant_angle)
+						c = self.euclidean_distance(x1, y1, x2, y2)
+						a = math.sqrt(c**2/(2*(1-math.cos(math.radians(135)))))
+						print("a: ", a)
+						if quadrant_angle >= 0 and quadrant_angle < 90:
+							delta_x = a*math.cos(math.radians(45))
+							delta_y = a*math.sin(math.radians(45))
+							new_point = (x1+delta_x, y1+delta_y)
+						elif quadrant_angle >= 90 and quadrant_angle < 180:
+							delta_x = a*math.cos(math.radians(45))
+							delta_y = a*math.sin(math.radians(45))
+							new_point = (x1-delta_x, y1+delta_y)
+						elif quadrant_angle < 0 and quadrant_angle >= -90:
+							delta_x = a*math.cos(math.radians(45))
+							delta_y = a*math.sin(math.radians(45))
+							new_point = (x1+delta_x, y1-delta_y)
+						elif quadrant_angle < -90 and quadrant_angle >= -180:
+							delta_x = a*math.cos(math.radians(45))
+							delta_y = a*math.sin(math.radians(45))
+							new_point = (x1-delta_x, y1-delta_y)
+					except:
+						pass
+				for point in removed_points:
+					try:
+						self.smoothed_points.remove(point)
+					except:
+						pass
+				removed_points = []
+	
+
+				for element in new_points:
+					i = element[1]
+					new_point = element[0]
+					self.smoothed_points.insert(i, new_point)
+				new_points = []
+		
+		for i, point in enumerate(self.smoothed_points):
+			if i == 0:
+					continue
+			if i == len(self.smoothed_points)-1:
+					continue
+			angle = self.triangle_angle(self.smoothed_points[i-1], self.smoothed_points[i+1], point)
+			if angle > 150 or angle <180:
+				new_x = (self.smoothed_points[i-1][0]+self.smoothed_points[i+1][0])/2
+				new_y = (self.smoothed_points[i-1][1]+self.smoothed_points[i+1][1])/2
+				self.smoothed_points[i] = (new_x, new_y)
+
+
+		self.path_points = self.smoothed_points
+
 
 		points = [(self.points[i][0], self.points[i][1]) for i in range(len(self.points))]
 
