@@ -16,7 +16,10 @@ from curve_generation.path_optimization import PathOptimization
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-
+from scipy.spatial import KDTree
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.ticker import ScalarFormatter
 
 class PathPlanningServer(rclpy_Node):
 
@@ -55,7 +58,7 @@ class PathPlanningServer(rclpy_Node):
         self.green_step = self.step_values[2]
         self.safe_step = self.step_values[3]
         self.open_sea_step = 100.0
-        
+        self.motion_dict = {}
         # enable fetching subscription once
         self.first_run = True
         
@@ -65,6 +68,23 @@ class PathPlanningServer(rclpy_Node):
         # gps data
         self.zones_dictionary_gps = {}
         self.coordinates = []
+        self.coast_points = []
+        self.red_zone = []
+        self.yellow_zone = []
+        self.green_zone = []
+        self.safe_zone = []
+        self.coast_gps = []
+        self.red_gps = []
+        self.yellow_gps = []
+        self.green_gps = []
+        self.safe_gps = []
+        self.coast_points_gps = []
+        self.red_zone_gps = []
+        self.yellow_zone_gps = []
+        self.green_zone_gps = []
+        self.safe_zone_gps = []
+        self.optimized_pathp_gps = []
+        self.optimized_path_gps = []
 
         # Local coordinate system = 1:grid_size scale (1 pixel = grid_size meters)
         self.grid_size = 0.0
@@ -88,6 +108,7 @@ class PathPlanningServer(rclpy_Node):
 
         # results
         self.path = []
+        self.pathp = []
         self.path_gps = []
         self.path_optimized = []
         self.optimization_results = []
@@ -173,6 +194,8 @@ class PathPlanningServer(rclpy_Node):
 
         self.path_gps = [self.adapt_coordinates_reverse(point) for point in self.path]
 
+        self.pathp_gps = [self.adapt_coordinates_reverse(point) for point in self.pathp]
+
         self.path_optimized, self.optimization_results = self.optimize_path()
 
         self.optimized_path_gps = [self.adapt_coordinates_reverse(point) for point in self.path_optimized]
@@ -191,7 +214,13 @@ class PathPlanningServer(rclpy_Node):
         raw_path_y = [point[1] for point in self.path_gps]
         raw_path_distance = raw_path_information[0]
         raw_path_time = raw_path_information[1]
+        
 
+        path_optimizationp = PathOptimization(self.pathp, self.optimization_method, False, self.sampling_rate)
+        path_optimizationp.optimize_path()
+        optimized_pathp = path_optimizationp.get_path()
+
+        self.optimized_pathp_gps = [self.adapt_coordinates_reverse(point) for point in optimized_pathp]
 
         result = StartGoalAction.Result()
         result.path_x = path_x  
@@ -210,8 +239,9 @@ class PathPlanningServer(rclpy_Node):
             self.plot_interpolation(self.optimization_results)
 
         if self.show_results:
-            self.visualization(False,self.zones_dictionary,self.start_m,self.goal_m,self.path,self.path_optimized)
-            #self.visualization(True,self.zones_dictionary_gps,self.start_gps,self.goal_gps,self.path_gps,self.optimized_path_gps)
+            #self.visualization(False,self.zones_dictionary,self.start_m,self.goal_m,self.path,self.path_optimized)
+            self.visualization(True,self.zones_dictionary_gps,self.start_gps,self.goal_gps,self.path_gps,self.optimized_path_gps)
+            #self.visualization_proximity(self.zones_dictionary,self.start_m,self.goal_m, self.pathp, optimized_pathp, self.path,self.path_optimized)
             plt.show()
 
         return result
@@ -260,16 +290,22 @@ class PathPlanningServer(rclpy_Node):
         zones_dictionary_gps, zones_dictionary, cost_dictionary = {}, {}, {}
 
         for point in safe_zone:
+            self.safe_gps.append(point)
             zones_dictionary_gps[point] = "s"
         for point in green_zone:
+            self.green_gps.append(point)
             zones_dictionary_gps[point] = "g"
         for point in yellow_zone:
+            self.yellow_gps.append(point)
             zones_dictionary_gps[point] = "y"
         for point in green_zone:
+            self.green_gps.append(point)
             zones_dictionary_gps[point] = "g"
         for point in red_zone:
+            self.red_gps.append(point)
             zones_dictionary_gps[point] = "r"
         for point in coast_points:
+            self.coast_gps.append(point)
             zones_dictionary_gps[point] = "c"
         
         # 1.2. min and max coordinates - all gps coordinates (zones+coast)
@@ -286,14 +322,19 @@ class PathPlanningServer(rclpy_Node):
         for key, value in zones_dictionary.items():
                 
             if value == "r":
+                self.red_zone.append(key)
                 cost_dictionary[key] = [self.red_cost, self.red_step]
             elif value == "y":
+                self.yellow_zone.append(key)
                 cost_dictionary[key] = [self.yellow_cost, self.yellow_step]
             elif value == "g":
+                self.green_zone.append(key)
                 cost_dictionary[key] = [self.green_cost, self.green_step]
             elif value == "s":
+                self.safe_zone.append(key)
                 cost_dictionary[key] = [self.safe_cost, self.safe_step]
             elif value == "c":
+                self.coast_points.append(key)
                 cost_dictionary[key] = [math.inf, 1]
             else:
                 cost_dictionary[key] = 1
@@ -414,6 +455,35 @@ class PathPlanningServer(rclpy_Node):
     
     ### D* Lite algorithm functions ###
 
+    def create_grid(self, val: float):
+        # 1.5. Create a grid
+        return np.full((self.x_max_world, self.y_max_world), val)
+
+    def build_motion_dict(self):
+        """Precompute all motion vectors as Python tuples for fast lookup."""
+        self.motion_dict = {}
+
+        step_sizes = [1]  # Ensure open_sea_step is int
+        for n in step_sizes:
+            directions = np.array([
+                [ n,  0],
+                [ 0,  n],
+                [-n,  0],
+                [ 0, -n],
+                [ n,  n],
+                [-n,  n],
+                [ n, -n],
+                [-n, -n]
+            ])
+            base_costs = np.array([1, 1, 1, 1, np.sqrt(2), np.sqrt(2), np.sqrt(2), np.sqrt(2)])
+
+            for direction, cost in zip(directions, base_costs):
+                # Convert to pure Python int keys
+                key = (int(direction[0]), int(direction[1]))
+                self.motion_dict[key] = cost
+
+
+
     def get_motions(self,n,m):
         motions = [
             Node((n,0),m),
@@ -427,28 +497,35 @@ class PathPlanningServer(rclpy_Node):
         ]
         return motions
 
-    def create_grid(self, val: float):
-        # 1.5. Create a grid
-        return np.full((self.x_max_world, self.y_max_world), val)
 
     def c(self, node1: Node, node2: Node):
 
-        factor = self.cost_dictionary.get((node2.x, node2.y), [1,self.open_sea_step])
+        # if node2 is the goal, return 0
+        if compare_coordinates(node2, self.start):
+            return 0
 
-        m,n = factor[0],factor[1]
+        # Get dynamic step and multiplier from the cost map
+        m, n = self.cost_dictionary.get((node2.x, node2.y), [1, self.open_sea_step])
 
-        new_node = Node((n*(node1.x-node2.x),n*(node1.y-node2.y)))
+        # Use NumPy for coordinate math
+        delta = np.array([node1.x - node2.x, node1.y - node2.y]) 
+        delta_tuple = tuple(delta.astype(int))  # round and convert to tuple
 
-        detected_motion = list(filter(lambda motion:
-                                      compare_coordinates(motion, new_node),
-                                      self.get_motions(n,m)))
-        
-        #self.get_logger().info(f"Detected motion: {detected_motion}")
-        motion = detected_motion[0].cost * m
-        return motion
+        base_cost = self.motion_dict.get(delta_tuple)
+        if base_cost is None:
+            self.get_logger().warn(f"No base cost for delta {delta_tuple}")
+            return float('inf')  # Prevents crash or silent bugs
+
+
+        return base_cost * m
 
     def h(self, s: Node):
-        return max(abs(self.start.x - s.x), abs(self.start.y - s.y))
+        #if start is equal to s, return 0
+        if compare_coordinates(s, self.start):
+            return 0
+        w = 1
+        h = w*math.hypot(s.x - self.start.x, s.y - self.start.y)
+        return h
  
 
     def calculate_key(self, s: Node):
@@ -545,6 +622,10 @@ class PathPlanningServer(rclpy_Node):
                 feedback.partial_path_y = []
 
                 self.goal_handle.publish_feedback(feedback)
+            
+            #self.get_logger().info(f"Start key not updated: {start_key_not_updated}")
+            #self.get_logger().info(f"RHS not equal to G: {rhs_not_equal_to_g}")
+            #self.get_logger().info(f"U length: {len(self.U)}")
 
 
     def compare_paths(self, path1: list, path2: list):
@@ -564,6 +645,44 @@ class PathPlanningServer(rclpy_Node):
             distance_i = self.euclidean_distance(path[i][0], path[i][1], path[i+1][0], path[i+1][1])
             distance += distance_i
         return round(distance, 5)
+
+    def c1(self, node1: Node, node2: Node):
+
+        # Get dynamic step and multiplier from the cost map
+        m, n = self.cost_dictionary.get((node2.x, node2.y), [1, self.open_sea_step])
+
+        # Use NumPy for coordinate math
+        delta = np.array([node1.x - node2.x, node1.y - node2.y]) 
+        delta_tuple = tuple(delta.astype(int))  # round and convert to tuple
+
+        base_cost = self.motion_dict.get(delta_tuple)
+        if base_cost is None:
+            self.get_logger().warn(f"No base cost for delta {delta_tuple}")
+            return float('inf')  # Prevents crash or silent bugs
+
+        motion_cost = base_cost * m
+
+        alpha = 5.0
+        beta = 0.05
+
+        # nearest coast point
+        #inflate red zone
+        tree = KDTree(list(self.red_zone))
+        _, idx = tree.query([node2.x, node2.y])
+        nearest_coast = self.red_zone[idx]
+
+        # euclidean distance from node2 to nearest coast point
+        distance = round(math.dist(nearest_coast, (node2.x, node2.y))/self.grid_size) * self.grid_size
+
+        # exponentinaly decreasing from the coast
+        distance_cost = alpha * math.exp(-distance*beta)
+
+        if m == 1.2:
+            m = 1 
+            
+        cost = motion_cost + # distance_cost)
+
+        return cost
     
     def test_dstar_lite(self):
         self.get_logger().info('D* Lite algorithm started')
@@ -574,18 +693,24 @@ class PathPlanningServer(rclpy_Node):
     
         start_time = time.time() 
         pathx, pathy = [], []
+        pathxp, pathyp = [], []
         rx, ry = [], []
+        self.build_motion_dict()
         self.compute_shortest_path()
         self.start = self.partial_start
         self.goal = self.partial_goal
         pathx.append(self.start.x + self.x_min_global)
         pathy.append(self.start.y + self.y_min_global)
 
+        self.startp = self.start
+
+        self.get_logger().info(f"Area found, now computing path")
 
         while not compare_coordinates(self.goal, self.start):
             if self.g[self.start.x][self.start.y] == math.inf:
                 print("No path possible")
                 return False, pathx, pathy
+            self.get_logger().info(f"Start: {self.start.x}, {self.start.y}")
             self.start = min(self.succ(self.start),
                              key=lambda sprime:
                              self.c(self.start, sprime) +
@@ -599,6 +724,24 @@ class PathPlanningServer(rclpy_Node):
         rx, ry = [rx[i] for i in range(len(rx))], [ry[i] for i in range(len(ry))]
         
         self.path = [(rx[i],ry[i]) for i in range(len(rx))]
+
+        while not compare_coordinates(self.goal, self.startp):
+            if self.g[self.startp.x][self.startp.y] == math.inf:
+                print("No path possible")
+                return False, pathx, pathy
+            self.startp = min(self.succ(self.startp),
+                             key=lambda sprime:
+                             self.c1(self.startp, sprime) +
+                             self.g[sprime.x][sprime.y])
+            pathxp.append(self.startp.x + self.x_min_global)
+            pathyp.append(self.startp.y + self.y_min_global)
+
+        rx = pathxp
+        ry = pathyp
+
+        rx, ry = [rx[i] for i in range(len(rx))], [ry[i] for i in range(len(ry))]
+        
+        self.pathp = [(rx[i],ry[i]) for i in range(len(rx))]
         
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
@@ -606,82 +749,206 @@ class PathPlanningServer(rclpy_Node):
         self.get_logger().info(f"Distance: {distance}") 
         self.get_logger().info(f"Execution time: {function_time}")   
 
+        self.get_logger().info(f'Path length: {len(self.path), len(self.pathp)}')    
        
         
 
-    ### Visualization functions ###
 
-    def visualization(self, gps = True, zones_dictionary = dict, start = [0.0,0.0], goal = [0.0,0.0], path = [], path_optimized = []):
+    def visualization(self, gps=True, zones_dictionary=dict, start=[0.0, 0.0], goal=[0.0, 0.0], path=[], path_optimized=[]):
         fig, ax = plt.subplots()
         ax.grid(True)
+        ax.xaxis.set_major_formatter(ScalarFormatter(useMathText=False))
+        ax.yaxis.set_major_formatter(ScalarFormatter(useMathText=False))
+        ax.ticklabel_format(style='plain', axis='both')
+        ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x:.5f}'))
+        ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, _: f'{y:.5f}'))
+
+        # Paths (also optimized)
+        def plot_path(path_data, color):
+            if not path_data:
+                return
+            arr = np.array(path_data)
+            ax.plot(arr[:, i], arr[:, j], 'o', color=color, markersize=1.5)
 
         if gps:
-            show_box = self.pixel_to_gps(50,50)
-            show_box = show_box[0]
-
+            show_box = 0.003
+            self.get_logger().info(f"Show box: {show_box}")
             set_title = "Planned path in global coordinate system"
-            i,j = 1,0
-            legend_elements = []
-            legend_elements.append(Line2D([0], [0], color='black', lw=4, label=f"min_global = {self.coordinates[0]}, {self.coordinates[1]}"))
-            legend_elements.append(Line2D([0], [0], color='black', lw=4, label=f"max_global = {self.coordinates[2]}, {self.coordinates[3]}"))
-            legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f"start = {self.start_gps[0]}, {self.start_gps[1]}"))
-            legend_elements.append(Line2D([0], [0], color='blue', lw=4, label=f"goal = {self.goal_gps[0]}, {self.goal_gps[1]}"))
-            ax.legend(handles=legend_elements, loc='upper right')
+            i, j = 1, 0
+
+            legend_elements = [
+                Line2D([0], [0], color='none', lw=4, label=f"Downsampling rate = {self.sampling_rate}"),
+                Line2D([0], [0], color='magenta', lw=4, label="D* Lite path"),
+                Line2D([0], [0], color='cyan', lw=4, label="Interpolated path"),
+                Line2D([0], [0], color='red', lw=4, label=f"red_cost = {self.red_cost}"),
+                Line2D([0], [0], color='red', lw=4, label=f"red_cost = {self.red_cost}"),
+                Line2D([0], [0], color='yellow', lw=4, label=f"yellow_cost = {self.yellow_cost}"),
+                Line2D([0], [0], color='green', lw=4, label=f"green_cost = {self.green_cost}"),
+                Line2D([0], [0], color='lawngreen', lw=4, label=f"safe_cost = {self.safe_cost}")
+            ]
+            ax.legend(handles=legend_elements, loc='best', fontsize=16)
+
             ax.set_xlabel("Longitude")
             ax.set_ylabel("Latitude")
-            ax.set_xticklabels(np.arange(self.coordinates[1], self.coordinates[3], 0.00001), rotation = 0)
-            ax.set_yticklabels(np.arange(self.coordinates[0], self.coordinates[2], 0.00001))
+
+            if path:
+                path_np = np.array(path)
+                ax.set_xlim(np.min(path_np[:, i]) - show_box, np.max(path_np[:, i]) + show_box)
+                ax.set_ylim(np.min(path_np[:, j]) - show_box, np.max(path_np[:, j]) + show_box)
+            
+            # Plot zones more efficiently
+            def plot_points(points, color, condition=True):
+                if not points or not condition:
+                    return
+                arr = np.array(points)
+                ax.plot(arr[:, i], arr[:, j], 'o', color=color, markersize=0.4)
+            
+            plot_points(self.coast_gps, 'black')
+            plot_points(self.red_gps, 'red')
+            plot_points(self.green_gps, 'green')
+            plot_points(self.yellow_gps, 'yellow')
+            plot_points(self.safe_gps, 'lawngreen', self.safe_cost > 1.0)
+
+            safe_zone_show = True
+
+            if safe_zone_show:
+                plot_path(path, 'magenta')
+                
         else:
             show_box = 50
-
             set_title = "Planned path in local coordinate system"
-            i,j = 0,1
-            legend_elements = []
-            legend_elements.append(Line2D([0], [0], color='none', lw=4, label=f"Downsampling rate = {self.sampling_rate}"))
-            legend_elements.append(Line2D([0], [0], color='magenta', lw=4, label="D* Lite path"))
-            legend_elements.append(Line2D([0], [0], color='cyan', lw=4, label="Interpolated path"))
-            # cost values
-            legend_elements.append(Line2D([0], [0], color='red', lw=4, label=f"red_cost = {self.red_cost}"))    
-            legend_elements.append(Line2D([0], [0], color='yellow', lw=4, label=f"yellow_cost = {self.yellow_cost}"))
-            legend_elements.append(Line2D([0], [0], color='green', lw=4, label=f"green_cost = {self.green_cost}"))
-            legend_elements.append(Line2D([0], [0], color='lawngreen', lw=4, label=f"safe_cost = {self.safe_cost}"))
-            
-            ax.legend(handles=legend_elements, loc='best', fontsize=16)
-        
-            #ax.set_title(set_title)
+            i, j = 0, 1
 
-            min_path_x = min([point[i] for point in path])
-            max_path_x = max([point[i] for point in path])
-            min_path_y = min([point[j] for point in path])
-            max_path_y = max([point[j] for point in path])
+            legend_elements = [
+                Line2D([0], [0], color='none', lw=4, label=f"Downsampling rate = {self.sampling_rate}"),
+                Line2D([0], [0], color='magenta', lw=4, label="D* Lite path"),
+                Line2D([0], [0], color='cyan', lw=4, label="Interpolated path"),
+                Line2D([0], [0], color='red', lw=4, label=f"red_cost = {self.red_cost}"),
+                Line2D([0], [0], color='yellow', lw=4, label=f"yellow_cost = {self.yellow_cost}"),
+                Line2D([0], [0], color='green', lw=4, label=f"green_cost = {self.green_cost}"),
+                Line2D([0], [0], color='lawngreen', lw=4, label=f"safe_cost = {self.safe_cost}")
+            ]
+            ax.legend(handles=legend_elements, loc='best', fontsize=14)
 
-            ax.set_xlim(min_path_x-show_box, max_path_x+show_box)
-            ax.set_ylim(min_path_y-show_box, max_path_y+show_box)
-        
-        for key, value in zones_dictionary.items():
-            if value == 'c':
-                ax.plot(key[i],key[j],'ko', markersize=0.6)
-            elif value == 'r':
-                ax.plot(key[i],key[j],'ro', markersize=0.6)
-            elif value == 'g':
-                ax.plot(key[i],key[j],'go', markersize=0.6)
-            elif value == 'y':
-                ax.plot(key[i],key[j],'yo', markersize=0.6)
-            elif value == 's':
-                if self.safe_cost > 1.0:
-                    ax.plot(key[i],key[j],color='lawngreen', marker='o', markersize=0.6)
-        
-        ax.plot(start[i],start[j],'bx', markersize=10)
-        ax.plot(goal[i],goal[j],'bo', markersize=10)
+            if path:
+                path_np = np.array(path)
+                ax.set_xlim(np.min(path_np[:, i]) - show_box, np.max(path_np[:, i]) + show_box)
+                ax.set_ylim(np.min(path_np[:, j]) - show_box, np.max(path_np[:, j]) + show_box)
 
+            # Plot zones more efficiently
+            def plot_points(points, color, condition=True):
+                if not points or not condition:
+                    return
+                arr = np.array(points)
+                ax.plot(arr[:, i], arr[:, j], 'o', color=color, markersize=1)
+
+            plot_points(self.coast_points, 'black')
+            plot_points(self.red_zone, 'red')
+            plot_points(self.green_zone, 'limegreen')
+            plot_points(self.yellow_zone, 'yellow')
+            plot_points(self.safe_zone, 'lawngreen', self.safe_cost > 1.0)
+
+       # Start and goal
+        ax.plot(start[i], start[j], 'bx', markersize=10)
+        ax.plot(goal[i], goal[j], 'bo', markersize=10)
+
+        plot_path(path, 'magenta')
+        plot_path(path_optimized, 'cyan')
+
+        ax.set_title(set_title)
+        plt.tight_layout()
+        plt.show(block=True)
+
+    def visualization_proximity(self, zones_dictionary=dict, start=[0.0,0.0], goal=[0.0,0.0], path=[], path_optimized=[], path_proximity=[], path_proximity_optimized=[]):
+        fig, ax = plt.subplots()
         ax.grid(True)
+        
+        show_box = 20
+        i, j = 0, 1
 
-        for point in path:
-                ax.plot(point[i],point[j],'mo', markersize=1)
-        for point in path_optimized:
-                ax.plot(point[i],point[j],'co', markersize=1)
+        # Legend
+        legend_elements = [
+            Line2D([0], [0], color='none', lw=4, label=f"Downsampling rate = {self.sampling_rate}"),
+            Line2D([0], [0], color='magenta', lw=4, label="D* Lite path with proximity cost"),
+            Line2D([0], [0], color='cyan', lw=4, label="Interpolated path with proximity cost"),
+            Line2D([0], [0], color='orange', lw=4, label="D* Lite path without proximity cost"),
+            Line2D([0], [0], color='salmon', lw=4, label="Interpolated path without proximity cost"),
+            Line2D([0], [0], color='red', lw=4, label=f"red_cost = {self.red_cost}"),    
+            Line2D([0], [0], color='yellow', lw=4, label=f"yellow_cost = {self.yellow_cost}"),
+            Line2D([0], [0], color='limegreen', lw=4, label=f"green_cost = {self.green_cost}"),
+            Line2D([0], [0], color='lawngreen', lw=4, label=f"safe_cost = {self.safe_cost}")
+        ]
+        ax.legend(handles=legend_elements, loc='best', fontsize=12)
+
+        # Path limits
+        min_path_x = min([p[i] for p in path])
+        max_path_x = max([p[i] for p in path])
+        min_path_y = min([p[j] for p in path])
+        max_path_y = max([p[j] for p in path])
+        ax.set_xlim(min_path_x - show_box, max_path_x + show_box)
+        ax.set_ylim(min_path_y - show_box, max_path_y + show_box)
+
+        # Plot zones more efficiently
+        def plot_points(points, color, condition=True):
+            if not points or not condition:
+                return
+            arr = np.array(points)
+            ax.plot(arr[:, i], arr[:, j], 'o', color=color, markersize=1)
+
+        plot_points(self.coast_points, 'black')
+        plot_points(self.red_zone, 'red')
+        plot_points(self.green_zone, 'limegreen')
+        plot_points(self.yellow_zone, 'yellow')
+        plot_points(self.safe_zone, 'lawngreen', self.safe_cost > 1.0)
+
+        # Start and goal
+        ax.plot(start[i], start[j], 'bx', markersize=10)
+        ax.plot(goal[i], goal[j], 'bo', markersize=10)
+
+        # Paths (also optimized)
+        def plot_path(path_data, color):
+            if not path_data:
+                return
+            arr = np.array(path_data)
+            ax.plot(arr[:, i], arr[:, j], 'o', color=color, markersize=1.5)
+
+        plot_path(path, 'orange')
+        plot_path(path_optimized, 'salmon')
+        plot_path(path_proximity, 'magenta')
+        plot_path(path_proximity_optimized, 'cyan')
 
         plt.show(block=True)
+
+    import numpy as np
+
+    def compute_min_turning_radius(path):
+        min_radius = float('inf')
+
+        for i in range(1, len(path) - 1):
+            x1, y1 = path[i - 1]
+            x2, y2 = path[i]
+            x3, y3 = path[i + 1]
+
+            # Numerator of curvature formula
+            num = 2 * abs((x2 - x1)*(y3 - y1) - (y2 - y1)*(x3 - x1))
+
+            # Denominator of curvature formula
+            a = np.hypot(x2 - x1, y2 - y1)
+            b = np.hypot(x3 - x2, y3 - y2)
+            c = np.hypot(x3 - x1, y3 - y1)
+            denom = a * b * c
+
+            if denom == 0:
+                continue  # skip degenerate cases (e.g., overlapping points)
+
+            curvature = num / denom
+            radius = 1 / curvature
+
+            if radius < min_radius:
+                min_radius = radius
+
+        return min_radius
+
 
     def test_optimization(self):
         fig,ax = plt.subplots()
@@ -744,18 +1011,20 @@ class PathPlanningServer(rclpy_Node):
 
         ax.legend(handles=legend_elements, loc='best', fontsize=20)
 
-        #plot green zone
-        for key, value in self.zones_dictionary.items():
-            if value == 'g':
-                ax.plot(key[0],key[1],'go', markersize=0.8)
-            if value == 's':
-                ax.plot(key[0],key[1],'co', markersize=0.8)
-            if value == 'r':
-                ax.plot(key[0],key[1],'ro', markersize=0.8)
-            if value == 'y':
-                ax.plot(key[0],key[1],'yo', markersize=0.8)
-            if value == 'c':
-                ax.plot(key[0],key[1],'ko', markersize=0.8)
+       # Plot zones more efficiently
+        def plot_points(points, color, condition=True):
+            if not points or not condition:
+                return
+            arr = np.array(points)
+            ax.plot(arr[:, i], arr[:, j], 'o', color=color, markersize=1)
+
+        plot_points(self.coast_points, 'black')
+        plot_points(self.red_zone, 'red')
+        plot_points(self.green_zone, 'limegreen')
+        plot_points(self.yellow_zone, 'yellow')
+        plot_points(self.safe_zone, 'lawngreen', self.safe_cost > 1.0)
+
+
 
         ax.grid(True)
         

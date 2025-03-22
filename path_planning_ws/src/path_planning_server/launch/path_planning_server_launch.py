@@ -56,13 +56,13 @@ def generate_launch_description():
 
     optimization_method_arg = DeclareLaunchArgument(
         'optimization_method',
-        default_value='polynomial',
+        default_value='bezier',
         description='The optimization method to use',
     )
 
     sampling_rate_arg = DeclareLaunchArgument(
         'sampling_rate',
-        default_value='5.0',
+        default_value='3.0',
         description='The sampling rate to use',
     )
 

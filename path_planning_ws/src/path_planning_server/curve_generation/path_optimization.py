@@ -34,7 +34,7 @@ def save_binary_data(data, file_name):
 
 class PathOptimization:
 
-	def __init__(self, points, method="dubins", show_results=False, sampling_rate=5.0):
+	def __init__(self, points, method="polynomial", show_results=False, sampling_rate=5.0):
 		self.points = points
 		self.points_new = []
 		self.points_new1 = []
