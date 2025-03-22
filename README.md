@@ -1,10 +1,10 @@
 # [Path-Planning Module for Autonomous Vessels](https://repozitorij.fer.unizg.hr/islandora/object/fer:12451)
 
-*System Architecture and Implementation of the Vessel Path-Planning Module Based on the Iron ROS2 Framework.*
+*System Architecture and Implementation of the Vessel Path-Planning Module Based on the [Jazzy ROS2](https://docs.ros.org/en/jazzy/index.html) Framework.*
 
-This project was originally developed as part of the master’s thesis Model-Informed Global Path Planning and Control for Autonomous Vessels at the Faculty of Electrical Engineering and Computing, University of Zagreb. Earlier prototype versions of the project are available in the branches drop-down menu.
+This project was originally developed as part of the master’s thesis *Model-Informed Global Path Planning and Control for Autonomous Vessels* at the Faculty of Electrical Engineering and Computing, University of Zagreb. Earlier prototype versions of the project are available in the branches drop-down menu.
 
-Each component of the *Path Planning Module* architecture follows a distinct approach and can be developed as an independent module. The current implementation represents only a part of a larger planned framework, as presented in [Section](#-ros2-software-architecture-for-vessel-path-planning). The referenced ROS2 packages can be upgraded or replaced in the future without affecting the module’s functionality or other system components, provided that the described communication topology is followed.
+Each component of the *Path Planning Module* architecture follows a distinct approach and can be developed as an independent module. The current implementation represents only a part of a larger planned framework, as presented in [Future Work](#-future-work). The referenced ROS2 packages can be upgraded or replaced in the future without affecting the module’s functionality or other system components, provided that the described communication topology is followed.
 
 This flexibility in the implementation allows developers to experiment with implementing their custom packages. Contributions are welcome, feel free to explore and join the project!
 
@@ -18,9 +18,8 @@ This flexibility in the implementation allows developers to experiment with impl
    * [Installing](#-installing)
    * [Requirements](#-requirements)
    * [Source Workspace](#-source-workspace)
-   * [Build Workspace](#-build-the-workspace)
+   * [Build Workspace](#-build-workspace)
    * [ROS2 Software Architecture for Vessel Path Planning](#-ros2-software-architecture-for-vessel-path-planning)
-   * [`map_maker` Package](#️-map_maker-package)
       * [Map Creation](#1️⃣-map-creation---optional)
          * [Download data from OpenStreetMap](#download-data-from-openstreetmap)
          * 🔗 [ROS2 Commands for Map Creation](#-ros2-commands-for-map-creation)
@@ -39,6 +38,7 @@ This flexibility in the implementation allows developers to experiment with impl
   * [`path_planning_server` Package](#-path_planning_server-package)
      * 🔗 [ROS2 Command for Running Path Planning](#-ros2-command-for-running-path-planning)
   * 🔗 [Example](#-example)
+  * [Future Work](#-future-work)
   * [Credits](#-credits)
   * [Acknowledgments](#-acknowledgments)
 
