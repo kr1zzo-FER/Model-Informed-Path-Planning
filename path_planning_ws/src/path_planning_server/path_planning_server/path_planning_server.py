@@ -194,7 +194,7 @@ class PathPlanningServer(rclpy_Node):
 
         self.path_gps = [self.adapt_coordinates_reverse(point) for point in self.path]
 
-        self.pathp_gps = [self.adapt_coordinates_reverse(point) for point in self.pathp]
+        #self.pathp_gps = [self.adapt_coordinates_reverse(point) for point in self.pathp]
 
         self.path_optimized, self.optimization_results = self.optimize_path()
 
@@ -216,11 +216,11 @@ class PathPlanningServer(rclpy_Node):
         raw_path_time = raw_path_information[1]
         
 
-        path_optimizationp = PathOptimization(self.pathp, self.optimization_method, False, self.sampling_rate)
-        path_optimizationp.optimize_path()
-        optimized_pathp = path_optimizationp.get_path()
+        #path_optimizationp = PathOptimization(self.pathp, self.optimization_method, False, self.sampling_rate)
+        #path_optimizationp.optimize_path()
+        #optimized_pathp = path_optimizationp.get_path()
 
-        self.optimized_pathp_gps = [self.adapt_coordinates_reverse(point) for point in optimized_pathp]
+        #self.optimized_pathp_gps = [self.adapt_coordinates_reverse(point) for point in optimized_pathp]
 
         result = StartGoalAction.Result()
         result.path_x = path_x  
@@ -676,11 +676,8 @@ class PathPlanningServer(rclpy_Node):
 
         # exponentinaly decreasing from the coast
         distance_cost = alpha * math.exp(-distance*beta)
-
-        if m == 1.2:
-            m = 1 
             
-        cost = motion_cost + # distance_cost)
+        cost = motion_cost + distance_cost
 
         return cost
     
@@ -713,7 +710,7 @@ class PathPlanningServer(rclpy_Node):
             self.get_logger().info(f"Start: {self.start.x}, {self.start.y}")
             self.start = min(self.succ(self.start),
                              key=lambda sprime:
-                             self.c(self.start, sprime) +
+                             self.c1(self.start, sprime) +
                              self.g[sprime.x][sprime.y])
             pathx.append(self.start.x + self.x_min_global)
             pathy.append(self.start.y + self.y_min_global)
@@ -725,6 +722,7 @@ class PathPlanningServer(rclpy_Node):
         
         self.path = [(rx[i],ry[i]) for i in range(len(rx))]
 
+        """
         while not compare_coordinates(self.goal, self.startp):
             if self.g[self.startp.x][self.startp.y] == math.inf:
                 print("No path possible")
@@ -742,6 +740,7 @@ class PathPlanningServer(rclpy_Node):
         rx, ry = [rx[i] for i in range(len(rx))], [ry[i] for i in range(len(ry))]
         
         self.pathp = [(rx[i],ry[i]) for i in range(len(rx))]
+        """
         
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
@@ -952,8 +951,8 @@ class PathPlanningServer(rclpy_Node):
 
     def test_optimization(self):
         fig,ax = plt.subplots()
-
-        sampling_rate = [2.0, 5.0, 10.0, 15.0, 20.0, 25.0]
+        i, j = 0, 1
+        sampling_rate = [2.0, 3.0, 4.0, 5.0, 8.0, 10.0]
 
         path_optimization_2 = PathOptimization(self.path, self.optimization_method, self.show_results, sampling_rate[0])
         path_optimization_2.optimize_path()

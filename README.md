@@ -14,11 +14,11 @@ This flexibility in the implementation allows developers to experiment with impl
 
 ## 📚 Table of Contents
 
-   * [Project Information](#-project-information)
    * [Installing](#-installing)
    * [Requirements](#-requirements)
    * [Source Workspace](#-source-workspace)
    * [Build Workspace](#-build-workspace)
+   * [Project Information](#)
    * [ROS2 Software Architecture for Vessel Path Planning](#-ros2-software-architecture-for-vessel-path-planning)
       * [Map Creation](#1️⃣-map-creation---optional)
          * [Download data from OpenStreetMap](#download-data-from-openstreetmap)
@@ -105,18 +105,18 @@ Navigate to `path_planning_ws` and build the workspace using the following `.sh`
 
 ## 💡 Project Information
 
-**This repository is a part of the diploma thesis at the Faculty of [Electrical Engineering and Computing, University of Zagreb](https://www.fer.unizg.hr/), [Laboratory for Underwater Systems and Technologies](https://labust.fer.hr/) in the academic year 2023./2024. The main goal of the thesis is to develop a [_model-informed path planning and control for autonomous vessels (Croatian: Modelski informirano globalno planiranje putanje i upravljanje autonomnoga plovila)_](https://repozitorij.fer.unizg.hr/islandora/object/fer:12451). The goal of the project was to develop a modular software system architecture for global vessel path planning using the Robot Operating System 2 (ROS2) framework. The system is designed to be flexible and scalable, integrating OpenStreetMap data, RViz2 visualization tools, and advanced path planning algorithms. The architecture consists of three main stages: map creation, start-goal management, and path planning. Requirement of the project was to develop general path planning algorithm that can be used for any type of vessel. Thus, dynamic vessel model is not implemented in this project.**
+**This repository started as part of the diploma thesis at the Faculty of [Electrical Engineering and Computing, University of Zagreb](https://www.fer.unizg.hr/), [Laboratory for Underwater Systems and Technologies](https://labust.fer.hr/) in the academic year 2023./2024. Our long-term goal is to develop the Path-Olanning Module capable of generating safe and efficient routes, either within an integrated autonomy framework or as a standalone module. This module is designed to support higher levels of autonomy by seamlessly interacting with both mission-planning and path-following systems. By leveraging the widely adopted ROS2 framework and aligning with state-of-the-art autonomy architectures, we ensure adaptability across diverse system structures.**
 
-**The `documentation` directory contains the final thesis and IEEE conference paper submissions, offering an in-depth description of the project. The paper is writen in English so it can be used as a reference for the project, while the thesis is written in Croatian and it is yet to be translated.**
+**The `documentation` directory contains the final thesis and conference paper submissions, offering an in-depth description of the project. The paper is writen in English so it can be used as a reference for the project, while the thesis is written in Croatian and it is yet to be translated.**
 
 &nbsp;
 
 ## 🤖 ROS2 Software Architecture for Vessel Path Planning
 
-Project involves the development of a modular software system architecture for global vessel path planning using **[Robot Operating System 2 (ROS2), version : Iron](https://docs.ros.org/en/iron/index.html)**. The system is designed to be flexible and scalable, integrating OpenStreetMap data, RViz2 visualization tools, and advanced path planning algorithms. The architecture consists of three main stages, as outlined below.
+Project involves the development of a modular software system architecture for vessel path planning module using **[Robot Operating System 2 (ROS2), version : Jazzy](https://docs.ros.org/en/iron/index.html)**. The system is designed to be flexible and scalable, integrating OpenStreetMap data, RViz2 visualization tools, and advanced path planning algorithms. The architecture consists of three main stages, as outlined below.
 
 <p align="center">
-<img src="assets/ros2_arh_ieee.png" alt="drawing" width="400"/>
+<img src="assets/ros2_arh_ieee_1.png" alt="drawing" width="400"/>
 </p>
 <p align="center">
 <em>
@@ -182,7 +182,7 @@ Figure : Block diagram of the ROS2 system architecture for global vessel path pl
 
 &nbsp;
 
-# 🗺️ map_maker Package
+# 🗺️ Map-Making package : map_maker 
 
 The **map_maker** ROS2 package is designed for creating and integrating geographical maps into the ROS2 framework. 
 This package processes data to generate maps and publishes them using a ROS2 publisher. 
@@ -361,7 +361,7 @@ ros2 launch map_maker publish_map_launch.py save_file:='save_file_name'
 
 &nbsp;
 
-# 📡 path_planning_client Package
+# 📡 Path Management package : path_planning_client 
 
 The **path_planning_client** ROS2 package is responsible for visualizing data in the RViz2 tool, managing the process of setting the start and goal points for vessel path planning, and publishing these points within the ROS2 framework using the action client and server communication mechanism. 
 This package integrates tools for setting coordinates, visualizing planned paths, and managing the path planning and visualization process.
@@ -547,7 +547,7 @@ ros2 launch path_planning_server path_planning_server_launch.py \
    - `show_debug` - show intermediate results in PyPlot window for debugging
    - `show_results` - show results in PyPlot window
    <p align="center">
-   <img src="assets/safe_cost_1.png" alt="drawing" width="300"/>
+   <img src="assets/safe_cost_12.png" alt="drawing" width="300"/>
    </p>
    <p align="center">
    <em>
@@ -699,7 +699,7 @@ ros2 launch path_planning_server path_planning_server_launch.py show_results:='T
 Note that the other parameters can be changed as well, as described before, but they were used in development of the system and are not necessary for the final path planning demonstration. Thus, the default parameters are used to alter the path planning algorithm results and user can change them as needed to achieve the desired results.
 
 <p align="center">
-   <img src="assets/klimno_final.png" alt="drawing" width="300"/>
+   <img src="assets/klimno1.png" alt="drawing" width="300"/>
    </p>
    <p align="center">
    <em>
@@ -708,7 +708,7 @@ Note that the other parameters can be changed as well, as described before, but 
 </p>
 
 <p align="center">
-   <img src="assets/klimno_downsampling.png" alt="drawing" width="300"/>
+   <img src="assets/klimno2.png" alt="drawing" width="300"/>
    </p>
    <p align="center">
    <em>
@@ -717,7 +717,7 @@ Note that the other parameters can be changed as well, as described before, but 
 </p>
 
 <p align="center">
-   <img src="assets/klimno_interpolation.png" alt="drawing" width="300"/>
+   <img src="assets/klimno3.png" alt="drawing" width="300"/>
    </p>
    <p align="center">
    <em>
@@ -730,7 +730,7 @@ Note that the other parameters can be changed as well, as described before, but 
 If everything is done correctly, the final path planning results should be visible in RViz2 as shown below where both D* Lite algorithm and path interpolation results are visible:
 
 <p align="center">
-   <img src="assets/klimno_rviz2.png" alt="drawing" width="700"/>
+   <img src="assets/klimno4.png" alt="drawing" width="700"/>
    </p>
    <p align="center">
    <em>
