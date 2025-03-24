@@ -19,14 +19,15 @@ This flexibility in the implementation allows developers to experiment with impl
    * [Source Workspace](#-source-workspace)
    * [Build Workspace](#-build-workspace)
    * [Project Information](#)
-   * [ROS2 Software Architecture for Vessel Path Planning](#-ros2-software-architecture-for-vessel-path-planning)
+   * [ROS2 Software Architecture for Vessel Path Planning Module](#-ros2-software-architecture-for-vessel-path-planning-module)
+   * [Map-Making Package : map_maker](#️-map-making-package--map_maker)
       * [Map Creation](#1️⃣-map-creation---optional)
          * [Download data from OpenStreetMap](#download-data-from-openstreetmap)
          * 🔗 [ROS2 Commands for Map Creation](#-ros2-commands-for-map-creation)
          * 🔗 [ROS2 Commands for Cost Map Visualization](#-ros2-commands-for-cost-map-visualization)
       * [Map Publishing](#2️⃣-map-publishing)
          * 🔗 [ROS2 Commands for Map Publishing](#-ros2-commands-for-map-publishing)
-  * [`path_planning_client` Package](#-path_planning_client-package)
+  * [Path Management Package : path_planning_client](#-path-management-package--path_planning_client)
       * [Cost Map Visualization](#1️⃣-cost-map-visualization)
          * 🔗 [ROS2 Commands for Cost Map Visualization in RViz2](#-ros2-commands-for-cost-map-visualization-in-rviz2)
       * [Setting Start and Goal Points](#2️⃣-setting-start-and-goal-points)
@@ -35,7 +36,7 @@ This flexibility in the implementation allows developers to experiment with impl
             * 🔗 [ROS2 Commands for Setting Start and Goal Points](#-ros2-commands-for-setting-start-and-goal-points)
       * [Publishing Start and Goal Points to the ROS2 Framework](#3️⃣-publishing-start-and-goal-points-to-the-ros2-framework)
          * 🔗 [ROS Commands for Publishing Start and Goal Points](#-ros-commands-for-publishing-start-and-goal-points)
-  * [`path_planning_server` Package](#-path_planning_server-package)
+  * [Path-Planning package : path_planning_server](#-path-management-package--path_planning_client)
      * 🔗 [ROS2 Command for Running Path Planning](#-ros2-command-for-running-path-planning)
   * 🔗 [Example](#-example)
   * [Future Work](#-future-work)
@@ -111,7 +112,7 @@ Navigate to `path_planning_ws` and build the workspace using the following `.sh`
 
 &nbsp;
 
-## 🤖 ROS2 Software Architecture for Vessel Path Planning
+## 🤖 ROS2 Software Architecture for Vessel Path Planning Module
 
 Project involves the development of a modular software system architecture for vessel path planning module using **[Robot Operating System 2 (ROS2), version : Jazzy](https://docs.ros.org/en/iron/index.html)**. The system is designed to be flexible and scalable, integrating OpenStreetMap data, RViz2 visualization tools, and advanced path planning algorithms. The architecture consists of three main stages, as outlined below.
 
@@ -133,7 +134,7 @@ Figure : Block diagram of the ROS2 system architecture for global vessel path pl
 
 2. **Packages**
  - The system architecture is divided into three logical stages, with each stage implemented as a ROS2 package:
- - 1️⃣ [Map-Making Package map_maker](#️-map_maker-package)
+ - 1️⃣ [Map-Making Package map_maker](#️-map-making-package--map_maker)
    - **Purpose**: Extract geographic features from OpenStreetMap and create a cost map and publish data in ROS2 framework
    - **Implementation**: 
       - Makes map from OpenStreetMap data
@@ -141,14 +142,14 @@ Figure : Block diagram of the ROS2 system architecture for global vessel path pl
       - Publishes cost maps via a ROS2 publisher.
    - **Output**: Cost maps for path planning.
 
- - 2️⃣ [Start-Goal Management Package `path_planning_client`](#-path_planning_client-package)
+ - 2️⃣ [Path Management Package `path_planning_client`](#-path-management-package--path_planning_client)
    - **Purpose**: Define start and goal coordinates using RViz2 or geographic data and data visualization in RViz2.
    - **Implementation**:
       - Employs the ROS2 action client-server mechanism for communication.
       - Converts and visualizes data for coordinate setup.
    - **Output**: Start and goal coordinates published within the ROS2 framework.
 
- - 3️⃣ [Path-Planning Package `path_planning_server`](#-path_planning_server-package)
+ - 3️⃣ [Path-Planning Package `path_planning_server`](#-path-planning-package--path_planning_server)
    - **Purpose**: Generate a feasible and smooth path using the D* Lite algorithm.
    - **Implementation**:
       - Interpolates waypoints for enhanced path smoothness.
@@ -165,7 +166,10 @@ Figure : Block diagram of the ROS2 system architecture for global vessel path pl
    - **Output**: Custom message and action types for seamless communication within the ROS2 framework.
 
 
-3. **Communication Mechanisms**
+3. **Communication Topology**
+
+   - The system’s communication topology is based on ROS2 principles, where packages exchange information using custom messages and actions from `user_action_interfaces` package that carry geographic coordinates (latitude and longitude) in a global coordinate format. 
+   - Each ROS2 package receives data in a predefined format, processes it according to its specific function, and outputs results using the same structure. 
    -  📤 [Publisher-Subscriber](https://docs.ros.org/en/iron/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html)
       - Shares data such as Cost maps, Visualization data and Coordinate updates.
 
@@ -477,7 +481,7 @@ path planning server to generate the path described in the [next section](#-ros2
 
 &nbsp;
 
-# 🧭 path_planning_server Package
+# 🧭 Path-Planning package : path_planning_server 
 
 The **path_planning_server** ROS2 package handles global vessel path planning based on cost maps and performs path interpolation to ensure the generated paths are both optimal and feasible for execution. This package uses the D* lite algorithm for path planning and incorporates dynamic interpolation techniques for smooth path generation.
 
@@ -522,7 +526,7 @@ ros2 launch path_planning_server path_planning_server_launch.py \
   cost_values:='[10.0, 2.0, 1.5, 1.2]' \
   step_sizes:='[50.0, 50.0, 100.0, 100.0]' \
   speed_limits:='[2.0, 5.0, 8.0, 25.0]' \
-  optimization_method:='polynomial' \
+  optimization_method:='dubins' \
   sampling_rate:='5.0' \
   show_feedback:='True' \
   show_results:='True' \
@@ -538,7 +542,7 @@ ros2 launch path_planning_server path_planning_server_launch.py \
 - `speed_limits`
    - Specifies the speed limits in nautical miles for red, green, yellow, and free passage zones for calculating travel time.
 - `optimization_method` 
-   - Defines the optimization method for path interpolation, such as polynomial or spline.
+   - Defines the optimization method for path interpolation, such as Dubins curve, Bezier, curve, polynomial, Spline etc.
 - `sampling_rate`
    - Determines the sampling rate for path interpolation.
 
@@ -740,22 +744,43 @@ If everything is done correctly, the final path planning results should be visib
 
 ## 📈 Future Work
 
-- Develop a user-friendly GUI for path planning and control
-- Implement dynamic vessel model for path planning based on vessel type 
-- Implement advanced path planning algorithms to improve path smoothness and efficiency
-- Optimize runtime calculations for path planning (C++ implementation) to reduce execution time
-- Replace the map_maker package with a more efficient and precise map creation tool
-- Implement path planning for multiple vessels
-- Implement path planning for multiple goals and start points
-- Risk assessment and safety analysis for path planning
-- Support for local (dynamic) real-time vessel path planning
-   - Dynamic cost map updates based on real-time data
-   - Dynamic risk assessment strategies
-   - Integration with external systems for navigation and control
-   - Environmental data integration 
-   - Collision, Grounding and obstacle avoidance algorithms
-   - COLREG rules implementation
-   - Simulation and real-world testing
+### 🗺️ Map-Making Package
+- Replace `map_maker` with a more efficient and precise map creation tool  
+- Extend map-making capabilities to support **nautical charts**, including:
+  - Morphology data
+  - Danger zone representation
+- Integrate **up-to-date satellite imagery** for:
+  - Detecting dynamic environmental changes
+  - Enhancing navigation with static nautical maps
+- Improve map generation runtime and precision
+
+### 🧭 Path-Planning Package
+- Implement **advanced algorithms** for smoother and more efficient path generation
+- Optimize **runtime performance** via C++ implementation or NumPy
+- Support for:
+  - **Multiple vessels**
+  - **Multiple goals and start points**
+  - **Local (dynamic) real-time path planning**, including:
+    - Dynamic cost map updates from real-time data
+    - Dynamic risk assessment strategies
+    - Environmental data integration
+    - Obstacle, grounding, and collision avoidance
+    - COLREG rules compliance
+- Support for **field deployment**:
+  - Adaptive path updates based on mission and cost constraints
+  - Seamless integration with guidance and control modules
+- Risk assessment and safety analysis tools for path evaluation
+
+### 📍 Path-Management Package
+- Mission-Planning module support
+   - Upgrade for **multi-mission objective support**
+- Coordination with the guidance module for:
+  - Smooth trajectory execution
+  - Continuous path adjustment
+- Real-time path update handling
+- Integration with external systems (e.g., navigation, modem communication)
+- Final modem integration and **robust field testing**
+- GUI support
 
 
 ## 📧 Credits
