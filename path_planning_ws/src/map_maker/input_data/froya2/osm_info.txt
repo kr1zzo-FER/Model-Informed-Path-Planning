@@ -1,0 +1,1 @@
+<iframe width="425" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=8.802280426025392%2C63.683041157278424%2C8.939952850341799%2C63.71620297547648&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?#map=14/63.69963/8.87112">View Larger Map</a></small>

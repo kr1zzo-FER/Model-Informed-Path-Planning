@@ -59,6 +59,7 @@ class PathPlanningServer(rclpy_Node):
         self.safe_step = self.step_values[3]
         self.open_sea_step = 100.0
         self.motion_dict = {}
+        self.motion_dict1 = {}
         # enable fetching subscription once
         self.first_run = True
         
@@ -337,7 +338,7 @@ class PathPlanningServer(rclpy_Node):
                 self.coast_points.append(key)
                 cost_dictionary[key] = [math.inf, 1]
             else:
-                cost_dictionary[key] = 1
+                cost_dictionary[key] = [1,1]
 
         self.zones_dictionary = zones_dictionary  
         self.zones_dictionary_gps = zones_dictionary_gps  
@@ -462,6 +463,7 @@ class PathPlanningServer(rclpy_Node):
     def build_motion_dict(self):
         """Precompute all motion vectors as Python tuples for fast lookup."""
         self.motion_dict = {}
+        self.motion_dict1 = {}
 
         step_sizes = [1]  # Ensure open_sea_step is int
         for n in step_sizes:
@@ -477,11 +479,19 @@ class PathPlanningServer(rclpy_Node):
             ])
             base_costs = np.array([1, 1, 1, 1, np.sqrt(2), np.sqrt(2), np.sqrt(2), np.sqrt(2)])
 
+            base_costs1 = np.array([1, 1, 1, 1, 1, 1, 1, 1])
+
+            #base_costs = [1, 1, 1, 1, 1.25, 1.25, 1.25, 1.25]
+
             for direction, cost in zip(directions, base_costs):
                 # Convert to pure Python int keys
                 key = (int(direction[0]), int(direction[1]))
                 self.motion_dict[key] = cost
 
+            for direction, cost in zip(directions, base_costs1):
+                # Convert to pure Python int keys
+                key = (int(direction[0]), int(direction[1]))
+                self.motion_dict1[key] = cost
 
 
     def get_motions(self,n,m):
@@ -495,36 +505,47 @@ class PathPlanningServer(rclpy_Node):
             Node((n,-n),m*math.sqrt(2)),
             Node((-n,-n),m*math.sqrt(2))
         ]
+
         return motions
 
-
     def c(self, node1: Node, node2: Node):
-
-        # if node2 is the goal, return 0
         if compare_coordinates(node2, self.start):
             return 0
 
-        # Get dynamic step and multiplier from the cost map
-        m, n = self.cost_dictionary.get((node2.x, node2.y), [1, self.open_sea_step])
+        m, _ = self.cost_dictionary.get((node2.x, node2.y), [1, self.open_sea_step])
 
-        # Use NumPy for coordinate math
-        delta = np.array([node1.x - node2.x, node1.y - node2.y]) 
-        delta_tuple = tuple(delta.astype(int))  # round and convert to tuple
+        delta = np.array([node2.x - node1.x, node2.y - node1.y])
+        euclidean_distance = np.linalg.norm(delta)
 
+        if m == 1:
+            # Open sea: prioritize geometric cost
+            return euclidean_distance
+
+        delta_tuple = tuple(delta.astype(int))
         base_cost = self.motion_dict.get(delta_tuple)
+
         if base_cost is None:
             self.get_logger().warn(f"No base cost for delta {delta_tuple}")
-            return float('inf')  # Prevents crash or silent bugs
-
+            return float('inf')
 
         return base_cost * m
+
+
 
     def h(self, s: Node):
         #if start is equal to s, return 0
         if compare_coordinates(s, self.start):
             return 0
         w = 1
+
+        # euclidean distance
         h = w*math.hypot(s.x - self.start.x, s.y - self.start.y)
+
+        # Manhattan distance
+        #h = w*(abs(s.x - self.start.x) + abs(s.y - self.start.y))
+
+        #self.get_logger().info(f"h: {h}")
+
         return h
  
 
@@ -652,7 +673,7 @@ class PathPlanningServer(rclpy_Node):
         m, n = self.cost_dictionary.get((node2.x, node2.y), [1, self.open_sea_step])
 
         # Use NumPy for coordinate math
-        delta = np.array([node1.x - node2.x, node1.y - node2.y]) 
+        delta = np.array([node2.x - node1.x, node2.y - node1.y])
         delta_tuple = tuple(delta.astype(int))  # round and convert to tuple
 
         base_cost = self.motion_dict.get(delta_tuple)
@@ -672,14 +693,36 @@ class PathPlanningServer(rclpy_Node):
         nearest_coast = self.red_zone[idx]
 
         # euclidean distance from node2 to nearest coast point
-        distance = round(math.dist(nearest_coast, (node2.x, node2.y))/self.grid_size) * self.grid_size
+        distance_cost = round(math.dist(nearest_coast, (node2.x, node2.y))/self.grid_size) * self.grid_size
 
-        # exponentinaly decreasing from the coast
-        distance_cost = alpha * math.exp(-distance*beta)
-            
-        cost = motion_cost + distance_cost
+
+   
+        distance_cost = alpha * math.exp(-distance_cost*beta)
+        
+        # distance cost is o if more then 250 meters from the coast
+
+        cost = distance_cost * m
 
         return cost
+    
+    def distance_cost(self, node2: Node):
+        alpha = 5.0
+        beta = 0.05
+
+        if not self.red_zone:
+            return 0.0  # Safety fallback
+
+        tree = KDTree(list(self.red_zone))
+        _, idx = tree.query([node2.x, node2.y])
+        nearest_coast = self.red_zone[idx]
+
+        # Euclidean distance from node2 to nearest coast point
+        distance = round(math.dist(nearest_coast, (node2.x, node2.y)) / self.grid_size) * self.grid_size
+
+        # Exponentially decaying cost
+        return alpha * math.exp(-distance * beta)
+
+    
     
     def test_dstar_lite(self):
         self.get_logger().info('D* Lite algorithm started')
@@ -702,16 +745,30 @@ class PathPlanningServer(rclpy_Node):
         self.startp = self.start
 
         self.get_logger().info(f"Area found, now computing path")
+        
+        """
+        #self.plot_g_field()
+
+        for x in range(self.x_max_world):
+            for y in range(self.y_max_world):
+                if self.g[x][y] != math.inf:
+                    self.g[x][y] += self.distance_cost(Node((x, y)))
+
+        #self.plot_g_field()
+        """
 
         while not compare_coordinates(self.goal, self.start):
             if self.g[self.start.x][self.start.y] == math.inf:
                 print("No path possible")
                 return False, pathx, pathy
-            self.get_logger().info(f"Start: {self.start.x}, {self.start.y}")
+            m, n = self.cost_dictionary.get((self.start.x, self.start.y), [1, self.open_sea_step])
+
+
             self.start = min(self.succ(self.start),
-                             key=lambda sprime:
-                             self.c1(self.start, sprime) +
-                             self.g[sprime.x][sprime.y])
+                            key=lambda sprime:
+                            self.g[sprime.x][sprime.y]
+                            + self.c1(self.start, sprime))
+            
             pathx.append(self.start.x + self.x_min_global)
             pathy.append(self.start.y + self.y_min_global)
 
@@ -722,25 +779,7 @@ class PathPlanningServer(rclpy_Node):
         
         self.path = [(rx[i],ry[i]) for i in range(len(rx))]
 
-        """
-        while not compare_coordinates(self.goal, self.startp):
-            if self.g[self.startp.x][self.startp.y] == math.inf:
-                print("No path possible")
-                return False, pathx, pathy
-            self.startp = min(self.succ(self.startp),
-                             key=lambda sprime:
-                             self.c1(self.startp, sprime) +
-                             self.g[sprime.x][sprime.y])
-            pathxp.append(self.startp.x + self.x_min_global)
-            pathyp.append(self.startp.y + self.y_min_global)
-
-        rx = pathxp
-        ry = pathyp
-
-        rx, ry = [rx[i] for i in range(len(rx))], [ry[i] for i in range(len(ry))]
-        
-        self.pathp = [(rx[i],ry[i]) for i in range(len(rx))]
-        """
+        #self.plot_g_field()
         
         end_time = time.time()
         function_time = round(end_time - start_time, 5)
@@ -918,35 +957,6 @@ class PathPlanningServer(rclpy_Node):
 
         plt.show(block=True)
 
-    import numpy as np
-
-    def compute_min_turning_radius(path):
-        min_radius = float('inf')
-
-        for i in range(1, len(path) - 1):
-            x1, y1 = path[i - 1]
-            x2, y2 = path[i]
-            x3, y3 = path[i + 1]
-
-            # Numerator of curvature formula
-            num = 2 * abs((x2 - x1)*(y3 - y1) - (y2 - y1)*(x3 - x1))
-
-            # Denominator of curvature formula
-            a = np.hypot(x2 - x1, y2 - y1)
-            b = np.hypot(x3 - x2, y3 - y2)
-            c = np.hypot(x3 - x1, y3 - y1)
-            denom = a * b * c
-
-            if denom == 0:
-                continue  # skip degenerate cases (e.g., overlapping points)
-
-            curvature = num / denom
-            radius = 1 / curvature
-
-            if radius < min_radius:
-                min_radius = radius
-
-        return min_radius
 
 
     def test_optimization(self):
@@ -1098,6 +1108,25 @@ class PathPlanningServer(rclpy_Node):
         ax.legend(custom_lines, legend_labels, loc='upper right', fontsize=15)
         
         plt.show()
+
+
+    def plot_g_field(self):
+        """Plot the g-value field (cost-to-come) excluding infinite values."""
+        g_array = np.array(self.g)
+
+        # Mask infinite values
+        finite_mask = np.isfinite(g_array)
+        g_finite = np.where(finite_mask, g_array, np.nan)
+
+        plt.figure(figsize=(10, 8))
+        plt.imshow(g_finite.T, origin='lower', cmap='viridis')  # Transposed for correct orientation
+        plt.colorbar(label='g-value (cost-to-come)')
+        plt.title('D* Lite g-value Field')
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.grid(True)
+        plt.show()
+
 
 def main(args=None):
 

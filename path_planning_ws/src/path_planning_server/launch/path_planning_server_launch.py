@@ -23,7 +23,7 @@ def generate_launch_description():
 
     cost_values_arg = DeclareLaunchArgument(
         'cost_values',
-        default_value= '[10.0,2.0,1.5,1.2]',
+        default_value= '[5.0,2.0,1.5,1.2]',
     )
 
     step_sizes_arg = DeclareLaunchArgument(
