@@ -4,3 +4,4 @@ path_planning_ws/build/
 path_planning_ws/log/
 path_planning_ws/.dist/
 path_planning_ws/src/.dist/
+requirements/.venv
