@@ -127,7 +127,7 @@ source install/setup.bash
 ## 🚀 Easy Way to Run All Packages  
 
 You don’t need to start every package manually — there’s a smarter way!  
-With the [ROS2 App Launcher](https://github.com/kr1zzo-NTNU/ROS2_app_launcher), you can easily run **all your ROS2 packages with a single command**.  
+With the [ROS2 App Launcher](https://github.com/kr1zzo-NTNU/ROS2_app_launcher), you can easily run **all your ROS2 packages fast and easy**.  
 
 &nbsp; 
 
